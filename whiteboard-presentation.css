@@ -1,0 +1,71 @@
+/* Presentation mode styles */
+.whiteboard-presentation-controls {
+  display: flex;
+  align-items: center;
+  margin: 0 10px;
+}
+
+.whiteboard-presentation-controls button {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.whiteboard-presentation-controls button:hover {
+  background-color: #f0f0f0;
+}
+
+#presentation-mode-status {
+  font-weight: bold;
+  color: #666;
+}
+
+#presentation-mode-status.enabled {
+  color: #4caf50;
+}
+
+.wb-tool.disabled,
+button[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.view-only-message {
+  position: absolute;
+  top: 50px;
+  left: 0;
+  right: 0;
+  background-color: rgba(255, 152, 0, 0.1);
+  color: #ff9800;
+  text-align: center;
+  padding: 8px;
+  font-size: 14px;
+  font-weight: bold;
+  z-index: 10;
+  border-bottom: 1px solid #ff9800;
+}
+
+.presentation-mode .whiteboard-canvas-container {
+  border: 2px solid #ff9800;
+}
+
+/* Add highlight effect for presenter's cursor in presentation mode */
+.presenter-cursor {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: rgba(255, 0, 0, 0.7);
+  z-index: 100;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 5px rgba(255, 0, 0, 0.7);
+}

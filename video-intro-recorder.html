@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Record Your Expert Introduction | Expert Marketplace</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="video-recorder.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <div class="logo">
+                <img src="/uploads/default-avatar.png" alt="Logo">
+                <span>Expert Marketplace</span>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="profile.html">My Profile</a></li>
+                    <li><a href="settings.html">Account Settings</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="page-header">
+            <div class="page-title">
+                <h1>Create Your Video Introduction</h1>
+                <p class="page-subtitle">Record a 30-60 second video to introduce yourself to potential clients</p>
+            </div>
+        </div>
+
+        <div class="recorder-container" id="video-recorder-container">
+            <div class="recorder-wrapper">
+                <div class="video-preview-container">
+                    <video id="video-preview" autoplay muted playsinline></video>
+                    <div id="recording-timer" class="recording-timer">00:00</div>
+                    <div class="recording-indicator"></div>
+                </div>
+
+                <div class="filters-panel">
+                    <h3>Choose a Filter</h3>
+                    <div id="video-filters" class="filter-buttons"></div>
+                </div>
+
+                <div class="tips-panel">
+                    <h3>Tips for a Great Video</h3>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> Keep it concise (30-60 seconds)</li>
+                        <li><i class="fas fa-check-circle"></i> Introduce yourself and your expertise</li>
+                        <li><i class="fas fa-check-circle"></i> Explain how you help clients</li>
+                        <li><i class="fas fa-check-circle"></i> Mention your major credentials</li>
+                        <li><i class="fas fa-check-circle"></i> Use good lighting and minimize background noise</li>
+                    </ul>
+                </div>
+
+                <div class="examples-panel">
+                    <h3>Sample Script</h3>
+                    <div class="example-script">
+                        <p>"Hi, I'm [Name], a [Profession] with [X] years of experience in [Specialty]. I help clients [specific benefit you provide]. I've worked with [types of clients or notable achievements]. I'd love to help you with [specific problem you solve]. Book a session to get started!"</p>
+                    </div>
+                </div>
+
+                <div class="recorder-controls">
+                    <button id="record-button" class="btn btn-primary btn-large">
+                        <i class="fas fa-video"></i> Start Recording
+                    </button>
+                    <button id="stop-button" class="btn btn-danger btn-large" style="display: none;">
+                        <i class="fas fa-stop-circle"></i> Stop Recording
+                    </button>
+                    <button id="save-recording" class="btn btn-success btn-large" style="display: none;">
+                        <i class="fas fa-save"></i> Save Video
+                    </button>
+                    <button id="discard-recording" class="btn btn-outline btn-large" style="display: none;">
+                        <i class="fas fa-trash"></i> Discard & Retry
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="recorder-info">
+            <div class="info-card">
+                <div class="info-icon"><i class="fas fa-info-circle"></i></div>
+                <div class="info-content">
+                    <h3>Why Video Introductions Matter</h3>
+                    <p>Experts with video introductions get <strong>3x more bookings</strong> than those without. Your video helps establish trust and connection with potential clients before they even book a session.</p>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="info-icon"><i class="fas fa-lightbulb"></i></div>
+                <div class="info-content">
+                    <h3>Optimize Your Video</h3>
+                    <p>After recording, your video will be processed with professional enhancements for clarity and engagement. You can always re-record if you're not satisfied.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="action-footer">
+            <a href="profile.html" class="btn btn-outline">
+                <i class="fas fa-arrow-left"></i> Back to Profile
+            </a>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-columns">
+                <div class="footer-column">
+                    <h3>Expert Marketplace</h3>
+                    <p>Connect with top professionals in various fields for personalized 1-on-1 consultations.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Find an Expert</a></li>
+                        <li><a href="#">Become an Expert</a></li>
+                        <li><a href="#">How It Works</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Categories</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Technology</a></li>
+                        <li><a href="#">Business</a></li>
+                        <li><a href="#">Health</a></li>
+                        <li><a href="#">Creative</a></li>
+                        <li><a href="#">Legal</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Trust & Safety</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2023 Expert Marketplace. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="scripts.js"></script>
+</body>
+</html>

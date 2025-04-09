@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webinar</title>
+    <link rel="stylesheet" href="/css/whiteboard.css">
+    <link rel="stylesheet" href="/css/whiteboard-presentation.css">
+    <link rel="stylesheet" href="/css/whiteboard-recording.css">
+    <link rel="stylesheet" href="/css/whiteboard-recording-detail.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <!-- Other head elements -->
+</head>
+<body>
+    <!-- Video container -->
+    <div id="video-container" class="webinar-section">
+        <!-- Video content goes here -->
+    </div>
+
+    <!-- Whiteboard section -->
+    <div id="whiteboard-section" class="webinar-section">
+        <div class="section-header">
+            <h3>Whiteboard</h3>
+            <div class="section-controls">
+                <button id="toggle-whiteboard" class="toggle-btn">
+                    <i class="fas fa-expand-alt"></i>
+                </button>
+            </div>
+        </div>
+        <div class="section-content">
+            <div id="whiteboard-container" class="whiteboard-container">
+                <div id="whiteboard-toolbar" class="whiteboard-toolbar">
+                    <!-- Toolbar content will be injected by JavaScript -->
+                </div>
+                <div class="whiteboard-canvas-container">
+                    <canvas id="whiteboard-canvas"></canvas>
+                    <div id="whiteboard-loading" class="whiteboard-loading" style="display: none;">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        <p>Loading whiteboard...</p>
+                    </div>
+                    <div id="whiteboard-error" class="whiteboard-error" style="display: none;">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <p id="whiteboard-error-message">An error occurred</p>
+                    </div>
+                </div>
+                <div id="whiteboard-fullscreen-toggle" class="whiteboard-fullscreen-toggle">
+                    <i class="fas fa-expand"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chat container -->
+    <div id="chat-container" class="webinar-section">
+        <!-- Chat content goes here -->
+    </div>
+
+    <!-- Add these script imports before closing body tag -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.1/fabric.min.js"></script>
+    <script src="/js/whiteboard-core.js"></script>
+    <script src="/js/whiteboard-ui.js"></script>
+    <script src="/js/whiteboard-cursor.js"></script>
+    <script src="/js/whiteboard-image-handler.js"></script>
+    <script src="/js/whiteboard-recording.js"></script>
+    <script src="/js/whiteboard-recording-export.js"></script>
+    <script src="/js/whiteboard-recording-annotations.js"></script>
+    <script src="/js/whiteboard-recording-metadata.js"></script>
+    <script>
+        // Initialize whiteboard when DOM is loaded and user is authenticated
+        document.addEventListener('DOMContentLoaded', () => {
+            if (webinarData && socketConnected) {
+                // Initialize whiteboard after socket is connected
+                const whiteboard = new WhiteboardManager({
+                    webinarId: webinarData._id,
+                    userId: userData._id,
+                    socket: socket,
+                    isHost: userData._id === webinarData.host,
+                    isPresenter: webinarData.presenters && webinarData.presenters.some(p => p.user === userData._id)
+                });
+
+                // Initialize whiteboard UI
+                const whiteboardUI = new WhiteboardUI(whiteboard);
+
+                // Initialize cursor tracking for presentation mode
+                const cursorTracker = new WhiteboardCursorTracker({
+                    webinarId: webinarData._id,
+                    socket: socket,
+                    isHost: userData._id === webinarData.host,
+                    isPresenter: webinarData.presenters && webinarData.presenters.some(p => p.user === userData._id)
+                });
+
+                // Initialize recording manager with all new features
+                const whiteboardRecordingManager = new WhiteboardRecordingManager({
+                    whiteboardManager: whiteboard,
+                    webinarId: webinarData._id,
+                    socket: socket,
+                    userId: userData._id,
+                    isHost: userData._id === webinarData.host,
+                    isPresenter: webinarData.presenters && webinarData.presenters.some(p => p.user === userData._id)
+                });
+
+                // Make recording manager globally available for click handlers
+                window.whiteboardRecordingManager = whiteboardRecordingManager;
+
+                // Toggle whiteboard visibility
+                document.getElementById('toggle-whiteboard').addEventListener('click', () => {
+                    const whiteboardSection = document.getElementById('whiteboard-section');
+                    whiteboardSection.classList.toggle('collapsed');
+                });
+
+                // Toggle fullscreen
+                document.getElementById('whiteboard-fullscreen-toggle').addEventListener('click', () => {
+                    const container = document.getElementById('whiteboard-container');
+                    container.classList.toggle('whiteboard-fullscreen');
+
+                    const icon = document.querySelector('#whiteboard-fullscreen-toggle i');
+                    if (container.classList.contains('whiteboard-fullscreen')) {
+                        icon.classList.remove('fa-expand');
+                        icon.classList.add('fa-compress');
+                    } else {
+                        icon.classList.remove('fa-compress');
+                        icon.classList.add('fa-expand');
+                    }
+
+                    // Resize canvas after toggling fullscreen
+                    setTimeout(() => {
+                        whiteboard.resizeCanvas();
+                    }, 100);
+                });
+
+                // Listen for notifications about recording activities
+                socket.on('whiteboard:recording:started', data => {
+                    if (data.startedBy !== userData._id) {
+                        // Show notification to other users when someone starts recording
+                        const notification = document.createElement('div');
+                        notification.className = 'notification-toast info';
+                        notification.innerHTML = `
+                            <div style="font-weight: bold;">Recording Started</div>
+                            <div>A host or presenter has started recording this whiteboard session.</div>
+                        `;
+                        document.body.appendChild(notification);
+
+                        // Show notification
+                        setTimeout(() => {
+                            notification.classList.add('show');
+                        }, 10);
+
+                        // Remove after timeout
+                        setTimeout(() => {
+                            notification.classList.remove('show');
+                            setTimeout(() => {
+                                if (document.body.contains(notification)) {
+                                    document.body.removeChild(notification);
+                                }
+                            }, 300);
+                        }, 5000);
+                    }
+                });
+
+                socket.on('whiteboard:recording:stopped', data => {
+                    if (data.stoppedBy !== userData._id) {
+                        // Show notification to other users when someone stops recording
+                        const notification = document.createElement('div');
+                        notification.className = 'notification-toast info';
+                        notification.innerHTML = `
+                            <div style="font-weight: bold;">Recording Ended</div>
+                            <div>The whiteboard recording has been stopped.</div>
+                        `;
+                        document.body.appendChild(notification);
+
+                        // Show notification
+                        setTimeout(() => {
+                            notification.classList.add('show');
+                        }, 10);
+
+                        // Remove after timeout
+                        setTimeout(() => {
+                            notification.classList.remove('show');
+                            setTimeout(() => {
+                                if (document.body.contains(notification)) {
+                                    document.body.removeChild(notification);
+                                }
+                            }, 300);
+                        }, 5000);
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

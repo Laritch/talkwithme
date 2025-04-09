@@ -1,0 +1,534 @@
+/* Admin Panel Styles */
+
+.admin-panel {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+  overflow: hidden;
+}
+
+.admin-panel-header {
+  background-color: #343a40;
+  color: white;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.admin-panel-header h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.admin-panel-body {
+  padding: 20px;
+}
+
+/* Admin Tabs */
+.admin-tabs {
+  display: flex;
+  border-bottom: 1px solid #dee2e6;
+  margin-bottom: 20px;
+}
+
+.admin-tab {
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #6c757d;
+  background: none;
+  border: none;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s;
+}
+
+.admin-tab:hover {
+  color: #343a40;
+}
+
+.admin-tab.active {
+  color: #007bff;
+  border-bottom-color: #007bff;
+}
+
+.admin-tab-content {
+  display: none;
+}
+
+.admin-tab-content.active {
+  display: block;
+}
+
+/* Status Indicator */
+.webinar-status-container {
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  padding: 15px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.webinar-status-info {
+  display: flex;
+  align-items: center;
+}
+
+.webinar-status-info .status-label {
+  font-weight: 500;
+  margin-right: 10px;
+}
+
+.status-active,
+.status-inactive {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.status-active {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.status-inactive {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.recording-status {
+  display: inline-block;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.recording-status.recording {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.recording-status.completed {
+  background-color: #cce5ff;
+  color: #004085;
+}
+
+.recording-status.failed {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.webinar-control-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+/* Participant List */
+.participants-container,
+.recordings-container,
+.breakout-rooms-container {
+  margin-bottom: 20px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.section-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.section-header .badge {
+  background-color: #e9ecef;
+  color: #495057;
+  font-size: 12px;
+  padding: 3px 8px;
+  border-radius: 10px;
+}
+
+.participant-item,
+.recording-item,
+.breakout-room-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 15px;
+  border: 1px solid #e9ecef;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  transition: all 0.2s;
+}
+
+.participant-item:hover,
+.recording-item:hover,
+.breakout-room-item:hover {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-color: #dee2e6;
+}
+
+.participant-info,
+.recording-info,
+.breakout-room-info {
+  flex: 1;
+}
+
+.participant-name,
+.recording-title,
+.breakout-room-name {
+  font-weight: 500;
+  margin-bottom: 3px;
+}
+
+.participant-role,
+.recording-meta,
+.breakout-room-participants-count {
+  font-size: 12px;
+  color: #6c757d;
+}
+
+.recording-meta span {
+  margin-right: 10px;
+}
+
+.participant-actions,
+.recording-actions,
+.breakout-room-actions {
+  display: flex;
+  gap: 5px;
+}
+
+.participant-action-btn,
+.recording-action-btn,
+.breakout-room-action-btn {
+  background: none;
+  border: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6c757d;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.participant-action-btn:hover,
+.recording-action-btn:hover,
+.breakout-room-action-btn:hover {
+  background-color: #f8f9fa;
+  color: #343a40;
+}
+
+.mute-participant-btn:hover {
+  color: #fd7e14;
+}
+
+.remove-participant-btn:hover,
+.ban-participant-btn:hover,
+.delete-recording-btn:hover,
+.close-room-btn:hover {
+  color: #dc3545;
+}
+
+.view-recording-btn:hover,
+.join-room-btn:hover {
+  color: #007bff;
+}
+
+.export-recording-btn:hover {
+  color: #28a745;
+}
+
+/* Control Buttons */
+.control-button {
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  gap: 8px;
+  border: none;
+}
+
+.start-webinar-btn {
+  background-color: #28a745;
+  color: white;
+}
+
+.start-webinar-btn:hover {
+  background-color: #218838;
+}
+
+.end-webinar-btn {
+  background-color: #dc3545;
+  color: white;
+}
+
+.end-webinar-btn:hover {
+  background-color: #c82333;
+}
+
+.mute-all-btn {
+  background-color: #fd7e14;
+  color: white;
+}
+
+.mute-all-btn:hover {
+  background-color: #e67008;
+}
+
+.create-breakout-btn {
+  background-color: #007bff;
+  color: white;
+}
+
+.create-breakout-btn:hover {
+  background-color: #0069d9;
+}
+
+.control-button:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+/* Recording Controls */
+.recording-controls {
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  padding: 15px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.whiteboard-select-container {
+  flex: 1;
+  min-width: 200px;
+}
+
+.whiteboard-select-container label {
+  display: block;
+  font-size: 12px;
+  margin-bottom: 5px;
+  color: #6c757d;
+}
+
+#whiteboard-select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+}
+
+.start-recording-btn {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.stop-recording-btn {
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Settings Section */
+.settings-section {
+  margin-bottom: 20px;
+}
+
+.settings-section h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.settings-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.settings-column {
+  flex: 1;
+  min-width: 250px;
+  padding-right: 20px;
+}
+
+.settings-item {
+  margin-bottom: 15px;
+}
+
+.settings-item label {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+.settings-item label input[type="checkbox"] {
+  margin-right: 8px;
+}
+
+.settings-item select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+}
+
+.save-settings-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Empty States */
+.empty-state {
+  padding: 30px;
+  text-align: center;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  color: #6c757d;
+}
+
+.empty-state i {
+  font-size: 40px;
+  margin-bottom: 10px;
+  opacity: 0.5;
+}
+
+/* Notifications */
+.admin-notifications {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 300px;
+}
+
+.admin-notification {
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: 12px 15px;
+  opacity: 0;
+  transform: translateX(30px);
+  animation: notification-enter 0.3s forwards;
+}
+
+.admin-notification.fade-out {
+  animation: notification-exit 0.3s forwards;
+}
+
+.notification-title {
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.notification-message {
+  font-size: 13px;
+  color: #6c757d;
+}
+
+@keyframes notification-enter {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes notification-exit {
+  to {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .admin-tabs {
+    flex-wrap: wrap;
+  }
+
+  .admin-tab {
+    flex: 1 0 auto;
+    text-align: center;
+  }
+
+  .webinar-status-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .webinar-control-buttons {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .participant-item,
+  .recording-item,
+  .breakout-room-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .participant-info,
+  .recording-info,
+  .breakout-room-info {
+    margin-bottom: 10px;
+    width: 100%;
+  }
+
+  .participant-actions,
+  .recording-actions,
+  .breakout-room-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .recording-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .whiteboard-select-container {
+    width: 100%;
+  }
+}

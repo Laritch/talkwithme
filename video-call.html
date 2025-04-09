@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Call - Service Marketplace</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #111;
+            color: white;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .call-container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            position: relative;
+        }
+
+        .call-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background-color: rgba(0, 0, 0, 0.4);
+            z-index: 10;
+        }
+
+        .call-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .call-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .call-name {
+            font-weight: 600;
+            font-size: 18px;
+        }
+
+        .call-duration {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .call-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .call-videos {
+            flex: 1;
+            display: flex;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .remote-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .local-video-container {
+            position: absolute;
+            width: 180px;
+            height: 240px;
+            bottom: 85px;
+            right: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            z-index: 5;
+        }
+
+        .local-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .call-controls {
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            background-color: rgba(0, 0, 0, 0.4);
+            z-index: 5;
+        }
+
+        .control-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .control-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .control-btn.muted {
+            background-color: #e74c3c;
+        }
+
+        .control-btn.disabled {
+            background-color: #e74c3c;
+        }
+
+        .end-call-btn {
+            background-color: #e74c3c;
+        }
+
+        .end-call-btn:hover {
+            background-color: #c0392b;
+        }
+
+        .chat-panel {
+            position: absolute;
+            right: -320px;
+            top: 0;
+            bottom: 0;
+            width: 300px;
+            background-color: white;
+            color: #333;
+            z-index: 20;
+            transition: right 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .chat-panel.open {
+            right: 0;
+        }
+
+        .chat-header {
+            padding: 15px 20px;
+            border-bottom: 1px solid #e1e1e1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-body {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            background-color: #f5f7fb;
+        }
+
+        .chat-message {
+            margin-bottom: 15px;
+            max-width: 80%;
+            clear: both;
+        }
+
+        .chat-message.incoming {
+            float: left;
+        }
+
+        .chat-message.outgoing {
+            float: right;
+        }
+
+        .message-bubble {
+            padding: 10px 15px;
+            border-radius: 15px;
+            position: relative;
+            display: inline-block;
+            max-width: 100%;
+            word-wrap: break-word;
+        }
+
+        .chat-message.incoming .message-bubble {
+            background-color: white;
+            border: 1px solid #e1e1e1;
+            border-bottom-left-radius: 4px;
+        }
+
+        .chat-message.outgoing .message-bubble {
+            background-color: #3498db;
+            color: white;
+            border-bottom-right-radius: 4px;
+        }
+
+        .message-info {
+            font-size: 12px;
+            color: #999;
+            margin-top: 5px;
+            display: block;
+            text-align: right;
+        }
+
+        .chat-input {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid #e1e1e1;
+            background-color: white;
+        }
+
+        .chat-input textarea {
+            flex: 1;
+            border: 1px solid #e1e1e1;
+            border-radius: 20px;
+            padding: 8px 15px;
+            resize: none;
+            outline: none;
+        }
+
+        .chat-input button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            margin-left: 10px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .chat-input button:hover {
+            background-color: #2980b9;
+        }
+
+        .call-status {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-size: 18px;
+            display: none;
+        }
+
+        .status-connecting {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .connecting-animation {
+            display: flex;
+        }
+
+        .connecting-dot {
+            height: 8px;
+            width: 8px;
+            background-color: white;
+            border-radius: 50%;
+            margin: 0 2px;
+            animation: connecting 1.5s infinite ease-in-out;
+        }
+
+        .connecting-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .connecting-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes connecting {
+            0%, 60%, 100% {
+                transform: translateY(0);
+            }
+            30% {
+                transform: translateY(-7px);
+            }
+        }
+
+        .incoming-call {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: white;
+            border-radius: 10px;
+            width: 300px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            display: none;
+        }
+
+        .incoming-call-header {
+            background-color: #3498db;
+            color: white;
+            padding: 15px;
+            border-radius: 10px 10px 0 0;
+            font-weight: 600;
+        }
+
+        .incoming-call-body {
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .caller-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .caller-info {
+            flex: 1;
+        }
+
+        .caller-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .caller-type {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .incoming-call-actions {
+            display: flex;
+            padding: 0 15px 15px;
+            gap: 10px;
+        }
+
+        .incoming-call-actions button {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .accept-btn {
+            background-color: #2ecc71;
+            color: white;
+        }
+
+        .accept-btn:hover {
+            background-color: #27ae60;
+        }
+
+        .decline-btn {
+            background-color: #e74c3c;
+            color: white;
+        }
+
+        .decline-btn:hover {
+            background-color: #c0392b;
+        }
+
+        .screenshare-grid {
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+            height: 100%;
+        }
+
+        .screenshare-main {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .screenshare-preview {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background-color: #111;
+        }
+
+        .screenshare-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 10px;
+            overflow-y: auto;
+            background-color: #222;
+        }
+
+        .participant-container {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            height: 180px;
+        }
+
+        .participant-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .participant-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 5px 10px;
+            background: rgba(0, 0, 0, 0.5);
+            font-size: 12px;
+        }
+
+        .shared-by {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+        }
+
+        @media (max-width: 768px) {
+            .local-video-container {
+                width: 100px;
+                height: 130px;
+                bottom: 80px;
+                right: 10px;
+            }
+
+            .call-controls {
+                gap: 10px;
+            }
+
+            .control-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+
+            .screenshare-grid {
+                grid-template-columns: 1fr;
+                grid-template-rows: 3fr 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Video Call Interface -->
+    <div class="call-container">
+        <!-- Call Header -->
+        <div class="call-header">
+            <div class="call-info">
+                <img src="/uploads/default-avatar.png" alt="Participant" class="call-avatar" id="remote-avatar">
+                <div>
+                    <div class="call-name" id="remote-name">Dr. Jessica Chen</div>
+                    <div class="call-duration" id="call-duration">00:00</div>
+                </div>
+            </div>
+            <div class="call-actions">
+                <button class="control-btn" id="toggle-chat-btn" title="Toggle Chat">
+                    <i class="fas fa-comments"></i>
+                </button>
+                <button class="control-btn" id="toggle-fullscreen" title="Toggle Fullscreen">
+                    <i class="fas fa-expand"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Call Status Indicator -->
+        <div class="call-status" id="call-status">
+            <div class="status-connecting">
+                <span>Connecting</span>
+                <div class="connecting-animation">
+                    <span class="connecting-dot"></span>
+                    <span class="connecting-dot"></span>
+                    <span class="connecting-dot"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Video Streams Container -->
+        <div class="call-videos" id="call-videos">
+            <!-- Remote Video Stream (main view) -->
+            <video id="remote-video" class="remote-video" autoplay playsinline></video>
+
+            <!-- Local Video Stream (small view) -->
+            <div class="local-video-container">
+                <video id="local-video" class="local-video" autoplay playsinline muted></video>
+            </div>
+        </div>
+
+        <!-- Screen Share Layout (initially hidden) -->
+        <div class="screenshare-grid" id="screenshare-grid" style="display: none;">
+            <div class="screenshare-main">
+                <video id="screenshare-preview" class="screenshare-preview" autoplay playsinline></video>
+                <div class="shared-by" id="shared-by">Screen shared by Jessica</div>
+            </div>
+            <div class="screenshare-sidebar" id="participant-videos">
+                <!-- This will be populated with participant videos -->
+                <div class="participant-container">
+                    <video class="participant-video" autoplay playsinline></video>
+                    <div class="participant-info">Dr. Jessica Chen</div>
+                </div>
+                <div class="participant-container">
+                    <video class="participant-video" autoplay playsinline></video>
+                    <div class="participant-info">John Smith</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Call Controls -->
+        <div class="call-controls">
+            <button class="control-btn" id="toggle-mic" title="Toggle Microphone">
+                <i class="fas fa-microphone"></i>
+            </button>
+            <button class="control-btn" id="toggle-video" title="Toggle Video">
+                <i class="fas fa-video"></i>
+            </button>
+            <button class="control-btn" id="toggle-screenshare" title="Share Screen">
+                <i class="fas fa-desktop"></i>
+            </button>
+            <button class="control-btn" id="toggle-captions" title="Toggle Captions">
+                <i class="fas fa-closed-captioning"></i>
+            </button>
+            <button class="control-btn end-call-btn" id="end-call" title="End Call">
+                <i class="fas fa-phone-slash"></i>
+            </button>
+        </div>
+
+        <!-- Chat Panel (slides in from right) -->
+        <div class="chat-panel" id="chat-panel">
+            <div class="chat-header">
+                <div>In-Call Messages</div>
+                <button class="control-btn" id="close-chat-btn" title="Close Chat">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="chat-body" id="chat-body">
+                <!-- Sample incoming message -->
+                <div class="chat-message incoming">
+                    <div class="message-bubble">Hello! How are you today?</div>
+                    <span class="message-info">Dr. Jessica Chen • 10:15 AM</span>
+                </div>
+
+                <!-- Sample outgoing message -->
+                <div class="chat-message outgoing">
+                    <div class="message-bubble">I'm doing well, thanks for asking! I wanted to discuss my nutrition plan.</div>
+                    <span class="message-info">10:16 AM</span>
+                </div>
+
+                <!-- More sample messages for demonstration -->
+                <div class="chat-message incoming">
+                    <div class="message-bubble">Great! I've reviewed your assessment form. Let's go over your goals and current diet.</div>
+                    <span class="message-info">Dr. Jessica Chen • 10:17 AM</span>
+                </div>
+
+                <div class="chat-message outgoing">
+                    <div class="message-bubble">Sounds good. My main goal is to improve my energy levels throughout the day.</div>
+                    <span class="message-info">10:18 AM</span>
+                </div>
+            </div>
+            <div class="chat-input">
+                <textarea placeholder="Type a message..."></textarea>
+                <button title="Send Message">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Incoming Call Notification (initially hidden) -->
+    <div class="incoming-call" id="incoming-call">
+        <div class="incoming-call-header">
+            Incoming Call
+        </div>
+        <div class="incoming-call-body">
+            <img src="/uploads/default-avatar.png" alt="Caller" class="caller-avatar" id="caller-avatar">
+            <div class="caller-info">
+                <div class="caller-name" id="caller-name">Dr. Jessica Chen</div>
+                <div class="caller-type" id="call-type">Video Call</div>
+            </div>
+        </div>
+        <div class="incoming-call-actions">
+            <button class="decline-btn" id="decline-call">
+                <i class="fas fa-phone-slash"></i> Decline
+            </button>
+            <button class="accept-btn" id="accept-call">
+                <i class="fas fa-phone"></i> Accept
+            </button>
+        </div>
+    </div>
+
+    <!-- WebRTC and Video Call Logic -->
+    <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+    <script src="js/video-call.js"></script>
+</body>
+</html>
