@@ -1,0 +1,108 @@
+.offline-indicator {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  background-color: #f8f9fa;
+  border-radius: 50px;
+  padding: 8px 16px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.offline-indicator:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.offline-indicator.active {
+  background-color: #fff3e0;
+  border-left: 3px solid #ff9800;
+}
+
+.status-icon {
+  font-size: 18px;
+  margin-right: 8px;
+}
+
+.status-text {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+}
+
+.offline-details {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 10px;
+  width: 250px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  z-index: 1001;
+}
+
+.details-content {
+  padding: 16px;
+}
+
+.details-status, .details-mode {
+  margin: 0 0 8px 0;
+  font-size: 14px;
+  color: #333;
+}
+
+.details-description {
+  margin: 12px 0;
+  font-size: 13px;
+  color: #666;
+  line-height: 1.4;
+}
+
+.toggle-offline-btn {
+  display: block;
+  width: 100%;
+  padding: 8px 12px;
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.toggle-offline-btn:hover {
+  background-color: #1976d2;
+}
+
+/* When offline mode is active, change button color */
+.offline-indicator.active .toggle-offline-btn {
+  background-color: #ff9800;
+}
+
+.offline-indicator.active .toggle-offline-btn:hover {
+  background-color: #f57c00;
+}
+
+@media (max-width: 768px) {
+  .offline-indicator {
+    top: 10px;
+    right: 10px;
+    padding: 6px 12px;
+  }
+
+  .status-text {
+    display: none;
+  }
+
+  .status-icon {
+    margin-right: 0;
+  }
+}

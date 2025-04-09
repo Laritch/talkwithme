@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>M-Pesa Payment | Expert Chat System</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="css/payment-form.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .payment-methods-section {
+      margin-bottom: 2rem;
+    }
+
+    .payment-method-tabs {
+      display: flex;
+      border-bottom: 1px solid #e2e8f0;
+      margin-bottom: 1.5rem;
+    }
+
+    .payment-method-tab {
+      padding: 1rem 1.5rem;
+      font-weight: 500;
+      color: #718096;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border-bottom: 2px solid transparent;
+    }
+
+    .payment-method-tab:hover {
+      color: #4a6cf7;
+    }
+
+    .payment-method-tab.active {
+      color: #4a6cf7;
+      border-bottom-color: #4a6cf7;
+    }
+
+    .payment-method-content {
+      display: none;
+    }
+
+    .payment-method-content.active {
+      display: block;
+    }
+
+    .mpesa-logo {
+      max-width: 120px;
+      margin-bottom: 1rem;
+    }
+
+    .payment-instruction {
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+      background-color: #f0f9ff;
+      border-radius: 0.5rem;
+      border-left: 3px solid #4299e1;
+    }
+
+    .payment-instruction h3 {
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+      color: #2b6cb0;
+    }
+
+    .payment-instruction ol {
+      margin-bottom: 0;
+      padding-left: 1.5rem;
+    }
+
+    .payment-instruction li {
+      margin-bottom: 0.5rem;
+    }
+
+    .payment-instruction li:last-child {
+      margin-bottom: 0;
+    }
+
+    .phone-prefix {
+      margin-right: 0.5rem;
+      color: #4a5568;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="main-header">
+      <div class="logo">
+        <a href="index.html">Expert Chat System</a>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="expert-matching.html">Find Experts</a></li>
+          <li><a href="store.html">Expert Store</a></li>
+          <li><a href="cart.html"><i class="fas fa-shopping-cart"></i></a></li>
+          <li id="userProfileNav" style="display:none;">
+            <a href="#" id="userProfileLink">
+              <img id="userProfileImage" src="/uploads/default-avatar.png" alt="Profile" class="avatar-img">
+            </a>
+          </li>
+          <li id="loginNav">
+            <a href="login.html" class="btn-login">Login</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="payment-container">
+      <div class="payment-header">
+        <h1 class="payment-title">Complete Your Payment</h1>
+        <p class="payment-description">Choose your preferred payment method to complete your order.</p>
+      </div>
+
+      <div class="payment-layout">
+        <div class="payment-form-container">
+          <div class="payment-methods-section">
+            <div class="payment-method-tabs">
+              <div class="payment-method-tab active" data-tab="mpesa">M-Pesa</div>
+              <div class="payment-method-tab" data-tab="card">Credit Card</div>
+              <div class="payment-method-tab" data-tab="bank">Bank Transfer</div>
+            </div>
+
+            <!-- M-Pesa Payment Tab -->
+            <div class="payment-method-content active" id="mpesa-tab">
+              <div class="text-center">
+                <img src="https://same-assets.com/mpesa-logo.png" alt="M-Pesa" class="mpesa-logo">
+              </div>
+
+              <div class="payment-instruction">
+                <h3>How to pay with M-Pesa</h3>
+                <ol>
+                  <li>Enter your M-Pesa phone number below</li>
+                  <li>Click "Pay with M-Pesa" button</li>
+                  <li>You will receive a popup on your phone</li>
+                  <li>Enter your M-Pesa PIN to complete payment</li>
+                </ol>
+              </div>
+
+              <form id="mpesa-form">
+                <div class="form-group">
+                  <label for="mpesa-phone">M-Pesa Phone Number</label>
+                  <div class="input-with-prefix">
+                    <span class="phone-prefix">+254</span>
+                    <input type="tel" id="mpesa-phone" class="form-control" placeholder="7XXXXXXXX" required>
+                  </div>
+                </div>
+
+                <!-- Hidden amount field, populated by JS -->
+                <input type="hidden" id="payment-amount" value="99.99">
+                <input type="hidden" id="order-id" value="">
+
+                <button type="submit" id="mpesa-submit" class="btn btn-primary payment-submit">
+                  Pay with M-Pesa
+                </button>
+              </form>
+
+              <div id="payment-result" class="payment-result" style="display: none;"></div>
+            </div>
+
+            <!-- Credit Card Payment Tab -->
+            <div class="payment-method-content" id="card-tab">
+              <div class="text-center">
+                <img src="https://same-assets.com/card-logos.png" alt="Credit Cards" style="max-width: 250px; margin-bottom: 1rem;">
+              </div>
+
+              <div class="payment-instruction">
+                <h3>Secure Credit Card Payment</h3>
+                <p>Your card details are securely processed by our payment provider. We do not store your card information.</p>
+              </div>
+
+              <form id="card-form">
+                <div class="form-group">
+                  <label for="card-name">Cardholder Name</label>
+                  <input type="text" id="card-name" class="form-control" placeholder="John Doe" required>
+                </div>
+
+                <div class="form-group">
+                  <label for="card-element">Card Details</label>
+                  <div id="card-element" class="card-element"></div>
+                  <div id="card-errors" class="card-errors" role="alert"></div>
+                </div>
+
+                <button type="submit" id="card-submit" class="btn btn-primary payment-submit">
+                  Pay with Card
+                </button>
+              </form>
+            </div>
+
+            <!-- Bank Transfer Tab -->
+            <div class="payment-method-content" id="bank-tab">
+              <div class="payment-instruction">
+                <h3>Bank Transfer Details</h3>
+                <p>Please transfer the exact amount to the following bank account:</p>
+                <div class="bank-details">
+                  <p><strong>Bank Name:</strong> Example Bank</p>
+                  <p><strong>Account Name:</strong> Expert Chat System Ltd</p>
+                  <p><strong>Account Number:</strong> 1234567890</p>
+                  <p><strong>Branch Code:</strong> 001</p>
+                  <p><strong>Reference:</strong> <span id="bank-reference">ORD12345</span></p>
+                </div>
+                <p>After making the transfer, please upload your proof of payment below:</p>
+              </div>
+
+              <form id="bank-form">
+                <div class="form-group">
+                  <label for="bank-name">Bank Name</label>
+                  <input type="text" id="bank-name" class="form-control" placeholder="Your Bank Name" required>
+                </div>
+
+                <div class="form-group">
+                  <label for="bank-reference">Your Reference Number</label>
+                  <input type="text" id="bank-reference-input" class="form-control" placeholder="Reference used for transfer" required>
+                </div>
+
+                <div class="form-group">
+                  <label for="bank-receipt">Proof of Payment (Optional)</label>
+                  <input type="file" id="bank-receipt" class="form-control">
+                </div>
+
+                <button type="submit" id="bank-submit" class="btn btn-primary payment-submit">
+                  Confirm Bank Transfer
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div class="payment-summary">
+          <h2 class="summary-title">Order Summary</h2>
+          <div id="order-items" class="order-items">
+            <div class="order-item">
+              <div class="order-item-name">Expert Consultation Package</div>
+              <div class="order-item-description">3-session package with personalized guidance</div>
+              <div class="order-item-price">$99.99</div>
+            </div>
+          </div>
+          <div id="payment-summary" class="summary-content">
+            <div class="summary-row summary-original">
+              <span>Original Amount</span>
+              <span>$99.99</span>
+            </div>
+            <div class="summary-row summary-final">
+              <span>Total</span>
+              <span>$99.99</span>
+            </div>
+          </div>
+          <div class="secure-payment-info">
+            <div class="secure-payment-badge">
+              <i class="fas fa-lock"></i> Secure Payment
+            </div>
+            <div class="payment-logos">
+              <img src="https://same-assets.com/payment-logos.png" alt="Payment Methods" style="max-width: 200px;">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Load Scripts -->
+  <script src="https://js.stripe.com/v3/"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/mpesa-payment.js"></script>
+  <script src="js/payment-form.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      updateAuthUI();
+
+      // Get payment details from URL params
+      const urlParams = new URLSearchParams(window.location.search);
+      const amount = parseFloat(urlParams.get('amount') || 99.99);
+      const orderId = urlParams.get('orderId') || '';
+      const paymentType = urlParams.get('type') || 'product';
+      const itemName = urlParams.get('itemName') || 'Expert Consultation Package';
+      const itemDescription = urlParams.get('itemDescription') || '3-session package with personalized guidance';
+
+      // Update hidden inputs
+      document.getElementById('payment-amount').value = amount;
+      document.getElementById('order-id').value = orderId;
+
+      // Update bank reference
+      const bankRef = document.getElementById('bank-reference');
+      if (bankRef) {
+        bankRef.textContent = orderId || `ORD${Date.now().toString().substring(8)}`;
+      }
+
+      // Update order item display
+      const orderItems = document.getElementById('order-items');
+      if (orderItems) {
+        orderItems.innerHTML = `
+          <div class="order-item">
+            <div class="order-item-name">${itemName}</div>
+            <div class="order-item-description">${itemDescription}</div>
+            <div class="order-item-price">$${amount.toFixed(2)}</div>
+          </div>
+        `;
+      }
+
+      // Initialize payment method tabs
+      const tabs = document.querySelectorAll('.payment-method-tab');
+      const tabContents = document.querySelectorAll('.payment-method-content');
+
+      tabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+          const tabId = this.getAttribute('data-tab');
+
+          // Update active tab
+          tabs.forEach(t => t.classList.remove('active'));
+          this.classList.add('active');
+
+          // Update active content
+          tabContents.forEach(content => {
+            content.classList.remove('active');
+            if (content.id === `${tabId}-tab`) {
+              content.classList.add('active');
+            }
+          });
+        });
+      });
+
+      // Initialize Stripe
+      const stripe = Stripe('pk_test_sample'); // Replace with your Stripe publishable key
+
+      // Initialize card payment form
+      const cardForm = new PaymentForm({
+        stripe: stripe,
+        orderId: orderId,
+        paymentType: paymentType,
+        onSuccess: function(result) {
+          // Redirect to success page or order confirmation
+          setTimeout(() => {
+            if (orderId) {
+              window.location.href = `/order-confirmation.html?orderId=${orderId}`;
+            } else {
+              window.location.href = '/client-dashboard.html';
+            }
+          }, 2000);
+        },
+        onError: function(error) {
+          console.error('Payment error:', error);
+        }
+      });
+
+      // Initialize M-Pesa payment form
+      const mpesaPayment = new MpesaPayment({
+        orderId: orderId,
+        onSuccess: function(result) {
+          // Redirect to success page or order confirmation
+          setTimeout(() => {
+            if (orderId) {
+              window.location.href = `/order-confirmation.html?orderId=${orderId}`;
+            } else {
+              window.location.href = '/client-dashboard.html';
+            }
+          }, 2000);
+        },
+        onError: function(error) {
+          console.error('M-Pesa payment error:', error);
+        }
+      });
+
+      // Handle bank transfer form submission
+      const bankForm = document.getElementById('bank-form');
+      if (bankForm) {
+        bankForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+
+          const bankName = document.getElementById('bank-name').value;
+          const reference = document.getElementById('bank-reference-input').value;
+
+          if (!bankName || !reference) {
+            alert('Please fill in all required fields');
+            return;
+          }
+
+          const paymentResult = document.getElementById('payment-result');
+          if (paymentResult) {
+            paymentResult.innerHTML = `
+              <div class="alert alert-success">
+                <i class="fas fa-check-circle"></i>
+                Thank you! Your bank transfer details have been submitted. We will verify your payment and process your order shortly.
+              </div>
+            `;
+            paymentResult.style.display = 'block';
+          }
+
+          // In a real implementation, you would send the bank transfer details to the server
+          // For now, just simulate a successful submission
+          setTimeout(() => {
+            if (orderId) {
+              window.location.href = `/order-confirmation.html?orderId=${orderId}`;
+            } else {
+              window.location.href = '/client-dashboard.html';
+            }
+          }, 3000);
+        });
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,542 @@
+/* Message Scheduler Styles */
+
+.schedule-button {
+  color: #6b7280;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-left: 4px;
+}
+
+.schedule-button:hover {
+  background-color: #f3f4f6;
+  color: #374151;
+}
+
+.schedule-button.active {
+  color: #4f46e5;
+}
+
+/* Schedule Dialog */
+.schedule-dialog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.schedule-dialog.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.schedule-dialog-content {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  width: 100%;
+  max-width: 420px;
+  overflow: hidden;
+  transform: translateY(20px);
+  transition: transform 0.3s ease;
+}
+
+.schedule-dialog.active .schedule-dialog-content {
+  transform: translateY(0);
+}
+
+.schedule-dialog-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid #e5e7eb;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.schedule-dialog-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.schedule-dialog-close {
+  background: none;
+  border: none;
+  color: #6b7280;
+  cursor: pointer;
+  font-size: 1.2rem;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s;
+}
+
+.schedule-dialog-close:hover {
+  background-color: #f3f4f6;
+  color: #374151;
+}
+
+.schedule-dialog-body {
+  padding: 20px;
+}
+
+.schedule-form-group {
+  margin-bottom: 16px;
+}
+
+.schedule-form-label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #374151;
+}
+
+.schedule-form-input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: all 0.2s;
+}
+
+.schedule-form-input:focus {
+  outline: none;
+  border-color: #818cf8;
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.1);
+}
+
+.schedule-form-help {
+  margin-top: 4px;
+  font-size: 0.8rem;
+  color: #6b7280;
+}
+
+.schedule-preview {
+  background-color: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 12px;
+  margin-bottom: 16px;
+}
+
+.schedule-preview-label {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #6b7280;
+  margin-bottom: 6px;
+}
+
+.schedule-preview-content {
+  font-size: 0.9rem;
+  color: #4b5563;
+  line-height: 1.5;
+  max-height: 100px;
+  overflow-y: auto;
+  word-break: break-word;
+}
+
+/* For the date and time selection */
+.schedule-datetime-container {
+  display: flex;
+  gap: 10px;
+}
+
+.schedule-datetime-container .schedule-form-input {
+  flex: 1;
+}
+
+.schedule-quick-times {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.schedule-quick-time-btn {
+  padding: 6px 12px;
+  background-color: #f3f4f6;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.schedule-quick-time-btn:hover {
+  background-color: #e5e7eb;
+}
+
+.schedule-quick-time-btn.active {
+  background-color: #eff6ff;
+  border-color: #bfdbfe;
+  color: #2563eb;
+}
+
+.schedule-dialog-footer {
+  padding: 16px 20px;
+  border-top: 1px solid #e5e7eb;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.schedule-cancel-btn {
+  padding: 8px 16px;
+  background-color: #f3f4f6;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #4b5563;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.schedule-cancel-btn:hover {
+  background-color: #e5e7eb;
+}
+
+.schedule-submit-btn {
+  padding: 8px 16px;
+  background-color: #4f46e5;
+  border: 1px solid #4338ca;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.schedule-submit-btn:hover {
+  background-color: #4338ca;
+}
+
+.schedule-submit-btn:disabled {
+  background-color: #c7d2fe;
+  border-color: #c7d2fe;
+  cursor: not-allowed;
+}
+
+/* Scheduled message styles */
+.message.scheduled {
+  opacity: 0.7;
+}
+
+.message.scheduled .scheduled-indicator {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.8rem;
+  color: #6b7280;
+  margin-top: 5px;
+}
+
+.message.scheduled .scheduled-indicator i {
+  font-size: 0.9rem;
+}
+
+/* Scheduled messages tab */
+.scheduled-messages-tab {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.scheduled-messages-tab:hover {
+  background-color: #f3f4f6;
+}
+
+.scheduled-messages-tab i {
+  color: #6b7280;
+  margin-right: 10px;
+  font-size: 1.1rem;
+}
+
+.scheduled-messages-tab-label {
+  font-weight: 500;
+  color: #4b5563;
+}
+
+.scheduled-messages-count {
+  margin-left: auto;
+  background-color: #e5e7eb;
+  color: #4b5563;
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+.scheduled-messages-list {
+  border-top: 1px solid #e5e7eb;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.scheduled-message-item {
+  padding: 12px 16px;
+  border-bottom: 1px solid #e5e7eb;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.scheduled-message-item:hover {
+  background-color: #f9fafb;
+}
+
+.scheduled-message-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.scheduled-message-time {
+  font-size: 0.85rem;
+  color: #6b7280;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.scheduled-message-recipient {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #4b5563;
+}
+
+.scheduled-message-preview {
+  font-size: 0.9rem;
+  color: #6b7280;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 280px;
+}
+
+.scheduled-message-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 5px;
+  margin-top: 8px;
+}
+
+.scheduled-message-action-btn {
+  padding: 4px 8px;
+  background: none;
+  border: none;
+  font-size: 0.8rem;
+  color: #6b7280;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.scheduled-message-action-btn:hover {
+  background-color: #f3f4f6;
+  color: #4b5563;
+}
+
+.scheduled-message-action-btn.edit {
+  color: #2563eb;
+}
+
+.scheduled-message-action-btn.delete {
+  color: #ef4444;
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  .schedule-button {
+    color: #9ca3af;
+  }
+
+  .schedule-button:hover {
+    background-color: #374151;
+    color: #e5e7eb;
+  }
+
+  .schedule-button.active {
+    color: #6366f1;
+  }
+
+  .schedule-dialog-content {
+    background-color: #1f2937;
+  }
+
+  .schedule-dialog-header {
+    border-bottom-color: #374151;
+  }
+
+  .schedule-dialog-title {
+    color: #f9fafb;
+  }
+
+  .schedule-dialog-close {
+    color: #9ca3af;
+  }
+
+  .schedule-dialog-close:hover {
+    background-color: #374151;
+    color: #e5e7eb;
+  }
+
+  .schedule-form-label {
+    color: #e5e7eb;
+  }
+
+  .schedule-form-input {
+    background-color: #111827;
+    border-color: #374151;
+    color: #f9fafb;
+  }
+
+  .schedule-form-input:focus {
+    border-color: #6366f1;
+  }
+
+  .schedule-form-help {
+    color: #9ca3af;
+  }
+
+  .schedule-preview {
+    background-color: #111827;
+    border-color: #374151;
+  }
+
+  .schedule-preview-label {
+    color: #9ca3af;
+  }
+
+  .schedule-preview-content {
+    color: #e5e7eb;
+  }
+
+  .schedule-quick-time-btn {
+    background-color: #374151;
+    border-color: #4b5563;
+    color: #e5e7eb;
+  }
+
+  .schedule-quick-time-btn:hover {
+    background-color: #4b5563;
+  }
+
+  .schedule-quick-time-btn.active {
+    background-color: #1e3a8a;
+    border-color: #3b82f6;
+    color: #e5e7eb;
+  }
+
+  .schedule-dialog-footer {
+    border-top-color: #374151;
+  }
+
+  .schedule-cancel-btn {
+    background-color: #374151;
+    border-color: #4b5563;
+    color: #e5e7eb;
+  }
+
+  .schedule-cancel-btn:hover {
+    background-color: #4b5563;
+  }
+
+  .schedule-submit-btn {
+    background-color: #4f46e5;
+    border-color: #4338ca;
+  }
+
+  .schedule-submit-btn:hover {
+    background-color: #4338ca;
+  }
+
+  .schedule-submit-btn:disabled {
+    background-color: #4b5563;
+    border-color: #4b5563;
+  }
+
+  .message.scheduled .scheduled-indicator {
+    color: #9ca3af;
+  }
+
+  .scheduled-messages-tab:hover {
+    background-color: #374151;
+  }
+
+  .scheduled-messages-tab i {
+    color: #9ca3af;
+  }
+
+  .scheduled-messages-tab-label {
+    color: #e5e7eb;
+  }
+
+  .scheduled-messages-count {
+    background-color: #374151;
+    color: #e5e7eb;
+  }
+
+  .scheduled-messages-list {
+    border-top-color: #374151;
+  }
+
+  .scheduled-message-item {
+    border-bottom-color: #374151;
+  }
+
+  .scheduled-message-item:hover {
+    background-color: #111827;
+  }
+
+  .scheduled-message-time {
+    color: #9ca3af;
+  }
+
+  .scheduled-message-recipient {
+    color: #e5e7eb;
+  }
+
+  .scheduled-message-preview {
+    color: #9ca3af;
+  }
+
+  .scheduled-message-action-btn {
+    color: #9ca3af;
+  }
+
+  .scheduled-message-action-btn:hover {
+    background-color: #374151;
+    color: #e5e7eb;
+  }
+
+  .scheduled-message-action-btn.edit {
+    color: #3b82f6;
+  }
+
+  .scheduled-message-action-btn.delete {
+    color: #ef4444;
+  }
+}

@@ -1,0 +1,411 @@
+/* Message Sharing Styles */
+
+/* Share dialog */
+.share-dialog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.share-content {
+  width: 90%;
+  max-width: 500px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  max-height: 80vh;
+}
+
+/* Share dialog header */
+.share-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.share-header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #111827;
+}
+
+.close-share {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: #6b7280;
+  cursor: pointer;
+}
+
+.close-share:hover {
+  color: #f43f5e;
+}
+
+/* Share options */
+.share-options {
+  padding: 20px;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.share-link-container {
+  margin-bottom: 20px;
+}
+
+.share-link-container label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #4b5563;
+  margin-bottom: 8px;
+}
+
+.share-link-input {
+  display: flex;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.share-link-input input {
+  flex: 1;
+  padding: 10px 12px;
+  font-size: 0.9rem;
+  border: none;
+  background: #f9fafb;
+  color: #4b5563;
+}
+
+.share-link-input input:focus {
+  outline: none;
+}
+
+.copy-link-btn {
+  padding: 0 12px;
+  background: #f3f4f6;
+  border: none;
+  border-left: 1px solid #d1d5db;
+  color: #4b5563;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.copy-link-btn:hover {
+  background: #e5e7eb;
+}
+
+.copy-link-btn.copied {
+  background: #10b981;
+  color: white;
+}
+
+/* Share to section */
+.share-to-section {
+  margin-top: 24px;
+}
+
+.share-to-section h4 {
+  font-size: 0.95rem;
+  color: #374151;
+  margin: 0 0 12px 0;
+}
+
+.share-search {
+  margin-bottom: 15px;
+}
+
+.share-search input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+.share-search input:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.1);
+}
+
+/* Share recipients list */
+.share-recipients {
+  max-height: 250px;
+  overflow-y: auto;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+}
+
+.share-section {
+  margin-bottom: 15px;
+}
+
+.share-section h5 {
+  font-size: 0.85rem;
+  padding: 8px 12px;
+  margin: 0;
+  background: #f3f4f6;
+  color: #4b5563;
+}
+
+.share-list {
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+.share-item {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background-color 0.15s;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.share-item:last-child {
+  border-bottom: none;
+}
+
+.share-item:hover {
+  background-color: #f9fafb;
+}
+
+.share-item.selected {
+  background-color: rgba(99, 102, 241, 0.1);
+}
+
+.share-item-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 12px;
+  flex-shrink: 0;
+}
+
+.share-item-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.share-item-info {
+  flex: 1;
+  overflow: hidden;
+}
+
+.share-name {
+  font-weight: 500;
+  color: #111827;
+  margin-bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.share-status, .share-members {
+  font-size: 0.8rem;
+  color: #6b7280;
+}
+
+/* Share loading and empty states */
+.share-loading, .share-empty, .share-error {
+  padding: 20px;
+  text-align: center;
+  color: #6b7280;
+  font-size: 0.9rem;
+}
+
+.share-error {
+  color: #ef4444;
+}
+
+/* Share actions */
+.share-actions {
+  padding: 12px 20px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  border-top: 1px solid #e5e7eb;
+  background-color: #f9fafb;
+}
+
+.share-cancel-btn, .share-send-btn {
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.share-cancel-btn {
+  background: none;
+  border: 1px solid #d1d5db;
+  color: #4b5563;
+}
+
+.share-cancel-btn:hover {
+  background-color: #f3f4f6;
+}
+
+.share-send-btn {
+  background-color: #6366f1;
+  border: none;
+  color: white;
+}
+
+.share-send-btn:hover:not(:disabled) {
+  background-color: #4f46e5;
+}
+
+.share-send-btn:disabled {
+  background-color: #a5b4fc;
+  cursor: not-allowed;
+}
+
+/* Shared message link */
+.shared-message-link {
+  color: #6366f1;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.shared-message-link:hover {
+  text-decoration: underline;
+}
+
+/* Highlight for shared message links */
+.highlight-linked-message {
+  animation: highlightShared 4s ease-out;
+}
+
+@keyframes highlightShared {
+  0%, 100% {
+    box-shadow: none;
+  }
+  10%, 90% {
+    box-shadow: 0 0 0 2px #6366f1;
+  }
+}
+
+/* Share button in message actions */
+.message-share-btn {
+  color: #6b7280;
+  transition: color 0.2s;
+}
+
+.message-share-btn:hover {
+  color: #6366f1;
+}
+
+/* Dark mode styles */
+@media (prefers-color-scheme: dark) {
+  .share-content {
+    background-color: #1f2937;
+  }
+
+  .share-header {
+    border-bottom-color: #374151;
+  }
+
+  .share-header h3 {
+    color: #f9fafb;
+  }
+
+  .share-link-container label,
+  .share-to-section h4 {
+    color: #e5e7eb;
+  }
+
+  .share-link-input {
+    border-color: #4b5563;
+  }
+
+  .share-link-input input {
+    background: #374151;
+    color: #e5e7eb;
+  }
+
+  .copy-link-btn {
+    background: #4b5563;
+    border-left-color: #6b7280;
+    color: #e5e7eb;
+  }
+
+  .copy-link-btn:hover {
+    background: #6b7280;
+  }
+
+  .share-search input {
+    background: #374151;
+    border-color: #4b5563;
+    color: #e5e7eb;
+  }
+
+  .share-recipients {
+    border-color: #4b5563;
+  }
+
+  .share-section h5 {
+    background: #374151;
+    color: #e5e7eb;
+  }
+
+  .share-item {
+    border-bottom-color: #374151;
+  }
+
+  .share-item:hover {
+    background-color: #2d3748;
+  }
+
+  .share-item.selected {
+    background-color: rgba(99, 102, 241, 0.2);
+  }
+
+  .share-name {
+    color: #f9fafb;
+  }
+
+  .share-status, .share-members {
+    color: #9ca3af;
+  }
+
+  .share-actions {
+    border-top-color: #374151;
+    background-color: #1f2937;
+  }
+
+  .share-cancel-btn {
+    border-color: #4b5563;
+    color: #e5e7eb;
+  }
+
+  .share-cancel-btn:hover {
+    background-color: #374151;
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

@@ -1,0 +1,174 @@
+/* Message Threading Styles */
+
+/* Reply preview in the chat input area */
+.reply-preview {
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  padding: 8px 12px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  animation: slideDown 0.2s ease-out;
+}
+
+.reply-preview-content {
+  flex: 1;
+  overflow: hidden;
+}
+
+.reply-to-sender {
+  font-weight: 600;
+  color: #6366f1;
+  font-size: 0.85rem;
+  display: block;
+  margin-bottom: 2px;
+}
+
+.reply-preview-text {
+  color: #666;
+  font-size: 0.85rem;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.reply-cancel-btn {
+  background: none;
+  border: none;
+  color: #666;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0 0 0 8px;
+  transition: color 0.2s;
+}
+
+.reply-cancel-btn:hover {
+  color: #f43f5e;
+}
+
+/* Reply indicator inside messages */
+.reply-to-indicator {
+  font-size: 0.8rem;
+  color: #6366f1;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.reply-original-link {
+  color: #6366f1;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.reply-original-link:hover {
+  text-decoration: underline;
+}
+
+/* Thread count indicator */
+.thread-count {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.85rem;
+  color: #6366f1;
+  margin-top: 5px;
+  padding: 3px 8px;
+  border-radius: 12px;
+  background-color: rgba(99, 102, 241, 0.08);
+  cursor: pointer;
+  width: fit-content;
+  transition: background-color 0.2s;
+}
+
+.thread-count:hover {
+  background-color: rgba(99, 102, 241, 0.15);
+}
+
+.thread-count i {
+  font-size: 0.8rem;
+}
+
+/* Thread view styles */
+.thread-view {
+  margin-left: 20px;
+  margin-bottom: 15px;
+  border-left: 2px solid #e5e7eb;
+  padding-left: 15px;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.thread-heading {
+  margin-bottom: 10px;
+}
+
+.thread-heading h3 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #4b5563;
+  margin: 0;
+}
+
+.thread-replies {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Reply message styles */
+.reply-message {
+  font-size: 0.95rem;
+  padding: 8px 10px;
+}
+
+/* Loading and empty states */
+.thread-loading,
+.thread-empty,
+.thread-error {
+  padding: 10px;
+  font-size: 0.9rem;
+  color: #6b7280;
+  text-align: center;
+}
+
+.thread-error {
+  color: #ef4444;
+}
+
+/* Highlight effect for the original message */
+.highlight-message {
+  animation: highlight 2s ease-out;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes highlight {
+  0%, 100% {
+    background-color: transparent;
+  }
+  20%, 80% {
+    background-color: rgba(99, 102, 241, 0.1);
+  }
+}

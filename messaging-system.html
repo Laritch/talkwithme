@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messages | Expert Marketplace</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="messaging-system.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <div class="logo">
+                <img src="/uploads/default-avatar.png" alt="Logo">
+                <span>Expert Marketplace</span>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="expert-profile.html">My Profile</a></li>
+                    <li><a href="expert-case-studies-manage.html">Case Studies</a></li>
+                    <li><a href="expert-booking-dashboard.html">Bookings</a></li>
+                    <li><a href="messaging-system.html" class="active">Messages</a></li>
+                    <li><a href="expert-analytics.html">Analytics</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <div class="user-menu">
+                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a" alt="Expert" class="user-avatar">
+                    <div class="user-dropdown">
+                        <a href="expert-profile.html">My Profile</a>
+                        <a href="expert-settings.html">Settings</a>
+                        <a href="login.html">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="messaging-container">
+        <!-- Sidebar with conversations -->
+        <div class="conversations-sidebar">
+            <div class="sidebar-header">
+                <h2>Messages</h2>
+                <div class="sidebar-actions">
+                    <button class="btn-icon" id="new-message-btn" title="New Message">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                    <div class="search-box">
+                        <input type="text" placeholder="Search messages...">
+                        <i class="fas fa-search"></i>
+                    </div>
+                </div>
+                <div class="filter-options">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="unread">Unread</button>
+                    <button class="filter-btn" data-filter="bookings">Bookings</button>
+                    <button class="filter-btn" data-filter="archived">Archived</button>
+                </div>
+            </div>
+
+            <div class="conversations-list">
+                <div class="conversation active" data-id="1">
+                    <div class="conversation-avatar">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330" alt="Emily Davis">
+                        <span class="status-indicator online"></span>
+                    </div>
+                    <div class="conversation-info">
+                        <div class="conversation-header">
+                            <h3>Emily Davis</h3>
+                            <span class="conversation-time">12:45 PM</span>
+                        </div>
+                        <div class="conversation-preview">
+                            <p>I reviewed your proposal and I think it's perfect for our needs...</p>
+                        </div>
+                        <div class="conversation-meta">
+                            <span class="meta-item"><i class="fas fa-calendar-check"></i> Booked</span>
+                            <span class="meta-badge unread">2</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="conversation" data-id="2">
+                    <div class="conversation-avatar">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d" alt="Michael Brown">
+                        <span class="status-indicator offline"></span>
+                    </div>
+                    <div class="conversation-info">
+                        <div class="conversation-header">
+                            <h3>Michael Brown</h3>
+                            <span class="conversation-time">Yesterday</span>
+                        </div>
+                        <div class="conversation-preview">
+                            <p>Thanks for your help with my marketing strategy. Looking forward to our next session!</p>
+                        </div>
+                        <div class="conversation-meta">
+                            <span class="meta-item"><i class="fas fa-calendar-check"></i> Booked</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="conversation" data-id="3">
+                    <div class="conversation-avatar">
+                        <img src="https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb" alt="Jennifer Adams">
+                        <span class="status-indicator offline"></span>
+                    </div>
+                    <div class="conversation-info">
+                        <div class="conversation-header">
+                            <h3>Jennifer Adams</h3>
+                            <span class="conversation-time">Apr 2</span>
+                        </div>
+                        <div class="conversation-preview">
+                            <p>I'm interested in your Content Strategy Makeover case study. Can we discuss how...</p>
+                        </div>
+                        <div class="conversation-meta">
+                            <span class="meta-item"><i class="fas fa-clock"></i> Pending</span>
+                            <span class="meta-badge unread">1</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="conversation" data-id="4">
+                    <div class="conversation-avatar">
+                        <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d" alt="Robert Chen">
+                        <span class="status-indicator away"></span>
+                    </div>
+                    <div class="conversation-info">
+                        <div class="conversation-header">
+                            <h3>Robert Chen</h3>
+                            <span class="conversation-time">Mar 30</span>
+                        </div>
+                        <div class="conversation-preview">
+                            <p>Could we discuss moving forward with implementing the full growth plan for my e-commerce...</p>
+                        </div>
+                        <div class="conversation-meta">
+                            <span class="meta-item"><i class="fas fa-calendar-check"></i> Booked</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="conversation" data-id="5">
+                    <div class="conversation-avatar">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2" alt="Lisa Thompson">
+                        <span class="status-indicator offline"></span>
+                    </div>
+                    <div class="conversation-info">
+                        <div class="conversation-header">
+                            <h3>Lisa Thompson</h3>
+                            <span class="conversation-time">Mar 28</span>
+                        </div>
+                        <div class="conversation-preview">
+                            <p>Thank you for accepting my booking request. I'm looking forward to our discovery call...</p>
+                        </div>
+                        <div class="conversation-meta">
+                            <span class="meta-item"><i class="fas fa-calendar-check"></i> Booked</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="conversation" data-id="6">
+                    <div class="conversation-avatar">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e" alt="David Wilson">
+                        <span class="status-indicator offline"></span>
+                    </div>
+                    <div class="conversation-info">
+                        <div class="conversation-header">
+                            <h3>David Wilson</h3>
+                            <span class="conversation-time">Mar 22</span>
+                        </div>
+                        <div class="conversation-preview">
+                            <p>I'd like to reschedule our upcoming session. Is next Tuesday at 2 PM available?</p>
+                        </div>
+                        <div class="conversation-meta">
+                            <span class="meta-item"><i class="fas fa-exchange-alt"></i> Reschedule</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main messaging area -->
+        <div class="message-panel">
+            <div class="message-header">
+                <div class="conversation-info">
+                    <div class="user-info">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330" alt="Emily Davis" class="user-avatar">
+                        <div>
+                            <h2>Emily Davis</h2>
+                            <p class="user-status"><span class="status-dot online"></span> Online</p>
+                        </div>
+                    </div>
+
+                    <div class="conversation-actions">
+                        <button class="btn-icon" title="Video Call">
+                            <i class="fas fa-video"></i>
+                        </button>
+                        <button class="btn-icon" title="View Profile">
+                            <i class="fas fa-user"></i>
+                        </button>
+                        <button class="btn-icon" title="View Appointment">
+                            <i class="fas fa-calendar-alt"></i>
+                        </button>
+                        <button class="btn-icon" title="More Options">
+                            <i class="fas fa-ellipsis-v"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="booking-info">
+                    <div class="booking-badge">
+                        <i class="fas fa-calendar-check"></i> Upcoming Session
+                    </div>
+                    <div class="booking-details">
+                        <span><i class="far fa-clock"></i> Tomorrow, 11:00 AM</span>
+                        <span><i class="fas fa-tag"></i> Discovery Call (30 min)</span>
+                        <a href="expert-booking-dashboard.html" class="view-booking">View Details</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="message-history">
+                <div class="date-separator">
+                    <span>Today, April 3</span>
+                </div>
+
+                <!-- Previous messages -->
+                <div class="message received">
+                    <div class="message-avatar">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330" alt="Emily Davis">
+                    </div>
+                    <div class="message-content">
+                        <div class="message-bubble">
+                            <p>Hi James! I found your case study about increasing revenue by 250% very interesting. I run an online retail store and I'm looking to improve our marketing strategy.</p>
+                        </div>
+                        <div class="message-time">10:32 AM</div>
+                        <div class="message-actions">
+                            <button class="message-action-btn report-message-btn" title="Report Message">
+                                <i class="fas fa-flag"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="message sent">
+                    <div class="message-content">
+                        <div class="message-bubble">
+                            <p>Hello Emily! Thank you for reaching out. I'd be happy to discuss how we can apply similar strategies to your retail store. Could you tell me a bit more about your business and what specific areas you'd like to improve?</p>
+                        </div>
+                        <div class="message-time">10:45 AM</div>
+                    </div>
+                </div>
+
+                <div class="message received">
+                    <div class="message-avatar">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330" alt="Emily Davis">
+                    </div>
+                    <div class="message-content">
+                        <div class="message-bubble">
+                            <p>Of course! We sell eco-friendly home products, and we've been in business for about 2 years. Our main challenges are customer acquisition costs and conversion rates. We get decent traffic but our conversion is only around 1.2%.</p>
+                        </div>
+                        <div class="message-time">11:03 AM</div>
+                    </div>
+                </div>
+
+                <div class="message sent">
+                    <div class="message-content">
+                        <div class="message-bubble">
+                            <p>Thanks for sharing that. With eco-friendly products, there's definitely an opportunity to improve conversion rates through better messaging and customer journey optimization. I'd recommend we start with a comprehensive review of your current funnel and customer touchpoints.</p>
+                        </div>
+                        <div class="message-time">11:15 AM</div>
+                    </div>
+                </div>
+
+                <div class="message sent">
+                    <div class="message-content">
+                        <div class="message-bubble">
+                            <p>Would you be interested in scheduling a discovery call to discuss this in more detail? I have availability this week and next.</p>
+                        </div>
+                        <div class="message-time">11:16 AM</div>
+                    </div>
+                </div>
+
+                <div class="message received">
+                    <div class="message-avatar">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330" alt="Emily Davis">
+                    </div>
+                    <div class="message-content">
+                        <div class="message-bubble">
+                            <p>That sounds perfect! I'd love to schedule a call to discuss this further. How about tomorrow at 11 AM?</p>
+                        </div>
+                        <div class="message-time">11:30 AM</div>
+                    </div>
+                </div>
+
+                <div class="message sent">
+                    <div class="message-content">
+                        <div class="message-bubble">
+                            <p>11 AM tomorrow works great for me. I'll send you a booking confirmation right away. Looking forward to our call!</p>
+                        </div>
+                        <div class="message-time">11:35 AM</div>
+                    </div>
+                </div>
+
+                <div class="system-message">
+                    <div class="system-message-content">
+                        <i class="fas fa-calendar-check"></i>
+                        <p>You've scheduled a <strong>Discovery Call</strong> for <strong>April 4, 11:00 AM</strong></p>
+                    </div>
+                </div>
+
+                <div class="message received">
+                    <div class="message-avatar">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330" alt="Emily Davis">
+                    </div>
+                    <div class="message-content">
+                        <div class="message-bubble">
+                            <p>I received the confirmation. Thank you! I've also taken a look at your Growth Package, and I'm considering that option if our initial call goes well.</p>
+                        </div>
+                        <div class="message-time">12:05 PM</div>
+                    </div>
+                </div>
+
+                <div class="message received">
+                    <div class="message-avatar">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330" alt="Emily Davis">
+                    </div>
+                    <div class="message-content">
+                        <div class="message-bubble">
+                            <p>I reviewed your proposal and I think it's perfect for our needs. Should I prepare anything specific for our call tomorrow?</p>
+                        </div>
+                        <div class="message-time">12:45 PM</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="message-composer">
+                <div class="composer-actions">
+                    <button class="btn-icon" title="Attach File">
+                        <i class="fas fa-paperclip"></i>
+                    </button>
+                    <button class="btn-icon" title="Send Image">
+                        <i class="fas fa-image"></i>
+                    </button>
+                    <button class="btn-icon" title="Template Responses">
+                        <i class="fas fa-reply-all"></i>
+                    </button>
+                </div>
+                <div class="composer-input">
+                    <textarea placeholder="Type a message..."></textarea>
+                </div>
+                <div class="composer-send">
+                    <button class="btn-send" title="Send Message">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Client info sidebar -->
+        <div class="client-sidebar">
+            <div class="sidebar-close-mobile">
+                <button class="btn-icon">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div class="client-profile">
+                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330" alt="Emily Davis" class="client-avatar">
+                <h2>Emily Davis</h2>
+                <p class="client-title">Founder, EcoHome Essentials</p>
+                <div class="client-actions">
+                    <a href="#" class="btn btn-sm btn-outline"><i class="fas fa-user"></i> View Full Profile</a>
+                </div>
+            </div>
+
+            <div class="client-details">
+                <div class="detail-section">
+                    <h3>Contact Information</h3>
+                    <ul class="detail-list">
+                        <li><i class="fas fa-envelope"></i> emily@ecohome-essentials.com</li>
+                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                        <li><i class="fas fa-globe"></i> ecohome-essentials.com</li>
+                    </ul>
+                </div>
+
+                <div class="detail-section">
+                    <h3>Session History</h3>
+                    <div class="upcoming-session">
+                        <div class="session-badge upcoming">Upcoming</div>
+                        <div class="session-details">
+                            <h4>Discovery Call</h4>
+                            <p><i class="far fa-calendar-alt"></i> Apr 4, 2025 at 11:00 AM</p>
+                            <p><i class="far fa-clock"></i> 30 minutes</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="detail-section">
+                    <h3>Case Study Interest</h3>
+                    <div class="case-study-card">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f" alt="Case Study">
+                        <div class="case-study-info">
+                            <h4>Retail Growth Strategy</h4>
+                            <p>How We Increased Revenue by 250% in 6 Months</p>
+                            <a href="case-study-detail.html?id=1">View Case Study</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="detail-section">
+                    <h3>Notes</h3>
+                    <div class="notes-editor">
+                        <textarea placeholder="Add private notes about this client...">Online retail store selling eco-friendly home products. Looking to improve conversion rates (currently at 1.2%) and reduce CAC. In business for 2 years.</textarea>
+                        <button class="btn btn-sm btn-primary">Save Notes</button>
+                    </div>
+                </div>
+
+                <div class="detail-section">
+                    <h3>Tags</h3>
+                    <div class="tags-list">
+                        <span class="tag">E-commerce</span>
+                        <span class="tag">Retail</span>
+                        <span class="tag">Conversion Optimization</span>
+                        <span class="tag">New Client</span>
+                        <span class="tag">High Potential</span>
+                        <button class="btn-icon add-tag">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- New Message Modal -->
+    <div class="modal" id="new-message-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>New Message</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="recipient">Recipient</label>
+                    <div class="recipient-search">
+                        <input type="text" id="recipient" placeholder="Type name or email...">
+                        <div class="recipient-results">
+                            <!-- Results will appear here when typing -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="message-subject">Subject (Optional)</label>
+                    <input type="text" id="message-subject" placeholder="What's this conversation about?">
+                </div>
+
+                <div class="form-group">
+                    <label for="message-body">Message</label>
+                    <textarea id="message-body" placeholder="Type your message here..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Templates</label>
+                    <div class="template-options">
+                        <button class="template-option">Introduction</button>
+                        <button class="template-option">Follow-up</button>
+                        <button class="template-option">Booking Confirmation</button>
+                        <button class="template-option">Service Proposal</button>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button class="btn btn-outline">
+                        <i class="fas fa-paperclip"></i> Attach File
+                    </button>
+                    <button class="btn btn-primary">
+                        Send Message
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Report Message Modal -->
+    <div class="modal" id="report-message-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Report Message</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="report-message-container">
+                    <div class="reported-message-preview">
+                        <h4>Message:</h4>
+                        <div class="reported-message-content"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="report-reason">Reason for reporting:</label>
+                        <select id="report-reason" required>
+                            <option value="" disabled selected>Select a reason</option>
+                            <option value="harassment">Harassment or bullying</option>
+                            <option value="inappropriate_content">Inappropriate or offensive content</option>
+                            <option value="spam">Spam or commercial solicitation</option>
+                            <option value="misleading_information">Misleading or false information</option>
+                            <option value="external_contact">Attempting to communicate outside the platform</option>
+                            <option value="other">Other concern</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="report-details">Additional details (optional):</label>
+                        <textarea id="report-details" placeholder="Please provide any additional information that would help us understand the issue..."></textarea>
+                    </div>
+
+                    <div class="report-anonymous-option">
+                        <input type="checkbox" id="report-anonymous">
+                        <label for="report-anonymous">Submit report anonymously</label>
+                        <div class="anonymous-info">
+                            <i class="fas fa-info-circle"></i>
+                            <span class="tooltip-text">Your identity will not be shared with the reported user, but our admins will be able to see who submitted the report.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline cancel-report-btn">Cancel</button>
+                <button class="btn btn-warning submit-report-btn">
+                    <i class="fas fa-flag"></i> Submit Report
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Report Confirmation Modal -->
+    <div class="modal" id="report-confirmation-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Report Submitted</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="confirmation-message">
+                    <div class="confirmation-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <p>Thank you for your report. Our moderation team will review the message and take appropriate action if needed.</p>
+                    <p>Report ID: <span id="report-reference-id">REP-123456</span></p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary close-confirmation-btn">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts.js"></script>
+    <script src="messaging-system.js"></script>
+</body>
+</html>

@@ -1,0 +1,153 @@
+/* Message Quoting Styles */
+
+/* Quote preview in the chat input area */
+.quote-preview {
+  background-color: rgba(0, 0, 0, 0.03);
+  border-radius: 8px;
+  padding: 8px 12px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-left: 3px solid #6366f1;
+  animation: slideDown 0.2s ease-out;
+}
+
+.quote-preview-content {
+  flex: 1;
+  overflow: hidden;
+}
+
+.quote-info {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 2px;
+}
+
+.quote-icon {
+  color: #6366f1;
+  font-size: 0.8rem;
+}
+
+.quote-sender {
+  font-weight: 600;
+  color: #4b5563;
+  font-size: 0.85rem;
+}
+
+.quote-preview-text {
+  color: #6b7280;
+  font-size: 0.85rem;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-style: italic;
+}
+
+.quote-cancel-btn {
+  background: none;
+  border: none;
+  color: #6b7280;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0 0 0 8px;
+  transition: color 0.2s;
+}
+
+.quote-cancel-btn:hover {
+  color: #f43f5e;
+}
+
+/* Quote display in messages */
+.quoted-message {
+  margin-bottom: 6px;
+  padding: 6px 10px;
+  background-color: rgba(0, 0, 0, 0.03);
+  border-radius: 6px;
+  border-left: 2px solid #6366f1;
+  cursor: pointer;
+  position: relative;
+  transition: background-color 0.2s;
+}
+
+.quoted-message:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.quoted-content {
+  position: relative;
+  padding-left: 6px;
+}
+
+.quoted-sender {
+  font-weight: 600;
+  font-size: 0.8rem;
+  color: #4b5563;
+  margin-bottom: 2px;
+}
+
+.quoted-text {
+  font-size: 0.8rem;
+  color: #6b7280;
+  font-style: italic;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+/* Quote button in message actions */
+.message-quote-btn {
+  color: #6b7280;
+  transition: color 0.2s;
+}
+
+.message-quote-btn:hover {
+  color: #6366f1;
+}
+
+/* Dark mode styles */
+@media (prefers-color-scheme: dark) {
+  .quote-preview {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+
+  .quote-sender {
+    color: #e5e7eb;
+  }
+
+  .quote-preview-text {
+    color: #9ca3af;
+  }
+
+  .quoted-message {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+
+  .quoted-message:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .quoted-sender {
+    color: #e5e7eb;
+  }
+
+  .quoted-text {
+    color: #9ca3af;
+  }
+}
+
+/* Animation for quote preview appearing */
+@keyframes slideDown {
+  from {
+    transform: translateY(-10px);
+    opacity: a0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
