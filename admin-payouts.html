@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expert Payouts | Admin Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="admin-dashboard.css">
+    <link rel="stylesheet" href="admin-payouts.css">
+    <link rel="stylesheet" href="admin-notification.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
+    <!-- Date Range Picker -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Admin Sidebar -->
+        <aside class="admin-sidebar">
+            <div class="admin-brand">
+                <img src="/uploads/default-avatar.png" alt="Logo" class="admin-logo">
+                <div class="admin-logo-text">
+                    <h1>Expert Marketplace</h1>
+                    <p>Admin Panel</p>
+                </div>
+            </div>
+
+            <nav class="admin-nav">
+                <ul>
+                    <li><a href="admin-dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+
+                    <!-- User Management -->
+                    <li class="nav-section-title">User Management</li>
+                    <li><a href="admin-experts.html"><i class="fas fa-user-tie"></i> Experts</a></li>
+                    <li><a href="admin-clients.html"><i class="fas fa-users"></i> Clients</a></li>
+                    <li><a href="admin-user-management.html"><i class="fas fa-user-cog"></i> User Controls</a></li>
+                    <li><a href="admin-role-management.html"><i class="fas fa-user-shield"></i> Roles & Permissions</a></li>
+
+                    <!-- Content & Bookings -->
+                    <li class="nav-section-title">Content & Bookings</li>
+                    <li><a href="admin-bookings.html"><i class="fas fa-calendar-check"></i> Bookings</a></li>
+                    <li><a href="admin-case-studies.html"><i class="fas fa-file-alt"></i> Case Studies</a></li>
+                    <li><a href="admin-content-moderation.html"><i class="fas fa-shield-alt"></i> Content Moderation</a></li>
+                    <li><a href="admin-appeals-management.html"><i class="fas fa-gavel"></i> Appeals</a></li>
+
+                    <!-- Communication -->
+                    <li class="nav-section-title">Communication</li>
+                    <li><a href="admin-message-monitoring.html"><i class="fas fa-comments"></i> Messages</a></li>
+                    <li><a href="admin-support-tickets.html"><i class="fas fa-headset"></i> Support Tickets</a></li>
+                    <li><a href="admin-knowledge-base.html"><i class="fas fa-book"></i> Knowledge Base</a></li>
+
+                    <!-- Finance -->
+                    <li class="nav-section-title">Finance</li>
+                    <li><a href="admin-payments.html"><i class="fas fa-credit-card"></i> Payments</a></li>
+                    <li><a href="admin-refunds.html"><i class="fas fa-undo"></i> Refunds</a></li>
+                    <li><a href="admin-payouts.html" class="active"><i class="fas fa-money-bill-wave"></i> Payouts</a></li>
+                    <li><a href="admin-tax-management.html"><i class="fas fa-file-invoice-dollar"></i> Tax Documents</a></li>
+
+                    <!-- Analytics & Marketing -->
+                    <li class="nav-section-title">Analytics & Marketing</li>
+                    <li><a href="admin-analytics-dashboard.html"><i class="fas fa-chart-line"></i> Analytics</a></li>
+                    <li><a href="admin-reports.html"><i class="fas fa-chart-bar"></i> Reports</a></li>
+                    <li><a href="admin-email-campaigns.html"><i class="fas fa-envelope"></i> Email Campaigns</a></li>
+                    <li><a href="admin-promotions.html"><i class="fas fa-tags"></i> Promotions</a></li>
+                    <li><a href="admin-seo.html"><i class="fas fa-search"></i> SEO Management</a></li>
+
+                    <!-- System -->
+                    <li class="nav-section-title">System</li>
+                    <li><a href="admin-settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+                    <li><a href="admin-feature-toggles.html"><i class="fas fa-toggle-on"></i> Feature Toggles</a></li>
+                    <li><a href="admin-api-management.html"><i class="fas fa-plug"></i> API & Integrations</a></li>
+                    <li><a href="admin-system-health.html"><i class="fas fa-heartbeat"></i> System Health</a></li>
+                    <li><a href="admin-security.html"><i class="fas fa-lock"></i> Security & Compliance</a></li>
+
+                    <li class="separator"></li>
+                    <li><a href="index.html"><i class="fas fa-sign-out-alt"></i> Exit Admin</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <!-- Header -->
+            <header class="admin-header">
+                <div class="admin-header-content">
+                    <h1>Expert Payout Management</h1>
+                    <div class="admin-user">
+                        <!-- Notification Bell -->
+                        <div class="notification-bell-container">
+                            <div id="notification-bell" class="notification-bell">
+                                <i class="fas fa-bell"></i>
+                                <span id="notification-counter" class="notification-counter">0</span>
+                            </div>
+
+                            <!-- Notification Panel -->
+                            <div id="notification-panel" class="notification-panel">
+                                <div class="notification-panel-header">
+                                    <h3>Notifications</h3>
+                                    <button id="settings-btn" class="btn-icon" title="Notification Settings">
+                                        <i class="fas fa-cog"></i>
+                                    </button>
+                                </div>
+                                <div id="notification-list" class="notification-list">
+                                    <!-- Notifications will be populated here by JS -->
+                                    <div class="empty-notifications">
+                                        <i class="fas fa-check-circle"></i>
+                                        <p>No new notifications</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <span>Admin User</span>
+                        <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde" alt="Admin" class="admin-avatar">
+                    </div>
+                </div>
+            </header>
+
+            <!-- Page Content -->
+            <div class="admin-content">
+                <!-- Payout Overview -->
+                <div class="dashboard-section">
+                    <h2>Payout Overview</h2>
+                    <div class="stat-cards">
+                        <div class="stat-card">
+                            <div class="stat-icon bg-primary">
+                                <i class="fas fa-money-bill-wave"></i>
+                            </div>
+                            <div class="stat-details">
+                                <p class="stat-label">Pending Payouts</p>
+                                <p class="stat-value" id="pendingPayouts">$43,210</p>
+                                <p class="stat-change positive"><i class="fas fa-arrow-up"></i> 7.8% vs last month</p>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon bg-success">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="stat-details">
+                                <p class="stat-label">Processed This Month</p>
+                                <p class="stat-value" id="processedPayouts">$78,450</p>
+                                <p class="stat-change positive"><i class="fas fa-arrow-up"></i> 12.5% vs last month</p>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon bg-info">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="stat-details">
+                                <p class="stat-label">Experts Awaiting Payment</p>
+                                <p class="stat-value" id="expertsAwaitingPayment">24</p>
+                                <p class="stat-change negative"><i class="fas fa-arrow-down"></i> 3 fewer than last month</p>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon bg-warning">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </div>
+                            <div class="stat-details">
+                                <p class="stat-label">Failed Payouts</p>
+                                <p class="stat-value" id="failedPayouts">2</p>
+                                <p class="stat-change negative"><i class="fas fa-arrow-down"></i> 1 fewer than last month</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Payout Schedule Tools -->
+                <div class="dashboard-section">
+                    <div class="section-header">
+                        <h2>Payout Actions</h2>
+                        <div class="section-actions">
+                            <button id="run-scheduled-payouts-btn" class="btn btn-primary">
+                                <i class="fas fa-play"></i> Run Scheduled Payouts
+                            </button>
+                            <button id="edit-schedule-btn" class="btn btn-secondary">
+                                <i class="fas fa-calendar-alt"></i> Edit Schedule
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="schedule-info-panel">
+                        <div class="schedule-info-item">
+                            <div class="info-icon">
+                                <i class="fas fa-calendar-check"></i>
+                            </div>
+                            <div class="info-details">
+                                <h3>Next Scheduled Payout Run</h3>
+                                <p id="next-payout-date">April 15, 2023 at 12:00 AM UTC</p>
+                            </div>
+                        </div>
+
+                        <div class="schedule-info-item">
+                            <div class="info-icon">
+                                <i class="fas fa-history"></i>
+                            </div>
+                            <div class="info-details">
+                                <h3>Last Payout Run</h3>
+                                <p id="last-payout-date">April 1, 2023 at 12:00 AM UTC</p>
+                            </div>
+                        </div>
+
+                        <div class="schedule-info-item">
+                            <div class="info-icon">
+                                <i class="fas fa-money-check-alt"></i>
+                            </div>
+                            <div class="info-details">
+                                <h3>Current Schedule</h3>
+                                <p id="current-schedule">Bi-monthly (1st and 15th)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Payout Management -->
+                <div class="dashboard-section">
+                    <div class="section-header">
+                        <h2>Expert Payouts</h2>
+                        <div class="section-actions">
+                            <div class="date-range-container">
+                                <input type="text" id="payout-date-range" placeholder="Select date range" class="date-range-input">
+                            </div>
+                            <button id="bulk-process-btn" class="btn btn-success" disabled>
+                                <i class="fas fa-check-double"></i> Process Selected
+                            </button>
+                            <button id="export-payouts-btn" class="btn btn-secondary">
+                                <i class="fas fa-file-export"></i> Export
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Payout Filters -->
+                    <div class="filter-container">
+                        <div class="filter-row">
+                            <div class="filter-group">
+                                <label for="payout-status">Status</label>
+                                <select id="payout-status" class="select-control">
+                                    <option value="all">All Status</option>
+                                    <option value="pending">Pending</option>
+                                    <option value="processing">Processing</option>
+                                    <option value="completed">Completed</option>
+                                    <option value="failed">Failed</option>
+                                </select>
+                            </div>
+
+                            <div class="filter-group">
+                                <label for="payout-method">Payment Method</label>
+                                <select id="payout-method" class="select-control">
+                                    <option value="all">All Methods</option>
+                                    <option value="bank_transfer">Bank Transfer</option>
+                                    <option value="paypal">PayPal</option>
+                                    <option value="wise">Wise</option>
+                                    <option value="crypto">Cryptocurrency</option>
+                                </select>
+                            </div>
+
+                            <div class="filter-group">
+                                <label for="payout-amount">Amount Range</label>
+                                <div class="amount-range">
+                                    <input type="number" id="min-payout-amount" placeholder="Min" class="amount-input">
+                                    <span class="amount-separator">to</span>
+                                    <input type="number" id="max-payout-amount" placeholder="Max" class="amount-input">
+                                </div>
+                            </div>
+
+                            <div class="filter-group">
+                                <label for="payout-search">Search Expert</label>
+                                <div class="search-input">
+                                    <input type="text" id="payout-search" placeholder="Search by name, email, or ID...">
+                                    <button id="payout-search-btn" class="btn btn-icon">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="filter-actions">
+                            <button id="apply-payout-filters" class="btn btn-primary">Apply Filters</button>
+                            <button id="reset-payout-filters" class="btn btn-outline">Reset</button>
+                        </div>
+                    </div>
+
+                    <!-- Payouts Table -->
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <input type="checkbox" id="select-all-payouts">
+                                    </th>
+                                    <th>Expert</th>
+                                    <th>Payout ID</th>
+                                    <th>Period</th>
+                                    <th>Amount</th>
+                                    <th>Payment Method</th>
+                                    <th>Status</th>
+                                    <th>Schedule Date</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="payouts-table-body">
+                                <!-- Sample payout rows -->
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" class="payout-checkbox" data-id="pyt_12345">
+                                    </td>
+                                    <td>
+                                        <div class="user-info">
+                                            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a" alt="James Wilson" class="avatar-sm">
+                                            <div>
+                                                <div>James Wilson</div>
+                                                <div class="user-email">jwilson@example.com</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>pyt_12345</td>
+                                    <td>Mar 1 - Mar 31, 2023</td>
+                                    <td class="amount positive">$1,250.00</td>
+                                    <td>Bank Transfer</td>
+                                    <td><span class="status-badge pending">Pending</span></td>
+                                    <td>Apr 15, 2023</td>
+                                    <td>
+                                        <div class="table-actions">
+                                            <button class="btn-icon view-payout" title="View Details" data-id="pyt_12345"><i class="fas fa-eye"></i></button>
+                                            <button class="btn-icon process-payout" title="Process Now" data-id="pyt_12345"><i class="fas fa-check"></i></button>
+                                            <div class="action-dropdown">
+                                                <button class="btn-icon" title="More Actions"><i class="fas fa-ellipsis-v"></i></button>
+                                                <div class="dropdown-menu">
+                                                    <a href="#" class="dropdown-item edit-banking-info" data-id="pyt_12345">Edit Banking Info</a>
+                                                    <a href="#" class="dropdown-item download-statement" data-id="pyt_12345">Download Statement</a>
+                                                    <a href="#" class="dropdown-item contact-expert" data-id="pyt_12345">Contact Expert</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" class="payout-checkbox" data-id="pyt_12346">
+                                    </td>
+                                    <td>
+                                        <div class="user-info">
+                                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330" alt="Emily Davis" class="avatar-sm">
+                                            <div>
+                                                <div>Emily Davis</div>
+                                                <div class="user-email">emily.davis@example.com</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>pyt_12346</td>
+                                    <td>Mar 1 - Mar 31, 2023</td>
+                                    <td class="amount positive">$2,340.00</td>
+                                    <td>PayPal</td>
+                                    <td><span class="status-badge completed">Completed</span></td>
+                                    <td>Apr 1, 2023</td>
+                                    <td>
+                                        <div class="table-actions">
+                                            <button class="btn-icon view-payout" title="View Details" data-id="pyt_12346"><i class="fas fa-eye"></i></button>
+                                            <button class="btn-icon download-receipt" title="Download Receipt" data-id="pyt_12346"><i class="fas fa-file-download"></i></button>
+                                            <div class="action-dropdown">
+                                                <button class="btn-icon" title="More Actions"><i class="fas fa-ellipsis-v"></i></button>
+                                                <div class="dropdown-menu">
+                                                    <a href="#" class="dropdown-item download-statement" data-id="pyt_12346">Download Statement</a>
+                                                    <a href="#" class="dropdown-item contact-expert" data-id="pyt_12346">Contact Expert</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" class="payout-checkbox" data-id="pyt_12347">
+                                    </td>
+                                    <td>
+                                        <div class="user-info">
+                                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d" alt="Michael Brown" class="avatar-sm">
+                                            <div>
+                                                <div>Michael Brown</div>
+                                                <div class="user-email">mbrown@example.com</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>pyt_12347</td>
+                                    <td>Mar 1 - Mar 31, 2023</td>
+                                    <td class="amount positive">$950.00</td>
+                                    <td>Wise</td>
+                                    <td><span class="status-badge failed">Failed</span></td>
+                                    <td>Apr 1, 2023</td>
+                                    <td>
+                                        <div class="table-actions">
+                                            <button class="btn-icon view-payout" title="View Details" data-id="pyt_12347"><i class="fas fa-eye"></i></button>
+                                            <button class="btn-icon retry-payout" title="Retry Payment" data-id="pyt_12347"><i class="fas fa-redo"></i></button>
+                                            <div class="action-dropdown">
+                                                <button class="btn-icon" title="More Actions"><i class="fas fa-ellipsis-v"></i></button>
+                                                <div class="dropdown-menu">
+                                                    <a href="#" class="dropdown-item edit-banking-info" data-id="pyt_12347">Edit Banking Info</a>
+                                                    <a href="#" class="dropdown-item download-statement" data-id="pyt_12347">Download Statement</a>
+                                                    <a href="#" class="dropdown-item contact-expert" data-id="pyt_12347">Contact Expert</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" class="payout-checkbox" data-id="pyt_12348">
+                                    </td>
+                                    <td>
+                                        <div class="user-info">
+                                            <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d" alt="Robert Chen" class="avatar-sm">
+                                            <div>
+                                                <div>Robert Chen</div>
+                                                <div class="user-email">rchen@example.com</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>pyt_12348</td>
+                                    <td>Mar 1 - Mar 31, 2023</td>
+                                    <td class="amount positive">$1,750.00</td>
+                                    <td>Cryptocurrency</td>
+                                    <td><span class="status-badge processing">Processing</span></td>
+                                    <td>Apr 1, 2023</td>
+                                    <td>
+                                        <div class="table-actions">
+                                            <button class="btn-icon view-payout" title="View Details" data-id="pyt_12348"><i class="fas fa-eye"></i></button>
+                                            <div class="action-dropdown">
+                                                <button class="btn-icon" title="More Actions"><i class="fas fa-ellipsis-v"></i></button>
+                                                <div class="dropdown-menu">
+                                                    <a href="#" class="dropdown-item check-status" data-id="pyt_12348">Check Status</a>
+                                                    <a href="#" class="dropdown-item download-statement" data-id="pyt_12348">Download Statement</a>
+                                                    <a href="#" class="dropdown-item contact-expert" data-id="pyt_12348">Contact Expert</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="pagination">
+                        <button class="pagination-btn" disabled><i class="fas fa-chevron-left"></i></button>
+                        <button class="pagination-btn active">1</button>
+                        <button class="pagination-btn">2</button>
+                        <button class="pagination-btn">3</button>
+                        <span class="pagination-ellipsis">...</span>
+                        <button class="pagination-btn">8</button>
+                        <button class="pagination-btn"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+
+                <!-- Batch Payout Tools -->
+                <div class="dashboard-section">
+                    <div class="section-header">
+                        <h2>Batch Upload</h2>
+                    </div>
+                    <div class="batch-upload-container">
+                        <div class="batch-upload-card">
+                            <div class="batch-upload-icon">
+                                <i class="fas fa-file-upload"></i>
+                            </div>
+                            <div class="batch-upload-content">
+                                <h3>Upload Payouts CSV</h3>
+                                <p>Upload a CSV file with payout information to process multiple payouts in a batch.</p>
+                                <div class="upload-actions">
+                                    <button id="download-template-btn" class="btn btn-outline">
+                                        <i class="fas fa-file-download"></i> Download Template
+                                    </button>
+                                    <label for="upload-csv" class="btn btn-primary">
+                                        <i class="fas fa-upload"></i> Upload CSV
+                                    </label>
+                                    <input type="file" id="upload-csv" accept=".csv" hidden>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Payout Detail Modal -->
+    <div id="payout-detail-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Payout Details</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="payout-detail-container">
+                    <!-- Content will be populated dynamically -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" id="close-payout-modal-btn">Close</button>
+                <button class="btn btn-primary" id="payout-action-btn">Process Payout</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Schedule Edit Modal -->
+    <div id="schedule-edit-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Edit Payout Schedule</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="schedule-frequency">Payout Frequency</label>
+                    <select id="schedule-frequency" class="select-control">
+                        <option value="monthly">Monthly</option>
+                        <option value="bi-monthly" selected>Bi-monthly</option>
+                        <option value="weekly">Weekly</option>
+                        <option value="custom">Custom</option>
+                    </select>
+                </div>
+
+                <div class="form-group schedule-dates">
+                    <label>Payout Days</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-container">
+                            <input type="checkbox" id="day-1" checked>
+                            <span class="checkbox-label">1st of month</span>
+                        </label>
+                        <label class="checkbox-container">
+                            <input type="checkbox" id="day-15" checked>
+                            <span class="checkbox-label">15th of month</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="schedule-time">Payout Time (UTC)</label>
+                    <input type="time" id="schedule-time" class="form-control" value="00:00">
+                </div>
+
+                <div class="form-group">
+                    <label for="min-payout-threshold">Minimum Payout Amount</label>
+                    <div class="input-with-prefix">
+                        <span class="input-prefix">$</span>
+                        <input type="number" id="min-payout-threshold" class="form-control" value="50">
+                    </div>
+                    <small class="form-hint">Experts with earnings below this amount will rollover to next payout period</small>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" id="cancel-schedule-btn">Cancel</button>
+                <button class="btn btn-primary" id="save-schedule-btn">Save Schedule</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include the notification services -->
+    <script type="module" src="services/admin-notification-service.js"></script>
+    <script type="module" src="services/admin-notification-handler.js"></script>
+
+    <!-- Include the admin payouts script -->
+    <script type="module" src="admin-payouts.js"></script>
+</body>
+</html>

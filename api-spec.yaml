@@ -1,0 +1,554 @@
+openapi: 3.0.3
+info:
+  title: Instructor Chat System API
+  description: API for the Instructor Chat System
+  version: 1.0.0
+  contact:
+    email: support@instructorchatsystem.io
+servers:
+  - url: /api
+    description: Current API server
+tags:
+  - name: auth
+    description: Authentication operations
+  - name: chat
+    description: Chat operations
+  - name: user
+    description: User operations
+  - name: messages
+    description: Message operations
+  - name: notifications
+    description: Notification operations
+
+paths:
+  /auth/login:
+    post:
+      tags:
+        - auth
+      summary: Login to the system
+      description: Authenticate a user with email and password
+      operationId: login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - password
+              properties:
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+                  format: password
+      responses:
+        '200':
+          description: Successful login
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        '401':
+          description: Invalid credentials
+        '500':
+          description: Server error
+
+  /auth/register:
+    post:
+      tags:
+        - auth
+      summary: Register a new user
+      description: Create a new user account
+      operationId: register
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRegistration'
+      responses:
+        '201':
+          description: User created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        '400':
+          description: Invalid request
+        '409':
+          description: User already exists
+        '500':
+          description: Server error
+
+  /auth/logout:
+    post:
+      tags:
+        - auth
+      summary: Logout from the system
+      description: End the current user session
+      operationId: logout
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successfully logged out
+        '401':
+          description: Unauthorized
+        '500':
+          description: Server error
+
+  /chats:
+    get:
+      tags:
+        - chat
+      summary: Get all chats
+      description: Retrieve all chats for the authenticated user
+      operationId: getChats
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: A list of chats
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Chat'
+        '401':
+          description: Unauthorized
+        '500':
+          description: Server error
+
+    post:
+      tags:
+        - chat
+      summary: Create a new chat
+      description: Start a new chat conversation
+      operationId: createChat
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+              properties:
+                name:
+                  type: string
+                participants:
+                  type: array
+                  items:
+                    type: string
+                    format: uuid
+      responses:
+        '201':
+          description: Chat created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Chat'
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Server error
+
+  /chats/{chatId}:
+    get:
+      tags:
+        - chat
+      summary: Get a specific chat
+      description: Retrieve details for a specific chat
+      operationId: getChatById
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/chatId'
+      responses:
+        '200':
+          description: Chat details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Chat'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Chat not found
+        '500':
+          description: Server error
+
+    delete:
+      tags:
+        - chat
+      summary: Delete a chat
+      description: Delete a specific chat
+      operationId: deleteChat
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/chatId'
+      responses:
+        '204':
+          description: Chat deleted
+        '401':
+          description: Unauthorized
+        '404':
+          description: Chat not found
+        '500':
+          description: Server error
+
+  /chats/{chatId}/messages:
+    get:
+      tags:
+        - messages
+      summary: Get messages for a chat
+      description: Retrieve all messages for a specific chat
+      operationId: getChatMessages
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/chatId'
+        - name: limit
+          in: query
+          description: Maximum number of messages to return
+          schema:
+            type: integer
+            default: 50
+        - name: offset
+          in: query
+          description: Number of messages to skip
+          schema:
+            type: integer
+            default: 0
+      responses:
+        '200':
+          description: A list of messages
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Message'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Chat not found
+        '500':
+          description: Server error
+
+    post:
+      tags:
+        - messages
+      summary: Send a message
+      description: Send a message to a specific chat
+      operationId: sendMessage
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/chatId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MessageInput'
+      responses:
+        '201':
+          description: Message sent
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Chat not found
+        '500':
+          description: Server error
+
+  /users/profile:
+    get:
+      tags:
+        - user
+      summary: Get user profile
+      description: Retrieve the authenticated user's profile
+      operationId: getUserProfile
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: User profile
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          description: Unauthorized
+        '500':
+          description: Server error
+
+    put:
+      tags:
+        - user
+      summary: Update user profile
+      description: Update the authenticated user's profile
+      operationId: updateUserProfile
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserProfileUpdate'
+      responses:
+        '200':
+          description: Profile updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Server error
+
+  /notifications:
+    get:
+      tags:
+        - notifications
+      summary: Get user notifications
+      description: Retrieve all notifications for the authenticated user
+      operationId: getNotifications
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: unreadOnly
+          in: query
+          description: Filter to only unread notifications
+          schema:
+            type: boolean
+            default: false
+      responses:
+        '200':
+          description: A list of notifications
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Notification'
+        '401':
+          description: Unauthorized
+        '500':
+          description: Server error
+
+    put:
+      tags:
+        - notifications
+      summary: Mark notifications as read
+      description: Mark one or more notifications as read
+      operationId: markNotificationsAsRead
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - notificationIds
+              properties:
+                notificationIds:
+                  type: array
+                  items:
+                    type: string
+                    format: uuid
+      responses:
+        '200':
+          description: Notifications marked as read
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Server error
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  parameters:
+    chatId:
+      name: chatId
+      in: path
+      required: true
+      description: ID of the chat
+      schema:
+        type: string
+        format: uuid
+
+  schemas:
+    AuthResponse:
+      type: object
+      properties:
+        token:
+          type: string
+        user:
+          $ref: '#/components/schemas/User'
+
+    UserRegistration:
+      type: object
+      required:
+        - name
+        - email
+        - password
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          format: password
+
+    UserProfileUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+        bio:
+          type: string
+        avatarUrl:
+          type: string
+          format: uri
+
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        role:
+          type: string
+          enum: [student, instructor, admin]
+        avatarUrl:
+          type: string
+          format: uri
+        bio:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    Chat:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        participants:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+        lastMessage:
+          $ref: '#/components/schemas/Message'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    MessageInput:
+      type: object
+      required:
+        - content
+      properties:
+        content:
+          type: string
+        attachments:
+          type: array
+          items:
+            type: string
+            format: uri
+
+    Message:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        chatId:
+          type: string
+          format: uuid
+        sender:
+          $ref: '#/components/schemas/User'
+        content:
+          type: string
+        attachments:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                format: uuid
+              url:
+                type: string
+                format: uri
+              type:
+                type: string
+              name:
+                type: string
+        read:
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+
+    Notification:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        userId:
+          type: string
+          format: uuid
+        type:
+          type: string
+          enum: [message, mention, system]
+        title:
+          type: string
+        content:
+          type: string
+        read:
+          type: boolean
+        metadata:
+          type: object
+        createdAt:
+          type: string
+          format: date-time

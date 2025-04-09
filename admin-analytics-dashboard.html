@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Analytics Dashboard | Expert Marketplace</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="admin-analytics-dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Admin Sidebar -->
+        <aside class="admin-sidebar">
+            <div class="admin-brand">
+                <img src="/uploads/default-avatar.png" alt="Logo" class="admin-logo">
+                <div class="admin-logo-text">
+                    <h1>Expert Marketplace</h1>
+                    <p>Admin Panel</p>
+                </div>
+            </div>
+
+            <nav class="admin-nav">
+                <ul>
+                    <li><a href="admin-dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                    <li><a href="admin-experts.html"><i class="fas fa-user-tie"></i> Experts</a></li>
+                    <li><a href="admin-clients.html"><i class="fas fa-users"></i> Clients</a></li>
+                    <li><a href="admin-bookings.html"><i class="fas fa-calendar-check"></i> Bookings</a></li>
+                    <li><a href="admin-case-studies.html"><i class="fas fa-file-alt"></i> Case Studies</a></li>
+                    <li><a href="admin-message-monitoring.html"><i class="fas fa-comments"></i> Messages</a></li>
+                    <li><a href="admin-analytics-dashboard.html" class="active"><i class="fas fa-chart-line"></i> Analytics</a></li>
+                    <li><a href="admin-payments.html"><i class="fas fa-credit-card"></i> Payments</a></li>
+                    <li><a href="admin-reports.html"><i class="fas fa-chart-bar"></i> Reports</a></li>
+                    <li><a href="admin-settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+                    <li class="separator"></li>
+                    <li><a href="index.html"><i class="fas fa-sign-out-alt"></i> Exit Admin</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <!-- Header -->
+            <header class="admin-header">
+                <div class="admin-header-content">
+                    <h1>Analytics Dashboard</h1>
+                    <div class="admin-user">
+                        <span>Admin User</span>
+                        <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde" alt="Admin" class="admin-avatar">
+                    </div>
+                </div>
+            </header>
+
+            <!-- Page Content -->
+            <div class="admin-content">
+                <!-- Date Range Filter -->
+                <div class="date-range-filter">
+                    <h2>Message Monitoring Analytics</h2>
+                    <div class="filter-controls">
+                        <div class="date-picker">
+                            <label for="date-range">Date Range:</label>
+                            <select id="date-range" class="filter-select">
+                                <option value="7days">Last 7 Days</option>
+                                <option value="30days" selected>Last 30 Days</option>
+                                <option value="90days">Last 90 Days</option>
+                                <option value="year">Last Year</option>
+                                <option value="custom">Custom Range</option>
+                            </select>
+                        </div>
+                        <div class="custom-date-range" style="display: none;">
+                            <input type="date" id="date-from" class="date-input">
+                            <span>to</span>
+                            <input type="date" id="date-to" class="date-input">
+                        </div>
+                        <button class="btn btn-primary" id="apply-date-range">
+                            <i class="fas fa-filter"></i> Apply Filter
+                        </button>
+                        <button class="btn btn-outline" id="export-analytics">
+                            <i class="fas fa-download"></i> Export Data
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Overview Stats -->
+                <div class="stats-overview">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <div class="stat-details">
+                            <h3>Total Messages</h3>
+                            <p class="stat-value">245,928</p>
+                            <p class="stat-change positive">+8.5% vs. previous period</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon warning">
+                            <i class="fas fa-flag"></i>
+                        </div>
+                        <div class="stat-details">
+                            <h3>Flagged Messages</h3>
+                            <p class="stat-value">342</p>
+                            <p class="stat-change negative">+12.3% vs. previous period</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon success">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="stat-details">
+                            <h3>Resolved Issues</h3>
+                            <p class="stat-value">295</p>
+                            <p class="stat-change positive">+18.7% vs. previous period</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon info">
+                            <i class="fas fa-user-shield"></i>
+                        </div>
+                        <div class="stat-details">
+                            <h3>AI Detected</h3>
+                            <p class="stat-value">254</p>
+                            <p class="stat-change negative">+7.2% vs. previous period</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts Row 1 -->
+                <div class="analytics-row">
+                    <div class="analytics-card">
+                        <div class="card-header">
+                            <h3>Message Volume Trend</h3>
+                            <div class="card-actions">
+                                <button class="btn-icon" title="Download Data">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                                <button class="btn-icon" title="View Fullscreen">
+                                    <i class="fas fa-expand-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="message-volume-chart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="analytics-card">
+                        <div class="card-header">
+                            <h3>Flagged Messages by Category</h3>
+                            <div class="card-actions">
+                                <button class="btn-icon" title="Download Data">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                                <button class="btn-icon" title="View Fullscreen">
+                                    <i class="fas fa-expand-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="flagged-category-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts Row 2 -->
+                <div class="analytics-row">
+                    <div class="analytics-card">
+                        <div class="card-header">
+                            <h3>Response Time Performance</h3>
+                            <div class="card-actions">
+                                <button class="btn-icon" title="Download Data">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                                <button class="btn-icon" title="View Fullscreen">
+                                    <i class="fas fa-expand-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="response-time-chart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="analytics-card">
+                        <div class="card-header">
+                            <h3>AI Detection Accuracy</h3>
+                            <div class="card-actions">
+                                <button class="btn-icon" title="Download Data">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                                <button class="btn-icon" title="View Fullscreen">
+                                    <i class="fas fa-expand-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="ai-accuracy-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts Row 3 -->
+                <div class="analytics-row">
+                    <div class="analytics-card">
+                        <div class="card-header">
+                            <h3>Top Users with Flagged Messages</h3>
+                            <div class="card-actions">
+                                <button class="btn-icon" title="Download Data">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                                <button class="btn-icon" title="View Fullscreen">
+                                    <i class="fas fa-expand-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="analytics-table">
+                                    <thead>
+                                        <tr>
+                                            <th>User</th>
+                                            <th>Type</th>
+                                            <th>Flagged Messages</th>
+                                            <th>Last Activity</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <div class="user-info">
+                                                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a" alt="James Wilson" class="user-avatar">
+                                                    <span>James Wilson</span>
+                                                </div>
+                                            </td>
+                                            <td>Expert</td>
+                                            <td>12</td>
+                                            <td>Today</td>
+                                            <td><span class="status-badge warning">Warning Issued</span></td>
+                                            <td>
+                                                <div class="action-buttons">
+                                                    <button class="btn-icon" title="View Profile"><i class="fas fa-user"></i></button>
+                                                    <button class="btn-icon" title="View Messages"><i class="fas fa-comments"></i></button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="user-info">
+                                                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330" alt="Emily Davis" class="user-avatar">
+                                                    <span>Emily Davis</span>
+                                                </div>
+                                            </td>
+                                            <td>Client</td>
+                                            <td>8</td>
+                                            <td>Yesterday</td>
+                                            <td><span class="status-badge normal">Active</span></td>
+                                            <td>
+                                                <div class="action-buttons">
+                                                    <button class="btn-icon" title="View Profile"><i class="fas fa-user"></i></button>
+                                                    <button class="btn-icon" title="View Messages"><i class="fas fa-comments"></i></button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="user-info">
+                                                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d" alt="Michael Brown" class="user-avatar">
+                                                    <span>Michael Brown</span>
+                                                </div>
+                                            </td>
+                                            <td>Client</td>
+                                            <td>7</td>
+                                            <td>2 days ago</td>
+                                            <td><span class="status-badge normal">Active</span></td>
+                                            <td>
+                                                <div class="action-buttons">
+                                                    <button class="btn-icon" title="View Profile"><i class="fas fa-user"></i></button>
+                                                    <button class="btn-icon" title="View Messages"><i class="fas fa-comments"></i></button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="user-info">
+                                                    <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e" alt="Amanda Rodriguez" class="user-avatar">
+                                                    <span>Amanda Rodriguez</span>
+                                                </div>
+                                            </td>
+                                            <td>Expert</td>
+                                            <td>6</td>
+                                            <td>3 days ago</td>
+                                            <td><span class="status-badge danger">Suspended</span></td>
+                                            <td>
+                                                <div class="action-buttons">
+                                                    <button class="btn-icon" title="View Profile"><i class="fas fa-user"></i></button>
+                                                    <button class="btn-icon" title="View Messages"><i class="fas fa-comments"></i></button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="user-info">
+                                                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2" alt="Sarah Johnson" class="user-avatar">
+                                                    <span>Sarah Johnson</span>
+                                                </div>
+                                            </td>
+                                            <td>Expert</td>
+                                            <td>5</td>
+                                            <td>1 week ago</td>
+                                            <td><span class="status-badge warning">Warning Issued</span></td>
+                                            <td>
+                                                <div class="action-buttons">
+                                                    <button class="btn-icon" title="View Profile"><i class="fas fa-user"></i></button>
+                                                    <button class="btn-icon" title="View Messages"><i class="fas fa-comments"></i></button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- User Report Analysis -->
+                <div class="analytics-row">
+                    <div class="analytics-card full-width">
+                        <div class="card-header">
+                            <h3>User Report Analysis</h3>
+                            <div class="card-actions">
+                                <button class="btn-icon" title="Download Data">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                                <button class="btn-icon" title="View Fullscreen">
+                                    <i class="fas fa-expand-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="report-metrics">
+                                <div class="metric-item">
+                                    <div class="metric-value">152</div>
+                                    <div class="metric-label">Total Reports</div>
+                                </div>
+                                <div class="metric-item">
+                                    <div class="metric-value">87</div>
+                                    <div class="metric-label">Resolved</div>
+                                </div>
+                                <div class="metric-item">
+                                    <div class="metric-value">42</div>
+                                    <div class="metric-label">Pending</div>
+                                </div>
+                                <div class="metric-item">
+                                    <div class="metric-value">23</div>
+                                    <div class="metric-label">Dismissed</div>
+                                </div>
+                                <div class="metric-item">
+                                    <div class="metric-value">57%</div>
+                                    <div class="metric-label">Resolution Rate</div>
+                                </div>
+                                <div class="metric-item">
+                                    <div class="metric-value">14.2h</div>
+                                    <div class="metric-label">Avg. Resolution Time</div>
+                                </div>
+                            </div>
+                            <div class="report-charts">
+                                <div class="report-chart-container">
+                                    <h4>Reports by Category</h4>
+                                    <canvas id="report-category-chart"></canvas>
+                                </div>
+                                <div class="report-chart-container">
+                                    <h4>Reports by Status</h4>
+                                    <canvas id="report-status-chart"></canvas>
+                                </div>
+                                <div class="report-chart-container">
+                                    <h4>Report Volume Trend</h4>
+                                    <canvas id="report-trend-chart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="admin-analytics-dashboard.js"></script>
+</body>
+</html>

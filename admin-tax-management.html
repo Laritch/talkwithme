@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tax Document Management | Admin Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="admin-dashboard.css">
+    <link rel="stylesheet" href="admin-tax-management.css">
+    <link rel="stylesheet" href="admin-notification.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
+    <!-- Date Range Picker -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Admin Sidebar -->
+        <aside class="admin-sidebar">
+            <div class="admin-brand">
+                <img src="/uploads/default-avatar.png" alt="Logo" class="admin-logo">
+                <div class="admin-logo-text">
+                    <h1>Expert Marketplace</h1>
+                    <p>Admin Panel</p>
+                </div>
+            </div>
+
+            <nav class="admin-nav">
+                <ul>
+                    <li><a href="admin-dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+
+                    <!-- User Management -->
+                    <li class="nav-section-title">User Management</li>
+                    <li><a href="admin-experts.html"><i class="fas fa-user-tie"></i> Experts</a></li>
+                    <li><a href="admin-clients.html"><i class="fas fa-users"></i> Clients</a></li>
+                    <li><a href="admin-user-management.html"><i class="fas fa-user-cog"></i> User Controls</a></li>
+                    <li><a href="admin-role-management.html"><i class="fas fa-user-shield"></i> Roles & Permissions</a></li>
+
+                    <!-- Content & Bookings -->
+                    <li class="nav-section-title">Content & Bookings</li>
+                    <li><a href="admin-bookings.html"><i class="fas fa-calendar-check"></i> Bookings</a></li>
+                    <li><a href="admin-case-studies.html"><i class="fas fa-file-alt"></i> Case Studies</a></li>
+                    <li><a href="admin-content-moderation.html"><i class="fas fa-shield-alt"></i> Content Moderation</a></li>
+                    <li><a href="admin-appeals-management.html"><i class="fas fa-gavel"></i> Appeals</a></li>
+
+                    <!-- Communication -->
+                    <li class="nav-section-title">Communication</li>
+                    <li><a href="admin-message-monitoring.html"><i class="fas fa-comments"></i> Messages</a></li>
+                    <li><a href="admin-support-tickets.html"><i class="fas fa-headset"></i> Support Tickets</a></li>
+                    <li><a href="admin-knowledge-base.html"><i class="fas fa-book"></i> Knowledge Base</a></li>
+
+                    <!-- Finance -->
+                    <li class="nav-section-title">Finance</li>
+                    <li><a href="admin-payments.html"><i class="fas fa-credit-card"></i> Payments</a></li>
+                    <li><a href="admin-refunds.html"><i class="fas fa-undo"></i> Refunds</a></li>
+                    <li><a href="admin-payouts.html"><i class="fas fa-money-bill-wave"></i> Payouts</a></li>
+                    <li><a href="admin-tax-management.html" class="active"><i class="fas fa-file-invoice-dollar"></i> Tax Documents</a></li>
+
+                    <!-- Analytics & Marketing -->
+                    <li class="nav-section-title">Analytics & Marketing</li>
+                    <li><a href="admin-analytics-dashboard.html"><i class="fas fa-chart-line"></i> Analytics</a></li>
+                    <li><a href="admin-reports.html"><i class="fas fa-chart-bar"></i> Reports</a></li>
+                    <li><a href="admin-email-campaigns.html"><i class="fas fa-envelope"></i> Email Campaigns</a></li>
+                    <li><a href="admin-promotions.html"><i class="fas fa-tags"></i> Promotions</a></li>
+                    <li><a href="admin-seo.html"><i class="fas fa-search"></i> SEO Management</a></li>
+
+                    <!-- System -->
+                    <li class="nav-section-title">System</li>
+                    <li><a href="admin-settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+                    <li><a href="admin-feature-toggles.html"><i class="fas fa-toggle-on"></i> Feature Toggles</a></li>
+                    <li><a href="admin-api-management.html"><i class="fas fa-plug"></i> API & Integrations</a></li>
+                    <li><a href="admin-system-health.html"><i class="fas fa-heartbeat"></i> System Health</a></li>
+                    <li><a href="admin-security.html"><i class="fas fa-lock"></i> Security & Compliance</a></li>
+
+                    <li class="separator"></li>
+                    <li><a href="index.html"><i class="fas fa-sign-out-alt"></i> Exit Admin</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <!-- Header -->
+            <header class="admin-header">
+                <div class="admin-header-content">
+                    <h1>Tax Document Management</h1>
+                    <div class="admin-user">
+                        <!-- Notification Bell -->
+                        <div class="notification-bell-container">
+                            <div id="notification-bell" class="notification-bell">
+                                <i class="fas fa-bell"></i>
+                                <span id="notification-counter" class="notification-counter">0</span>
+                            </div>
+
+                            <!-- Notification Panel -->
+                            <div id="notification-panel" class="notification-panel">
+                                <div class="notification-panel-header">
+                                    <h3>Notifications</h3>
+                                    <button id="settings-btn" class="btn-icon" title="Notification Settings">
+                                        <i class="fas fa-cog"></i>
+                                    </button>
+                                </div>
+                                <div id="notification-list" class="notification-list">
+                                    <!-- Notifications will be populated here by JS -->
+                                    <div class="empty-notifications">
+                                        <i class="fas fa-check-circle"></i>
+                                        <p>No new notifications</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <span>Admin User</span>
+                        <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde" alt="Admin" class="admin-avatar">
+                    </div>
+                </div>
+            </header>
+
+            <!-- Page Content -->
+            <div class="admin-content">
+                <!-- Tax Document Overview -->
+                <div class="dashboard-section">
+                    <h2>Tax Document Status</h2>
+                    <div class="stat-cards">
+                        <div class="stat-card">
+                            <div class="stat-icon bg-primary">
+                                <i class="fas fa-file-invoice"></i>
+                            </div>
+                            <div class="stat-details">
+                                <p class="stat-label">Total Tax Forms</p>
+                                <p class="stat-value" id="totalTaxForms">258</p>
+                                <p class="stat-change positive"><i class="fas fa-arrow-up"></i> 15% more than last year</p>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon bg-success">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="stat-details">
+                                <p class="stat-label">Forms Generated</p>
+                                <p class="stat-value" id="formsGenerated">245</p>
+                                <p class="stat-change positive"><i class="fas fa-arrow-up"></i> 95% completion rate</p>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon bg-warning">
+                                <i class="fas fa-exclamation-circle"></i>
+                            </div>
+                            <div class="stat-details">
+                                <p class="stat-label">Missing Information</p>
+                                <p class="stat-value" id="missingInfo">13</p>
+                                <p class="stat-change negative"><i class="fas fa-arrow-up"></i> 5 more than last month</p>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon bg-info">
+                                <i class="fas fa-paper-plane"></i>
+                            </div>
+                            <div class="stat-details">
+                                <p class="stat-label">Sent to Experts</p>
+                                <p class="stat-value" id="sentToExperts">226</p>
+                                <p class="stat-change positive"><i class="fas fa-arrow-up"></i> 92% delivery rate</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tax Document Compliance Charts -->
+                <div class="dashboard-section">
+                    <div class="section-header">
+                        <h2>Tax Document Compliance</h2>
+                        <div class="section-actions">
+                            <div class="chart-period-selector">
+                                <label for="compliance-period">Time Period:</label>
+                                <select id="compliance-period" class="select-control">
+                                    <option value="quarter">Last Quarter</option>
+                                    <option value="6months">Last 6 Months</option>
+                                    <option value="year" selected>Last Year</option>
+                                    <option value="2years">Last 2 Years</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="charts-container">
+                        <div class="chart-card">
+                            <div class="chart-header">
+                                <h3>Compliance Rate by Form Type</h3>
+                                <div class="chart-legend">
+                                    <span class="legend-item"><span class="legend-color" style="background-color: #4a6cf7;"></span> Complete</span>
+                                    <span class="legend-item"><span class="legend-color" style="background-color: #f7c32e;"></span> Pending</span>
+                                    <span class="legend-item"><span class="legend-color" style="background-color: #dc3545;"></span> Missing Info</span>
+                                </div>
+                            </div>
+                            <div class="chart-container">
+                                <canvas id="formTypeComplianceChart"></canvas>
+                            </div>
+                        </div>
+
+                        <div class="chart-card">
+                            <div class="chart-header">
+                                <h3>Compliance Rate Over Time</h3>
+                            </div>
+                            <div class="chart-container">
+                                <canvas id="timeComplianceChart"></canvas>
+                            </div>
+                        </div>
+
+                        <div class="chart-card">
+                            <div class="chart-header">
+                                <h3>Compliance by Country</h3>
+                            </div>
+                            <div class="chart-container">
+                                <canvas id="countryComplianceChart"></canvas>
+                            </div>
+                        </div>
+
+                        <div class="chart-card">
+                            <div class="chart-header">
+                                <h3>Document Delivery Success</h3>
+                            </div>
+                            <div class="chart-container">
+                                <canvas id="deliverySuccessChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Multi-Year Tax Document Comparison -->
+                <div class="dashboard-section">
+                    <div class="section-header">
+                        <h2>Multi-Year Comparison</h2>
+                        <div class="section-actions">
+                            <button id="export-comparison-btn" class="btn btn-secondary">
+                                <i class="fas fa-file-export"></i> Export Report
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="year-comparison-container">
+                        <div class="year-comparison-header">
+                            <h3>Tax Document Statistics by Year</h3>
+                            <div class="year-comparison-controls">
+                                <div class="form-group">
+                                    <label for="base-year">Base Year:</label>
+                                    <select id="base-year" class="select-control">
+                                        <option value="2023" selected>2023</option>
+                                        <option value="2022">2022</option>
+                                        <option value="2021">2021</option>
+                                        <option value="2020">2020</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="compare-years">Compare With:</label>
+                                    <select id="compare-years" class="select-control" multiple>
+                                        <option value="2022" selected>2022</option>
+                                        <option value="2021">2021</option>
+                                        <option value="2020">2020</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="year-comparison-chart">
+                            <canvas id="yearComparisonChart"></canvas>
+                        </div>
+
+                        <div class="comparison-metrics">
+                            <div class="comparison-metric">
+                                <h4>Total Forms Generated</h4>
+                                <p class="comparison-value">258</p>
+                                <p class="comparison-change positive"><i class="fas fa-arrow-up"></i> 12% more than previous year</p>
+                            </div>
+
+                            <div class="comparison-metric">
+                                <h4>Average Processing Time</h4>
+                                <p class="comparison-value">3.2 days</p>
+                                <p class="comparison-change positive"><i class="fas fa-arrow-down"></i> 15% faster than previous year</p>
+                            </div>
+
+                            <div class="comparison-metric">
+                                <h4>Compliance Rate</h4>
+                                <p class="comparison-value">95%</p>
+                                <p class="comparison-change positive"><i class="fas fa-arrow-up"></i> 5% better than previous year</p>
+                            </div>
+
+                            <div class="comparison-metric">
+                                <h4>Form Corrections</h4>
+                                <p class="comparison-value">22</p>
+                                <p class="comparison-change negative"><i class="fas fa-arrow-up"></i> 4 more than previous year</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tax Forms Management -->
+                <div class="dashboard-section">
+                    <div class="section-header">
+                        <h2>Tax Forms</h2>
+                        <div class="section-actions">
+                            <div class="year-selector">
+                                <label for="tax-year">Tax Year:</label>
+                                <select id="tax-year" class="select-control">
+                                    <option value="2023" selected>2023</option>
+                                    <option value="2022">2022</option>
+                                    <option value="2021">2021</option>
+                                    <option value="2020">2020</option>
+                                </select>
+                            </div>
+                            <button id="generate-all-btn" class="btn btn-primary">
+                                <i class="fas fa-file-invoice"></i> Generate All
+                            </button>
+                            <button id="send-all-btn" class="btn btn-success">
+                                <i class="fas fa-paper-plane"></i> Send All
+                            </button>
+                            <button id="export-tax-data-btn" class="btn btn-secondary">
+                                <i class="fas fa-file-export"></i> Export
+                            </button>
+                            <button id="batch-export-btn" class="btn btn-secondary">
+                                <i class="fas fa-th-large"></i> Batch Export
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Tax Forms Filters -->
+                    <div class="filter-container">
+                        <div class="filter-row">
+                            <div class="filter-group">
+                                <label for="tax-form-type">Form Type</label>
+                                <select id="tax-form-type" class="select-control">
+                                    <option value="all">All Types</option>
+                                    <option value="1099-NEC">1099-NEC</option>
+                                    <option value="1099-MISC">1099-MISC</option>
+                                    <option value="W-8BEN">W-8BEN</option>
+                                    <option value="W-9">W-9</option>
+                                </select>
+                            </div>
+
+                            <div class="filter-group">
+                                <label for="tax-form-status">Status</label>
+                                <select id="tax-form-status" class="select-control">
+                                    <option value="all">All Status</option>
+                                    <option value="generated">Generated</option>
+                                    <option value="sent">Sent</option>
+                                    <option value="pending">Pending Generation</option>
+                                    <option value="missing-info">Missing Information</option>
+                                </select>
+                            </div>
+
+                            <div class="filter-group">
+                                <label for="tax-form-country">Country</label>
+                                <select id="tax-form-country" class="select-control">
+                                    <option value="all">All Countries</option>
+                                    <option value="US">United States</option>
+                                    <option value="CA">Canada</option>
+                                    <option value="GB">United Kingdom</option>
+                                    <option value="AU">Australia</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+
+                            <div class="filter-group">
+                                <label for="tax-form-search">Search Expert</label>
+                                <div class="search-input">
+                                    <input type="text" id="tax-form-search" placeholder="Search by name, email, or ID...">
+                                    <button id="tax-form-search-btn" class="btn btn-icon">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="filter-actions">
+                            <button id="apply-tax-form-filters" class="btn btn-primary">Apply Filters</button>
+                            <button id="reset-tax-form-filters" class="btn btn-outline">Reset</button>
+                        </div>
+                    </div>
+
+                    <!-- Tax Forms Table -->
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <input type="checkbox" id="select-all-tax-forms">
+                                    </th>
+                                    <th>Expert</th>
+                                    <th>Form Type</th>
+                                    <th>Tax Year</th>
+                                    <th>Amount</th>
+                                    <th>Country</th>
+                                    <th>Status</th>
+                                    <th>Generated Date</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tax-forms-table-body">
+                                <!-- Sample tax form rows -->
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" class="tax-form-checkbox" data-id="tax_12345">
+                                    </td>
+                                    <td>
+                                        <div class="user-info">
+                                            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a" alt="James Wilson" class="avatar-sm">
+                                            <div>
+                                                <div>James Wilson</div>
+                                                <div class="user-email">jwilson@example.com</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>1099-NEC</td>
+                                    <td>2023</td>
+                                    <td class="amount">$12,450.00</td>
+                                    <td>United States</td>
+                                    <td><span class="status-badge generated">Generated</span></td>
+                                    <td>Feb 15, 2024</td>
+                                    <td>
+                                        <div class="table-actions">
+                                            <button class="btn-icon view-tax-form" title="View Form" data-id="tax_12345"><i class="fas fa-eye"></i></button>
+                                            <button class="btn-icon download-tax-form" title="Download Form" data-id="tax_12345"><i class="fas fa-file-download"></i></button>
+                                            <button class="btn-icon send-tax-form" title="Send to Expert" data-id="tax_12345"><i class="fas fa-paper-plane"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" class="tax-form-checkbox" data-id="tax_12346">
+                                    </td>
+                                    <td>
+                                        <div class="user-info">
+                                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330" alt="Emily Davis" class="avatar-sm">
+                                            <div>
+                                                <div>Emily Davis</div>
+                                                <div class="user-email">emily.davis@example.com</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>1099-NEC</td>
+                                    <td>2023</td>
+                                    <td class="amount">$24,830.00</td>
+                                    <td>United States</td>
+                                    <td><span class="status-badge sent">Sent</span></td>
+                                    <td>Feb 10, 2024</td>
+                                    <td>
+                                        <div class="table-actions">
+                                            <button class="btn-icon view-tax-form" title="View Form" data-id="tax_12346"><i class="fas fa-eye"></i></button>
+                                            <button class="btn-icon download-tax-form" title="Download Form" data-id="tax_12346"><i class="fas fa-file-download"></i></button>
+                                            <button class="btn-icon resend-tax-form" title="Resend to Expert" data-id="tax_12346"><i class="fas fa-paper-plane"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr class="warning-row">
+                                    <td>
+                                        <input type="checkbox" class="tax-form-checkbox" data-id="tax_12347">
+                                    </td>
+                                    <td>
+                                        <div class="user-info">
+                                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d" alt="Michael Brown" class="avatar-sm">
+                                            <div>
+                                                <div>Michael Brown</div>
+                                                <div class="user-email">mbrown@example.com</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>W-8BEN</td>
+                                    <td>2023</td>
+                                    <td class="amount">$9,875.00</td>
+                                    <td>United Kingdom</td>
+                                    <td><span class="status-badge missing-info">Missing Info</span></td>
+                                    <td>--</td>
+                                    <td>
+                                        <div class="table-actions">
+                                            <button class="btn-icon request-info" title="Request Information" data-id="tax_12347"><i class="fas fa-envelope"></i></button>
+                                            <button class="btn-icon edit-tax-info" title="Edit Tax Information" data-id="tax_12347"><i class="fas fa-edit"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" class="tax-form-checkbox" data-id="tax_12348">
+                                    </td>
+                                    <td>
+                                        <div class="user-info">
+                                            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2" alt="Sarah Johnson" class="avatar-sm">
+                                            <div>
+                                                <div>Sarah Johnson</div>
+                                                <div class="user-email">sjohnson@example.com</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>1099-NEC</td>
+                                    <td>2023</td>
+                                    <td class="amount">$18,650.00</td>
+                                    <td>United States</td>
+                                    <td><span class="status-badge pending">Pending</span></td>
+                                    <td>--</td>
+                                    <td>
+                                        <div class="table-actions">
+                                            <button class="btn-icon generate-tax-form" title="Generate Form" data-id="tax_12348"><i class="fas fa-file-invoice"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="pagination">
+                        <button class="pagination-btn" disabled><i class="fas fa-chevron-left"></i></button>
+                        <button class="pagination-btn active">1</button>
+                        <button class="pagination-btn">2</button>
+                        <button class="pagination-btn">3</button>
+                        <span class="pagination-ellipsis">...</span>
+                        <button class="pagination-btn">7</button>
+                        <button class="pagination-btn"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+
+                <!-- Tax Compliance Forecasting -->
+                <div class="dashboard-section">
+                    <div class="section-header">
+                        <h2>Compliance Forecasting</h2>
+                        <div class="section-actions">
+                            <div class="form-group">
+                                <label for="forecast-period">Time Period:</label>
+                                <select id="forecast-period" class="select-control">
+                                    <option value="quarter">Next Quarter</option>
+                                    <option value="6months" selected>Next 6 Months</option>
+                                    <option value="year">Next Year</option>
+                                </select>
+                            </div>
+                            <button id="update-forecast-btn" class="btn btn-primary">
+                                <i class="fas fa-sync"></i> Update Forecast
+                            </button>
+                            <button id="export-forecast-btn" class="btn btn-secondary">
+                                <i class="fas fa-file-export"></i> Export Report
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="forecast-container">
+                        <div class="forecast-chart">
+                            <canvas id="complianceForecastChart"></canvas>
+                        </div>
+
+                        <div class="forecast-metrics">
+                            <div class="forecast-metric">
+                                <div class="forecast-metric-label">Current Compliance</div>
+                                <div class="forecast-metric-value">95%</div>
+                            </div>
+                            <div class="forecast-metric">
+                                <div class="forecast-metric-label">Projected Compliance</div>
+                                <div class="forecast-metric-value">97%</div>
+                            </div>
+                            <div class="forecast-metric">
+                                <div class="forecast-metric-label">At-Risk Experts</div>
+                                <div class="forecast-metric-value">8</div>
+                            </div>
+                            <div class="forecast-metric">
+                                <div class="forecast-metric-label">Revenue Impact</div>
+                                <div class="forecast-metric-value">$15,200</div>
+                            </div>
+                        </div>
+
+                        <div class="forecast-recommendations">
+                            <h4>Recommended Actions</h4>
+                            <div class="recommendation-item">
+                                <div class="recommendation-icon">
+                                    <i class="fas fa-bell"></i>
+                                </div>
+                                <div class="recommendation-text">
+                                    Increase frequency of reminders for 8 high-risk experts to improve compliance rate
+                                </div>
+                            </div>
+                            <div class="recommendation-item">
+                                <div class="recommendation-icon">
+                                    <i class="fas fa-file-alt"></i>
+                                </div>
+                                <div class="recommendation-text">
+                                    Simplify tax information collection form to reduce abandonment (currently 23%)
+                                </div>
+                            </div>
+                            <div class="recommendation-item">
+                                <div class="recommendation-icon">
+                                    <i class="fas fa-calendar-alt"></i>
+                                </div>
+                                <div class="recommendation-text">
+                                    Schedule additional reminder campaigns in December before year-end
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tax Settings -->
+                <div class="dashboard-section">
+                    <div class="section-header">
+                        <h2>Tax Settings</h2>
+                        <div class="section-actions">
+                            <button id="save-tax-settings-btn" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Save Settings
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="settings-container">
+                        <div class="settings-card">
+                            <div class="settings-header">
+                                <h3>Document Generation Settings</h3>
+                            </div>
+                            <div class="settings-content">
+                                <div class="form-group">
+                                    <label for="auto-generate">Auto-Generate Tax Forms</label>
+                                    <div class="toggle-switch">
+                                        <input type="checkbox" id="auto-generate" class="toggle-input" checked>
+                                        <label for="auto-generate" class="toggle-label"></label>
+                                    </div>
+                                    <p class="setting-description">Automatically generate tax forms when the year ends</p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="generation-date">Generation Date</label>
+                                    <input type="date" id="generation-date" class="form-control" value="2024-01-15">
+                                    <p class="setting-description">Date when tax forms will be automatically generated</p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="minimum-threshold">Minimum Payment Threshold</label>
+                                    <div class="input-with-prefix">
+                                        <span class="input-prefix">$</span>
+                                        <input type="number" id="minimum-threshold" class="form-control" value="600">
+                                    </div>
+                                    <p class="setting-description">Minimum amount to generate a tax form</p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="reminder-frequency">Missing Information Reminders</label>
+                                    <select id="reminder-frequency" class="form-control">
+                                        <option value="weekly">Weekly</option>
+                                        <option value="biweekly" selected>Bi-weekly</option>
+                                        <option value="monthly">Monthly</option>
+                                    </select>
+                                    <p class="setting-description">How often to send reminders for missing tax information</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="settings-card">
+                            <div class="settings-header">
+                                <h3>Company Information</h3>
+                            </div>
+                            <div class="settings-content">
+                                <div class="form-group">
+                                    <label for="company-name">Company Name</label>
+                                    <input type="text" id="company-name" class="form-control" value="Expert Marketplace Inc.">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="company-address">Company Address</label>
+                                    <textarea id="company-address" class="form-control" rows="3">123 Main Street, Suite 400
+San Francisco, CA 94105
+United States</textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="company-ein">Company EIN</label>
+                                    <input type="text" id="company-ein" class="form-control" value="12-3456789">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="company-phone">Company Phone</label>
+                                    <input type="text" id="company-phone" class="form-control" value="(415) 555-1234">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="settings-card">
+                            <div class="settings-header">
+                                <h3>Email Templates</h3>
+                            </div>
+                            <div class="settings-content">
+                                <!-- Template Type Selector -->
+                                <div class="template-tabs">
+                                    <div class="template-tab active" data-template="general">General</div>
+                                    <div class="template-tab" data-template="1099-nec">1099-NEC</div>
+                                    <div class="template-tab" data-template="1099-misc">1099-MISC</div>
+                                    <div class="template-tab" data-template="w8ben">W-8BEN</div>
+                                    <div class="template-tab" data-template="w9">W-9</div>
+                                </div>
+
+                                <!-- General Templates (Default) -->
+                                <div class="template-content active" id="general-templates">
+                                    <div class="form-group">
+                                        <label for="tax-form-email-subject">Default Email Subject</label>
+                                        <input type="text" id="tax-form-email-subject" class="form-control" value="Your [YEAR] Tax Form from Expert Marketplace">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="tax-form-email-template">Default Email Template</label>
+                                        <textarea id="tax-form-email-template" class="form-control" rows="5">Dear [EXPERT_NAME],
+
+Your [FORM_TYPE] for tax year [YEAR] is now available. Please find it attached to this email for your records.
+
+If you have any questions about this tax form, please contact our support team at support@expertmarketplace.com.
+
+Thank you for being a valued expert on our platform.
+
+Best regards,
+Expert Marketplace Team</textarea>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="missing-info-email-subject">Missing Info Email Subject</label>
+                                        <input type="text" id="missing-info-email-subject" class="form-control" value="Action Required: Missing Tax Information">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="missing-info-email-template">Missing Info Email Template</label>
+                                        <textarea id="missing-info-email-template" class="form-control" rows="5">Dear [EXPERT_NAME],
+
+We need additional tax information from you to generate your [FORM_TYPE] for tax year [YEAR]. Please log in to your account and update the following missing information:
+
+[MISSING_FIELDS]
+
+This information is required to comply with tax regulations. Please update it at your earliest convenience.
+
+Thank you for your cooperation.
+
+Best regards,
+Expert Marketplace Team</textarea>
+                                    </div>
+                                </div>
+
+                                <!-- 1099-NEC Templates -->
+                                <div class="template-content" id="1099-nec-templates">
+                                    <div class="form-group">
+                                        <label for="1099-nec-subject">1099-NEC Email Subject</label>
+                                        <input type="text" id="1099-nec-subject" class="form-control" value="Your [YEAR] 1099-NEC Tax Form from Expert Marketplace">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="1099-nec-template">1099-NEC Email Template</label>
+                                        <textarea id="1099-nec-template" class="form-control" rows="5">Dear [EXPERT_NAME],
+
+Your 1099-NEC form for tax year [YEAR] is now available. This form shows the nonemployee compensation of $[AMOUNT] that you received from Expert Marketplace Inc. during [YEAR].
+
+Please find the form attached to this email for your records. You'll need this information when filing your income tax return.
+
+If you have any questions about this tax form, please contact our support team at support@expertmarketplace.com.
+
+Thank you for your services as an expert on our platform.
+
+Best regards,
+Expert Marketplace Team</textarea>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="1099-nec-instructions">Attachment: 1099-NEC Instructions</label>
+                                        <div class="toggle-switch">
+                                            <input type="checkbox" id="1099-nec-instructions" class="toggle-input" checked>
+                                            <label for="1099-nec-instructions" class="toggle-label"></label>
+                                        </div>
+                                        <p class="setting-description">Attach instructions for 1099-NEC forms to the email</p>
+                                    </div>
+                                </div>
+
+                                <!-- 1099-MISC Templates -->
+                                <div class="template-content" id="1099-misc-templates">
+                                    <div class="form-group">
+                                        <label for="1099-misc-subject">1099-MISC Email Subject</label>
+                                        <input type="text" id="1099-misc-subject" class="form-control" value="Your [YEAR] 1099-MISC Tax Form from Expert Marketplace">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="1099-misc-template">1099-MISC Email Template</label>
+                                        <textarea id="1099-misc-template" class="form-control" rows="5">Dear [EXPERT_NAME],
+
+Your 1099-MISC form for tax year [YEAR] is now available. This form shows the miscellaneous income of $[AMOUNT] that you received from Expert Marketplace Inc. during [YEAR].
+
+Please find the form attached to this email for your records. You'll need this information when filing your income tax return.
+
+If you have any questions about this tax form, please contact our support team at support@expertmarketplace.com.
+
+Thank you for your contributions to our platform.
+
+Best regards,
+Expert Marketplace Team</textarea>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="1099-misc-instructions">Attachment: 1099-MISC Instructions</label>
+                                        <div class="toggle-switch">
+                                            <input type="checkbox" id="1099-misc-instructions" class="toggle-input" checked>
+                                            <label for="1099-misc-instructions" class="toggle-label"></label>
+                                        </div>
+                                        <p class="setting-description">Attach instructions for 1099-MISC forms to the email</p>
+                                    </div>
+                                </div>
+
+                                <!-- W-8BEN Templates -->
+                                <div class="template-content" id="w8ben-templates">
+                                    <div class="form-group">
+                                        <label for="w8ben-subject">W-8BEN Email Subject</label>
+                                        <input type="text" id="w8ben-subject" class="form-control" value="Your [YEAR] International Tax Form (W-8BEN) from Expert Marketplace">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="w8ben-template">W-8BEN Email Template</label>
+                                        <textarea id="w8ben-template" class="form-control" rows="5">Dear [EXPERT_NAME],
+
+Your W-8BEN Certificate of Foreign Status form for tax year [YEAR] is now available. This form certifies that you are not a U.S. person and are the beneficial owner of the income for which this form relates.
+
+Please find the form attached to this email for your records. This form will be used to document your non-U.S. status for tax purposes.
+
+If you have any questions about this tax form, please contact our support team at support@expertmarketplace.com.
+
+Thank you for your international expertise on our platform.
+
+Best regards,
+Expert Marketplace Team</textarea>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="w8ben-instructions">Attachment: W-8BEN Instructions</label>
+                                        <div class="toggle-switch">
+                                            <input type="checkbox" id="w8ben-instructions" class="toggle-input" checked>
+                                            <label for="w8ben-instructions" class="toggle-label"></label>
+                                        </div>
+                                        <p class="setting-description">Attach instructions for W-8BEN forms to the email</p>
+                                    </div>
+                                </div>
+
+                                <!-- W-9 Templates -->
+                                <div class="template-content" id="w9-templates">
+                                    <div class="form-group">
+                                        <label for="w9-subject">W-9 Email Subject</label>
+                                        <input type="text" id="w9-subject" class="form-control" value="Request for Taxpayer Information (W-9) from Expert Marketplace">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="w9-template">W-9 Email Template</label>
+                                        <textarea id="w9-template" class="form-control" rows="5">Dear [EXPERT_NAME],
+
+As a U.S. person providing services on our platform, we are required to collect a completed W-9 form from you. This form certifies your taxpayer identification number.
+
+Please find the W-9 form attached to this email. Please complete the form, sign it, and return it to us at tax@expertmarketplace.com or upload it directly to your account dashboard.
+
+This information is required by the IRS. We cannot process your future payments until we receive your completed W-9.
+
+If you have any questions about this tax form, please contact our support team at support@expertmarketplace.com.
+
+Thank you for your prompt attention to this matter.
+
+Best regards,
+Expert Marketplace Team</textarea>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="w9-instructions">Attachment: W-9 Instructions</label>
+                                        <div class="toggle-switch">
+                                            <input type="checkbox" id="w9-instructions" class="toggle-input" checked>
+                                            <label for="w9-instructions" class="toggle-label"></label>
+                                        </div>
+                                        <p class="setting-description">Attach instructions for W-9 forms to the email</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Permissions Management Card -->
+                        <div class="settings-card">
+                            <div class="settings-header">
+                                <h3>Permissions Management</h3>
+                            </div>
+                            <div class="settings-content">
+                                <div class="form-group">
+                                    <label>Tax Document Access Levels</label>
+                                    <div class="permissions-table">
+                                        <div class="permissions-row permissions-header">
+                                            <div class="permissions-cell role-cell">Role</div>
+                                            <div class="permissions-cell">View</div>
+                                            <div class="permissions-cell">Download</div>
+                                            <div class="permissions-cell">Generate</div>
+                                            <div class="permissions-cell">Send</div>
+                                            <div class="permissions-cell">Edit</div>
+                                        </div>
+                                        <div class="permissions-row">
+                                            <div class="permissions-cell role-cell">Admin</div>
+                                            <div class="permissions-cell"><input type="checkbox" class="permission-checkbox" id="admin-view" checked disabled></div>
+                                            <div class="permissions-cell"><input type="checkbox" class="permission-checkbox" id="admin-download" checked disabled></div>
+                                            <div class="permissions-cell"><input type="checkbox" class="permission-checkbox" id="admin-generate" checked disabled></div>
+                                            <div class="permissions-cell"><input type="checkbox" class="permission-checkbox" id="admin-send" checked disabled></div>
+                                            <div class="permissions-cell"><input type="checkbox" class="permission-checkbox" id="admin-edit" checked disabled></div>
+                                        </div>
+                                        <div class="permissions-row">
+                                            <div class="permissions-cell role-cell">Finance Manager</div>
+                                            <div class="permissions-cell"><input type="checkbox" class="permission-checkbox" id="finance-view" checked></div>
+                                            <div class="permissions-cell"><input type="checkbox" class="permission-checkbox" id="finance-download" checked></div>
+                                            <div class="permissions-cell"><input type="checkbox" class="permission-checkbox" id="finance-generate" checked></div>
+                                            <div class="permissions-cell"><input type="checkbox" class="permission-checkbox" id="finance-send" checked></div>
+                                            <div class="permissions-cell"><input type="checkbox" class="permission-checkbox" id="finance-edit" checked></div>
+                                        </div>
+                                        <div class="permissions-row">
+                                            <div class="permissions-cell role-cell">Support Agent</div>
+                                            <div class="permissions-cell"><input type="checkbox" class="permission-checkbox" id="support-view" checked></div>
+                                            <div class="permissions-cell"><input type="checkbox" class="permission-checkbox" id="support-download"></div>
+                                            <div class="permissions-cell"><input type="checkbox" class="permission-checkbox" id="support-generate"></div>
+                                            <div class="permissions-cell"><input type="checkbox" class="permission-checkbox" id="support-send"></div>
+                                            <div class="permissions-cell"><input type="checkbox" class="permission-checkbox" id="support-edit"></div>
+                                        </div>
+                                        <div class="permissions-row">
+                                            <div class="permissions-cell role-cell">Content Moderator</div>
+                                            <div class="permissions-cell"><input type="checkbox" class="permission-checkbox" id="moderator-view"></div>
+                                            <div class="permissions-cell"><input type="checkbox" class="permission-checkbox" id="moderator-download"></div>
+                                            <div class="permissions-cell"><input type="checkbox" class="permission-checkbox" id="moderator-generate"></div>
+                                            <div class="permissions-cell"><input type="checkbox" class="permission-checkbox" id="moderator-send"></div>
+                                            <div class="permissions-cell"><input type="checkbox" class="permission-checkbox" id="moderator-edit"></div>
+                                        </div>
+                                        <div class="permissions-row">
+                                            <div class="permissions-cell role-cell">Data Analyst</div>
+                                            <div class="permissions-cell"><input type="checkbox" class="permission-checkbox" id="analyst-view" checked></div>
+                                            <div class="permissions-cell"><input type="checkbox" class="permission-checkbox" id="analyst-download" checked></div>
+                                            <div class="permissions-cell"><input type="checkbox" class="permission-checkbox" id="analyst-generate"></div>
+                                            <div class="permissions-cell"><input type="checkbox" class="permission-checkbox" id="analyst-send"></div>
+                                            <div class="permissions-cell"><input type="checkbox" class="permission-checkbox" id="analyst-edit"></div>
+                                        </div>
+                                    </div>
+                                    <p class="setting-description">Control which roles can access tax document features</p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Individual User Permissions</label>
+                                    <div class="user-permissions-controls">
+                                        <button id="add-user-permission-btn" class="btn btn-sm btn-outline">
+                                            <i class="fas fa-plus"></i> Add User Override
+                                        </button>
+                                    </div>
+                                    <div class="user-permissions-list">
+                                        <div class="user-permission-item">
+                                            <div class="user-info">
+                                                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2" alt="Sarah Johnson" class="avatar-sm">
+                                                <div class="user-details">
+                                                    <div class="user-name">Sarah Johnson (Finance)</div>
+                                                    <div class="user-email">sjohnson@example.com</div>
+                                                </div>
+                                            </div>
+                                            <div class="user-permission-access">
+                                                <span class="permission-tag">View</span>
+                                                <span class="permission-tag">Download</span>
+                                                <span class="permission-tag">Generate</span>
+                                                <span class="permission-tag">Send</span>
+                                                <span class="permission-tag">Edit</span>
+                                            </div>
+                                            <div class="user-permission-actions">
+                                                <button class="btn-icon edit-permission" title="Edit Permissions"><i class="fas fa-edit"></i></button>
+                                                <button class="btn-icon remove-permission" title="Remove Override"><i class="fas fa-times"></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="user-permission-item">
+                                            <div class="user-info">
+                                                <img src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61" alt="Thomas Lee" class="avatar-sm">
+                                                <div class="user-details">
+                                                    <div class="user-name">Thomas Lee (Support)</div>
+                                                    <div class="user-email">tlee@example.com</div>
+                                                </div>
+                                            </div>
+                                            <div class="user-permission-access">
+                                                <span class="permission-tag">View</span>
+                                                <span class="permission-tag">Download</span>
+                                            </div>
+                                            <div class="user-permission-actions">
+                                                <button class="btn-icon edit-permission" title="Edit Permissions"><i class="fas fa-edit"></i></button>
+                                                <button class="btn-icon remove-permission" title="Remove Override"><i class="fas fa-times"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p class="setting-description">Set custom permissions for specific users that override their role defaults</p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="audit-logging">Permission Audit Logging</label>
+                                    <div class="toggle-switch">
+                                        <input type="checkbox" id="audit-logging" class="toggle-input" checked>
+                                        <label for="audit-logging" class="toggle-label"></label>
+                                    </div>
+                                    <p class="setting-description">Log all tax document access and permission changes</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tax Form Detail Modal -->
+                <div id="tax-form-detail-modal" class="modal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2>Tax Form Details</h2>
+                            <button class="modal-close">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <div id="tax-form-detail-container">
+                                <!-- Content will be populated dynamically -->
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-outline" id="close-tax-form-modal-btn">Close</button>
+                            <button class="btn btn-secondary" id="download-tax-form-btn">Download Form</button>
+                            <button class="btn btn-primary" id="send-tax-form-btn">Send to Expert</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Request Information Modal -->
+                <div id="request-info-modal" class="modal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2>Request Tax Information</h2>
+                            <button class="modal-close">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="missing-fields">Missing Information</label>
+                                <div class="checkbox-list">
+                                    <label class="checkbox-container">
+                                        <input type="checkbox" name="missing-fields" value="tax_id" checked> Tax ID (SSN/EIN)
+                                    </label>
+                                    <label class="checkbox-container">
+                                        <input type="checkbox" name="missing-fields" value="address" checked> Complete Address
+                                    </label>
+                                    <label class="checkbox-container">
+                                        <input type="checkbox" name="missing-fields" value="tax_classification"> Tax Classification
+                                    </label>
+                                    <label class="checkbox-container">
+                                        <input type="checkbox" name="missing-fields" value="w8ben_form"> W-8BEN Form
+                                    </label>
+                                    <label class="checkbox-container">
+                                        <input type="checkbox" name="missing-fields" value="w9_form"> W-9 Form
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="custom-message">Custom Message (Optional)</label>
+                                <textarea id="custom-message" class="form-control" rows="4" placeholder="Add any additional details or specific requests here..."></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-outline" id="cancel-request-btn">Cancel</button>
+                            <button class="btn btn-primary" id="send-request-btn">Send Request</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Batch Export Modal -->
+                <div id="batch-export-modal" class="modal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2>Batch Export Tax Documents</h2>
+                            <button class="modal-close">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="export-options">
+                                <div class="export-option" data-export-type="all">
+                                    <div class="export-option-header">
+                                        <div class="export-option-icon">
+                                            <i class="fas fa-file-export"></i>
+                                        </div>
+                                        <div class="export-option-title">All Tax Documents</div>
+                                    </div>
+                                    <div class="export-option-description">
+                                        Export all tax documents for the selected year
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="export-year-all">Tax Year:</label>
+                                        <select id="export-year-all" class="select-control">
+                                            <option value="2023" selected>2023</option>
+                                            <option value="2022">2022</option>
+                                            <option value="2021">2021</option>
+                                            <option value="2020">2020</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="export-option" data-export-type="by-form">
+                                    <div class="export-option-header">
+                                        <div class="export-option-icon">
+                                            <i class="fas fa-file-invoice"></i>
+                                        </div>
+                                        <div class="export-option-title">By Form Type</div>
+                                    </div>
+                                    <div class="export-option-description">
+                                        Export tax documents filtered by form type
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="export-form-type">Form Type:</label>
+                                        <select id="export-form-type" class="select-control">
+                                            <option value="1099-NEC" selected>1099-NEC</option>
+                                            <option value="1099-MISC">1099-MISC</option>
+                                            <option value="W-8BEN">W-8BEN</option>
+                                            <option value="W-9">W-9</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="export-year-form">Tax Year:</label>
+                                        <select id="export-year-form" class="select-control">
+                                            <option value="2023" selected>2023</option>
+                                            <option value="2022">2022</option>
+                                            <option value="2021">2021</option>
+                                            <option value="2020">2020</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="export-option" data-export-type="by-country">
+                                    <div class="export-option-header">
+                                        <div class="export-option-icon">
+                                            <i class="fas fa-globe-americas"></i>
+                                        </div>
+                                        <div class="export-option-title">By Country</div>
+                                    </div>
+                                    <div class="export-option-description">
+                                        Export tax documents filtered by expert's country
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="export-country">Country:</label>
+                                        <select id="export-country" class="select-control">
+                                            <option value="US" selected>United States</option>
+                                            <option value="CA">Canada</option>
+                                            <option value="GB">United Kingdom</option>
+                                            <option value="AU">Australia</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="export-year-country">Tax Year:</label>
+                                        <select id="export-year-country" class="select-control">
+                                            <option value="2023" selected>2023</option>
+                                            <option value="2022">2022</option>
+                                            <option value="2021">2021</option>
+                                            <option value="2020">2020</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="export-option" data-export-type="by-status">
+                                    <div class="export-option-header">
+                                        <div class="export-option-icon">
+                                            <i class="fas fa-tasks"></i>
+                                        </div>
+                                        <div class="export-option-title">By Status</div>
+                                    </div>
+                                    <div class="export-option-description">
+                                        Export tax documents filtered by current status
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="export-status">Status:</label>
+                                        <select id="export-status" class="select-control">
+                                            <option value="generated" selected>Generated</option>
+                                            <option value="sent">Sent</option>
+                                            <option value="pending">Pending Generation</option>
+                                            <option value="missing-info">Missing Information</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="export-year-status">Tax Year:</label>
+                                        <select id="export-year-status" class="select-control">
+                                            <option value="2023" selected>2023</option>
+                                            <option value="2022">2022</option>
+                                            <option value="2021">2021</option>
+                                            <option value="2020">2020</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="export-format-section">
+                                <h3>Export Format</h3>
+                                <div class="export-format-options">
+                                    <label class="radio-container">
+                                        <input type="radio" name="export-format" value="pdf" checked> PDF Documents
+                                        <span class="radio-checkmark"></span>
+                                    </label>
+                                    <label class="radio-container">
+                                        <input type="radio" name="export-format" value="csv"> CSV Summary
+                                        <span class="radio-checkmark"></span>
+                                    </label>
+                                    <label class="radio-container">
+                                        <input type="radio" name="export-format" value="both"> Both PDF and CSV
+                                        <span class="radio-checkmark"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-outline" id="close-export-modal-btn">Cancel</button>
+                            <button class="btn btn-primary" id="export-documents-btn">Export Documents</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- User Permission Modal -->
+                <div id="user-permission-modal" class="modal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2>Edit User Permissions</h2>
+                            <button class="modal-close">&times;</button>
+                        </div>
+                        <div class="modal-body permission-modal-body">
+                            <div class="user-info-header">
+                                <div class="user-info">
+                                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2" alt="User" class="avatar-sm" id="permission-user-avatar">
+                                    <div class="user-details">
+                                        <div class="user-name" id="permission-user-name">User Name</div>
+                                        <div class="user-email" id="permission-user-email">user@example.com</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="permission-options">
+                                <div class="permission-option">
+                                    <input type="checkbox" id="permission-view" class="permission-checkbox">
+                                    <label for="permission-view">View Tax Documents</label>
+                                </div>
+                                <div class="permission-option">
+                                    <input type="checkbox" id="permission-download" class="permission-checkbox">
+                                    <label for="permission-download">Download Tax Documents</label>
+                                </div>
+                                <div class="permission-option">
+                                    <input type="checkbox" id="permission-generate" class="permission-checkbox">
+                                    <label for="permission-generate">Generate Tax Forms</label>
+                                </div>
+                                <div class="permission-option">
+                                    <input type="checkbox" id="permission-send" class="permission-checkbox">
+                                    <label for="permission-send">Send Tax Forms</label>
+                                </div>
+                                <div class="permission-option">
+                                    <input type="checkbox" id="permission-edit" class="permission-checkbox">
+                                    <label for="permission-edit">Edit Tax Information</label>
+                                </div>
+                            </div>
+
+                            <div class="audit-log-section">
+                                <h3>Permission Audit Log</h3>
+                                <div class="audit-log-container">
+                                    <div class="audit-log-item">
+                                        <div>Added <strong>Send Tax Forms</strong> permission by Admin User</div>
+                                        <div class="audit-log-time">March 15, 2025 10:23 AM</div>
+                                    </div>
+                                    <div class="audit-log-item">
+                                        <div>Removed <strong>Edit Tax Information</strong> permission by Admin User</div>
+                                        <div class="audit-log-time">February 28, 2025 2:45 PM</div>
+                                    </div>
+                                    <div class="audit-log-item">
+                                        <div>Added <strong>View Tax Documents</strong> permission by Admin User</div>
+                                        <div class="audit-log-time">January 10, 2025 9:12 AM</div>
+                                    </div>
+                                    <div class="audit-log-item">
+                                        <div>Added <strong>Download Tax Documents</strong> permission by Admin User</div>
+                                        <div class="audit-log-time">January 10, 2025 9:12 AM</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-outline" id="cancel-permission-btn">Cancel</button>
+                            <button class="btn btn-primary" id="save-permission-btn">Save Permissions</button>
+                        </div>
+                    </div>
+                </div>
+
+            </main>
+        </div>
+
+        <!-- Include the notification services -->
+        <script type="module" src="services/admin-notification-service.js"></script>
+        <script type="module" src="services/admin-notification-handler.js"></script>
+
+        <!-- Include the admin tax management script -->
+        <script type="module" src="admin-tax-management.js"></script>
+    </body>
+</html>

@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Message Monitoring | Expert Marketplace</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="admin-message-monitoring.css">
+    <link rel="stylesheet" href="admin-notification.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Admin Sidebar -->
+        <aside class="admin-sidebar">
+            <div class="admin-brand">
+                <img src="/uploads/default-avatar.png" alt="Logo" class="admin-logo">
+                <div class="admin-logo-text">
+                    <h1>Expert Marketplace</h1>
+                    <p>Admin Panel</p>
+                </div>
+            </div>
+
+            <nav class="admin-nav">
+                <ul>
+                    <li><a href="admin-dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                    <li><a href="admin-experts.html"><i class="fas fa-user-tie"></i> Experts</a></li>
+                    <li><a href="admin-clients.html"><i class="fas fa-users"></i> Clients</a></li>
+                    <li><a href="admin-bookings.html"><i class="fas fa-calendar-check"></i> Bookings</a></li>
+                    <li><a href="admin-case-studies.html"><i class="fas fa-file-alt"></i> Case Studies</a></li>
+                    <li><a href="admin-message-monitoring.html" class="active"><i class="fas fa-comments"></i> Messages</a></li>
+                    <li><a href="admin-payments.html"><i class="fas fa-credit-card"></i> Payments</a></li>
+                    <li><a href="admin-reports.html"><i class="fas fa-chart-bar"></i> Reports</a></li>
+                    <li><a href="admin-settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+                    <li class="separator"></li>
+                    <li><a href="index.html"><i class="fas fa-sign-out-alt"></i> Exit Admin</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <!-- Header -->
+            <header class="admin-header">
+                <div class="admin-header-content">
+                    <h1>Message Monitoring Dashboard</h1>
+                    <div class="admin-user">
+                        <!-- Notification Bell -->
+                        <div class="notification-bell-container">
+                            <div id="notification-bell" class="notification-bell">
+                                <i class="fas fa-bell"></i>
+                                <span id="notification-counter" class="notification-counter">0</span>
+                            </div>
+
+                            <!-- Notification Panel -->
+                            <div id="notification-panel" class="notification-panel">
+                                <div class="notification-panel-header">
+                                    <h3>Notifications</h3>
+                                    <button id="settings-btn" class="btn-icon" title="Notification Settings">
+                                        <i class="fas fa-cog"></i>
+                                    </button>
+                                </div>
+                                <div id="notification-list" class="notification-list">
+                                    <!-- Notifications will be populated here by JS -->
+                                    <div class="empty-notifications">
+                                        <i class="fas fa-check-circle"></i>
+                                        <p>No new notifications</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <span>Admin User</span>
+                        <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde" alt="Admin" class="admin-avatar">
+                    </div>
+                </div>
+            </header>
+
+            <!-- Page Content -->
+            <div class="admin-content">
+                <div class="admin-section">
+                    <div class="section-header">
+                        <h2>Message Monitoring Overview</h2>
+                        <div class="section-actions">
+                            <button class="btn btn-outline" id="refresh-data-btn">
+                                <i class="fas fa-sync-alt"></i> Refresh Data
+                            </button>
+                            <button class="btn btn-primary" id="export-report-btn">
+                                <i class="fas fa-file-export"></i> Export Report
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="stats-cards">
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-comments"></i>
+                            </div>
+                            <div class="stat-details">
+                                <h3>Total Messages</h3>
+                                <p class="stat-value">36,429</p>
+                                <p class="stat-change positive">+12.5% from last week</p>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-flag"></i>
+                            </div>
+                            <div class="stat-details">
+                                <h3>Flagged Messages</h3>
+                                <p class="stat-value">28</p>
+                                <p class="stat-change negative">+8.3% from last week</p>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-user-clock"></i>
+                            </div>
+                            <div class="stat-details">
+                                <h3>Avg. Response Time</h3>
+                                <p class="stat-value">1.8 hours</p>
+                                <p class="stat-change positive">-15.2% from last week</p>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-thumbs-up"></i>
+                            </div>
+                            <div class="stat-details">
+                                <h3>Conversion Rate</h3>
+                                <p class="stat-value">24.7%</p>
+                                <p class="stat-change positive">+3.2% from last week</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="admin-section">
+                    <div class="section-header">
+                        <h2>Message Monitoring</h2>
+                        <div class="filter-controls">
+                            <div class="search-box">
+                                <input type="text" placeholder="Search conversations...">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <select class="filter-select" id="filter-status">
+                                <option value="all">All Status</option>
+                                <option value="flagged">Flagged</option>
+                                <option value="resolved">Resolved</option>
+                                <option value="pending">Pending Review</option>
+                            </select>
+                            <select class="filter-select" id="filter-period">
+                                <option value="all">All Time</option>
+                                <option value="today">Today</option>
+                                <option value="week">This Week</option>
+                                <option value="month">This Month</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Messages Table -->
+                    <div class="table-responsive">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <input type="checkbox" id="select-all">
+                                    </th>
+                                    <th>Conversation</th>
+                                    <th>Expert</th>
+                                    <th>Client</th>
+                                    <th>Last Activity</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" class="row-checkbox">
+                                    </td>
+                                    <td>
+                                        <div class="conversation-preview">
+                                            <span class="conversation-subject">Business Growth Strategy</span>
+                                            <span class="conversation-excerpt">I think we should focus on improving the conversion rate first...</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="user-info">
+                                            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a" alt="James Wilson" class="user-avatar">
+                                            <span>James Wilson</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="user-info">
+                                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330" alt="Emily Davis" class="user-avatar">
+                                            <span>Emily Davis</span>
+                                        </div>
+                                    </td>
+                                    <td>2 hours ago</td>
+                                    <td><span class="status-badge flagged">Flagged</span></td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button class="btn-icon" title="View Conversation"><i class="fas fa-eye"></i></button>
+                                            <button class="btn-icon" title="Mark as Resolved"><i class="fas fa-check"></i></button>
+                                            <button class="btn-icon" title="Delete"><i class="fas fa-trash"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" class="row-checkbox">
+                                    </td>
+                                    <td>
+                                        <div class="conversation-preview">
+                                            <span class="conversation-subject">Marketing Strategy Consultation</span>
+                                            <span class="conversation-excerpt">Let's schedule a call to discuss your social media campaign...</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="user-info">
+                                            <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e" alt="Amanda Rodriguez" class="user-avatar">
+                                            <span>Amanda Rodriguez</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="user-info">
+                                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d" alt="Michael Brown" class="user-avatar">
+                                            <span>Michael Brown</span>
+                                        </div>
+                                    </td>
+                                    <td>Yesterday</td>
+                                    <td><span class="status-badge normal">Normal</span></td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button class="btn-icon" title="View Conversation"><i class="fas fa-eye"></i></button>
+                                            <button class="btn-icon" title="Flag"><i class="far fa-flag"></i></button>
+                                            <button class="btn-icon" title="Delete"><i class="fas fa-trash"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" class="row-checkbox">
+                                    </td>
+                                    <td>
+                                        <div class="conversation-preview">
+                                            <span class="conversation-subject">Financial Planning Services</span>
+                                            <span class="conversation-excerpt">I'm attaching my company's revenue reports for the last quarter...</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="user-info">
+                                            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2" alt="Sarah Johnson" class="user-avatar">
+                                            <span>Sarah Johnson</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="user-info">
+                                            <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d" alt="Robert Chen" class="user-avatar">
+                                            <span>Robert Chen</span>
+                                        </div>
+                                    </td>
+                                    <td>2 days ago</td>
+                                    <td><span class="status-badge pending">Pending</span></td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button class="btn-icon" title="View Conversation"><i class="fas fa-eye"></i></button>
+                                            <button class="btn-icon" title="Approve"><i class="fas fa-check"></i></button>
+                                            <button class="btn-icon" title="Flag"><i class="far fa-flag"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" class="row-checkbox">
+                                    </td>
+                                    <td>
+                                        <div class="conversation-preview">
+                                            <span class="conversation-subject">Website Optimization</span>
+                                            <span class="conversation-excerpt">I've analyzed your website and found several areas for improvement...</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="user-info">
+                                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e" alt="David Wilson" class="user-avatar">
+                                            <span>David Wilson</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="user-info">
+                                            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2" alt="Lisa Thompson" class="user-avatar">
+                                            <span>Lisa Thompson</span>
+                                        </div>
+                                    </td>
+                                    <td>3 days ago</td>
+                                    <td><span class="status-badge resolved">Resolved</span></td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button class="btn-icon" title="View Conversation"><i class="fas fa-eye"></i></button>
+                                            <button class="btn-icon" title="Flag"><i class="far fa-flag"></i></button>
+                                            <button class="btn-icon" title="Archive"><i class="fas fa-archive"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" class="row-checkbox">
+                                    </td>
+                                    <td>
+                                        <div class="conversation-preview">
+                                            <span class="conversation-subject">Legal Consultation</span>
+                                            <span class="conversation-excerpt">Here's the draft contract we discussed. Please review and let me know...</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="user-info">
+                                            <img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5" alt="Thomas Wright" class="user-avatar">
+                                            <span>Thomas Wright</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="user-info">
+                                            <img src="https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb" alt="Jennifer Adams" class="user-avatar">
+                                            <span>Jennifer Adams</span>
+                                        </div>
+                                    </td>
+                                    <td>1 week ago</td>
+                                    <td><span class="status-badge normal">Normal</span></td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button class="btn-icon" title="View Conversation"><i class="fas fa-eye"></i></button>
+                                            <button class="btn-icon" title="Flag"><i class="far fa-flag"></i></button>
+                                            <button class="btn-icon" title="Archive"><i class="fas fa-archive"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="table-footer">
+                        <div class="table-actions">
+                            <select class="bulk-action">
+                                <option value="">Bulk Actions</option>
+                                <option value="flag">Flag Selected</option>
+                                <option value="resolve">Mark as Resolved</option>
+                                <option value="archive">Archive Selected</option>
+                                <option value="delete">Delete Selected</option>
+                            </select>
+                            <button class="btn btn-outline">Apply</button>
+                        </div>
+
+                        <div class="pagination">
+                            <button class="pagination-btn" disabled><i class="fas fa-chevron-left"></i></button>
+                            <button class="pagination-btn active">1</button>
+                            <button class="pagination-btn">2</button>
+                            <button class="pagination-btn">3</button>
+                            <span class="pagination-ellipsis">...</span>
+                            <button class="pagination-btn">12</button>
+                            <button class="pagination-btn"><i class="fas fa-chevron-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Message Viewer Modal -->
+    <div class="modal" id="message-viewer-modal">
+        <div class="modal-content large-modal">
+            <div class="modal-header">
+                <h2>Conversation Viewer</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="conversation-header">
+                    <div class="conversation-info">
+                        <h3>Business Growth Strategy</h3>
+                        <div class="conversation-meta">
+                            <div class="conversation-participants">
+                                <div class="participant">
+                                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a" alt="James Wilson" class="participant-avatar">
+                                    <span>James Wilson (Expert)</span>
+                                </div>
+                                <div class="participant">
+                                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330" alt="Emily Davis" class="participant-avatar">
+                                    <span>Emily Davis (Client)</span>
+                                </div>
+                            </div>
+                            <div class="conversation-details">
+                                <span><i class="fas fa-calendar"></i> Started: Apr 1, 2025</span>
+                                <span><i class="fas fa-exchange-alt"></i> 28 messages</span>
+                                <span><i class="fas fa-clock"></i> Last activity: 2 hours ago</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="conversation-actions">
+                        <button class="btn btn-outline btn-sm" id="download-transcript-btn">
+                            <i class="fas fa-download"></i> Download Transcript
+                        </button>
+                        <button class="btn btn-primary btn-sm" id="analyze-conversation-btn">
+                            <i class="fas fa-chart-bar"></i> Analyze Conversation
+                        </button>
+                    </div>
+                </div>
+
+                <div class="message-viewer">
+                    <div class="message-thread">
+                        <div class="message-date-separator">
+                            <span>April 1, 2025</span>
+                        </div>
+
+                        <div class="message client-message">
+                            <div class="message-avatar">
+                                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330" alt="Emily Davis">
+                            </div>
+                            <div class="message-content">
+                                <div class="message-header">
+                                    <span class="message-sender">Emily Davis</span>
+                                    <span class="message-time">10:32 AM</span>
+                                </div>
+                                <div class="message-body">
+                                    <p>Hi James! I found your case study about increasing revenue by 250% very interesting. I run an online retail store and I'm looking to improve our marketing strategy.</p>
+                                </div>
+                                <div class="message-footer">
+                                    <div class="message-actions">
+                                        <button class="btn-text" title="Flag Message"><i class="far fa-flag"></i> Flag</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="message expert-message">
+                            <div class="message-avatar">
+                                <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a" alt="James Wilson">
+                            </div>
+                            <div class="message-content">
+                                <div class="message-header">
+                                    <span class="message-sender">James Wilson</span>
+                                    <span class="message-time">10:45 AM</span>
+                                </div>
+                                <div class="message-body">
+                                    <p>Hello Emily! Thank you for reaching out. I'd be happy to discuss how we can apply similar strategies to your retail store. Could you tell me a bit more about your business and what specific areas you'd like to improve?</p>
+                                </div>
+                                <div class="message-footer">
+                                    <div class="message-actions">
+                                        <button class="btn-text" title="Flag Message"><i class="far fa-flag"></i> Flag</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="message client-message">
+                            <div class="message-avatar">
+                                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330" alt="Emily Davis">
+                            </div>
+                            <div class="message-content">
+                                <div class="message-header">
+                                    <span class="message-sender">Emily Davis</span>
+                                    <span class="message-time">11:03 AM</span>
+                                </div>
+                                <div class="message-body">
+                                    <p>Of course! We sell eco-friendly home products, and we've been in business for about 2 years. Our main challenges are customer acquisition costs and conversion rates. We get decent traffic but our conversion is only around 1.2%.</p>
+                                </div>
+                                <div class="message-footer">
+                                    <div class="message-actions">
+                                        <button class="btn-text" title="Flag Message"><i class="far fa-flag"></i> Flag</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="message-date-separator">
+                            <span>April 2, 2025</span>
+                        </div>
+
+                        <div class="message expert-message flagged">
+                            <div class="message-avatar">
+                                <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a" alt="James Wilson">
+                            </div>
+                            <div class="message-content">
+                                <div class="message-header">
+                                    <span class="message-sender">James Wilson</span>
+                                    <span class="message-time">9:15 AM</span>
+                                    <span class="flag-indicator"><i class="fas fa-flag"></i> Flagged</span>
+                                </div>
+                                <div class="message-body">
+                                    <p>I think we should focus on improving the conversion rate first. Based on your website, I can see several issues that are likely contributing to the low conversion rate. The checkout process seems complicated and there's no clear value proposition on the product pages.</p>
+                                    <p>I recommend implementing a more streamlined checkout process and adding more prominent customer testimonials. I've helped several clients achieve 3-4x improvements in conversion rates with these changes.</p>
+                                </div>
+                                <div class="message-footer">
+                                    <div class="message-flagged-info">
+                                        <p><strong>Flagged reason:</strong> Potential unauthorized website access or evaluation without consent</p>
+                                        <p><strong>Flagged by:</strong> System AI</p>
+                                        <p><strong>Flagged on:</strong> Apr 2, 2025, 9:20 AM</p>
+                                    </div>
+                                    <div class="message-actions">
+                                        <button class="btn-text approve-btn" title="Approve Message"><i class="fas fa-check"></i> Approve</button>
+                                        <button class="btn-text warn-btn" title="Send Warning"><i class="fas fa-exclamation-triangle"></i> Warn Expert</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="message client-message">
+                            <div class="message-avatar">
+                                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330" alt="Emily Davis">
+                            </div>
+                            <div class="message-content">
+                                <div class="message-header">
+                                    <span class="message-sender">Emily Davis</span>
+                                    <span class="message-time">9:30 AM</span>
+                                </div>
+                                <div class="message-body">
+                                    <p>That's really helpful insight! I didn't realize those issues were so apparent. Would you be able to provide more specific recommendations for our checkout process? And how would we go about measuring the impact of these changes?</p>
+                                </div>
+                                <div class="message-footer">
+                                    <div class="message-actions">
+                                        <button class="btn-text" title="Flag Message"><i class="far fa-flag"></i> Flag</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="admin-notes">
+                        <h3>Admin Notes</h3>
+                        <textarea placeholder="Add notes about this conversation for other admins..."></textarea>
+                        <div class="admin-actions">
+                            <button class="btn btn-outline btn-sm">Cancel</button>
+                            <button class="btn btn-primary btn-sm">Save Notes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" id="close-viewer-btn">Close</button>
+                <div class="modal-actions">
+                    <button class="btn btn-warning" id="suspend-conversation-btn">Suspend Conversation</button>
+                    <button class="btn btn-primary" id="resolve-flag-btn">Resolve Flag</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include the message analyzer script -->
+    <script type="module" src="message-analyzer.js"></script>
+
+    <!-- Include the notification services -->
+    <script type="module" src="services/admin-notification-service.js"></script>
+    <script type="module" src="services/admin-notification-handler.js"></script>
+
+    <!-- Include the admin message monitoring script -->
+    <script type="module" src="admin-message-monitoring.js"></script>
+</body>
+</html>

@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Expert Marketplace</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="admin-dashboard.css">
+    <link rel="stylesheet" href="admin-notification.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
+    <!-- Date Range Picker -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Admin Sidebar -->
+        <aside class="admin-sidebar">
+            <div class="admin-brand">
+                <img src="/uploads/default-avatar.png" alt="Logo" class="admin-logo">
+                <div class="admin-logo-text">
+                    <h1>Expert Marketplace</h1>
+                    <p>Admin Panel</p>
+                </div>
+            </div>
+
+            <nav class="admin-nav">
+                <ul>
+                    <li><a href="admin-dashboard.html" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+
+                    <!-- User Management -->
+                    <li class="nav-section-title">User Management</li>
+                    <li><a href="admin-experts.html"><i class="fas fa-user-tie"></i> Experts</a></li>
+                    <li><a href="admin-clients.html"><i class="fas fa-users"></i> Clients</a></li>
+                    <li><a href="admin-user-management.html"><i class="fas fa-user-cog"></i> User Controls</a></li>
+                    <li><a href="admin-role-management.html"><i class="fas fa-user-shield"></i> Roles & Permissions</a></li>
+
+                    <!-- Content & Bookings -->
+                    <li class="nav-section-title">Content & Bookings</li>
+                    <li><a href="admin-bookings.html"><i class="fas fa-calendar-check"></i> Bookings</a></li>
+                    <li><a href="admin-case-studies.html"><i class="fas fa-file-alt"></i> Case Studies</a></li>
+                    <li><a href="admin-content-moderation.html"><i class="fas fa-shield-alt"></i> Content Moderation</a></li>
+                    <li><a href="admin-appeals-management.html"><i class="fas fa-gavel"></i> Appeals</a></li>
+
+                    <!-- Communication -->
+                    <li class="nav-section-title">Communication</li>
+                    <li><a href="admin-message-monitoring.html"><i class="fas fa-comments"></i> Messages</a></li>
+                    <li><a href="admin-support-tickets.html"><i class="fas fa-headset"></i> Support Tickets</a></li>
+                    <li><a href="admin-knowledge-base.html"><i class="fas fa-book"></i> Knowledge Base</a></li>
+
+                    <!-- Finance -->
+                    <li class="nav-section-title">Finance</li>
+                    <li><a href="admin-payments.html"><i class="fas fa-credit-card"></i> Payments</a></li>
+                    <li><a href="admin-refunds.html"><i class="fas fa-undo"></i> Refunds</a></li>
+                    <li><a href="admin-payouts.html"><i class="fas fa-money-bill-wave"></i> Payouts</a></li>
+                    <li><a href="admin-tax-management.html"><i class="fas fa-file-invoice-dollar"></i> Tax Documents</a></li>
+
+                    <!-- Analytics & Marketing -->
+                    <li class="nav-section-title">Analytics & Marketing</li>
+                    <li><a href="admin-analytics-dashboard.html"><i class="fas fa-chart-line"></i> Analytics</a></li>
+                    <li><a href="admin-reports.html"><i class="fas fa-chart-bar"></i> Reports</a></li>
+                    <li><a href="admin-email-campaigns.html"><i class="fas fa-envelope"></i> Email Campaigns</a></li>
+                    <li><a href="admin-promotions.html"><i class="fas fa-tags"></i> Promotions</a></li>
+                    <li><a href="admin-seo.html"><i class="fas fa-search"></i> SEO Management</a></li>
+
+                    <!-- System -->
+                    <li class="nav-section-title">System</li>
+                    <li><a href="admin-settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+                    <li><a href="admin-feature-toggles.html"><i class="fas fa-toggle-on"></i> Feature Toggles</a></li>
+                    <li><a href="admin-api-management.html"><i class="fas fa-plug"></i> API & Integrations</a></li>
+                    <li><a href="admin-system-health.html"><i class="fas fa-heartbeat"></i> System Health</a></li>
+                    <li><a href="admin-security.html"><i class="fas fa-lock"></i> Security & Compliance</a></li>
+
+                    <li class="separator"></li>
+                    <li><a href="index.html"><i class="fas fa-sign-out-alt"></i> Exit Admin</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <!-- Header -->
+            <header class="admin-header">
+                <div class="admin-header-content">
+                    <h1>Admin Dashboard</h1>
+                    <div class="admin-user">
+                        <!-- Notification Bell -->
+                        <div class="notification-bell-container">
+                            <div id="notification-bell" class="notification-bell">
+                                <i class="fas fa-bell"></i>
+                                <span id="notification-counter" class="notification-counter">0</span>
+                            </div>
+
+                            <!-- Notification Panel -->
+                            <div id="notification-panel" class="notification-panel">
+                                <div class="notification-panel-header">
+                                    <h3>Notifications</h3>
+                                    <button id="settings-btn" class="btn-icon" title="Notification Settings">
+                                        <i class="fas fa-cog"></i>
+                                    </button>
+                                </div>
+                                <div id="notification-list" class="notification-list">
+                                    <!-- Notifications will be populated here by JS -->
+                                    <div class="empty-notifications">
+                                        <i class="fas fa-check-circle"></i>
+                                        <p>No new notifications</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <span>Admin User</span>
+                        <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde" alt="Admin" class="admin-avatar">
+                    </div>
+                </div>
+            </header>
+
+            <!-- Page Content -->
+            <div class="admin-content">
+                <!-- Date Range Filter -->
+                <div class="filter-controls">
+                    <div class="date-range-container">
+                        <button id="dateRangeBtn" class="btn btn-outline">
+                            <i class="far fa-calendar-alt"></i> <span id="dateRangeText">Last 30 Days</span>
+                        </button>
+                    </div>
+                    <div class="action-buttons">
+                        <button id="refresh-btn" class="btn btn-primary">
+                            <i class="fas fa-sync-alt"></i> Refresh Data
+                        </button>
+                        <button id="export-btn" class="btn btn-secondary">
+                            <i class="fas fa-file-export"></i> Export Dashboard
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Platform Health Overview -->
+                <div class="dashboard-section">
+                    <h2>Platform Health Overview</h2>
+                    <div class="stat-cards">
+                        <div class="stat-card">
+                            <div class="stat-icon bg-primary">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="stat-details">
+                                <p class="stat-label">Active Users</p>
+                                <p class="stat-value" id="totalUsers">5,243</p>
+                                <p class="stat-change positive"><i class="fas fa-arrow-up"></i> 12.5% vs last month</p>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon bg-success">
+                                <i class="fas fa-dollar-sign"></i>
+                            </div>
+                            <div class="stat-details">
+                                <p class="stat-label">Revenue (MTD)</p>
+                                <p class="stat-value" id="totalRevenue">$128,450</p>
+                                <p class="stat-change positive"><i class="fas fa-arrow-up"></i> 8.3% vs last month</p>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon bg-warning">
+                                <i class="fas fa-handshake"></i>
+                            </div>
+                            <div class="stat-details">
+                                <p class="stat-label">Active Bookings</p>
+                                <p class="stat-value" id="activeBookings">342</p>
+                                <p class="stat-change positive"><i class="fas fa-arrow-up"></i> 5.2% vs last month</p>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon bg-info">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="stat-details">
+                                <p class="stat-label">Avg. Rating</p>
+                                <p class="stat-value" id="avgRating">4.8 / 5.0</p>
+                                <p class="stat-change positive"><i class="fas fa-arrow-up"></i> 0.2 vs last month</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts Section -->
+                <div class="dashboard-section">
+                    <div class="dashboard-grid">
+                        <!-- Revenue Chart -->
+                        <div class="dashboard-chart-card span-2">
+                            <div class="card-header">
+                                <h3>Revenue Trends</h3>
+                                <div class="card-actions">
+                                    <select id="revenuePeriodSelect" class="select-control">
+                                        <option value="daily">Daily</option>
+                                        <option value="weekly">Weekly</option>
+                                        <option value="monthly" selected>Monthly</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-container">
+                                    <canvas id="revenueChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Users Acquisition -->
+                        <div class="dashboard-chart-card">
+                            <div class="card-header">
+                                <h3>User Acquisition</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-container">
+                                    <canvas id="userAcquisitionChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Category Distribution -->
+                        <div class="dashboard-chart-card">
+                            <div class="card-header">
+                                <h3>Top Categories</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-container">
+                                    <canvas id="categoryChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Access Section -->
+                <div class="dashboard-section">
+                    <h2>Quick Access</h2>
+                    <div class="quick-access-grid">
+                        <a href="admin-message-monitoring.html" class="quick-access-card">
+                            <div class="quick-access-icon bg-primary">
+                                <i class="fas fa-comments"></i>
+                            </div>
+                            <div class="quick-access-details">
+                                <h3>Message Monitoring</h3>
+                                <p>Review and moderate user messages</p>
+                            </div>
+                            <div class="quick-access-indicator">
+                                <span class="badge" id="messageMonitoringAlert">2</span>
+                            </div>
+                        </a>
+
+                        <a href="admin-experts.html" class="quick-access-card">
+                            <div class="quick-access-icon bg-success">
+                                <i class="fas fa-user-tie"></i>
+                            </div>
+                            <div class="quick-access-details">
+                                <h3>Expert Management</h3>
+                                <p>Manage expert profiles and verifications</p>
+                            </div>
+                            <div class="quick-access-indicator">
+                                <span class="badge" id="expertManagementAlert">3</span>
+                            </div>
+                        </a>
+
+                        <a href="admin-bookings.html" class="quick-access-card">
+                            <div class="quick-access-icon bg-warning">
+                                <i class="fas fa-calendar-check"></i>
+                            </div>
+                            <div class="quick-access-details">
+                                <h3>Booking Management</h3>
+                                <p>View and manage all platform bookings</p>
+                            </div>
+                            <div class="quick-access-indicator">
+                                <span class="badge" id="bookingManagementAlert">0</span>
+                            </div>
+                        </a>
+
+                        <a href="admin-payments.html" class="quick-access-card">
+                            <div class="quick-access-icon bg-info">
+                                <i class="fas fa-credit-card"></i>
+                            </div>
+                            <div class="quick-access-details">
+                                <h3>Payment Processing</h3>
+                                <p>Manage transactions and payouts</p>
+                            </div>
+                            <div class="quick-access-indicator">
+                                <span class="badge" id="paymentProcessingAlert">1</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Recent Activities and Alerts -->
+                <div class="dashboard-section">
+                    <div class="dashboard-grid">
+                        <!-- Recent Activities -->
+                        <div class="dashboard-card span-2">
+                            <div class="card-header">
+                                <h3>Recent Activities</h3>
+                                <div class="card-actions">
+                                    <button class="btn-link">View All</button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="activity-list" id="recentActivitiesList">
+                                    <div class="activity-item">
+                                        <div class="activity-icon bg-success">
+                                            <i class="fas fa-user-plus"></i>
+                                        </div>
+                                        <div class="activity-details">
+                                            <p class="activity-title">New Expert Registration</p>
+                                            <p class="activity-desc">Dr. Sarah Johnson registered as a Business Strategy expert</p>
+                                            <p class="activity-time">10 minutes ago</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="activity-item">
+                                        <div class="activity-icon bg-primary">
+                                            <i class="fas fa-calendar-plus"></i>
+                                        </div>
+                                        <div class="activity-details">
+                                            <p class="activity-title">New Booking Created</p>
+                                            <p class="activity-desc">Michael Brown booked a session with James Wilson</p>
+                                            <p class="activity-time">25 minutes ago</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="activity-item">
+                                        <div class="activity-icon bg-warning">
+                                            <i class="fas fa-flag"></i>
+                                        </div>
+                                        <div class="activity-details">
+                                            <p class="activity-title">Message Flagged</p>
+                                            <p class="activity-desc">A message was flagged for potential external contact attempt</p>
+                                            <p class="activity-time">45 minutes ago</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="activity-item">
+                                        <div class="activity-icon bg-info">
+                                            <i class="fas fa-dollar-sign"></i>
+                                        </div>
+                                        <div class="activity-details">
+                                            <p class="activity-title">Payment Processed</p>
+                                            <p class="activity-desc">Payment of $350 was processed for consultation #12345</p>
+                                            <p class="activity-time">1 hour ago</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="activity-item">
+                                        <div class="activity-icon bg-danger">
+                                            <i class="fas fa-exclamation-triangle"></i>
+                                        </div>
+                                        <div class="activity-details">
+                                            <p class="activity-title">Verification Rejected</p>
+                                            <p class="activity-desc">Expert verification for Thomas Green was rejected</p>
+                                            <p class="activity-time">2 hours ago</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- System Health Alerts -->
+                        <div class="dashboard-card">
+                            <div class="card-header">
+                                <h3>System Health</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="health-metrics">
+                                    <div class="health-metric">
+                                        <div class="health-metric-title">
+                                            <span>Server Response Time</span>
+                                            <span class="status-indicator good">Good</span>
+                                        </div>
+                                        <div class="progress-bar">
+                                            <div class="progress-fill" style="width: 15%"></div>
+                                        </div>
+                                        <div class="health-metric-details">
+                                            <span class="metric-value">128ms</span>
+                                            <span class="metric-label">Average</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="health-metric">
+                                        <div class="health-metric-title">
+                                            <span>CPU Utilization</span>
+                                            <span class="status-indicator good">Good</span>
+                                        </div>
+                                        <div class="progress-bar">
+                                            <div class="progress-fill" style="width: 45%"></div>
+                                        </div>
+                                        <div class="health-metric-details">
+                                            <span class="metric-value">45%</span>
+                                            <span class="metric-label">Average</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="health-metric">
+                                        <div class="health-metric-title">
+                                            <span>Memory Usage</span>
+                                            <span class="status-indicator warning">Warning</span>
+                                        </div>
+                                        <div class="progress-bar">
+                                            <div class="progress-fill warning" style="width: 75%"></div>
+                                        </div>
+                                        <div class="health-metric-details">
+                                            <span class="metric-value">75%</span>
+                                            <span class="metric-label">Average</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="health-metric">
+                                        <div class="health-metric-title">
+                                            <span>Database Load</span>
+                                            <span class="status-indicator good">Good</span>
+                                        </div>
+                                        <div class="progress-bar">
+                                            <div class="progress-fill" style="width: 30%"></div>
+                                        </div>
+                                        <div class="health-metric-details">
+                                            <span class="metric-value">30%</span>
+                                            <span class="metric-label">Average</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="system-alerts">
+                                    <h4>Recent Alerts</h4>
+                                    <div class="alert-list">
+                                        <div class="alert-item warning">
+                                            <i class="fas fa-exclamation-triangle"></i>
+                                            <span>Memory usage spike detected at 2:15 PM</span>
+                                        </div>
+                                        <div class="alert-item success">
+                                            <i class="fas fa-check-circle"></i>
+                                            <span>Database backup completed successfully</span>
+                                        </div>
+                                        <div class="alert-item info">
+                                            <i class="fas fa-info-circle"></i>
+                                            <span>System updates scheduled for tomorrow at 2 AM</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Top Performers -->
+                <div class="dashboard-section">
+                    <div class="section-header">
+                        <h2>Top Performing Experts</h2>
+                        <div class="section-actions">
+                            <select id="expertMetricSelect" class="select-control">
+                                <option value="revenue">By Revenue</option>
+                                <option value="bookings">By Bookings</option>
+                                <option value="rating">By Rating</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Expert</th>
+                                    <th>Category</th>
+                                    <th>Bookings</th>
+                                    <th>Revenue</th>
+                                    <th>Rating</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="topExpertsTableBody">
+                                <tr>
+                                    <td>
+                                        <div class="user-info">
+                                            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a" alt="James Wilson" class="avatar">
+                                            <div>
+                                                <p class="user-name">James Wilson</p>
+                                                <p class="user-email">james.wilson@example.com</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>Business Strategy</td>
+                                    <td>42</td>
+                                    <td>$12,850</td>
+                                    <td>
+                                        <div class="rating">
+                                            <span class="stars">★★★★★</span>
+                                            <span class="rating-value">4.9</span>
+                                        </div>
+                                    </td>
+                                    <td><span class="status-badge active">Active</span></td>
+                                    <td>
+                                        <div class="table-actions">
+                                            <button class="btn-icon" title="View Profile"><i class="fas fa-eye"></i></button>
+                                            <button class="btn-icon" title="Edit Profile"><i class="fas fa-edit"></i></button>
+                                            <button class="btn-icon" title="Message"><i class="fas fa-comment"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="user-info">
+                                            <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e" alt="Amanda Rodriguez" class="avatar">
+                                            <div>
+                                                <p class="user-name">Amanda Rodriguez</p>
+                                                <p class="user-email">amanda.r@example.com</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>Digital Marketing</td>
+                                    <td>38</td>
+                                    <td>$10,320</td>
+                                    <td>
+                                        <div class="rating">
+                                            <span class="stars">★★★★★</span>
+                                            <span class="rating-value">4.8</span>
+                                        </div>
+                                    </td>
+                                    <td><span class="status-badge active">Active</span></td>
+                                    <td>
+                                        <div class="table-actions">
+                                            <button class="btn-icon" title="View Profile"><i class="fas fa-eye"></i></button>
+                                            <button class="btn-icon" title="Edit Profile"><i class="fas fa-edit"></i></button>
+                                            <button class="btn-icon" title="Message"><i class="fas fa-comment"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="user-info">
+                                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e" alt="David Wilson" class="avatar">
+                                            <div>
+                                                <p class="user-name">David Wilson</p>
+                                                <p class="user-email">david.wilson@example.com</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>Web Development</td>
+                                    <td>35</td>
+                                    <td>$9,875</td>
+                                    <td>
+                                        <div class="rating">
+                                            <span class="stars">★★★★☆</span>
+                                            <span class="rating-value">4.7</span>
+                                        </div>
+                                    </td>
+                                    <td><span class="status-badge active">Active</span></td>
+                                    <td>
+                                        <div class="table-actions">
+                                            <button class="btn-icon" title="View Profile"><i class="fas fa-eye"></i></button>
+                                            <button class="btn-icon" title="Edit Profile"><i class="fas fa-edit"></i></button>
+                                            <button class="btn-icon" title="Message"><i class="fas fa-comment"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="user-info">
+                                            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2" alt="Sarah Johnson" class="avatar">
+                                            <div>
+                                                <p class="user-name">Sarah Johnson</p>
+                                                <p class="user-email">sarah.j@example.com</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>Financial Planning</td>
+                                    <td>32</td>
+                                    <td>$9,120</td>
+                                    <td>
+                                        <div class="rating">
+                                            <span class="stars">★★★★☆</span>
+                                            <span class="rating-value">4.6</span>
+                                        </div>
+                                    </td>
+                                    <td><span class="status-badge active">Active</span></td>
+                                    <td>
+                                        <div class="table-actions">
+                                            <button class="btn-icon" title="View Profile"><i class="fas fa-eye"></i></button>
+                                            <button class="btn-icon" title="Edit Profile"><i class="fas fa-edit"></i></button>
+                                            <button class="btn-icon" title="Message"><i class="fas fa-comment"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Include the notification services -->
+    <script type="module" src="services/admin-notification-service.js"></script>
+    <script type="module" src="services/admin-notification-handler.js"></script>
+
+    <!-- Include the admin dashboard script -->
+    <script type="module" src="admin-dashboard.js"></script>
+</body>
+</html>

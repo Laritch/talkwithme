@@ -1,0 +1,83 @@
+<div id="ai-processing" class="d-none">
+        <div class="text-center py-5">
+          <div class="mb-4">
+            <i class="fas fa-brain fa-4x text-primary mb-3"></i>
+            <div class="spinner-border text-primary" role="status">
+              <span class="sr-only">Processing...</span>
+            </div>
+          </div>
+          <h5>AI Model Processing</h5>
+          <p class="text-muted">Analyzing historical data and generating optimized fee recommendations...</p>
+          <div class="progress mt-3" style="height: 10px;">
+            <div id="ai-progress-bar" class="progress-bar progress-bar-striped progress-bar-animated" style="width: 0%"></div>
+          </div>
+          <div class="small text-muted mt-2">
+            <span id="ai-progress-status">Initializing AI model...</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI-Generated Recommendations Section -->
+      <div id="ai-recommendations-container" class="d-none">
+        <h5 class="mb-3">AI-Generated Recommendations</h5>
+
+        <div class="alert alert-success">
+          <i class="fas fa-check-circle mr-2"></i> The AI model has generated optimized fee structures with an estimated <strong>14.7% improvement</strong> in selected metrics.
+        </div>
+
+        <div class="row mb-4">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header bg-light">
+                <h6 class="mb-0">Recommended Fee Structure Adjustments</h6>
+              </div>
+              <div class="card-body p-0">
+                <div class="table-responsive">
+                  <table class="table table-bordered mb-0">
+                    <thead class="thead-light">
+                      <tr>
+                        <th>Region</th>
+                        <th>Current Commission</th>
+                        <th>Recommended Commission</th>
+                        <th>Current Initial Fee</th>
+                        <th>Recommended Initial Fee</th>
+                        <th>Expected Impact</th>
+                        <th>Confidence</th>
+                      </tr>
+                    </thead>
+                    <tbody id="ai-recommendation-table">
+                      <tr>
+                        <td>North America</td>
+                        <td>15.0%</td>
+                        <td class="bg-light">16.5% <span class="text-success ml-1">+1.5%</span></td>
+                        <td>$100</td>
+                        <td class="bg-light">$75 <span class="text-danger ml-1">-$25</span></td>
+                        <td><span class="badge badge-success">+18% Revenue</span></td>
+                        <td>92%</td>
+                      </tr>
+                      <tr>
+                        <td>Europe</td>
+                        <td>18.0%</td>
+                        <td class="bg-light">17.5% <span class="text-danger ml-1">-0.5%</span></td>
+                        <td>€120</td>
+                        <td class="bg-light">€95 <span class="text-danger ml-1">-€25</span></td>
+                        <td><span class="badge badge-success">+12% Experts</span></td>
+                        <td>89%</td>
+                      </tr>
+                      <tr>
+                        <td>Asia Pacific</td>
+                        <td>12.0%</td>
+                        <td class="bg-light">14.0% <span class="text-success ml-1">+2.0%</span></td>
+                        <td>$80</td>
+                        <td class="bg-light">$60 <span class="text-danger ml-1">-$20</span></td>
+                        <td><span class="badge badge-success">+22% Revenue</span></td>
+                        <td>87%</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>

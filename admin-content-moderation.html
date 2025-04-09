@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content Moderation | Admin Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="admin-dashboard.css">
+    <link rel="stylesheet" href="admin-content-moderation.css">
+    <link rel="stylesheet" href="admin-notification.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Date Range Picker -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Admin Sidebar -->
+        <aside class="admin-sidebar">
+            <div class="admin-brand">
+                <img src="/uploads/default-avatar.png" alt="Logo" class="admin-logo">
+                <div class="admin-logo-text">
+                    <h1>Expert Marketplace</h1>
+                    <p>Admin Panel</p>
+                </div>
+            </div>
+
+            <nav class="admin-nav">
+                <ul>
+                    <li><a href="admin-dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+
+                    <!-- User Management -->
+                    <li class="nav-section-title">User Management</li>
+                    <li><a href="admin-experts.html"><i class="fas fa-user-tie"></i> Experts</a></li>
+                    <li><a href="admin-clients.html"><i class="fas fa-users"></i> Clients</a></li>
+                    <li><a href="admin-user-management.html"><i class="fas fa-user-cog"></i> User Controls</a></li>
+                    <li><a href="admin-role-management.html"><i class="fas fa-user-shield"></i> Roles & Permissions</a></li>
+
+                    <!-- Content & Bookings -->
+                    <li class="nav-section-title">Content & Bookings</li>
+                    <li><a href="admin-bookings.html"><i class="fas fa-calendar-check"></i> Bookings</a></li>
+                    <li><a href="admin-case-studies.html"><i class="fas fa-file-alt"></i> Case Studies</a></li>
+                    <li><a href="admin-content-moderation.html" class="active"><i class="fas fa-shield-alt"></i> Content Moderation</a></li>
+                    <li><a href="admin-appeals-management.html"><i class="fas fa-gavel"></i> Appeals</a></li>
+
+                    <!-- Communication -->
+                    <li class="nav-section-title">Communication</li>
+                    <li><a href="admin-message-monitoring.html"><i class="fas fa-comments"></i> Messages</a></li>
+                    <li><a href="admin-support-tickets.html"><i class="fas fa-headset"></i> Support Tickets</a></li>
+                    <li><a href="admin-knowledge-base.html"><i class="fas fa-book"></i> Knowledge Base</a></li>
+
+                    <!-- Finance -->
+                    <li class="nav-section-title">Finance</li>
+                    <li><a href="admin-payments.html"><i class="fas fa-credit-card"></i> Payments</a></li>
+                    <li><a href="admin-refunds.html"><i class="fas fa-undo"></i> Refunds</a></li>
+                    <li><a href="admin-payouts.html"><i class="fas fa-money-bill-wave"></i> Payouts</a></li>
+                    <li><a href="admin-tax-management.html"><i class="fas fa-file-invoice-dollar"></i> Tax Documents</a></li>
+
+                    <!-- Analytics & Marketing -->
+                    <li class="nav-section-title">Analytics & Marketing</li>
+                    <li><a href="admin-analytics-dashboard.html"><i class="fas fa-chart-line"></i> Analytics</a></li>
+                    <li><a href="admin-reports.html"><i class="fas fa-chart-bar"></i> Reports</a></li>
+                    <li><a href="admin-email-campaigns.html"><i class="fas fa-envelope"></i> Email Campaigns</a></li>
+                    <li><a href="admin-promotions.html"><i class="fas fa-tags"></i> Promotions</a></li>
+                    <li><a href="admin-seo.html"><i class="fas fa-search"></i> SEO Management</a></li>
+
+                    <!-- System -->
+                    <li class="nav-section-title">System</li>
+                    <li><a href="admin-settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+                    <li><a href="admin-feature-toggles.html"><i class="fas fa-toggle-on"></i> Feature Toggles</a></li>
+                    <li><a href="admin-api-management.html"><i class="fas fa-plug"></i> API & Integrations</a></li>
+                    <li><a href="admin-system-health.html"><i class="fas fa-heartbeat"></i> System Health</a></li>
+                    <li><a href="admin-security.html"><i class="fas fa-lock"></i> Security & Compliance</a></li>
+
+                    <li class="separator"></li>
+                    <li><a href="index.html"><i class="fas fa-sign-out-alt"></i> Exit Admin</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <!-- Header -->
+            <header class="admin-header">
+                <div class="admin-header-content">
+                    <h1>Content Moderation</h1>
+                    <div class="admin-user">
+                        <!-- Notification Bell -->
+                        <div class="notification-bell-container">
+                            <div id="notification-bell" class="notification-bell">
+                                <i class="fas fa-bell"></i>
+                                <span id="notification-counter" class="notification-counter">0</span>
+                            </div>
+
+                            <!-- Notification Panel -->
+                            <div id="notification-panel" class="notification-panel">
+                                <div class="notification-panel-header">
+                                    <h3>Notifications</h3>
+                                    <button id="settings-btn" class="btn-icon" title="Notification Settings">
+                                        <i class="fas fa-cog"></i>
+                                    </button>
+                                </div>
+                                <div id="notification-list" class="notification-list">
+                                    <!-- Notifications will be populated here by JS -->
+                                    <div class="empty-notifications">
+                                        <i class="fas fa-check-circle"></i>
+                                        <p>No new notifications</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <span>Admin User</span>
+                        <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde" alt="Admin" class="admin-avatar">
+                    </div>
+                </div>
+            </header>
+
+            <!-- Page Content -->
+            <div class="admin-content">
+                <!-- Moderation Queue Stats -->
+                <div class="dashboard-section">
+                    <h2>Moderation Queue</h2>
+                    <div class="stat-cards">
+                        <div class="stat-card">
+                            <div class="stat-icon bg-warning">
+                                <i class="fas fa-hourglass-half"></i>
+                            </div>
+                            <div class="stat-details">
+                                <p class="stat-label">Pending Review</p>
+                                <p class="stat-value" id="pendingCount">24</p>
+                                <p class="stat-change"><i class="fas fa-arrow-up"></i> 5 new today</p>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon bg-danger">
+                                <i class="fas fa-flag"></i>
+                            </div>
+                            <div class="stat-details">
+                                <p class="stat-label">Flagged Content</p>
+                                <p class="stat-value" id="flaggedCount">12</p>
+                                <p class="stat-change negative"><i class="fas fa-arrow-up"></i> 3 new today</p>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon bg-success">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="stat-details">
+                                <p class="stat-label">Approved Today</p>
+                                <p class="stat-value" id="approvedCount">45</p>
+                                <p class="stat-change positive"><i class="fas fa-arrow-up"></i> 10 more than yesterday</p>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon bg-info">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="stat-details">
+                                <p class="stat-label">Avg. Review Time</p>
+                                <p class="stat-value" id="avgReviewTime">14m</p>
+                                <p class="stat-change positive"><i class="fas fa-arrow-down"></i> 2m faster than last week</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Content Filters -->
+                <div class="dashboard-section">
+                    <div class="section-header">
+                        <h2>Content Filters</h2>
+                        <div class="section-actions">
+                            <button id="auto-assign-btn" class="btn btn-primary">
+                                <i class="fas fa-random"></i> Auto-Assign Content
+                            </button>
+                            <button id="ai-review-btn" class="btn btn-secondary">
+                                <i class="fas fa-robot"></i> AI Pre-Review
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="filter-container">
+                        <div class="filter-row">
+                            <div class="filter-group">
+                                <label for="content-type">Content Type</label>
+                                <select id="content-type" class="select-control">
+                                    <option value="all">All Content</option>
+                                    <option value="expert-profile">Expert Profiles</option>
+                                    <option value="case-study">Case Studies</option>
+                                    <option value="article">Articles</option>
+                                    <option value="comment">Comments</option>
+                                    <option value="review">Reviews</option>
+                                    <option value="image">Images</option>
+                                </select>
+                            </div>
+
+                            <div class="filter-group">
+                                <label for="content-status">Status</label>
+                                <select id="content-status" class="select-control">
+                                    <option value="pending">Pending Review</option>
+                                    <option value="flagged">Flagged</option>
+                                    <option value="approved">Approved</option>
+                                    <option value="rejected">Rejected</option>
+                                    <option value="all">All Status</option>
+                                </select>
+                            </div>
+
+                            <div class="filter-group">
+                                <label for="content-date">Submission Date</label>
+                                <input type="text" id="content-date" class="date-range-input" placeholder="Select date range">
+                            </div>
+
+                            <div class="filter-group">
+                                <label for="content-search">Search</label>
+                                <div class="search-input">
+                                    <input type="text" id="content-search" placeholder="Search content...">
+                                    <button id="search-btn" class="btn btn-icon">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="filter-actions">
+                            <button id="apply-filters" class="btn btn-primary">Apply Filters</button>
+                            <button id="reset-filters" class="btn btn-outline">Reset</button>
+                            <button id="save-filter" class="btn btn-secondary">
+                                <i class="fas fa-save"></i> Save Filter
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Content Moderation Queue -->
+                <div class="dashboard-section">
+                    <div class="section-header">
+                        <h2>Content Queue</h2>
+                        <div class="section-actions">
+                            <span id="selection-counter">0 items selected</span>
+                            <div class="bulk-actions">
+                                <select id="bulk-action" class="select-control">
+                                    <option value="">Bulk Actions</option>
+                                    <option value="approve">Approve Selected</option>
+                                    <option value="reject">Reject Selected</option>
+                                    <option value="flag">Flag Selected</option>
+                                    <option value="assign">Assign to Moderator</option>
+                                </select>
+                                <button id="apply-bulk-action" class="btn btn-primary" disabled>Apply</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="content-grid">
+                        <!-- Content Item -->
+                        <div class="content-card">
+                            <div class="content-card-header">
+                                <div class="content-selection">
+                                    <input type="checkbox" class="content-checkbox" data-id="content1">
+                                </div>
+                                <div class="content-meta">
+                                    <span class="content-type expert-profile">Expert Profile</span>
+                                    <span class="content-status pending">Pending Review</span>
+                                </div>
+                                <div class="content-actions">
+                                    <button class="btn-icon" title="View Details"><i class="fas fa-eye"></i></button>
+                                    <button class="btn-icon" title="Approve"><i class="fas fa-check"></i></button>
+                                    <button class="btn-icon" title="Reject"><i class="fas fa-times"></i></button>
+                                    <button class="btn-icon" title="Flag"><i class="fas fa-flag"></i></button>
+                                </div>
+                            </div>
+                            <div class="content-card-body">
+                                <div class="content-preview">
+                                    <div class="profile-preview">
+                                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a" alt="Expert Profile" class="profile-image">
+                                        <div class="profile-info">
+                                            <h3>James Wilson</h3>
+                                            <p>Business Strategy Consultant</p>
+                                        </div>
+                                    </div>
+                                    <div class="content-excerpt">
+                                        <p>I help businesses develop growth strategies and improve operational efficiency with over 15 years of experience in management consulting...</p>
+                                    </div>
+                                </div>
+                                <div class="content-info">
+                                    <div class="content-author">
+                                        <span>Submitted by:</span>
+                                        <a href="#">James Wilson</a>
+                                    </div>
+                                    <div class="content-date">
+                                        <span>Submitted:</span>
+                                        <time>3 hours ago</time>
+                                    </div>
+                                    <div class="ai-flags">
+                                        <i class="fas fa-robot"></i>
+                                        <span class="ai-suggestion safe">AI Scan: Safe Content</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Content Item (Case Study) -->
+                        <div class="content-card">
+                            <div class="content-card-header">
+                                <div class="content-selection">
+                                    <input type="checkbox" class="content-checkbox" data-id="content2">
+                                </div>
+                                <div class="content-meta">
+                                    <span class="content-type case-study">Case Study</span>
+                                    <span class="content-status flagged">Flagged</span>
+                                </div>
+                                <div class="content-actions">
+                                    <button class="btn-icon" title="View Details"><i class="fas fa-eye"></i></button>
+                                    <button class="btn-icon" title="Approve"><i class="fas fa-check"></i></button>
+                                    <button class="btn-icon" title="Reject"><i class="fas fa-times"></i></button>
+                                    <button class="btn-icon" title="Flag"><i class="fas fa-flag"></i></button>
+                                </div>
+                            </div>
+                            <div class="content-card-body">
+                                <div class="content-preview">
+                                    <div class="case-study-preview">
+                                        <h3>Increasing Sales by 200% for XYZ Corp</h3>
+                                        <div class="case-study-image">
+                                            <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0" alt="Case Study Image">
+                                        </div>
+                                    </div>
+                                    <div class="content-excerpt">
+                                        <p>In this case study, I demonstrate how I helped XYZ Corp achieve remarkable growth through implementing a new digital marketing strategy...</p>
+                                    </div>
+                                </div>
+                                <div class="content-info">
+                                    <div class="content-author">
+                                        <span>Submitted by:</span>
+                                        <a href="#">Amanda Rodriguez</a>
+                                    </div>
+                                    <div class="content-date">
+                                        <span>Submitted:</span>
+                                        <time>2 days ago</time>
+                                    </div>
+                                    <div class="ai-flags warning">
+                                        <i class="fas fa-robot"></i>
+                                        <span class="ai-suggestion warning">AI Flag: Potential external contact info</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Content Item (Review) -->
+                        <div class="content-card">
+                            <div class="content-card-header">
+                                <div class="content-selection">
+                                    <input type="checkbox" class="content-checkbox" data-id="content3">
+                                </div>
+                                <div class="content-meta">
+                                    <span class="content-type review">Review</span>
+                                    <span class="content-status pending">Pending Review</span>
+                                </div>
+                                <div class="content-actions">
+                                    <button class="btn-icon" title="View Details"><i class="fas fa-eye"></i></button>
+                                    <button class="btn-icon" title="Approve"><i class="fas fa-check"></i></button>
+                                    <button class="btn-icon" title="Reject"><i class="fas fa-times"></i></button>
+                                    <button class="btn-icon" title="Flag"><i class="fas fa-flag"></i></button>
+                                </div>
+                            </div>
+                            <div class="content-card-body">
+                                <div class="content-preview">
+                                    <div class="review-preview">
+                                        <div class="rating">
+                                            <span class="stars">★★★★★</span>
+                                            <span class="rating-value">5.0</span>
+                                        </div>
+                                        <h3>Exceptional Financial Guidance</h3>
+                                    </div>
+                                    <div class="content-excerpt">
+                                        <p>Sarah provided outstanding financial advice that helped me restructure my small business finances. Her insights were invaluable...</p>
+                                    </div>
+                                </div>
+                                <div class="content-info">
+                                    <div class="content-author">
+                                        <span>Submitted by:</span>
+                                        <a href="#">Robert Chen</a>
+                                    </div>
+                                    <div class="content-date">
+                                        <span>Submitted:</span>
+                                        <time>5 hours ago</time>
+                                    </div>
+                                    <div class="ai-flags">
+                                        <i class="fas fa-robot"></i>
+                                        <span class="ai-suggestion safe">AI Scan: Safe Content</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Content Item (Article) -->
+                        <div class="content-card">
+                            <div class="content-card-header">
+                                <div class="content-selection">
+                                    <input type="checkbox" class="content-checkbox" data-id="content4">
+                                </div>
+                                <div class="content-meta">
+                                    <span class="content-type article">Article</span>
+                                    <span class="content-status pending">Pending Review</span>
+                                </div>
+                                <div class="content-actions">
+                                    <button class="btn-icon" title="View Details"><i class="fas fa-eye"></i></button>
+                                    <button class="btn-icon" title="Approve"><i class="fas fa-check"></i></button>
+                                    <button class="btn-icon" title="Reject"><i class="fas fa-times"></i></button>
+                                    <button class="btn-icon" title="Flag"><i class="fas fa-flag"></i></button>
+                                </div>
+                            </div>
+                            <div class="content-card-body">
+                                <div class="content-preview">
+                                    <div class="article-preview">
+                                        <h3>10 Tech Trends Every Business Leader Should Know in 2023</h3>
+                                        <div class="article-image">
+                                            <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5" alt="Article Image">
+                                        </div>
+                                    </div>
+                                    <div class="content-excerpt">
+                                        <p>As technology continues to evolve at a rapid pace, business leaders must stay informed about the latest trends that could impact their operations...</p>
+                                    </div>
+                                </div>
+                                <div class="content-info">
+                                    <div class="content-author">
+                                        <span>Submitted by:</span>
+                                        <a href="#">David Wilson</a>
+                                    </div>
+                                    <div class="content-date">
+                                        <span>Submitted:</span>
+                                        <time>1 day ago</time>
+                                    </div>
+                                    <div class="ai-flags">
+                                        <i class="fas fa-robot"></i>
+                                        <span class="ai-suggestion safe">AI Scan: Safe Content</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="pagination">
+                        <button class="pagination-btn" disabled><i class="fas fa-chevron-left"></i></button>
+                        <button class="pagination-btn active">1</button>
+                        <button class="pagination-btn">2</button>
+                        <button class="pagination-btn">3</button>
+                        <span class="pagination-ellipsis">...</span>
+                        <button class="pagination-btn">10</button>
+                        <button class="pagination-btn"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+
+                <!-- Moderation Guidelines -->
+                <div class="dashboard-section">
+                    <div class="section-header">
+                        <h2>Moderation Guidelines</h2>
+                        <div class="section-actions">
+                            <button id="update-guidelines-btn" class="btn btn-outline">
+                                <i class="fas fa-edit"></i> Update Guidelines
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="guidelines-container">
+                        <div class="guideline-category">
+                            <h3><i class="fas fa-user-tie"></i> Expert Profiles</h3>
+                            <ul class="guideline-list">
+                                <li>Verify professional credentials match claimed expertise</li>
+                                <li>Check that profile images are professional and appropriate</li>
+                                <li>Ensure no direct contact information is included</li>
+                                <li>Confirm all claims of experience have appropriate substantiation</li>
+                            </ul>
+                        </div>
+
+                        <div class="guideline-category">
+                            <h3><i class="fas fa-file-alt"></i> Case Studies</h3>
+                            <ul class="guideline-list">
+                                <li>Verify client anonymity is maintained unless explicit permission is granted</li>
+                                <li>Check that all data and claims are credible and not misleading</li>
+                                <li>Ensure images and graphics don't contain confidential information</li>
+                                <li>Confirm case studies represent genuine work performed by the expert</li>
+                            </ul>
+                        </div>
+
+                        <div class="guideline-category">
+                            <h3><i class="fas fa-comment"></i> Reviews & Comments</h3>
+                            <ul class="guideline-list">
+                                <li>Flag reviews that appear fake or manufactured</li>
+                                <li>Remove any personal attacks or inappropriate language</li>
+                                <li>Check for spam or promotion of external services</li>
+                                <li>Verify reviews come from legitimate clients who received services</li>
+                            </ul>
+                        </div>
+
+                        <div class="guideline-category">
+                            <h3><i class="fas fa-image"></i> Images & Media</h3>
+                            <ul class="guideline-list">
+                                <li>Ensure all images are appropriate and professional</li>
+                                <li>Verify proper licensing for stock images</li>
+                                <li>Check that images don't contain confidential data</li>
+                                <li>Ensure any people featured have given permission</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Content Detail Modal -->
+    <div id="content-detail-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Content Review</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="content-detail-container">
+                    <!-- Content will be populated dynamically -->
+                </div>
+                <div class="moderation-actions">
+                    <div class="action-group">
+                        <h3>Decision</h3>
+                        <div class="action-buttons">
+                            <button class="btn btn-success" id="modal-approve-btn">
+                                <i class="fas fa-check"></i> Approve
+                            </button>
+                            <button class="btn btn-danger" id="modal-reject-btn">
+                                <i class="fas fa-times"></i> Reject
+                            </button>
+                            <button class="btn btn-warning" id="modal-flag-btn">
+                                <i class="fas fa-flag"></i> Flag for Review
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="action-group">
+                        <h3>Feedback</h3>
+                        <textarea id="moderation-feedback" placeholder="Enter feedback or reason for rejection..."></textarea>
+                    </div>
+
+                    <div class="action-group">
+                        <h3>Tags</h3>
+                        <div class="tag-input">
+                            <input type="text" id="tag-input" placeholder="Add a tag...">
+                            <button class="btn btn-sm btn-outline" id="add-tag-btn">Add</button>
+                        </div>
+                        <div class="tags-container" id="tags-container">
+                            <span class="tag">Misleading <button class="tag-remove">&times;</button></span>
+                            <span class="tag">Needs Citation <button class="tag-remove">&times;</button></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" id="cancel-review-btn">Cancel</button>
+                <button class="btn btn-primary" id="submit-review-btn">Submit Review</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include the notification services -->
+    <script type="module" src="services/admin-notification-service.js"></script>
+    <script type="module" src="services/admin-notification-handler.js"></script>
+
+    <!-- Include the admin content moderation script -->
+    <script type="module" src="admin-content-moderation.js"></script>
+</body>
+</html>

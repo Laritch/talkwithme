@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Refund Management | Admin Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="admin-dashboard.css">
+    <link rel="stylesheet" href="admin-refunds.css">
+    <link rel="stylesheet" href="admin-notification.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
+    <!-- Date Range Picker -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Admin Sidebar -->
+        <aside class="admin-sidebar">
+            <div class="admin-brand">
+                <img src="/uploads/default-avatar.png" alt="Logo" class="admin-logo">
+                <div class="admin-logo-text">
+                    <h1>Expert Marketplace</h1>
+                    <p>Admin Panel</p>
+                </div>
+            </div>
+
+            <nav class="admin-nav">
+                <ul>
+                    <li><a href="admin-dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+
+                    <!-- User Management -->
+                    <li class="nav-section-title">User Management</li>
+                    <li><a href="admin-experts.html"><i class="fas fa-user-tie"></i> Experts</a></li>
+                    <li><a href="admin-clients.html"><i class="fas fa-users"></i> Clients</a></li>
+                    <li><a href="admin-user-management.html"><i class="fas fa-user-cog"></i> User Controls</a></li>
+                    <li><a href="admin-role-management.html"><i class="fas fa-user-shield"></i> Roles & Permissions</a></li>
+
+                    <!-- Content & Bookings -->
+                    <li class="nav-section-title">Content & Bookings</li>
+                    <li><a href="admin-bookings.html"><i class="fas fa-calendar-check"></i> Bookings</a></li>
+                    <li><a href="admin-case-studies.html"><i class="fas fa-file-alt"></i> Case Studies</a></li>
+                    <li><a href="admin-content-moderation.html"><i class="fas fa-shield-alt"></i> Content Moderation</a></li>
+                    <li><a href="admin-appeals-management.html"><i class="fas fa-gavel"></i> Appeals</a></li>
+
+                    <!-- Communication -->
+                    <li class="nav-section-title">Communication</li>
+                    <li><a href="admin-message-monitoring.html"><i class="fas fa-comments"></i> Messages</a></li>
+                    <li><a href="admin-support-tickets.html"><i class="fas fa-headset"></i> Support Tickets</a></li>
+                    <li><a href="admin-knowledge-base.html"><i class="fas fa-book"></i> Knowledge Base</a></li>
+
+                    <!-- Finance -->
+                    <li class="nav-section-title">Finance</li>
+                    <li><a href="admin-payments.html"><i class="fas fa-credit-card"></i> Payments</a></li>
+                    <li><a href="admin-refunds.html" class="active"><i class="fas fa-undo"></i> Refunds</a></li>
+                    <li><a href="admin-payouts.html"><i class="fas fa-money-bill-wave"></i> Payouts</a></li>
+                    <li><a href="admin-tax-management.html"><i class="fas fa-file-invoice-dollar"></i> Tax Documents</a></li>
+
+                    <!-- Analytics & Marketing -->
+                    <li class="nav-section-title">Analytics & Marketing</li>
+                    <li><a href="admin-analytics-dashboard.html"><i class="fas fa-chart-line"></i> Analytics</a></li>
+                    <li><a href="admin-reports.html"><i class="fas fa-chart-bar"></i> Reports</a></li>
+                    <li><a href="admin-email-campaigns.html"><i class="fas fa-envelope"></i> Email Campaigns</a></li>
+                    <li><a href="admin-promotions.html"><i class="fas fa-tags"></i> Promotions</a></li>
+                    <li><a href="admin-seo.html"><i class="fas fa-search"></i> SEO Management</a></li>
+
+                    <!-- System -->
+                    <li class="nav-section-title">System</li>
+                    <li><a href="admin-settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+                    <li><a href="admin-feature-toggles.html"><i class="fas fa-toggle-on"></i> Feature Toggles</a></li>
+                    <li><a href="admin-api-management.html"><i class="fas fa-plug"></i> API & Integrations</a></li>
+                    <li><a href="admin-system-health.html"><i class="fas fa-heartbeat"></i> System Health</a></li>
+                    <li><a href="admin-security.html"><i class="fas fa-lock"></i> Security & Compliance</a></li>
+
+                    <li class="separator"></li>
+                    <li><a href="index.html"><i class="fas fa-sign-out-alt"></i> Exit Admin</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <!-- Header -->
+            <header class="admin-header">
+                <div class="admin-header-content">
+                    <h1>Refund Management</h1>
+                    <div class="admin-user">
+                        <!-- Notification Bell -->
+                        <div class="notification-bell-container">
+                            <div id="notification-bell" class="notification-bell">
+                                <i class="fas fa-bell"></i>
+                                <span id="notification-counter" class="notification-counter">0</span>
+                            </div>
+
+                            <!-- Notification Panel -->
+                            <div id="notification-panel" class="notification-panel">
+                                <div class="notification-panel-header">
+                                    <h3>Notifications</h3>
+                                    <button id="settings-btn" class="btn-icon" title="Notification Settings">
+                                        <i class="fas fa-cog"></i>
+                                    </button>
+                                </div>
+                                <div id="notification-list" class="notification-list">
+                                    <!-- Notifications will be populated here by JS -->
+                                    <div class="empty-notifications">
+                                        <i class="fas fa-check-circle"></i>
+                                        <p>No new notifications</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <span>Admin User</span>
+                        <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde" alt="Admin" class="admin-avatar">
+                    </div>
+                </div>
+            </header>
+
+            <!-- Page Content -->
+            <div class="admin-content">
+                <!-- Refund Overview -->
+                <div class="dashboard-section">
+                    <h2>Refund Overview</h2>
+                    <div class="stat-cards">
+                        <div class="stat-card">
+                            <div class="stat-icon bg-warning">
+                                <i class="fas fa-file-alt"></i>
+                            </div>
+                            <div class="stat-details">
+                                <p class="stat-label">Pending Requests</p>
+                                <p class="stat-value" id="pendingRefunds">15</p>
+                                <p class="stat-change negative"><i class="fas fa-arrow-up"></i> 3 more than last week</p>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon bg-danger">
+                                <i class="fas fa-exclamation-circle"></i>
+                            </div>
+                            <div class="stat-details">
+                                <p class="stat-label">Urgent (>48h)</p>
+                                <p class="stat-value" id="urgentRefunds">4</p>
+                                <p class="stat-change"><i class="fas fa-minus"></i> No change</p>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon bg-success">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="stat-details">
+                                <p class="stat-label">Processed This Month</p>
+                                <p class="stat-value" id="processedRefunds">42</p>
+                                <p class="stat-change positive"><i class="fas fa-arrow-down"></i> 7% fewer than last month</p>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon bg-info">
+                                <i class="fas fa-dollar-sign"></i>
+                            </div>
+                            <div class="stat-details">
+                                <p class="stat-label">Refund Amount (MTD)</p>
+                                <p class="stat-value" id="refundAmount">$6,245</p>
+                                <p class="stat-change positive"><i class="fas fa-arrow-down"></i> 12% less than last month</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Refund Analytics -->
+                <div class="dashboard-section">
+                    <div class="dashboard-grid">
+                        <!-- Refund Trends -->
+                        <div class="dashboard-chart-card span-2">
+                            <div class="card-header">
+                                <h3>Refund Trends</h3>
+                                <div class="card-actions">
+                                    <select id="refundPeriodSelect" class="select-control">
+                                        <option value="weekly">Weekly</option>
+                                        <option value="monthly" selected>Monthly</option>
+                                        <option value="quarterly">Quarterly</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-container">
+                                    <canvas id="refundTrendsChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Refund Reasons -->
+                        <div class="dashboard-chart-card">
+                            <div class="card-header">
+                                <h3>Refund Reasons</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-container">
+                                    <canvas id="refundReasonsChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Service Categories with Most Refunds -->
+                        <div class="dashboard-chart-card">
+                            <div class="card-header">
+                                <h3>Top Refunded Categories</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-container">
+                                    <canvas id="refundCategoriesChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Refund Requests Management -->
+                <div class="dashboard-section">
+                    <div class="section-header">
+                        <h2>Refund Requests</h2>
+                        <div class="section-actions">
+                            <div class="date-range-container">
+                                <input type="text" id="refund-date-range" placeholder="Select date range" class="date-range-input">
+                            </div>
+                            <div class="bulk-actions-container" id="bulk-actions">
+                                <button class="btn btn-success bulk-action" id="approve-selected-btn" disabled>
+                                    <i class="fas fa-check"></i> Approve Selected
+                                </button>
+                                <button class="btn btn-danger bulk-action" id="reject-selected-btn" disabled>
+                                    <i class="fas fa-times"></i> Reject Selected
+                                </button>
+                            </div>
+                            <button id="export-refunds-btn" class="btn btn-secondary">
+                                <i class="fas fa-file-export"></i> Export
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Refund Filters -->
+                    <div class="filter-container">
+                        <div class="filter-row">
+                            <div class="filter-group">
+                                <label for="refund-status">Status</label>
+                                <select id="refund-status" class="select-control">
+                                    <option value="all">All Status</option>
+                                    <option value="pending" selected>Pending</option>
+                                    <option value="approved">Approved</option>
+                                    <option value="rejected">Rejected</option>
+                                    <option value="processing">Processing</option>
+                                    <option value="completed">Completed</option>
+                                </select>
+                            </div>
+
+                            <div class="filter-group">
+                                <label for="refund-reason">Reason</label>
+                                <select id="refund-reason" class="select-control">
+                                    <option value="all">All Reasons</option>
+                                    <option value="expert_unavailable">Expert Unavailable</option>
+                                    <option value="quality_issues">Quality Issues</option>
+                                    <option value="not_as_described">Not As Described</option>
+                                    <option value="service_issue">Service Issue</option>
+                                    <option value="changed_mind">Changed Mind</option>
+                                    <option value="duplicate_payment">Duplicate Payment</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+
+                            <div class="filter-group">
+                                <label for="refund-amount">Amount Range</label>
+                                <div class="amount-range">
+                                    <input type="number" id="min-refund-amount" placeholder="Min" class="amount-input">
+                                    <span class="amount-separator">to</span>
+                                    <input type="number" id="max-refund-amount" placeholder="Max" class="amount-input">
+                                </div>
+                            </div>
+
+                            <div class="filter-group">
+                                <label for="refund-search">Search</label>
+                                <div class="search-input">
+                                    <input type="text" id="refund-search" placeholder="Search by ID, user, or service...">
+                                    <button id="refund-search-btn" class="btn btn-icon">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="filter-actions">
+                            <button id="apply-refund-filters" class="btn btn-primary">Apply Filters</button>
+                            <button id="reset-refund-filters" class="btn btn-outline">Reset</button>
+                        </div>
+                    </div>
+
+                    <!-- Refunds Table -->
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <input type="checkbox" id="select-all-refunds">
+                                    </th>
+                                    <th>Request ID</th>
+                                    <th>Date</th>
+                                    <th>Client</th>
+                                    <th>Service</th>
+                                    <th>Expert</th>
+                                    <th>Amount</th>
+                                    <th>Reason</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="refunds-table-body">
+                                <!-- Sample refund rows -->
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" class="refund-checkbox" data-id="ref_12345">
+                                    </td>
+                                    <td>ref_12345</td>
+                                    <td>Apr 1, 2023 14:30</td>
+                                    <td>
+                                        <div class="user-info">
+                                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330" alt="Emily Davis" class="avatar-sm">
+                                            <span>Emily Davis</span>
+                                        </div>
+                                    </td>
+                                    <td>Business Strategy Consultation</td>
+                                    <td>
+                                        <div class="user-info">
+                                            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a" alt="James Wilson" class="avatar-sm">
+                                            <span>James Wilson</span>
+                                        </div>
+                                    </td>
+                                    <td class="amount">$350.00</td>
+                                    <td>Expert Unavailable</td>
+                                    <td><span class="status-badge pending">Pending</span></td>
+                                    <td>
+                                        <div class="table-actions">
+                                            <button class="btn-icon view-refund" title="View Details" data-id="ref_12345"><i class="fas fa-eye"></i></button>
+                                            <button class="btn-icon approve-refund" title="Approve" data-id="ref_12345"><i class="fas fa-check"></i></button>
+                                            <button class="btn-icon reject-refund" title="Reject" data-id="ref_12345"><i class="fas fa-times"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr class="urgent-row">
+                                    <td>
+                                        <input type="checkbox" class="refund-checkbox" data-id="ref_12346">
+                                    </td>
+                                    <td>ref_12346</td>
+                                    <td>Mar 29, 2023 15:45</td>
+                                    <td>
+                                        <div class="user-info">
+                                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d" alt="Michael Brown" class="avatar-sm">
+                                            <span>Michael Brown</span>
+                                        </div>
+                                    </td>
+                                    <td>Marketing Consultation</td>
+                                    <td>
+                                        <div class="user-info">
+                                            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2" alt="Sarah Johnson" class="avatar-sm">
+                                            <span>Sarah Johnson</span>
+                                        </div>
+                                    </td>
+                                    <td class="amount">$200.00</td>
+                                    <td>Quality Issues</td>
+                                    <td><span class="status-badge pending urgent">Urgent <i class="fas fa-exclamation-circle"></i></span></td>
+                                    <td>
+                                        <div class="table-actions">
+                                            <button class="btn-icon view-refund" title="View Details" data-id="ref_12346"><i class="fas fa-eye"></i></button>
+                                            <button class="btn-icon approve-refund" title="Approve" data-id="ref_12346"><i class="fas fa-check"></i></button>
+                                            <button class="btn-icon reject-refund" title="Reject" data-id="ref_12346"><i class="fas fa-times"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" class="refund-checkbox" data-id="ref_12347">
+                                    </td>
+                                    <td>ref_12347</td>
+                                    <td>Apr 2, 2023 10:15</td>
+                                    <td>
+                                        <div class="user-info">
+                                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e" alt="Robert Chen" class="avatar-sm">
+                                            <span>Robert Chen</span>
+                                        </div>
+                                    </td>
+                                    <td>Financial Planning Session</td>
+                                    <td>
+                                        <div class="user-info">
+                                            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956" alt="Jessica Taylor" class="avatar-sm">
+                                            <span>Jessica Taylor</span>
+                                        </div>
+                                    </td>
+                                    <td class="amount">$425.00</td>
+                                    <td>Not As Described</td>
+                                    <td><span class="status-badge pending">Pending</span></td>
+                                    <td>
+                                        <div class="table-actions">
+                                            <button class="btn-icon view-refund" title="View Details" data-id="ref_12347"><i class="fas fa-eye"></i></button>
+                                            <button class="btn-icon approve-refund" title="Approve" data-id="ref_12347"><i class="fas fa-check"></i></button>
+                                            <button class="btn-icon reject-refund" title="Reject" data-id="ref_12347"><i class="fas fa-times"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr class="urgent-row">
+                                    <td>
+                                        <input type="checkbox" class="refund-checkbox" data-id="ref_12348">
+                                    </td>
+                                    <td>ref_12348</td>
+                                    <td>Mar 28, 2023 09:20</td>
+                                    <td>
+                                        <div class="user-info">
+                                            <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d" alt="David Smith" class="avatar-sm">
+                                            <span>David Smith</span>
+                                        </div>
+                                    </td>
+                                    <td>Legal Consultation</td>
+                                    <td>
+                                        <div class="user-info">
+                                            <img src="https://images.unsplash.com/photo-1629425733761-caae3b5f2e50" alt="Thomas Wright" class="avatar-sm">
+                                            <span>Thomas Wright</span>
+                                        </div>
+                                    </td>
+                                    <td class="amount">$550.00</td>
+                                    <td>Duplicate Payment</td>
+                                    <td><span class="status-badge pending urgent">Urgent <i class="fas fa-exclamation-circle"></i></span></td>
+                                    <td>
+                                        <div class="table-actions">
+                                            <button class="btn-icon view-refund" title="View Details" data-id="ref_12348"><i class="fas fa-eye"></i></button>
+                                            <button class="btn-icon approve-refund" title="Approve" data-id="ref_12348"><i class="fas fa-check"></i></button>
+                                            <button class="btn-icon reject-refund" title="Reject" data-id="ref_12348"><i class="fas fa-times"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="pagination">
+                        <button class="pagination-btn" disabled><i class="fas fa-chevron-left"></i></button>
+                        <button class="pagination-btn active">1</button>
+                        <button class="pagination-btn">2</button>
+                        <button class="pagination-btn">3</button>
+                        <span class="pagination-ellipsis">...</span>
+                        <button class="pagination-btn">10</button>
+                        <button class="pagination-btn"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+
+                <!-- Refund Policy Management -->
+                <div class="dashboard-section">
+                    <div class="section-header">
+                        <h2>Refund Policy Management</h2>
+                        <div class="section-actions">
+                            <button id="edit-policy-btn" class="btn btn-secondary">
+                                <i class="fas fa-edit"></i> Edit Policy
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="policy-container">
+                        <div class="policy-card">
+                            <div class="policy-header">
+                                <h3>Current Refund Policy</h3>
+                                <span class="policy-version">Version 2.3 - Updated March 15, 2023</span>
+                            </div>
+                            <div class="policy-content">
+                                <div class="policy-item">
+                                    <h4><i class="fas fa-clock"></i> Time Frame</h4>
+                                    <p>Clients may request a refund within <strong>14 days</strong> of the service completion date.</p>
+                                </div>
+                                <div class="policy-item">
+                                    <h4><i class="fas fa-percent"></i> Refund Amount</h4>
+                                    <p>Full refunds (100%) are provided for service quality issues or expert unavailability.</p>
+                                    <p>Partial refunds (50-80%) are provided for services partially completed or with minor issues.</p>
+                                    <p>Cancellation refunds vary based on notice provided (100% if >24h, 50% if <24h).</p>
+                                </div>
+                                <div class="policy-item">
+                                    <h4><i class="fas fa-file-alt"></i> Documentation</h4>
+                                    <p>Clients may be required to provide documentation or evidence supporting their refund request in cases where there is a dispute.</p>
+                                </div>
+                                <div class="policy-item">
+                                    <h4><i class="fas fa-credit-card"></i> Refund Method</h4>
+                                    <p>Refunds are processed to the original payment method when possible. Platform credits may be offered as an alternative.</p>
+                                </div>
+                                <div class="policy-item">
+                                    <h4><i class="fas fa-business-time"></i> Processing Time</h4>
+                                    <p>Refund requests are processed within <strong>3 business days</strong> of approval.</p>
+                                    <p>Funds may take an additional 5-10 business days to appear in the client's account, depending on their payment provider.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Refund Details Modal -->
+            <div id="refund-detail-modal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>Refund Request Details</h2>
+                        <button class="modal-close">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="refund-detail-container">
+                            <!-- Content will be populated dynamically -->
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-outline" id="close-refund-modal-btn">Close</button>
+                        <button class="btn btn-danger" id="reject-refund-btn">Reject Request</button>
+                        <button class="btn btn-success" id="approve-refund-btn">Approve Refund</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Refund Policy Edit Modal -->
+            <div id="policy-edit-modal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>Edit Refund Policy</h2>
+                        <button class="modal-close">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="policy-version">Version</label>
+                            <input type="text" id="policy-version" class="form-control" value="2.4">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="refund-timeframe">Refund Time Frame (Days)</label>
+                            <input type="number" id="refund-timeframe" class="form-control" value="14">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Refund Percentages</label>
+                            <div class="percentage-inputs">
+                                <div class="input-group">
+                                    <label for="quality-issues-percent">Quality Issues</label>
+                                    <div class="input-with-suffix">
+                                        <input type="number" id="quality-issues-percent" class="form-control" value="100">
+                                        <span class="input-suffix">%</span>
+                                    </div>
+                                </div>
+                                <div class="input-group">
+                                    <label for="expert-unavailable-percent">Expert Unavailable</label>
+                                    <div class="input-with-suffix">
+                                        <input type="number" id="expert-unavailable-percent" class="form-control" value="100">
+                                        <span class="input-suffix">%</span>
+                                    </div>
+                                </div>
+                                <div class="input-group">
+                                    <label for="partial-completion-percent">Partial Completion</label>
+                                    <div class="input-with-suffix">
+                                        <input type="number" id="partial-completion-percent" class="form-control" value="50">
+                                        <span class="input-suffix">%</span>
+                                    </div>
+                                </div>
+                                <div class="input-group">
+                                    <label for="cancel-24h-percent">Cancellation (>24h)</label>
+                                    <div class="input-with-suffix">
+                                        <input type="number" id="cancel-24h-percent" class="form-control" value="100">
+                                        <span class="input-suffix">%</span>
+                                    </div>
+                                </div>
+                                <div class="input-group">
+                                    <label for="cancel-less-24h-percent">Cancellation (<24h)</label>
+                                    <div class="input-with-suffix">
+                                        <input type="number" id="cancel-less-24h-percent" class="form-control" value="50">
+                                        <span class="input-suffix">%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="processing-time">Processing Time (Business Days)</label>
+                            <input type="number" id="processing-time" class="form-control" value="3">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="policy-notes">Additional Notes</label>
+                            <textarea id="policy-notes" class="form-control" rows="4">Refunds are processed to the original payment method when possible. Platform credits may be offered as an alternative. Funds may take an additional 5-10 business days to appear in the client's account, depending on their payment provider.</textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-outline" id="cancel-policy-btn">Cancel</button>
+                        <button class="btn btn-primary" id="save-policy-btn">Save Policy</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Include the notification services -->
+    <script type="module" src="services/admin-notification-service.js"></script>
+    <script type="module" src="services/admin-notification-handler.js"></script>
+
+    <!-- Include the admin refunds script -->
+    <script type="module" src="admin-refunds.js"></script>
+</body>
+</html>

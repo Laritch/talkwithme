@@ -1,0 +1,272 @@
+/* Admin Analytics Dashboard Styles */
+
+/* Inherit core admin styles */
+@import url('admin-message-monitoring.css');
+
+/* Date Range Filter */
+.date-range-filter {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.date-range-filter h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0;
+    color: #1a202c;
+}
+
+.date-picker {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.date-picker label {
+    font-weight: 500;
+    color: #4a5568;
+}
+
+.date-input {
+    padding: 0.5rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 5px;
+    font-size: 0.875rem;
+}
+
+.custom-date-range {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.custom-date-range span {
+    color: #4a5568;
+}
+
+/* Analytics Cards */
+.analytics-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 48%), 1fr));
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.analytics-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.analytics-card.full-width {
+    grid-column: 1 / -1;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.card-header h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0;
+    color: #1a202c;
+}
+
+.card-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.card-body {
+    padding: 1.5rem;
+    position: relative;
+}
+
+/* Chart containers */
+canvas {
+    width: 100% !important;
+    height: 300px !important;
+    max-height: 300px;
+}
+
+/* Stats Overview enhancements */
+.stats-overview {
+    margin-bottom: 1.5rem;
+}
+
+.stat-icon.warning {
+    background-color: rgba(237, 137, 54, 0.1);
+}
+
+.stat-icon.warning i {
+    color: #ed8936;
+}
+
+.stat-icon.success {
+    background-color: rgba(72, 187, 120, 0.1);
+}
+
+.stat-icon.success i {
+    color: #48bb78;
+}
+
+.stat-icon.info {
+    background-color: rgba(56, 178, 172, 0.1);
+}
+
+.stat-icon.info i {
+    color: #38b2ac;
+}
+
+/* Analytics Table */
+.analytics-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.analytics-table th,
+.analytics-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.analytics-table th {
+    font-weight: 600;
+    color: #4a5568;
+    background-color: #f8fafc;
+    font-size: 0.875rem;
+}
+
+.analytics-table td {
+    vertical-align: middle;
+    font-size: 0.875rem;
+}
+
+.analytics-table tr:hover {
+    background-color: #f8fafc;
+}
+
+.status-badge.warning {
+    background-color: #fef3c7;
+    color: #d97706;
+}
+
+.status-badge.danger {
+    background-color: #fee2e2;
+    color: #dc2626;
+}
+
+/* Report Metrics */
+.report-metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.metric-item {
+    text-align: center;
+    padding: 1.25rem;
+    background-color: #f8fafc;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+}
+
+.metric-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1a202c;
+    margin-bottom: 0.5rem;
+}
+
+.metric-label {
+    font-size: 0.875rem;
+    color: #64748b;
+}
+
+/* Report Charts */
+.report-charts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.report-chart-container {
+    background-color: #f8fafc;
+    padding: 1.25rem;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+}
+
+.report-chart-container h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1a202c;
+    margin: 0 0 1rem 0;
+    text-align: center;
+}
+
+/* Responsive fixes */
+@media (max-width: 1200px) {
+    .analytics-row {
+        grid-template-columns: 1fr;
+    }
+
+    .report-charts {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .date-range-filter {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .filter-controls {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .date-picker {
+        width: 100%;
+    }
+
+    .date-picker select {
+        width: 100%;
+    }
+
+    .custom-date-range {
+        width: 100%;
+        flex-wrap: wrap;
+    }
+
+    .custom-date-range input {
+        flex: 1;
+    }
+
+    .report-metrics {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .report-metrics {
+        grid-template-columns: 1fr;
+    }
+}

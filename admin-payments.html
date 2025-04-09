@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Management | Admin Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="admin-dashboard.css">
+    <link rel="stylesheet" href="admin-payments.css">
+    <link rel="stylesheet" href="admin-notification.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
+    <!-- Date Range Picker -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Admin Sidebar -->
+        <aside class="admin-sidebar">
+            <div class="admin-brand">
+                <img src="/uploads/default-avatar.png" alt="Logo" class="admin-logo">
+                <div class="admin-logo-text">
+                    <h1>Expert Marketplace</h1>
+                    <p>Admin Panel</p>
+                </div>
+            </div>
+
+            <nav class="admin-nav">
+                <ul>
+                    <li><a href="admin-dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+
+                    <!-- User Management -->
+                    <li class="nav-section-title">User Management</li>
+                    <li><a href="admin-experts.html"><i class="fas fa-user-tie"></i> Experts</a></li>
+                    <li><a href="admin-clients.html"><i class="fas fa-users"></i> Clients</a></li>
+                    <li><a href="admin-user-management.html"><i class="fas fa-user-cog"></i> User Controls</a></li>
+                    <li><a href="admin-role-management.html"><i class="fas fa-user-shield"></i> Roles & Permissions</a></li>
+
+                    <!-- Content & Bookings -->
+                    <li class="nav-section-title">Content & Bookings</li>
+                    <li><a href="admin-bookings.html"><i class="fas fa-calendar-check"></i> Bookings</a></li>
+                    <li><a href="admin-case-studies.html"><i class="fas fa-file-alt"></i> Case Studies</a></li>
+                    <li><a href="admin-content-moderation.html"><i class="fas fa-shield-alt"></i> Content Moderation</a></li>
+                    <li><a href="admin-appeals-management.html"><i class="fas fa-gavel"></i> Appeals</a></li>
+
+                    <!-- Communication -->
+                    <li class="nav-section-title">Communication</li>
+                    <li><a href="admin-message-monitoring.html"><i class="fas fa-comments"></i> Messages</a></li>
+                    <li><a href="admin-support-tickets.html"><i class="fas fa-headset"></i> Support Tickets</a></li>
+                    <li><a href="admin-knowledge-base.html"><i class="fas fa-book"></i> Knowledge Base</a></li>
+
+                    <!-- Finance -->
+                    <li class="nav-section-title">Finance</li>
+                    <li><a href="admin-payments.html" class="active"><i class="fas fa-credit-card"></i> Payments</a></li>
+                    <li><a href="admin-refunds.html"><i class="fas fa-undo"></i> Refunds</a></li>
+                    <li><a href="admin-payouts.html"><i class="fas fa-money-bill-wave"></i> Payouts</a></li>
+                    <li><a href="admin-tax-management.html"><i class="fas fa-file-invoice-dollar"></i> Tax Documents</a></li>
+
+                    <!-- Analytics & Marketing -->
+                    <li class="nav-section-title">Analytics & Marketing</li>
+                    <li><a href="admin-analytics-dashboard.html"><i class="fas fa-chart-line"></i> Analytics</a></li>
+                    <li><a href="admin-reports.html"><i class="fas fa-chart-bar"></i> Reports</a></li>
+                    <li><a href="admin-email-campaigns.html"><i class="fas fa-envelope"></i> Email Campaigns</a></li>
+                    <li><a href="admin-promotions.html"><i class="fas fa-tags"></i> Promotions</a></li>
+                    <li><a href="admin-seo.html"><i class="fas fa-search"></i> SEO Management</a></li>
+
+                    <!-- System -->
+                    <li class="nav-section-title">System</li>
+                    <li><a href="admin-settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+                    <li><a href="admin-feature-toggles.html"><i class="fas fa-toggle-on"></i> Feature Toggles</a></li>
+                    <li><a href="admin-api-management.html"><i class="fas fa-plug"></i> API & Integrations</a></li>
+                    <li><a href="admin-system-health.html"><i class="fas fa-heartbeat"></i> System Health</a></li>
+                    <li><a href="admin-security.html"><i class="fas fa-lock"></i> Security & Compliance</a></li>
+
+                    <li class="separator"></li>
+                    <li><a href="index.html"><i class="fas fa-sign-out-alt"></i> Exit Admin</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <!-- Header -->
+            <header class="admin-header">
+                <div class="admin-header-content">
+                    <h1>Payment Management</h1>
+                    <div class="admin-user">
+                        <!-- Notification Bell -->
+                        <div class="notification-bell-container">
+                            <div id="notification-bell" class="notification-bell">
+                                <i class="fas fa-bell"></i>
+                                <span id="notification-counter" class="notification-counter">0</span>
+                            </div>
+
+                            <!-- Notification Panel -->
+                            <div id="notification-panel" class="notification-panel">
+                                <div class="notification-panel-header">
+                                    <h3>Notifications</h3>
+                                    <button id="settings-btn" class="btn-icon" title="Notification Settings">
+                                        <i class="fas fa-cog"></i>
+                                    </button>
+                                </div>
+                                <div id="notification-list" class="notification-list">
+                                    <!-- Notifications will be populated here by JS -->
+                                    <div class="empty-notifications">
+                                        <i class="fas fa-check-circle"></i>
+                                        <p>No new notifications</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <span>Admin User</span>
+                        <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde" alt="Admin" class="admin-avatar">
+                    </div>
+                </div>
+            </header>
+
+            <!-- Page Content -->
+            <div class="admin-content">
+                <!-- Financial Overview -->
+                <div class="dashboard-section">
+                    <h2>Financial Overview</h2>
+                    <div class="stat-cards">
+                        <div class="stat-card">
+                            <div class="stat-icon bg-success">
+                                <i class="fas fa-dollar-sign"></i>
+                            </div>
+                            <div class="stat-details">
+                                <p class="stat-label">Total Revenue (MTD)</p>
+                                <p class="stat-value" id="totalRevenue">$128,450</p>
+                                <p class="stat-change positive"><i class="fas fa-arrow-up"></i> 8.3% vs last month</p>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon bg-primary">
+                                <i class="fas fa-credit-card"></i>
+                            </div>
+                            <div class="stat-details">
+                                <p class="stat-label">Transactions (MTD)</p>
+                                <p class="stat-value" id="totalTransactions">1,245</p>
+                                <p class="stat-change positive"><i class="fas fa-arrow-up"></i> 5.2% vs last month</p>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon bg-warning">
+                                <i class="fas fa-undo"></i>
+                            </div>
+                            <div class="stat-details">
+                                <p class="stat-label">Refunds (MTD)</p>
+                                <p class="stat-value" id="totalRefunds">$2,340</p>
+                                <p class="stat-change negative"><i class="fas fa-arrow-up"></i> 1.3% vs last month</p>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon bg-info">
+                                <i class="fas fa-money-bill-wave"></i>
+                            </div>
+                            <div class="stat-details">
+                                <p class="stat-label">Pending Payouts</p>
+                                <p class="stat-value" id="pendingPayouts">$43,210</p>
+                                <p class="stat-change"><i class="fas fa-arrow-up"></i> 7.8% vs last month</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Financial Charts -->
+                <div class="dashboard-section">
+                    <div class="dashboard-grid">
+                        <!-- Revenue Trends -->
+                        <div class="dashboard-chart-card span-2">
+                            <div class="card-header">
+                                <h3>Revenue Trends</h3>
+                                <div class="card-actions">
+                                    <select id="revenuePeriodSelect" class="select-control">
+                                        <option value="daily">Daily</option>
+                                        <option value="weekly">Weekly</option>
+                                        <option value="monthly" selected>Monthly</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-container">
+                                    <canvas id="revenueChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Payment Methods -->
+                        <div class="dashboard-chart-card">
+                            <div class="card-header">
+                                <h3>Payment Methods</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-container">
+                                    <canvas id="paymentMethodsChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Refund Reasons -->
+                        <div class="dashboard-chart-card">
+                            <div class="card-header">
+                                <h3>Refund Reasons</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-container">
+                                    <canvas id="refundReasonsChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Transaction Management -->
+                <div class="dashboard-section">
+                    <div class="section-header">
+                        <h2>Transaction Management</h2>
+                        <div class="section-actions">
+                            <div class="date-range-container">
+                                <input type="text" id="transaction-date-range" placeholder="Select date range" class="date-range-input">
+                            </div>
+                            <button id="export-transactions-btn" class="btn btn-secondary">
+                                <i class="fas fa-file-export"></i> Export
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Transaction Filters -->
+                    <div class="filter-container">
+                        <div class="filter-row">
+                            <div class="filter-group">
+                                <label for="transaction-type">Transaction Type</label>
+                                <select id="transaction-type" class="select-control">
+                                    <option value="all">All Types</option>
+                                    <option value="payment">Payments</option>
+                                    <option value="refund">Refunds</option>
+                                    <option value="payout">Payouts</option>
+                                </select>
+                            </div>
+
+                            <div class="filter-group">
+                                <label for="transaction-status">Status</label>
+                                <select id="transaction-status" class="select-control">
+                                    <option value="all">All Status</option>
+                                    <option value="completed">Completed</option>
+                                    <option value="pending">Pending</option>
+                                    <option value="failed">Failed</option>
+                                    <option value="disputed">Disputed</option>
+                                </select>
+                            </div>
+
+                            <div class="filter-group">
+                                <label for="transaction-amount">Amount Range</label>
+                                <div class="amount-range">
+                                    <input type="number" id="min-amount" placeholder="Min" class="amount-input">
+                                    <span class="amount-separator">to</span>
+                                    <input type="number" id="max-amount" placeholder="Max" class="amount-input">
+                                </div>
+                            </div>
+
+                            <div class="filter-group">
+                                <label for="transaction-search">Search</label>
+                                <div class="search-input">
+                                    <input type="text" id="transaction-search" placeholder="Search by ID, user, or reference...">
+                                    <button id="search-btn" class="btn btn-icon">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="filter-actions">
+                            <button id="apply-filters" class="btn btn-primary">Apply Filters</button>
+                            <button id="reset-filters" class="btn btn-outline">Reset</button>
+                        </div>
+                    </div>
+
+                    <!-- Transactions Table -->
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <input type="checkbox" id="select-all-transactions">
+                                    </th>
+                                    <th>Transaction ID</th>
+                                    <th>Date & Time</th>
+                                    <th>Type</th>
+                                    <th>User</th>
+                                    <th>Description</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="transactions-table-body">
+                                <!-- Sample transaction rows -->
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" class="transaction-checkbox" data-id="txn_12345">
+                                    </td>
+                                    <td>txn_12345</td>
+                                    <td>Apr 2, 2023 14:30</td>
+                                    <td><span class="badge payment">Payment</span></td>
+                                    <td>
+                                        <div class="user-info">
+                                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330" alt="Emily Davis" class="avatar-sm">
+                                            <span>Emily Davis</span>
+                                        </div>
+                                    </td>
+                                    <td>Business Strategy Consultation</td>
+                                    <td class="amount positive">$350.00</td>
+                                    <td><span class="status-badge completed">Completed</span></td>
+                                    <td>
+                                        <div class="table-actions">
+                                            <button class="btn-icon" title="View Details"><i class="fas fa-eye"></i></button>
+                                            <button class="btn-icon" title="Download Receipt"><i class="fas fa-file-download"></i></button>
+                                            <div class="action-dropdown">
+                                                <button class="btn-icon" title="More Actions"><i class="fas fa-ellipsis-v"></i></button>
+                                                <div class="dropdown-menu">
+                                                    <a href="#" class="dropdown-item">Issue Refund</a>
+                                                    <a href="#" class="dropdown-item">Mark as Disputed</a>
+                                                    <a href="#" class="dropdown-item">Contact Customer</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" class="transaction-checkbox" data-id="txn_12346">
+                                    </td>
+                                    <td>txn_12346</td>
+                                    <td>Apr 2, 2023 15:45</td>
+                                    <td><span class="badge refund">Refund</span></td>
+                                    <td>
+                                        <div class="user-info">
+                                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d" alt="Michael Brown" class="avatar-sm">
+                                            <span>Michael Brown</span>
+                                        </div>
+                                    </td>
+                                    <td>Refund: Marketing Consultation</td>
+                                    <td class="amount negative">-$200.00</td>
+                                    <td><span class="status-badge completed">Completed</span></td>
+                                    <td>
+                                        <div class="table-actions">
+                                            <button class="btn-icon" title="View Details"><i class="fas fa-eye"></i></button>
+                                            <button class="btn-icon" title="Download Receipt"><i class="fas fa-file-download"></i></button>
+                                            <div class="action-dropdown">
+                                                <button class="btn-icon" title="More Actions"><i class="fas fa-ellipsis-v"></i></button>
+                                                <div class="dropdown-menu">
+                                                    <a href="#" class="dropdown-item">View Original Payment</a>
+                                                    <a href="#" class="dropdown-item">Contact Customer</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" class="transaction-checkbox" data-id="txn_12347">
+                                    </td>
+                                    <td>txn_12347</td>
+                                    <td>Apr 3, 2023 09:15</td>
+                                    <td><span class="badge payout">Payout</span></td>
+                                    <td>
+                                        <div class="user-info">
+                                            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a" alt="James Wilson" class="avatar-sm">
+                                            <span>James Wilson</span>
+                                        </div>
+                                    </td>
+                                    <td>Expert Payout - March 2023</td>
+                                    <td class="amount negative">-$1,250.00</td>
+                                    <td><span class="status-badge pending">Pending</span></td>
+                                    <td>
+                                        <div class="table-actions">
+                                            <button class="btn-icon" title="View Details"><i class="fas fa-eye"></i></button>
+                                            <div class="action-dropdown">
+                                                <button class="btn-icon" title="More Actions"><i class="fas fa-ellipsis-v"></i></button>
+                                                <div class="dropdown-menu">
+                                                    <a href="#" class="dropdown-item">Process Now</a>
+                                                    <a href="#" class="dropdown-item">Cancel Payout</a>
+                                                    <a href="#" class="dropdown-item">Contact Expert</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" class="transaction-checkbox" data-id="txn_12348">
+                                    </td>
+                                    <td>txn_12348</td>
+                                    <td>Apr 3, 2023 10:22</td>
+                                    <td><span class="badge payment">Payment</span></td>
+                                    <td>
+                                        <div class="user-info">
+                                            <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d" alt="Robert Chen" class="avatar-sm">
+                                            <span>Robert Chen</span>
+                                        </div>
+                                    </td>
+                                    <td>Financial Planning Session</td>
+                                    <td class="amount positive">$425.00</td>
+                                    <td><span class="status-badge failed">Failed</span></td>
+                                    <td>
+                                        <div class="table-actions">
+                                            <button class="btn-icon" title="View Details"><i class="fas fa-eye"></i></button>
+                                            <div class="action-dropdown">
+                                                <button class="btn-icon" title="More Actions"><i class="fas fa-ellipsis-v"></i></button>
+                                                <div class="dropdown-menu">
+                                                    <a href="#" class="dropdown-item">Retry Payment</a>
+                                                    <a href="#" class="dropdown-item">Contact Customer</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="pagination">
+                        <button class="pagination-btn" disabled><i class="fas fa-chevron-left"></i></button>
+                        <button class="pagination-btn active">1</button>
+                        <button class="pagination-btn">2</button>
+                        <button class="pagination-btn">3</button>
+                        <span class="pagination-ellipsis">...</span>
+                        <button class="pagination-btn">12</button>
+                        <button class="pagination-btn"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+
+                <!-- Payment Gateway Status -->
+                <div class="dashboard-section">
+                    <div class="section-header">
+                        <h2>Payment Gateway Status</h2>
+                        <div class="section-actions">
+                            <button id="refresh-status-btn" class="btn btn-outline">
+                                <i class="fas fa-sync-alt"></i> Refresh Status
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="gateway-status-grid">
+                        <div class="gateway-card">
+                            <div class="gateway-header">
+                                <div class="gateway-icon">
+                                    <i class="fab fa-stripe"></i>
+                                </div>
+                                <div class="gateway-name">
+                                    <h3>Stripe</h3>
+                                    <span class="status-indicator operational">Operational</span>
+                                </div>
+                            </div>
+                            <div class="gateway-stats">
+                                <div class="gateway-stat">
+                                    <span class="stat-label">Success Rate</span>
+                                    <span class="stat-value">99.8%</span>
+                                </div>
+                                <div class="gateway-stat">
+                                    <span class="stat-label">Avg. Response</span>
+                                    <span class="stat-value">230ms</span>
+                                </div>
+                                <div class="gateway-stat">
+                                    <span class="stat-label">Volume (24h)</span>
+                                    <span class="stat-value">$12,450</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="gateway-card">
+                            <div class="gateway-header">
+                                <div class="gateway-icon">
+                                    <i class="fab fa-paypal"></i>
+                                </div>
+                                <div class="gateway-name">
+                                    <h3>PayPal</h3>
+                                    <span class="status-indicator operational">Operational</span>
+                                </div>
+                            </div>
+                            <div class="gateway-stats">
+                                <div class="gateway-stat">
+                                    <span class="stat-label">Success Rate</span>
+                                    <span class="stat-value">99.2%</span>
+                                </div>
+                                <div class="gateway-stat">
+                                    <span class="stat-label">Avg. Response</span>
+                                    <span class="stat-value">350ms</span>
+                                </div>
+                                <div class="gateway-stat">
+                                    <span class="stat-label">Volume (24h)</span>
+                                    <span class="stat-value">$8,320</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="gateway-card">
+                            <div class="gateway-header">
+                                <div class="gateway-icon">
+                                    <i class="fas fa-credit-card"></i>
+                                </div>
+                                <div class="gateway-name">
+                                    <h3>Square</h3>
+                                    <span class="status-indicator partial">Partial Outage</span>
+                                </div>
+                            </div>
+                            <div class="gateway-stats">
+                                <div class="gateway-stat">
+                                    <span class="stat-label">Success Rate</span>
+                                    <span class="stat-value">85.4%</span>
+                                </div>
+                                <div class="gateway-stat">
+                                    <span class="stat-label">Avg. Response</span>
+                                    <span class="stat-value">620ms</span>
+                                </div>
+                                <div class="gateway-stat">
+                                    <span class="stat-label">Volume (24h)</span>
+                                    <span class="stat-value">$3,150</span>
+                                </div>
+                            </div>
+                            <div class="gateway-alert">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                <span>API latency issues detected. Investigating.</span>
+                            </div>
+                        </div>
+
+                        <div class="gateway-card">
+                            <div class="gateway-header">
+                                <div class="gateway-icon">
+                                    <i class="fas fa-money-check-alt"></i>
+                                </div>
+                                <div class="gateway-name">
+                                    <h3>ACH Direct</h3>
+                                    <span class="status-indicator operational">Operational</span>
+                                </div>
+                            </div>
+                            <div class="gateway-stats">
+                                <div class="gateway-stat">
+                                    <span class="stat-label">Success Rate</span>
+                                    <span class="stat-value">98.7%</span>
+                                </div>
+                                <div class="gateway-stat">
+                                    <span class="stat-label">Avg. Response</span>
+                                    <span class="stat-value">180ms</span>
+                                </div>
+                                <div class="gateway-stat">
+                                    <span class="stat-label">Volume (24h)</span>
+                                    <span class="stat-value">$4,210</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Transaction Detail Modal -->
+    <div id="transaction-detail-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Transaction Details</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="transaction-detail-container">
+                    <!-- Content will be populated dynamically -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" id="close-modal-btn">Close</button>
+                <button class="btn btn-primary" id="transaction-action-btn">Process Refund</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include the notification services -->
+    <script type="module" src="services/admin-notification-service.js"></script>
+    <script type="module" src="services/admin-notification-handler.js"></script>
+
+    <!-- Include the admin payments script -->
+    <script type="module" src="admin-payments.js"></script>
+</body>
+</html>

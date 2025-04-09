@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audio Call - Service Marketplace</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #2c3e50;
+            color: white;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .call-container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            position: relative;
+        }
+
+        .call-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background-color: rgba(0, 0, 0, 0.2);
+            z-index: 10;
+        }
+
+        .call-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .call-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .call-name {
+            font-weight: 600;
+            font-size: 18px;
+        }
+
+        .call-duration {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .call-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .audio-call-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .avatar-container {
+            position: relative;
+            margin-bottom: 40px;
+        }
+
+        .large-avatar {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .status-badge {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #2ecc71;
+            border: 3px solid #2c3e50;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .status-badge i {
+            font-size: 14px;
+        }
+
+        .caller-name {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .call-status-text {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 40px;
+        }
+
+        .audio-visualizer {
+            width: 300px;
+            height: 60px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            overflow: hidden;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .audio-wave {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            padding: 0 20px;
+        }
+
+        .wave-bar {
+            background-color: #3498db;
+            width: 4px;
+            height: 10px;
+            margin: 0 2px;
+            border-radius: 2px;
+            animation: wave 1.5s infinite ease-in-out;
+        }
+
+        @keyframes wave {
+            0%, 100% {
+                height: 10px;
+            }
+            50% {
+                height: 40px;
+            }
+        }
+
+        .call-controls {
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            background-color: rgba(0, 0, 0, 0.2);
+            z-index: 5;
+        }
+
+        .control-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .control-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .control-btn.muted {
+            background-color: #e74c3c;
+        }
+
+        .control-btn.active {
+            background-color: #2ecc71;
+        }
+
+        .end-call-btn {
+            background-color: #e74c3c;
+            width: 60px;
+            height: 60px;
+        }
+
+        .end-call-btn:hover {
+            background-color: #c0392b;
+        }
+
+        .end-call-btn i {
+            font-size: 24px;
+        }
+
+        .call-status {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-size: 18px;
+            display: none;
+        }
+
+        .status-connecting {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .connecting-animation {
+            display: flex;
+        }
+
+        .connecting-dot {
+            height: 8px;
+            width: 8px;
+            background-color: white;
+            border-radius: 50%;
+            margin: 0 2px;
+            animation: connecting 1.5s infinite ease-in-out;
+        }
+
+        .connecting-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .connecting-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes connecting {
+            0%, 60%, 100% {
+                transform: translateY(0);
+            }
+            30% {
+                transform: translateY(-7px);
+            }
+        }
+
+        .incoming-call {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: white;
+            border-radius: 10px;
+            width: 300px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            display: none;
+        }
+
+        .incoming-call-header {
+            background-color: #3498db;
+            color: white;
+            padding: 15px;
+            border-radius: 10px 10px 0 0;
+            font-weight: 600;
+        }
+
+        .incoming-call-body {
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .caller-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .caller-info {
+            flex: 1;
+        }
+
+        .caller-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .caller-type {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .incoming-call-actions {
+            display: flex;
+            padding: 0 15px 15px;
+            gap: 10px;
+        }
+
+        .incoming-call-actions button {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .accept-btn {
+            background-color: #2ecc71;
+            color: white;
+        }
+
+        .accept-btn:hover {
+            background-color: #27ae60;
+        }
+
+        .decline-btn {
+            background-color: #e74c3c;
+            color: white;
+        }
+
+        .decline-btn:hover {
+            background-color: #c0392b;
+        }
+
+        @media (max-width: 768px) {
+            .large-avatar {
+                width: 150px;
+                height: 150px;
+            }
+
+            .audio-visualizer {
+                width: 240px;
+            }
+
+            .call-controls {
+                gap: 10px;
+            }
+
+            .control-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+
+            .end-call-btn {
+                width: 50px;
+                height: 50px;
+            }
+
+            .end-call-btn i {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Audio Call Interface -->
+    <div class="call-container">
+        <!-- Call Header -->
+        <div class="call-header">
+            <div class="call-info">
+                <img src="/uploads/default-avatar.png" alt="Participant" class="call-avatar" id="remote-avatar">
+                <div>
+                    <div class="call-name" id="remote-name">Dr. Jessica Chen</div>
+                    <div class="call-duration" id="call-duration">00:00</div>
+                </div>
+            </div>
+            <div class="call-actions">
+                <button class="control-btn" id="toggle-speaker" title="Toggle Speaker">
+                    <i class="fas fa-volume-up"></i>
+                </button>
+                <button class="control-btn" id="toggle-fullscreen" title="Toggle Fullscreen">
+                    <i class="fas fa-expand"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Call Status Indicator -->
+        <div class="call-status" id="call-status">
+            <div class="status-connecting">
+                <span>Connecting</span>
+                <div class="connecting-animation">
+                    <span class="connecting-dot"></span>
+                    <span class="connecting-dot"></span>
+                    <span class="connecting-dot"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Audio Call Main Content -->
+        <div class="audio-call-content">
+            <div class="avatar-container">
+                <img src="/uploads/default-avatar.png" alt="Dr. Jessica Chen" class="large-avatar" id="large-avatar">
+                <div class="status-badge">
+                    <i class="fas fa-microphone"></i>
+                </div>
+            </div>
+
+            <h2 class="caller-name" id="caller-name-display">Dr. Jessica Chen</h2>
+            <div class="call-status-text" id="call-status-text">In call</div>
+
+            <!-- Audio Visualizer -->
+            <div class="audio-visualizer">
+                <div class="audio-wave" id="audio-wave">
+                    <!-- These bars will be animated to simulate audio levels -->
+                    <div class="wave-bar" style="animation-delay: 0.0s;"></div>
+                    <div class="wave-bar" style="animation-delay: 0.1s;"></div>
+                    <div class="wave-bar" style="animation-delay: 0.2s;"></div>
+                    <div class="wave-bar" style="animation-delay: 0.3s;"></div>
+                    <div class="wave-bar" style="animation-delay: 0.4s;"></div>
+                    <div class="wave-bar" style="animation-delay: 0.3s;"></div>
+                    <div class="wave-bar" style="animation-delay: 0.2s;"></div>
+                    <div class="wave-bar" style="animation-delay: 0.1s;"></div>
+                    <div class="wave-bar" style="animation-delay: 0.0s;"></div>
+                    <div class="wave-bar" style="animation-delay: 0.1s;"></div>
+                    <div class="wave-bar" style="animation-delay: 0.2s;"></div>
+                    <div class="wave-bar" style="animation-delay: 0.3s;"></div>
+                    <div class="wave-bar" style="animation-delay: 0.4s;"></div>
+                    <div class="wave-bar" style="animation-delay: 0.3s;"></div>
+                    <div class="wave-bar" style="animation-delay: 0.2s;"></div>
+                    <div class="wave-bar" style="animation-delay: 0.1s;"></div>
+                    <div class="wave-bar" style="animation-delay: 0.0s;"></div>
+                    <div class="wave-bar" style="animation-delay: 0.1s;"></div>
+                    <div class="wave-bar" style="animation-delay: 0.2s;"></div>
+                    <div class="wave-bar" style="animation-delay: 0.3s;"></div>
+                    <div class="wave-bar" style="animation-delay: 0.4s;"></div>
+                    <div class="wave-bar" style="animation-delay: 0.3s;"></div>
+                    <div class="wave-bar" style="animation-delay: 0.2s;"></div>
+                    <div class="wave-bar" style="animation-delay: 0.1s;"></div>
+                    <div class="wave-bar" style="animation-delay: 0.0s;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Call Controls -->
+        <div class="call-controls">
+            <button class="control-btn" id="toggle-mic" title="Toggle Microphone">
+                <i class="fas fa-microphone"></i>
+            </button>
+            <button class="control-btn end-call-btn" id="end-call" title="End Call">
+                <i class="fas fa-phone-slash"></i>
+            </button>
+            <button class="control-btn" id="toggle-record" title="Record Call">
+                <i class="fas fa-record-vinyl"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Incoming Call Notification (initially hidden) -->
+    <div class="incoming-call" id="incoming-call">
+        <div class="incoming-call-header">
+            Incoming Call
+        </div>
+        <div class="incoming-call-body">
+            <img src="/uploads/default-avatar.png" alt="Caller" class="caller-avatar" id="caller-avatar">
+            <div class="caller-info">
+                <div class="caller-name" id="caller-name">Dr. Jessica Chen</div>
+                <div class="caller-type" id="call-type">Audio Call</div>
+            </div>
+        </div>
+        <div class="incoming-call-actions">
+            <button class="decline-btn" id="decline-call">
+                <i class="fas fa-phone-slash"></i> Decline
+            </button>
+            <button class="accept-btn" id="accept-call">
+                <i class="fas fa-phone"></i> Accept
+            </button>
+        </div>
+    </div>
+
+    <!-- Audio Call JavaScript -->
+    <script src="js/audio-call.js"></script>
+</body>
+</html>

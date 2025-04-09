@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management | Admin Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="admin-dashboard.css">
+    <link rel="stylesheet" href="admin-user-management.css">
+    <link rel="stylesheet" href="admin-notification.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Date Range Picker -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Admin Sidebar -->
+        <aside class="admin-sidebar">
+            <div class="admin-brand">
+                <img src="/uploads/default-avatar.png" alt="Logo" class="admin-logo">
+                <div class="admin-logo-text">
+                    <h1>Expert Marketplace</h1>
+                    <p>Admin Panel</p>
+                </div>
+            </div>
+
+            <nav class="admin-nav">
+                <ul>
+                    <li><a href="admin-dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+
+                    <!-- User Management -->
+                    <li class="nav-section-title">User Management</li>
+                    <li><a href="admin-experts.html"><i class="fas fa-user-tie"></i> Experts</a></li>
+                    <li><a href="admin-clients.html"><i class="fas fa-users"></i> Clients</a></li>
+                    <li><a href="admin-user-management.html" class="active"><i class="fas fa-user-cog"></i> User Controls</a></li>
+                    <li><a href="admin-role-management.html"><i class="fas fa-user-shield"></i> Roles & Permissions</a></li>
+
+                    <!-- Content & Bookings -->
+                    <li class="nav-section-title">Content & Bookings</li>
+                    <li><a href="admin-bookings.html"><i class="fas fa-calendar-check"></i> Bookings</a></li>
+                    <li><a href="admin-case-studies.html"><i class="fas fa-file-alt"></i> Case Studies</a></li>
+                    <li><a href="admin-content-moderation.html"><i class="fas fa-shield-alt"></i> Content Moderation</a></li>
+                    <li><a href="admin-appeals-management.html"><i class="fas fa-gavel"></i> Appeals</a></li>
+
+                    <!-- Communication -->
+                    <li class="nav-section-title">Communication</li>
+                    <li><a href="admin-message-monitoring.html"><i class="fas fa-comments"></i> Messages</a></li>
+                    <li><a href="admin-support-tickets.html"><i class="fas fa-headset"></i> Support Tickets</a></li>
+                    <li><a href="admin-knowledge-base.html"><i class="fas fa-book"></i> Knowledge Base</a></li>
+
+                    <!-- Finance -->
+                    <li class="nav-section-title">Finance</li>
+                    <li><a href="admin-payments.html"><i class="fas fa-credit-card"></i> Payments</a></li>
+                    <li><a href="admin-refunds.html"><i class="fas fa-undo"></i> Refunds</a></li>
+                    <li><a href="admin-payouts.html"><i class="fas fa-money-bill-wave"></i> Payouts</a></li>
+                    <li><a href="admin-tax-management.html"><i class="fas fa-file-invoice-dollar"></i> Tax Documents</a></li>
+
+                    <!-- Analytics & Marketing -->
+                    <li class="nav-section-title">Analytics & Marketing</li>
+                    <li><a href="admin-analytics-dashboard.html"><i class="fas fa-chart-line"></i> Analytics</a></li>
+                    <li><a href="admin-reports.html"><i class="fas fa-chart-bar"></i> Reports</a></li>
+                    <li><a href="admin-email-campaigns.html"><i class="fas fa-envelope"></i> Email Campaigns</a></li>
+                    <li><a href="admin-promotions.html"><i class="fas fa-tags"></i> Promotions</a></li>
+                    <li><a href="admin-seo.html"><i class="fas fa-search"></i> SEO Management</a></li>
+
+                    <!-- System -->
+                    <li class="nav-section-title">System</li>
+                    <li><a href="admin-settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+                    <li><a href="admin-feature-toggles.html"><i class="fas fa-toggle-on"></i> Feature Toggles</a></li>
+                    <li><a href="admin-api-management.html"><i class="fas fa-plug"></i> API & Integrations</a></li>
+                    <li><a href="admin-system-health.html"><i class="fas fa-heartbeat"></i> System Health</a></li>
+                    <li><a href="admin-security.html"><i class="fas fa-lock"></i> Security & Compliance</a></li>
+
+                    <li class="separator"></li>
+                    <li><a href="index.html"><i class="fas fa-sign-out-alt"></i> Exit Admin</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <!-- Header -->
+            <header class="admin-header">
+                <div class="admin-header-content">
+                    <h1>User Management</h1>
+                    <div class="admin-user">
+                        <!-- Notification Bell -->
+                        <div class="notification-bell-container">
+                            <div id="notification-bell" class="notification-bell">
+                                <i class="fas fa-bell"></i>
+                                <span id="notification-counter" class="notification-counter">0</span>
+                            </div>
+
+                            <!-- Notification Panel -->
+                            <div id="notification-panel" class="notification-panel">
+                                <div class="notification-panel-header">
+                                    <h3>Notifications</h3>
+                                    <button id="settings-btn" class="btn-icon" title="Notification Settings">
+                                        <i class="fas fa-cog"></i>
+                                    </button>
+                                </div>
+                                <div id="notification-list" class="notification-list">
+                                    <!-- Notifications will be populated here by JS -->
+                                    <div class="empty-notifications">
+                                        <i class="fas fa-check-circle"></i>
+                                        <p>No new notifications</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <span>Admin User</span>
+                        <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde" alt="Admin" class="admin-avatar">
+                    </div>
+                </div>
+            </header>
+
+            <!-- Page Content -->
+            <div class="admin-content">
+                <!-- Advanced User Search & Filters -->
+                <div class="dashboard-section">
+                    <h2>Advanced User Search</h2>
+                    <div class="search-container">
+                        <div class="search-row">
+                            <div class="search-field">
+                                <input type="text" id="search-keyword" placeholder="Search by name, email, or ID">
+                                <button id="search-btn" class="btn btn-primary">
+                                    <i class="fas fa-search"></i> Search
+                                </button>
+                            </div>
+                            <button id="advanced-search-toggle" class="btn btn-outline">
+                                <i class="fas fa-sliders-h"></i> Advanced Filters
+                            </button>
+                        </div>
+
+                        <div id="advanced-filters" class="advanced-filters" style="display: none;">
+                            <div class="filter-grid">
+                                <div class="filter-group">
+                                    <label for="filter-user-type">User Type</label>
+                                    <select id="filter-user-type" class="select-control">
+                                        <option value="all">All Users</option>
+                                        <option value="expert">Experts Only</option>
+                                        <option value="client">Clients Only</option>
+                                        <option value="admin">Admins Only</option>
+                                    </select>
+                                </div>
+
+                                <div class="filter-group">
+                                    <label for="filter-status">Status</label>
+                                    <select id="filter-status" class="select-control">
+                                        <option value="all">All Statuses</option>
+                                        <option value="active">Active</option>
+                                        <option value="pending">Pending Verification</option>
+                                        <option value="suspended">Suspended</option>
+                                        <option value="inactive">Inactive</option>
+                                    </select>
+                                </div>
+
+                                <div class="filter-group">
+                                    <label for="filter-join-date">Join Date</label>
+                                    <input type="text" id="filter-join-date" class="date-range-input" placeholder="Select date range">
+                                </div>
+
+                                <div class="filter-group">
+                                    <label for="filter-category">Expertise Category</label>
+                                    <select id="filter-category" class="select-control">
+                                        <option value="all">All Categories</option>
+                                        <option value="business">Business</option>
+                                        <option value="technology">Technology</option>
+                                        <option value="marketing">Marketing</option>
+                                        <option value="finance">Finance</option>
+                                        <option value="legal">Legal</option>
+                                        <option value="health">Health</option>
+                                    </select>
+                                </div>
+
+                                <div class="filter-group">
+                                    <label for="filter-verification">Verification</label>
+                                    <select id="filter-verification" class="select-control">
+                                        <option value="all">All</option>
+                                        <option value="verified">Verified</option>
+                                        <option value="unverified">Unverified</option>
+                                        <option value="in-progress">In Progress</option>
+                                    </select>
+                                </div>
+
+                                <div class="filter-group">
+                                    <label for="filter-activity">Last Activity</label>
+                                    <select id="filter-activity" class="select-control">
+                                        <option value="all">Any Time</option>
+                                        <option value="day">Last 24 Hours</option>
+                                        <option value="week">Last 7 Days</option>
+                                        <option value="month">Last 30 Days</option>
+                                        <option value="inactive">Inactive (90+ days)</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="filter-actions">
+                                <button id="apply-filters" class="btn btn-primary">Apply Filters</button>
+                                <button id="reset-filters" class="btn btn-outline">Reset</button>
+                                <button id="save-filter" class="btn btn-secondary">
+                                    <i class="fas fa-save"></i> Save Filter
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bulk Actions & User List -->
+                <div class="dashboard-section">
+                    <div class="section-header">
+                        <h2>User Management</h2>
+                        <div class="section-actions">
+                            <span id="selection-counter">0 users selected</span>
+                            <div class="bulk-actions">
+                                <select id="bulk-action" class="select-control">
+                                    <option value="">Bulk Actions</option>
+                                    <option value="verify">Verify Selected</option>
+                                    <option value="suspend">Suspend Selected</option>
+                                    <option value="activate">Activate Selected</option>
+                                    <option value="delete">Delete Selected</option>
+                                    <option value="export">Export Selected</option>
+                                    <option value="message">Message Selected</option>
+                                </select>
+                                <button id="apply-bulk-action" class="btn btn-primary" disabled>Apply</button>
+                            </div>
+                            <button id="add-user-btn" class="btn btn-success">
+                                <i class="fas fa-plus"></i> Add User
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <input type="checkbox" id="select-all-users">
+                                    </th>
+                                    <th>User</th>
+                                    <th>Type</th>
+                                    <th>Join Date</th>
+                                    <th>Status</th>
+                                    <th>Last Activity</th>
+                                    <th>Verification</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="users-table-body">
+                                <!-- Sample data rows - would be populated dynamically -->
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" class="user-select-checkbox" data-user-id="user1">
+                                    </td>
+                                    <td>
+                                        <div class="user-info">
+                                            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a" alt="James Wilson" class="avatar">
+                                            <div>
+                                                <p class="user-name">James Wilson</p>
+                                                <p class="user-email">james.wilson@example.com</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><span class="type-badge expert">Expert</span></td>
+                                    <td>Mar 15, 2023</td>
+                                    <td><span class="status-badge active">Active</span></td>
+                                    <td>10 minutes ago</td>
+                                    <td><span class="verification-badge verified">Verified</span></td>
+                                    <td>
+                                        <div class="table-actions">
+                                            <button class="btn-icon" title="View Profile"><i class="fas fa-eye"></i></button>
+                                            <button class="btn-icon" title="Edit User"><i class="fas fa-edit"></i></button>
+                                            <button class="btn-icon" title="Message"><i class="fas fa-comment"></i></button>
+                                            <div class="action-dropdown">
+                                                <button class="btn-icon" title="More Actions"><i class="fas fa-ellipsis-v"></i></button>
+                                                <div class="dropdown-menu">
+                                                    <a href="#" class="dropdown-item">Login History</a>
+                                                    <a href="#" class="dropdown-item">Activity Log</a>
+                                                    <a href="#" class="dropdown-item">Reset Password</a>
+                                                    <a href="#" class="dropdown-item">Suspend Account</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" class="user-select-checkbox" data-user-id="user2">
+                                    </td>
+                                    <td>
+                                        <div class="user-info">
+                                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330" alt="Emily Davis" class="avatar">
+                                            <div>
+                                                <p class="user-name">Emily Davis</p>
+                                                <p class="user-email">emily.davis@example.com</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><span class="type-badge client">Client</span></td>
+                                    <td>Apr 22, 2023</td>
+                                    <td><span class="status-badge active">Active</span></td>
+                                    <td>1 hour ago</td>
+                                    <td><span class="verification-badge verified">Verified</span></td>
+                                    <td>
+                                        <div class="table-actions">
+                                            <button class="btn-icon" title="View Profile"><i class="fas fa-eye"></i></button>
+                                            <button class="btn-icon" title="Edit User"><i class="fas fa-edit"></i></button>
+                                            <button class="btn-icon" title="Message"><i class="fas fa-comment"></i></button>
+                                            <div class="action-dropdown">
+                                                <button class="btn-icon" title="More Actions"><i class="fas fa-ellipsis-v"></i></button>
+                                                <div class="dropdown-menu">
+                                                    <a href="#" class="dropdown-item">Login History</a>
+                                                    <a href="#" class="dropdown-item">Activity Log</a>
+                                                    <a href="#" class="dropdown-item">Reset Password</a>
+                                                    <a href="#" class="dropdown-item">Suspend Account</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" class="user-select-checkbox" data-user-id="user3">
+                                    </td>
+                                    <td>
+                                        <div class="user-info">
+                                            <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e" alt="Amanda Rodriguez" class="avatar">
+                                            <div>
+                                                <p class="user-name">Amanda Rodriguez</p>
+                                                <p class="user-email">amanda.r@example.com</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><span class="type-badge expert">Expert</span></td>
+                                    <td>Jan 05, 2023</td>
+                                    <td><span class="status-badge pending">Pending</span></td>
+                                    <td>2 days ago</td>
+                                    <td><span class="verification-badge in-progress">In Progress</span></td>
+                                    <td>
+                                        <div class="table-actions">
+                                            <button class="btn-icon" title="View Profile"><i class="fas fa-eye"></i></button>
+                                            <button class="btn-icon" title="Edit User"><i class="fas fa-edit"></i></button>
+                                            <button class="btn-icon" title="Message"><i class="fas fa-comment"></i></button>
+                                            <div class="action-dropdown">
+                                                <button class="btn-icon" title="More Actions"><i class="fas fa-ellipsis-v"></i></button>
+                                                <div class="dropdown-menu">
+                                                    <a href="#" class="dropdown-item">Login History</a>
+                                                    <a href="#" class="dropdown-item">Activity Log</a>
+                                                    <a href="#" class="dropdown-item">Reset Password</a>
+                                                    <a href="#" class="dropdown-item">Complete Verification</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" class="user-select-checkbox" data-user-id="user4">
+                                    </td>
+                                    <td>
+                                        <div class="user-info">
+                                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e" alt="David Wilson" class="avatar">
+                                            <div>
+                                                <p class="user-name">David Wilson</p>
+                                                <p class="user-email">david.wilson@example.com</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><span class="type-badge expert">Expert</span></td>
+                                    <td>Feb 18, 2023</td>
+                                    <td><span class="status-badge suspended">Suspended</span></td>
+                                    <td>30 days ago</td>
+                                    <td><span class="verification-badge verified">Verified</span></td>
+                                    <td>
+                                        <div class="table-actions">
+                                            <button class="btn-icon" title="View Profile"><i class="fas fa-eye"></i></button>
+                                            <button class="btn-icon" title="Edit User"><i class="fas fa-edit"></i></button>
+                                            <button class="btn-icon" title="Message"><i class="fas fa-comment"></i></button>
+                                            <div class="action-dropdown">
+                                                <button class="btn-icon" title="More Actions"><i class="fas fa-ellipsis-v"></i></button>
+                                                <div class="dropdown-menu">
+                                                    <a href="#" class="dropdown-item">Login History</a>
+                                                    <a href="#" class="dropdown-item">Activity Log</a>
+                                                    <a href="#" class="dropdown-item">Reset Password</a>
+                                                    <a href="#" class="dropdown-item">Reactivate Account</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="pagination">
+                        <button class="pagination-btn" disabled><i class="fas fa-chevron-left"></i></button>
+                        <button class="pagination-btn active">1</button>
+                        <button class="pagination-btn">2</button>
+                        <button class="pagination-btn">3</button>
+                        <span class="pagination-ellipsis">...</span>
+                        <button class="pagination-btn">12</button>
+                        <button class="pagination-btn"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+
+                <!-- User Activity & Audit Log -->
+                <div class="dashboard-section">
+                    <div class="section-header">
+                        <h2>User Activity & Audit Log</h2>
+                        <div class="section-actions">
+                            <button class="btn btn-outline">
+                                <i class="fas fa-filter"></i> Filter
+                            </button>
+                            <button class="btn btn-secondary">
+                                <i class="fas fa-download"></i> Export Log
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="audit-log-container">
+                        <div class="audit-log">
+                            <div class="audit-entry">
+                                <div class="audit-timestamp">Today, 10:45 AM</div>
+                                <div class="audit-content">
+                                    <div class="audit-icon admin-action">
+                                        <i class="fas fa-user-shield"></i>
+                                    </div>
+                                    <div class="audit-details">
+                                        <p class="audit-title">Admin User (you) verified expert account</p>
+                                        <p class="audit-description">Completed verification process for <strong>Amanda Rodriguez</strong></p>
+                                        <p class="audit-meta">IP: 192.168.1.1 • Browser: Chrome • OS: Windows</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="audit-entry">
+                                <div class="audit-timestamp">Today, 09:32 AM</div>
+                                <div class="audit-content">
+                                    <div class="audit-icon security-alert">
+                                        <i class="fas fa-exclamation-triangle"></i>
+                                    </div>
+                                    <div class="audit-details">
+                                        <p class="audit-title">Failed login attempt</p>
+                                        <p class="audit-description">Multiple failed login attempts for user <strong>David Wilson</strong></p>
+                                        <p class="audit-meta">IP: 203.0.113.5 • Browser: Firefox • OS: Mac OS</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="audit-entry">
+                                <div class="audit-timestamp">Yesterday, 16:15 PM</div>
+                                <div class="audit-content">
+                                    <div class="audit-icon user-action">
+                                        <i class="fas fa-user-edit"></i>
+                                    </div>
+                                    <div class="audit-details">
+                                        <p class="audit-title">Profile updated</p>
+                                        <p class="audit-description">User <strong>James Wilson</strong> updated their profile information</p>
+                                        <p class="audit-meta">IP: 192.168.1.100 • Browser: Safari • OS: iOS</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="audit-entry">
+                                <div class="audit-timestamp">Yesterday, 14:20 PM</div>
+                                <div class="audit-content">
+                                    <div class="audit-icon system-action">
+                                        <i class="fas fa-cogs"></i>
+                                    </div>
+                                    <div class="audit-details">
+                                        <p class="audit-title">System automatically suspended user</p>
+                                        <p class="audit-description">User <strong>David Wilson</strong> suspended due to repeated terms violations</p>
+                                        <p class="audit-meta">Automated system action • Reference: SYS-20230507-123</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- User Actions Modal -->
+    <div id="user-actions-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>User Actions</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="user-action-form">
+                    <!-- Content will be populated based on selected action -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" id="cancel-action-btn">Cancel</button>
+                <button class="btn btn-primary" id="confirm-action-btn">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include the notification services -->
+    <script type="module" src="services/admin-notification-service.js"></script>
+    <script type="module" src="services/admin-notification-handler.js"></script>
+
+    <!-- Include the admin user management script -->
+    <script type="module" src="admin-user-management.js"></script>
+</body>
+</html>
