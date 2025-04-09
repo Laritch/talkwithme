@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics Dashboard | Expert Marketplace</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="analytics.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar Navigation -->
+        <aside class="dashboard-sidebar">
+            <div class="sidebar-header">
+                <img src="/uploads/default-avatar.png" alt="Logo" class="sidebar-logo">
+                <h2>Expert Dashboard</h2>
+            </div>
+
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="expert-dashboard.html"><i class="fas fa-th-large"></i> Overview</a></li>
+                    <li><a href="expert-profile-edit.html"><i class="fas fa-user-edit"></i> Edit Profile</a></li>
+                    <li><a href="expert-bookings.html"><i class="fas fa-calendar-check"></i> Bookings</a></li>
+                    <li><a href="live-sessions.html"><i class="fas fa-video"></i> Live Sessions</a></li>
+                    <li><a href="expert-posts-manage.html"><i class="fas fa-pen-square"></i> My Posts</a></li>
+                    <li><a href="expert-reviews.html"><i class="fas fa-star"></i> Reviews</a></li>
+                    <li><a href="expert-analytics.html" class="active"><i class="fas fa-chart-line"></i> Analytics</a></li>
+                    <li><a href="expert-badges.html"><i class="fas fa-award"></i> Badges & Trust</a></li>
+                    <li><a href="expert-payments.html"><i class="fas fa-wallet"></i> Payments</a></li>
+                    <li><a href="expert-settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+                </ul>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="logout.html" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <header class="dashboard-header">
+                <div class="header-title">
+                    <h1>Analytics Dashboard</h1>
+                    <p>Track your performance and growth</p>
+                </div>
+
+                <div class="header-actions">
+                    <div class="notification-bell">
+                        <i class="far fa-bell"></i>
+                        <span class="notification-badge">3</span>
+                    </div>
+                    <div class="user-profile">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a" alt="User" class="profile-image">
+                        <span class="profile-name">Dr. James Wilson</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+            </header>
+
+            <div class="dashboard-content">
+                <!-- Analytics Time Range Selector -->
+                <div class="analytics-header">
+                    <div class="timeframe-selector">
+                        <button class="timeframe-btn" data-timeframe="week">Last 7 days</button>
+                        <button class="timeframe-btn active" data-timeframe="month">Last 30 days</button>
+                        <button class="timeframe-btn" data-timeframe="quarter">Last 90 days</button>
+                        <button class="timeframe-btn" data-timeframe="year">Last 12 months</button>
+                        <button class="timeframe-btn" data-timeframe="all">All time</button>
+                    </div>
+
+                    <div class="analytics-actions">
+                        <button class="btn btn-outline btn-sm">
+                            <i class="fas fa-download"></i> Export Data
+                        </button>
+                        <button class="btn btn-outline btn-sm">
+                            <i class="fas fa-sync"></i> Refresh
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Summary Cards -->
+                <div class="summary-cards">
+                    <div class="summary-card">
+                        <div class="card-icon blue">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Total Sessions</h3>
+                            <div class="card-value">128</div>
+                            <div class="card-change positive">
+                                <i class="fas fa-arrow-up"></i> 14% from previous period
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="card-icon green">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Total Revenue</h3>
+                            <div class="card-value">$12,480</div>
+                            <div class="card-change positive">
+                                <i class="fas fa-arrow-up"></i> 8% from previous period
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="card-icon purple">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Average Rating</h3>
+                            <div class="card-value">4.9/5</div>
+                            <div class="card-change neutral">
+                                <i class="fas fa-minus"></i> No change from previous period
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="card-icon orange">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Profile Views</h3>
+                            <div class="card-value">3,245</div>
+                            <div class="card-change positive">
+                                <i class="fas fa-arrow-up"></i> 23% from previous period
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts Section -->
+                <div class="charts-section">
+                    <div class="chart-container large">
+                        <div class="chart-header">
+                            <h3>Sessions & Revenue</h3>
+                            <div class="chart-legend">
+                                <div class="legend-item">
+                                    <span class="legend-color" style="background-color: #4285F4;"></span>
+                                    <span class="legend-label">Sessions</span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-color" style="background-color: #34a853;"></span>
+                                    <span class="legend-label">Revenue ($)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chart-body">
+                            <canvas id="revenueChart" height="300"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="charts-row">
+                        <div class="chart-container medium">
+                            <div class="chart-header">
+                                <h3>Booking Sources</h3>
+                            </div>
+                            <div class="chart-body">
+                                <canvas id="sourcesChart" height="240"></canvas>
+                            </div>
+                        </div>
+
+                        <div class="chart-container medium">
+                            <div class="chart-header">
+                                <h3>Client Retention</h3>
+                            </div>
+                            <div class="chart-body">
+                                <canvas id="retentionChart" height="240"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Performance Metrics -->
+                <div class="metrics-section">
+                    <h2 class="section-title">Performance Metrics</h2>
+
+                    <div class="metrics-grid">
+                        <div class="metric-card">
+                            <div class="metric-header">
+                                <h3>Response Rate</h3>
+                                <div class="metric-icon">
+                                    <i class="fas fa-reply"></i>
+                                </div>
+                            </div>
+                            <div class="metric-value">98%</div>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 98%;"></div>
+                            </div>
+                            <div class="metric-footer">
+                                <div class="metric-label">Excellent</div>
+                                <div class="metric-info" data-tooltip="Response rate measures how quickly you respond to client inquiries. Higher is better.">
+                                    <i class="fas fa-info-circle"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="metric-card">
+                            <div class="metric-header">
+                                <h3>Completion Rate</h3>
+                                <div class="metric-icon">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                            </div>
+                            <div class="metric-value">100%</div>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 100%;"></div>
+                            </div>
+                            <div class="metric-footer">
+                                <div class="metric-label">Perfect</div>
+                                <div class="metric-info" data-tooltip="Completion rate measures the percentage of booked sessions that were completed successfully.">
+                                    <i class="fas fa-info-circle"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="metric-card">
+                            <div class="metric-header">
+                                <h3>Avg. Response Time</h3>
+                                <div class="metric-icon">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                            </div>
+                            <div class="metric-value">1.2 hours</div>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 85%;"></div>
+                            </div>
+                            <div class="metric-footer">
+                                <div class="metric-label">Very Good</div>
+                                <div class="metric-info" data-tooltip="Average time it takes you to respond to new client messages. Faster is better.">
+                                    <i class="fas fa-info-circle"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="metric-card">
+                            <div class="metric-header">
+                                <h3>Rebooking Rate</h3>
+                                <div class="metric-icon">
+                                    <i class="fas fa-redo"></i>
+                                </div>
+                            </div>
+                            <div class="metric-value">72%</div>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 72%;"></div>
+                            </div>
+                            <div class="metric-footer">
+                                <div class="metric-label">Good</div>
+                                <div class="metric-info" data-tooltip="Percentage of clients who book again after their first session. Higher indicates client satisfaction.">
+                                    <i class="fas fa-info-circle"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Content Performance -->
+                <div class="content-performance-section">
+                    <div class="section-header">
+                        <h2 class="section-title">Content Performance</h2>
+                        <button class="btn btn-outline btn-sm">View All</button>
+                    </div>
+
+                    <div class="tabs">
+                        <button class="tab-btn active" data-tab="posts">Expert Posts</button>
+                        <button class="tab-btn" data-tab="sessions">Live Sessions</button>
+                        <button class="tab-btn" data-tab="case-studies">Case Studies</button>
+                    </div>
+
+                    <div class="tab-content active" id="posts-tab">
+                        <div class="table-container">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Post Title</th>
+                                        <th>Date</th>
+                                        <th>Views</th>
+                                        <th>Engagement</th>
+                                        <th>Bookings</th>
+                                        <th>CTR</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>The Future of AI in Business: 5 Trends to Watch</td>
+                                        <td>May 2, 2023</td>
+                                        <td>12,456</td>
+                                        <td>23.4%</td>
+                                        <td>37</td>
+                                        <td>5.8%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>How to Implement Your First Machine Learning Model</td>
+                                        <td>Apr 18, 2023</td>
+                                        <td>8,932</td>
+                                        <td>18.7%</td>
+                                        <td>24</td>
+                                        <td>4.2%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>The Ethical Implications of AI Development</td>
+                                        <td>Mar 30, 2023</td>
+                                        <td>6,784</td>
+                                        <td>15.2%</td>
+                                        <td>19</td>
+                                        <td>3.9%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Building Responsible AI Systems From Scratch</td>
+                                        <td>Mar 15, 2023</td>
+                                        <td>5,125</td>
+                                        <td>12.8%</td>
+                                        <td>14</td>
+                                        <td>3.2%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Is ChatGPT Really the Future of AI?</td>
+                                        <td>Feb 28, 2023</td>
+                                        <td>15,876</td>
+                                        <td>32.1%</td>
+                                        <td>42</td>
+                                        <td>6.7%</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="tab-content" id="sessions-tab">
+                        <!-- Placeholder for sessions tab content -->
+                        <div class="table-container">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Session Title</th>
+                                        <th>Date</th>
+                                        <th>Attendees</th>
+                                        <th>Satisfaction</th>
+                                        <th>Follow-up Bookings</th>
+                                        <th>Revenue</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>AI for Small Business: Where to Start</td>
+                                        <td>Apr 10, 2023</td>
+                                        <td>87</td>
+                                        <td>94%</td>
+                                        <td>12</td>
+                                        <td>$870</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Introduction to Neural Networks</td>
+                                        <td>Mar 28, 2023</td>
+                                        <td>63</td>
+                                        <td>92%</td>
+                                        <td>8</td>
+                                        <td>$630</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Machine Learning Career Paths</td>
+                                        <td>Mar 14, 2023</td>
+                                        <td>124</td>
+                                        <td>98%</td>
+                                        <td>17</td>
+                                        <td>$1,240</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="tab-content" id="case-studies-tab">
+                        <!-- Placeholder for case studies tab content -->
+                        <div class="table-container">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Case Study Title</th>
+                                        <th>Date</th>
+                                        <th>Views</th>
+                                        <th>Downloads</th>
+                                        <th>Bookings</th>
+                                        <th>Conversion</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>AI-Powered Healthcare Diagnostics</td>
+                                        <td>Apr 25, 2023</td>
+                                        <td>2,456</td>
+                                        <td>487</td>
+                                        <td>18</td>
+                                        <td>3.7%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>E-commerce Personalization Engine</td>
+                                        <td>Apr 2, 2023</td>
+                                        <td>1,932</td>
+                                        <td>352</td>
+                                        <td>13</td>
+                                        <td>3.2%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Autonomous Inventory Management</td>
+                                        <td>Mar 8, 2023</td>
+                                        <td>1,478</td>
+                                        <td>214</td>
+                                        <td>9</td>
+                                        <td>2.8%</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Growth & Insights -->
+                <div class="insights-section">
+                    <h2 class="section-title">Growth Insights</h2>
+
+                    <div class="insights-grid">
+                        <div class="insight-card">
+                            <div class="insight-icon">
+                                <i class="fas fa-bullseye"></i>
+                            </div>
+                            <div class="insight-content">
+                                <h3>Opportunity</h3>
+                                <p>Your "AI for Beginners" content is performing exceptionally well. Consider creating a series or course on this topic to capitalize on interest.</p>
+                            </div>
+                            <a href="#" class="insight-action">Explore This <i class="fas fa-arrow-right"></i></a>
+                        </div>
+
+                        <div class="insight-card">
+                            <div class="insight-icon">
+                                <i class="fas fa-chart-pie"></i>
+                            </div>
+                            <div class="insight-content">
+                                <h3>Client Demographics</h3>
+                                <p>41% of your new clients are from the technology sector, followed by 28% from healthcare. There's untapped potential in the finance sector.</p>
+                            </div>
+                            <a href="#" class="insight-action">View Details <i class="fas fa-arrow-right"></i></a>
+                        </div>
+
+                        <div class="insight-card">
+                            <div class="insight-icon">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                            <div class="insight-content">
+                                <h3>Recommendation</h3>
+                                <p>Tuesday evenings have your highest engagement rates. Consider scheduling your next live Q&A session during this time slot for maximum attendance.</p>
+                            </div>
+                            <a href="#" class="insight-action">Schedule Now <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="analytics.js"></script>
+</body>
+</html>

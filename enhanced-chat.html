@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced Chat System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/enhanced-chat.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-comments"></i>
+                    <span>EnhancedChat</span>
+                </div>
+                <button class="mobile-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+
+            <div class="user-profile">
+                <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=50&h=50&crop=faces&auto=format&fit=crop" alt="User Profile" class="profile-pic">
+                <div class="user-info">
+                    <div class="username">Alex Johnson</div>
+                    <div class="status online">
+                        <span class="status-dot"></span>
+                        <span class="status-text">Online</span>
+                    </div>
+                </div>
+                <div class="user-actions">
+                    <button class="settings-btn" title="Settings">
+                        <i class="fas fa-cog"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="sidebar-nav">
+                <button class="nav-btn active" data-view="channels">
+                    <i class="fas fa-hashtag"></i>
+                    <span>Channels</span>
+                </button>
+                <button class="nav-btn" data-view="direct">
+                    <i class="fas fa-user"></i>
+                    <span>Direct Messages</span>
+                </button>
+                <button class="nav-btn" data-view="groups">
+                    <i class="fas fa-users"></i>
+                    <span>Group Chats</span>
+                </button>
+                <button class="nav-btn" data-view="media">
+                    <i class="fas fa-photo-video"></i>
+                    <span>Shared Media</span>
+                </button>
+                <button class="nav-btn" data-view="favorites">
+                    <i class="fas fa-star"></i>
+                    <span>Favorites</span>
+                </button>
+            </div>
+
+            <div class="search-wrapper">
+                <div class="search-input-wrapper">
+                    <i class="fas fa-search"></i>
+                    <input type="text" class="search-input" placeholder="Search messages, people, channels...">
+                </div>
+            </div>
+
+            <div class="conversation-list-wrapper">
+                <div class="list-header">
+                    <h3>Channels</h3>
+                    <button class="add-new-btn" title="Add Channel">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+
+                <div class="conversation-list">
+                    <!-- Channel list items will go here -->
+                    <div class="conversation-item active" data-id="channel-1">
+                        <div class="conversation-icon">
+                            <i class="fas fa-hashtag"></i>
+                        </div>
+                        <div class="conversation-details">
+                            <div class="conversation-name">general</div>
+                            <div class="conversation-last-message">Alex: Has anyone tried the new UI design?</div>
+                        </div>
+                        <div class="conversation-meta">
+                            <div class="conversation-time">10:45 AM</div>
+                            <div class="conversation-unread">3</div>
+                        </div>
+                    </div>
+
+                    <div class="conversation-item" data-id="channel-2">
+                        <div class="conversation-icon">
+                            <i class="fas fa-hashtag"></i>
+                        </div>
+                        <div class="conversation-details">
+                            <div class="conversation-name">tech-support</div>
+                            <div class="conversation-last-message">Sarah: I'm having issues with the latest update</div>
+                        </div>
+                        <div class="conversation-meta">
+                            <div class="conversation-time">9:30 AM</div>
+                        </div>
+                    </div>
+
+                    <div class="conversation-item" data-id="channel-3">
+                        <div class="conversation-icon">
+                            <i class="fas fa-hashtag"></i>
+                        </div>
+                        <div class="conversation-details">
+                            <div class="conversation-name">random</div>
+                            <div class="conversation-last-message">Michael: Check out this funny meme! 😂</div>
+                        </div>
+                        <div class="conversation-meta">
+                            <div class="conversation-time">Yesterday</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main chat area -->
+        <main class="chat-area">
+            <header class="chat-header">
+                <div class="chat-info">
+                    <div class="chat-icon">
+                        <i class="fas fa-hashtag"></i>
+                    </div>
+                    <div class="chat-details">
+                        <h2 class="chat-name">general</h2>
+                        <div class="chat-participants">
+                            <span>120 members</span>
+                            <span class="online-count">34 online</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chat-actions">
+                    <button class="action-btn" title="Search in Chat">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <button class="action-btn" title="Video Call">
+                        <i class="fas fa-video"></i>
+                    </button>
+                    <button class="action-btn" title="Voice Call">
+                        <i class="fas fa-phone-alt"></i>
+                    </button>
+                    <button class="action-btn" title="Pin Messages">
+                        <i class="fas fa-thumbtack"></i>
+                    </button>
+                    <button class="action-btn" title="More Options">
+                        <i class="fas fa-ellipsis-v"></i>
+                    </button>
+                </div>
+            </header>
+
+            <div class="messages-container">
+                <div class="encryption-notice">
+                    <i class="fas fa-lock"></i>
+                    <span>Messages in this conversation are end-to-end encrypted.</span>
+                </div>
+
+                <div class="date-separator">
+                    <span>Today</span>
+                </div>
+
+                <div class="message-list">
+                    <!-- Messages will be loaded here -->
+                    <div class="message" data-id="msg1">
+                        <div class="message-avatar">
+                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=50&h=50&crop=faces&auto=format&fit=crop" alt="Sarah">
+                        </div>
+                        <div class="message-content">
+                            <div class="message-sender">
+                                <span class="sender-name">Sarah Miller</span>
+                                <span class="message-time">9:30 AM</span>
+                            </div>
+                            <div class="message-text">
+                                Good morning everyone! I've finished designing the new dashboard layout.
+                            </div>
+                            <div class="message-attachments">
+                                <img src="https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=300&auto=format&fit=crop" alt="Dashboard Design" class="message-image">
+                            </div>
+                            <div class="message-actions">
+                                <button class="message-action-btn">
+                                    <i class="fas fa-smile"></i>
+                                </button>
+                                <button class="message-action-btn">
+                                    <i class="fas fa-reply"></i>
+                                </button>
+                                <button class="message-action-btn">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </button>
+                            </div>
+                            <div class="message-reactions">
+                                <div class="reaction">
+                                    <span class="emoji">👍</span>
+                                    <span class="count">5</span>
+                                </div>
+                                <div class="reaction">
+                                    <span class="emoji">🔥</span>
+                                    <span class="count">3</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="message" data-id="msg2">
+                        <div class="message-avatar">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=50&h=50&crop=faces&auto=format&fit=crop" alt="Michael">
+                        </div>
+                        <div class="message-content">
+                            <div class="message-sender">
+                                <span class="sender-name">Michael Chen</span>
+                                <span class="message-time">9:45 AM</span>
+                            </div>
+                            <div class="message-text">
+                                Great work Sarah! I especially like the new visualization section.
+                            </div>
+                            <div class="message-actions">
+                                <button class="message-action-btn">
+                                    <i class="fas fa-smile"></i>
+                                </button>
+                                <button class="message-action-btn">
+                                    <i class="fas fa-reply"></i>
+                                </button>
+                                <button class="message-action-btn">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="message" data-id="msg3">
+                        <div class="message-avatar">
+                            <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=50&h=50&crop=faces&auto=format&fit=crop" alt="Alex">
+                        </div>
+                        <div class="message-content">
+                            <div class="message-sender">
+                                <span class="sender-name">Alex Johnson</span>
+                                <span class="message-time">10:15 AM</span>
+                            </div>
+                            <div class="message-text">
+                                Has anyone tried the new UI design? I'm thinking of implementing it in our project.
+                            </div>
+                            <div class="message-actions">
+                                <button class="message-action-btn">
+                                    <i class="fas fa-smile"></i>
+                                </button>
+                                <button class="message-action-btn">
+                                    <i class="fas fa-reply"></i>
+                                </button>
+                                <button class="message-action-btn">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="message translated" data-id="msg4">
+                        <div class="message-avatar">
+                            <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=50&h=50&crop=faces&auto=format&fit=crop" alt="Elena">
+                        </div>
+                        <div class="message-content">
+                            <div class="message-sender">
+                                <span class="sender-name">Elena García</span>
+                                <span class="message-time">10:30 AM</span>
+                            </div>
+                            <div class="message-text">
+                                <div class="original-message">
+                                    Sí, yo lo probé ayer. Funciona muy bien y es bastante intuitivo.
+                                </div>
+                                <div class="translated-message">
+                                    <div class="translation-info">
+                                        <span>Translated from Spanish</span>
+                                        <button class="show-original-btn">Show original</button>
+                                    </div>
+                                    Yes, I tried it yesterday. It works very well and is quite intuitive.
+                                </div>
+                            </div>
+                            <div class="message-actions">
+                                <button class="message-action-btn">
+                                    <i class="fas fa-smile"></i>
+                                </button>
+                                <button class="message-action-btn">
+                                    <i class="fas fa-reply"></i>
+                                </button>
+                                <button class="message-action-btn">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="typing-indicator">
+                    <div class="typing-avatar">
+                        <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=30&h=30&crop=faces&auto=format&fit=crop" alt="Elena">
+                    </div>
+                    <div class="typing-text">
+                        Elena García is typing...
+                    </div>
+                </div>
+            </div>
+
+            <div class="message-composer">
+                <div class="composer-attachments">
+                    <button class="attachment-btn" title="Add Emoji">
+                        <i class="fas fa-smile"></i>
+                    </button>
+                    <button class="attachment-btn" title="Attach File">
+                        <i class="fas fa-paperclip"></i>
+                    </button>
+                    <button class="attachment-btn" title="GIF">
+                        <i class="fas fa-gift"></i>
+                    </button>
+                    <button class="attachment-btn" title="Poll">
+                        <i class="fas fa-poll-h"></i>
+                    </button>
+                </div>
+
+                <div class="composer-input-wrapper">
+                    <textarea class="composer-input" placeholder="Type a message..."></textarea>
+                </div>
+
+                <div class="composer-actions">
+                    <div class="composer-tools">
+                        <button class="action-btn" title="Formatting">
+                            <i class="fas fa-bold"></i>
+                        </button>
+                        <button class="action-btn" title="Voice Message">
+                            <i class="fas fa-microphone"></i>
+                        </button>
+                    </div>
+
+                    <button class="send-btn" title="Send Message">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <!-- Info panel -->
+        <aside class="info-panel">
+            <div class="panel-header">
+                <h3>Channel Info</h3>
+                <button class="close-panel-btn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div class="panel-content">
+                <div class="panel-section">
+                    <h4>About</h4>
+                    <p class="channel-description">General discussions for all team members. Work-related topics are encouraged, but casual conversations are welcome too!</p>
+                    <div class="channel-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Created on May 10, 2023</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel-section">
+                    <h4>Members (120)</h4>
+                    <div class="member-search">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search members...">
+                    </div>
+
+                    <div class="member-list">
+                        <div class="member-item">
+                            <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=40&h=40&crop=faces&auto=format&fit=crop" alt="Alex" class="member-avatar">
+                            <div class="member-info">
+                                <div class="member-name">Alex Johnson</div>
+                                <div class="member-role">Administrator</div>
+                            </div>
+                            <div class="member-status online"></div>
+                        </div>
+
+                        <div class="member-item">
+                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=40&h=40&crop=faces&auto=format&fit=crop" alt="Sarah" class="member-avatar">
+                            <div class="member-info">
+                                <div class="member-name">Sarah Miller</div>
+                                <div class="member-role">Moderator</div>
+                            </div>
+                            <div class="member-status online"></div>
+                        </div>
+
+                        <div class="member-item">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&crop=faces&auto=format&fit=crop" alt="Michael" class="member-avatar">
+                            <div class="member-info">
+                                <div class="member-name">Michael Chen</div>
+                                <div class="member-role">Member</div>
+                            </div>
+                            <div class="member-status online"></div>
+                        </div>
+
+                        <div class="member-item">
+                            <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=40&h=40&crop=faces&auto=format&fit=crop" alt="Elena" class="member-avatar">
+                            <div class="member-info">
+                                <div class="member-name">Elena García</div>
+                                <div class="member-role">Member</div>
+                            </div>
+                            <div class="member-status online"></div>
+                        </div>
+
+                        <div class="member-item">
+                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=40&h=40&crop=faces&auto=format&fit=crop" alt="John" class="member-avatar">
+                            <div class="member-info">
+                                <div class="member-name">John Williams</div>
+                                <div class="member-role">Member</div>
+                            </div>
+                            <div class="member-status offline"></div>
+                        </div>
+
+                        <!-- More members would be here -->
+                    </div>
+                </div>
+
+                <div class="panel-section">
+                    <h4>Shared Media</h4>
+                    <div class="media-tabs">
+                        <button class="media-tab active" data-tab="images">Images</button>
+                        <button class="media-tab" data-tab="files">Files</button>
+                        <button class="media-tab" data-tab="links">Links</button>
+                    </div>
+
+                    <div class="media-grid">
+                        <div class="media-item">
+                            <img src="https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=100&auto=format&fit=crop" alt="Dashboard">
+                        </div>
+                        <div class="media-item">
+                            <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=100&auto=format&fit=crop" alt="Document">
+                        </div>
+                        <div class="media-item">
+                            <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=100&auto=format&fit=crop" alt="Meeting">
+                        </div>
+                        <div class="media-item">
+                            <img src="https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?w=100&auto=format&fit=crop" alt="Workspace">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel-section">
+                    <h4>Settings</h4>
+                    <div class="settings-options">
+                        <div class="settings-option">
+                            <div class="option-info">
+                                <div class="option-name">Notifications</div>
+                                <div class="option-description">Get notified about new messages</div>
+                            </div>
+                            <div class="option-control">
+                                <label class="switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="settings-option">
+                            <div class="option-info">
+                                <div class="option-name">Auto Translation</div>
+                                <div class="option-description">Automatically translate messages in other languages</div>
+                            </div>
+                            <div class="option-control">
+                                <label class="switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="settings-option">
+                            <div class="option-info">
+                                <div class="option-name">Mute Channel</div>
+                                <div class="option-description">Stop receiving notifications from this channel</div>
+                            </div>
+                            <div class="option-control">
+                                <label class="switch">
+                                    <input type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Modals and dialogs -->
+    <div class="modal-container" id="searchModal">
+        <div class="modal-overlay"></div>
+        <div class="modal search-modal">
+            <div class="modal-header">
+                <h3>Search Messages</h3>
+                <button class="close-modal-btn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="search-input-wrapper full-width">
+                    <i class="fas fa-search"></i>
+                    <input type="text" class="search-input" placeholder="Search in current conversation...">
+                    <div class="search-filter-btn">
+                        <i class="fas fa-filter"></i>
+                    </div>
+                </div>
+
+                <div class="search-filters">
+                    <div class="filter-group">
+                        <div class="filter-label">From:</div>
+                        <select class="filter-select">
+                            <option value="">Anyone</option>
+                            <option value="alex">Alex Johnson</option>
+                            <option value="sarah">Sarah Miller</option>
+                            <option value="michael">Michael Chen</option>
+                            <option value="elena">Elena García</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <div class="filter-label">Has:</div>
+                        <div class="filter-options">
+                            <label class="filter-option">
+                                <input type="checkbox" name="has-images">
+                                <span>Images</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" name="has-files">
+                                <span>Files</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" name="has-links">
+                                <span>Links</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <div class="filter-label">Date:</div>
+                        <select class="filter-select">
+                            <option value="">Anytime</option>
+                            <option value="today">Today</option>
+                            <option value="yesterday">Yesterday</option>
+                            <option value="week">Last 7 days</option>
+                            <option value="month">Last 30 days</option>
+                            <option value="custom">Custom range</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="search-results">
+                    <!-- Results will appear here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/enhanced-chat.js"></script>
+</body>
+</html>

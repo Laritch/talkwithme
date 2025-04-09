@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Badges & Trust | Expert Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="badges.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar Navigation -->
+        <aside class="dashboard-sidebar">
+            <div class="sidebar-header">
+                <img src="/uploads/default-avatar.png" alt="Logo" class="sidebar-logo">
+                <h2>Expert Dashboard</h2>
+            </div>
+
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="expert-dashboard.html"><i class="fas fa-th-large"></i> Overview</a></li>
+                    <li><a href="expert-profile-edit.html"><i class="fas fa-user-edit"></i> Edit Profile</a></li>
+                    <li><a href="expert-bookings.html"><i class="fas fa-calendar-check"></i> Bookings</a></li>
+                    <li><a href="live-sessions.html"><i class="fas fa-video"></i> Live Sessions</a></li>
+                    <li><a href="expert-posts-manage.html"><i class="fas fa-pen-square"></i> My Posts</a></li>
+                    <li><a href="expert-reviews.html"><i class="fas fa-star"></i> Reviews</a></li>
+                    <li><a href="expert-analytics.html"><i class="fas fa-chart-line"></i> Analytics</a></li>
+                    <li><a href="expert-badges.html" class="active"><i class="fas fa-award"></i> Badges & Trust</a></li>
+                    <li><a href="expert-payments.html"><i class="fas fa-wallet"></i> Payments</a></li>
+                    <li><a href="expert-settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+                </ul>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="logout.html" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <header class="dashboard-header">
+                <div class="header-title">
+                    <h1>Badges & Trust</h1>
+                    <p>Enhance your credibility with verification and badges</p>
+                </div>
+
+                <div class="header-actions">
+                    <div class="notification-bell">
+                        <i class="far fa-bell"></i>
+                        <span class="notification-badge">3</span>
+                    </div>
+                    <div class="user-profile">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a" alt="User" class="profile-image">
+                        <span class="profile-name">Dr. James Wilson</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+            </header>
+
+            <div class="dashboard-content">
+                <!-- Verification Status Section -->
+                <div class="verification-section">
+                    <div class="verification-header">
+                        <h2>Verification Status</h2>
+                        <div class="verification-progress">
+                            <div class="progress-item completed">
+                                <div class="progress-icon">
+                                    <i class="fas fa-check"></i>
+                                </div>
+                                <div class="progress-label">Documents Submitted</div>
+                            </div>
+                            <div class="progress-connector completed"></div>
+                            <div class="progress-item completed">
+                                <div class="progress-icon">
+                                    <i class="fas fa-check"></i>
+                                </div>
+                                <div class="progress-label">Under Review</div>
+                            </div>
+                            <div class="progress-connector completed"></div>
+                            <div class="progress-item completed">
+                                <div class="progress-icon">
+                                    <i class="fas fa-check"></i>
+                                </div>
+                                <div class="progress-label">Verified</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="verification-card">
+                        <div class="verification-status verified">
+                            <div class="status-icon">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="status-content">
+                                <h3>Verified Expert</h3>
+                                <p>Your credentials and identity have been verified. This badge is now displayed on your profile.</p>
+                                <div class="verification-date">Verified on May 3, 2023</div>
+                            </div>
+                        </div>
+
+                        <div class="verification-details">
+                            <div class="verification-item">
+                                <div class="item-label">Identity Verification</div>
+                                <div class="item-status completed"><i class="fas fa-check-circle"></i> Verified</div>
+                            </div>
+                            <div class="verification-item">
+                                <div class="item-label">Educational Credentials</div>
+                                <div class="item-status completed"><i class="fas fa-check-circle"></i> Verified</div>
+                            </div>
+                            <div class="verification-item">
+                                <div class="item-label">Professional Certifications</div>
+                                <div class="item-status completed"><i class="fas fa-check-circle"></i> Verified</div>
+                            </div>
+                            <div class="verification-item">
+                                <div class="item-label">Background Check</div>
+                                <div class="item-status completed"><i class="fas fa-check-circle"></i> Verified</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Badges Section -->
+                <div class="badges-section">
+                    <div class="section-header">
+                        <h2>Your Badges</h2>
+                        <p>Badges showcase your achievements and expertise</p>
+                    </div>
+
+                    <div class="badges-container">
+                        <div class="badges-group">
+                            <h3>Trust & Verification</h3>
+                            <div class="badges-grid">
+                                <div class="badge-card earned">
+                                    <div class="badge-icon verified">
+                                        <i class="fas fa-check-circle"></i>
+                                    </div>
+                                    <div class="badge-details">
+                                        <h4>Verified Expert</h4>
+                                        <p>Identity and credentials verified by our team</p>
+                                    </div>
+                                    <div class="badge-status">
+                                        <span class="earned-badge">Earned</span>
+                                    </div>
+                                </div>
+
+                                <div class="badge-card earned">
+                                    <div class="badge-icon id-verified">
+                                        <i class="fas fa-id-card"></i>
+                                    </div>
+                                    <div class="badge-details">
+                                        <h4>ID Verified</h4>
+                                        <p>Government-issued ID has been verified</p>
+                                    </div>
+                                    <div class="badge-status">
+                                        <span class="earned-badge">Earned</span>
+                                    </div>
+                                </div>
+
+                                <div class="badge-card earned">
+                                    <div class="badge-icon background-check">
+                                        <i class="fas fa-shield-alt"></i>
+                                    </div>
+                                    <div class="badge-details">
+                                        <h4>Background Checked</h4>
+                                        <p>Completed comprehensive background verification</p>
+                                    </div>
+                                    <div class="badge-status">
+                                        <span class="earned-badge">Earned</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="badges-group">
+                            <h3>Performance & Quality</h3>
+                            <div class="badges-grid">
+                                <div class="badge-card earned">
+                                    <div class="badge-icon top-rated">
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <div class="badge-details">
+                                        <h4>Top Rated</h4>
+                                        <p>Maintained a 4.8+ star rating for over 3 months</p>
+                                    </div>
+                                    <div class="badge-status">
+                                        <span class="earned-badge">Earned</span>
+                                    </div>
+                                </div>
+
+                                <div class="badge-card earned">
+                                    <div class="badge-icon fast-response">
+                                        <i class="fas fa-bolt"></i>
+                                    </div>
+                                    <div class="badge-details">
+                                        <h4>Fast Responder</h4>
+                                        <p>Responds to inquiries within 2 hours on average</p>
+                                    </div>
+                                    <div class="badge-status">
+                                        <span class="earned-badge">Earned</span>
+                                    </div>
+                                </div>
+
+                                <div class="badge-card">
+                                    <div class="badge-icon rising-star">
+                                        <i class="fas fa-rocket"></i>
+                                    </div>
+                                    <div class="badge-details">
+                                        <h4>Rising Star</h4>
+                                        <p>Achieved exceptional growth in first 90 days</p>
+                                    </div>
+                                    <div class="badge-status">
+                                        <button class="btn btn-outline btn-sm">Claim</button>
+                                    </div>
+                                </div>
+
+                                <div class="badge-card earned">
+                                    <div class="badge-icon completion">
+                                        <i class="fas fa-check-double"></i>
+                                    </div>
+                                    <div class="badge-details">
+                                        <h4>Perfect Completion</h4>
+                                        <p>100% completion rate on all booked sessions</p>
+                                    </div>
+                                    <div class="badge-status">
+                                        <span class="earned-badge">Earned</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="badges-group">
+                            <h3>Experience & Engagement</h3>
+                            <div class="badges-grid">
+                                <div class="badge-card earned">
+                                    <div class="badge-icon veteran">
+                                        <i class="fas fa-award"></i>
+                                    </div>
+                                    <div class="badge-details">
+                                        <h4>Experienced Expert</h4>
+                                        <p>Completed over 100 consultation sessions</p>
+                                    </div>
+                                    <div class="badge-status">
+                                        <span class="earned-badge">Earned</span>
+                                    </div>
+                                </div>
+
+                                <div class="badge-card">
+                                    <div class="badge-icon content-creator">
+                                        <i class="fas fa-pen-fancy"></i>
+                                    </div>
+                                    <div class="badge-details">
+                                        <h4>Content Creator</h4>
+                                        <p>Published 10+ high-quality articles or case studies</p>
+                                    </div>
+                                    <div class="badge-status progress">
+                                        <div class="progress-text">4/10 Posts</div>
+                                        <div class="progress-bar">
+                                            <div class="progress" style="width: 40%;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="badge-card">
+                                    <div class="badge-icon live-presenter">
+                                        <i class="fas fa-video"></i>
+                                    </div>
+                                    <div class="badge-details">
+                                        <h4>Live Presenter</h4>
+                                        <p>Hosted 5+ live Q&A sessions with high attendance</p>
+                                    </div>
+                                    <div class="badge-status progress">
+                                        <div class="progress-text">2/5 Sessions</div>
+                                        <div class="progress-bar">
+                                            <div class="progress" style="width: 40%;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="badge-card locked">
+                                    <div class="badge-icon mentor">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="badge-details">
+                                        <h4>Expert Mentor</h4>
+                                        <p>Achieved Elite status and mentored other experts</p>
+                                    </div>
+                                    <div class="badge-status">
+                                        <span class="locked-badge"><i class="fas fa-lock"></i> Locked</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="badges-group">
+                            <h3>Membership & Loyalty</h3>
+                            <div class="badges-grid">
+                                <div class="badge-card earned">
+                                    <div class="badge-icon elite">
+                                        <i class="fas fa-crown"></i>
+                                    </div>
+                                    <div class="badge-details">
+                                        <h4>Elite Member</h4>
+                                        <p>Subscribed to Elite membership tier</p>
+                                    </div>
+                                    <div class="badge-status">
+                                        <span class="earned-badge">Earned</span>
+                                    </div>
+                                </div>
+
+                                <div class="badge-card earned">
+                                    <div class="badge-icon featured">
+                                        <i class="fas fa-certificate"></i>
+                                    </div>
+                                    <div class="badge-details">
+                                        <h4>Featured Expert</h4>
+                                        <p>Selected for featured placement in search results</p>
+                                    </div>
+                                    <div class="badge-status">
+                                        <span class="earned-badge">Earned</span>
+                                    </div>
+                                </div>
+
+                                <div class="badge-card">
+                                    <div class="badge-icon loyal">
+                                        <i class="fas fa-heart"></i>
+                                    </div>
+                                    <div class="badge-details">
+                                        <h4>Platform Veteran</h4>
+                                        <p>Active member for 1+ year with consistent sessions</p>
+                                    </div>
+                                    <div class="badge-status progress">
+                                        <div class="progress-text">8 months / 12 months</div>
+                                        <div class="progress-bar">
+                                            <div class="progress" style="width: 67%;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trust Signals Section -->
+                <div class="trust-signals-section">
+                    <div class="section-header">
+                        <h2>Trust Signals</h2>
+                        <p>Additional verification and credentials that boost client trust</p>
+                    </div>
+
+                    <div class="trust-signals-container">
+                        <!-- Current Trust Signals -->
+                        <div class="trust-signals-active">
+                            <h3>Active Trust Signals</h3>
+                            <div class="trust-signals-grid">
+                                <div class="trust-signal-card">
+                                    <div class="trust-signal-icon">
+                                        <i class="fas fa-university"></i>
+                                    </div>
+                                    <div class="trust-signal-details">
+                                        <h4>Stanford University</h4>
+                                        <p>PhD in Computer Science, 2011</p>
+                                        <div class="verification-info">
+                                            <span class="verified-indicator"><i class="fas fa-check-circle"></i> Verified</span>
+                                            <button class="btn btn-text">
+                                                <i class="fas fa-eye"></i> View Certificate
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="trust-signal-card">
+                                    <div class="trust-signal-icon">
+                                        <i class="fas fa-certificate"></i>
+                                    </div>
+                                    <div class="trust-signal-details">
+                                        <h4>Google AI Professional</h4>
+                                        <p>Certified AI Engineer, 2015</p>
+                                        <div class="verification-info">
+                                            <span class="verified-indicator"><i class="fas fa-check-circle"></i> Verified</span>
+                                            <button class="btn btn-text">
+                                                <i class="fas fa-eye"></i> View Certificate
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="trust-signal-card">
+                                    <div class="trust-signal-icon">
+                                        <i class="fas fa-briefcase"></i>
+                                    </div>
+                                    <div class="trust-signal-details">
+                                        <h4>Google</h4>
+                                        <p>Research Lead, 2011-2018</p>
+                                        <div class="verification-info">
+                                            <span class="verified-indicator"><i class="fas fa-check-circle"></i> Verified</span>
+                                            <button class="btn btn-text">
+                                                <i class="fas fa-eye"></i> View Record
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="trust-signal-card">
+                                    <div class="trust-signal-icon">
+                                        <i class="fas fa-award"></i>
+                                    </div>
+                                    <div class="trust-signal-details">
+                                        <h4>ACM Award</h4>
+                                        <p>Contributions to Machine Learning, 2017</p>
+                                        <div class="verification-info">
+                                            <span class="verified-indicator"><i class="fas fa-check-circle"></i> Verified</span>
+                                            <button class="btn btn-text">
+                                                <i class="fas fa-eye"></i> View Award
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Add New Trust Signal -->
+                        <div class="add-trust-signal">
+                            <h3>Add New Trust Signal</h3>
+                            <p>Enhance your profile with additional trust signals like certifications, employment records, awards, or academic credentials.</p>
+
+                            <form class="trust-signal-form">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="trust-signal-type">Type</label>
+                                        <select id="trust-signal-type" required>
+                                            <option value="">Select credential type</option>
+                                            <option value="education">Education</option>
+                                            <option value="certification">Certification</option>
+                                            <option value="employment">Employment</option>
+                                            <option value="award">Award</option>
+                                            <option value="publication">Publication</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="trust-signal-name">Name/Title</label>
+                                        <input type="text" id="trust-signal-name" placeholder="E.g., TensorFlow Developer Certificate" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="trust-signal-issuer">Issuing Organization</label>
+                                        <input type="text" id="trust-signal-issuer" placeholder="E.g., Google" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="trust-signal-date">Issue Date</label>
+                                        <input type="date" id="trust-signal-date" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="trust-signal-description">Description</label>
+                                    <textarea id="trust-signal-description" rows="3" placeholder="Brief description of this credential"></textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="trust-signal-document">Supporting Document</label>
+                                    <div class="file-upload">
+                                        <input type="file" id="trust-signal-document" accept=".pdf,.jpg,.jpeg,.png">
+                                        <div class="upload-button">
+                                            <i class="fas fa-cloud-upload-alt"></i> Choose File
+                                        </div>
+                                        <div class="file-name"></div>
+                                    </div>
+                                    <div class="help-text">Upload certificate, diploma, or other verification document</div>
+                                </div>
+
+                                <div class="form-actions">
+                                    <button type="submit" class="btn btn-primary">Submit for Verification</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Badge Benefits Section -->
+                <div class="benefits-section">
+                    <h2 class="section-title">Badge Benefits</h2>
+
+                    <div class="benefits-grid">
+                        <div class="benefit-card">
+                            <div class="benefit-icon">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <div class="benefit-content">
+                                <h3>Higher Search Visibility</h3>
+                                <p>Experts with more badges appear higher in search results and receive up to 3x more profile views.</p>
+                            </div>
+                        </div>
+
+                        <div class="benefit-card">
+                            <div class="benefit-icon">
+                                <i class="fas fa-handshake"></i>
+                            </div>
+                            <div class="benefit-content">
+                                <h3>Increased Client Trust</h3>
+                                <p>Verified experts with multiple badges have a 78% higher booking conversion rate.</p>
+                            </div>
+                        </div>
+
+                        <div class="benefit-card">
+                            <div class="benefit-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="benefit-content">
+                                <h3>Higher Earnings</h3>
+                                <p>Elite experts with all trust badges earn on average 45% more than non-verified experts.</p>
+                            </div>
+                        </div>
+
+                        <div class="benefit-card">
+                            <div class="benefit-icon">
+                                <i class="fas fa-user-friends"></i>
+                            </div>
+                            <div class="benefit-content">
+                                <h3>Client Retention</h3>
+                                <p>Clients are 62% more likely to book again with experts who have earned multiple badges.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="badges.js"></script>
+</body>
+</html>

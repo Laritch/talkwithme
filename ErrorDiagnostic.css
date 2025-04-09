@@ -1,0 +1,55 @@
+.error-log {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.error-log.translation-error {
+  background-color: #fff5f5;
+  border-left: 3px solid #e53e3e;
+}
+
+.error-timestamp {
+  font-size: 12px;
+  color: #718096;
+  margin-bottom: 6px;
+}
+
+.admin-badge {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: normal;
+  background-color: #e53e3e;
+  color: white;
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-left: 10px;
+}
+
+.access-denied-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.access-denied-icon {
+  font-size: 32px;
+  margin-bottom: 16px;
+}
+
+.error-diagnostic.admin-only {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 15px 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  border: 1px solid #eee;
+  opacity: 0.7;
+}
