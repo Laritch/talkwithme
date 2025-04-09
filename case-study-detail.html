@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Study Detail | Expert Marketplace</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="case-studies.css">
+    <link rel="stylesheet" href="case-study-detail.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <div class="logo">
+                <img src="/uploads/default-avatar.png" alt="Logo">
+                <span>Expert Marketplace</span>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="experts.html">Find Experts</a></li>
+                    <li><a href="categories.html">Categories</a></li>
+                    <li><a href="how-it-works.html">How It Works</a></li>
+                    <li><a href="expert-posts.html">Expert Posts</a></li>
+                    <li><a href="expert-case-studies.html" class="active">Case Studies</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <a href="login.html" class="btn btn-outline">Login</a>
+                <a href="signup.html" class="btn btn-primary">Sign Up</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="case-study-detail-container container" id="case-study-container">
+            <!-- Content will be dynamically loaded by JavaScript -->
+            <div class="case-study-loading">
+                <div class="loading-spinner"></div>
+                <p>Loading case study...</p>
+            </div>
+        </div>
+
+        <section class="related-case-studies">
+            <div class="container">
+                <h2 class="section-title">Related Case Studies</h2>
+                <div class="case-studies-grid" id="related-case-studies">
+                    <!-- Related case studies will be dynamically loaded by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <section class="expert-cta">
+            <div class="container">
+                <div class="expert-cta-box">
+                    <div class="expert-cta-content">
+                        <h2>Work With This Expert</h2>
+                        <p>Ready to achieve similar results for your business? Book a consultation or send a message to get started.</p>
+                    </div>
+                    <div class="expert-cta-buttons">
+                        <a href="#" class="btn btn-primary" id="book-expert-btn">Book a Consultation</a>
+                        <a href="#" class="btn btn-outline" id="message-expert-btn">Send a Message</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>Expert Marketplace</h3>
+                    <p>Connect with top professionals in every field and get the expert help you need.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4>For Clients</h4>
+                    <ul>
+                        <li><a href="#">How It Works</a></li>
+                        <li><a href="#">Find an Expert</a></li>
+                        <li><a href="#">Success Stories</a></li>
+                        <li><a href="#">Resources</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>For Experts</h4>
+                    <ul>
+                        <li><a href="#">Join as an Expert</a></li>
+                        <li><a href="#">Success Stories</a></li>
+                        <li><a href="#">Resources</a></li>
+                        <li><a href="#">Community</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Press</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Expert Marketplace. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Accessibility</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="scripts.js"></script>
+    <script src="case-study-detail.js"></script>
+</body>
+</html>

@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping Cart | Expert Chat System</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .cart-container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    .cart-title {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      color: #333;
+    }
+
+    .cart-content {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 2rem;
+    }
+
+    .cart-items {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      padding: 1.5rem;
+    }
+
+    .cart-item {
+      display: flex;
+      border-bottom: 1px solid #eee;
+      padding: 1.5rem 0;
+    }
+
+    .cart-item:first-child {
+      padding-top: 0;
+    }
+
+    .cart-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .cart-item-image {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 4px;
+      margin-right: 1.5rem;
+    }
+
+    .cart-item-details {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cart-item-name {
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+      color: #333;
+    }
+
+    .cart-item-expert {
+      font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 0.5rem;
+    }
+
+    .cart-item-type {
+      display: inline-block;
+      font-size: 0.8rem;
+      padding: 0.3rem 0.6rem;
+      background-color: #f0f4ff;
+      color: #4a6cf7;
+      border-radius: 20px;
+      margin-bottom: 0.5rem;
+    }
+
+    .digital-item {
+      background-color: #e0f7e0;
+      color: #28a745;
+    }
+
+    .cart-item-price {
+      font-weight: 600;
+      color: #4a6cf7;
+      margin-top: auto;
+    }
+
+    .cart-item-controls {
+      display: flex;
+      align-items: center;
+      margin-left: 1.5rem;
+    }
+
+    .quantity-control {
+      display: flex;
+      align-items: center;
+      margin-right: 1.5rem;
+    }
+
+    .quantity-btn {
+      width: 32px;
+      height: 32px;
+      border: 1px solid #ddd;
+      background: #f8f9fa;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .quantity-input {
+      width: 40px;
+      height: 32px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      margin: 0 0.5rem;
+      text-align: center;
+    }
+
+    .cart-item-remove {
+      color: #dc3545;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .cart-item-remove:hover {
+      transform: scale(1.1);
+    }
+
+    .cart-summary {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      padding: 1.5rem;
+      height: fit-content;
+    }
+
+    .summary-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #eee;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+      color: #666;
+    }
+
+    .summary-row.total {
+      font-weight: 600;
+      color: #333;
+      font-size: 1.1rem;
+      border-top: 1px solid #eee;
+      margin-top: 1rem;
+      padding-top: 1rem;
+    }
+
+    .checkout-btn {
+      width: 100%;
+      padding: 1rem;
+      background-color: #4a6cf7;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 1.5rem;
+      transition: background-color 0.3s ease;
+    }
+
+    .checkout-btn:hover {
+      background-color: #3a57d7;
+    }
+
+    .checkout-btn:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+
+    .continue-shopping {
+      display: inline-block;
+      margin-top: 1.5rem;
+      color: #4a6cf7;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .continue-shopping i {
+      margin-right: 0.5rem;
+    }
+
+    .empty-cart {
+      text-align: center;
+      padding: 3rem;
+      background-color: #f8f9fa;
+      border-radius: 8px;
+      grid-column: span 2;
+    }
+
+    .empty-cart i {
+      font-size: 3rem;
+      color: #adb5bd;
+      margin-bottom: 1rem;
+    }
+
+    .empty-cart h2 {
+      margin-bottom: 1rem;
+      color: #333;
+    }
+
+    .empty-cart p {
+      color: #666;
+      margin-bottom: 1.5rem;
+    }
+
+    .empty-cart a {
+      display: inline-block;
+      padding: 0.8rem 1.5rem;
+      background-color: #4a6cf7;
+      color: white;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: background-color 0.3s ease;
+    }
+
+    .empty-cart a:hover {
+      background-color: #3a57d7;
+    }
+
+    .loading-spinner {
+      text-align: center;
+      padding: 2rem;
+      grid-column: span 2;
+    }
+
+    .loading-spinner i {
+      font-size: 2rem;
+      color: #4a6cf7;
+      animation: spin 1s infinite linear;
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* Mobile responsiveness */
+    @media (max-width: 768px) {
+      .cart-content {
+        grid-template-columns: 1fr;
+      }
+
+      .cart-item {
+        flex-direction: column;
+      }
+
+      .cart-item-image {
+        width: 100%;
+        height: auto;
+        margin-right: 0;
+        margin-bottom: 1rem;
+      }
+
+      .cart-item-controls {
+        margin-left: 0;
+        margin-top: 1rem;
+        justify-content: space-between;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="main-header">
+      <div class="logo">
+        <a href="index.html">Expert Chat System</a>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="expert-matching.html">Find Experts</a></li>
+          <li><a href="store.html">Expert Store</a></li>
+          <li><a href="cart.html" class="active"><i class="fas fa-shopping-cart"></i></a></li>
+          <li id="userProfileNav" style="display:none;">
+            <a href="#" id="userProfileLink">
+              <img id="userProfileImage" src="/uploads/default-avatar.png" alt="Profile" class="avatar-img">
+            </a>
+          </li>
+          <li id="loginNav">
+            <a href="login.html" class="btn-login">Login</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="cart-container">
+      <h1 class="cart-title">Your Shopping Cart</h1>
+
+      <div id="cartContent" class="cart-content">
+        <!-- Cart will be loaded here -->
+        <div class="loading-spinner">
+          <i class="fas fa-spinner fa-spin"></i> Loading your cart...
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/auth.js"></script>
+  <script>
+    // DOM elements
+    const cartContentContainer = document.getElementById('cartContent');
+
+    // Check auth status and load cart
+    document.addEventListener('DOMContentLoaded', async () => {
+      updateAuthUI();
+
+      // Check if user is logged in
+      const user = getCurrentUser();
+      if (!user) {
+        showEmptyCart('Please log in to view your cart.', true);
+        return;
+      }
+
+      await loadCart();
+    });
+
+    // Load cart contents
+    async function loadCart() {
+      try {
+        const response = await fetch('/api/ecommerce/cart', {
+          headers: {
+            'Authorization': `Bearer ${getToken()}`
+          }
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to load cart');
+        }
+
+        const data = await response.json();
+
+        if (!data.cart || !data.cart.items || data.cart.items.length === 0) {
+          showEmptyCart();
+          return;
+        }
+
+        // Calculate the order summary
+        const summaryResponse = await fetch('/api/ecommerce/cart/summary', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${getToken()}`
+          },
+          body: JSON.stringify({})
+        });
+
+        if (!summaryResponse.ok) {
+          throw new Error('Failed to calculate order summary');
+        }
+
+        const summaryData = await summaryResponse.json();
+        const summary = summaryData.summary;
+
+        // Render cart
+        renderCart(data.cart, summary);
+      } catch (error) {
+        console.error('Error loading cart:', error);
+        showError('Failed to load your cart. Please try refreshing the page.');
+      }
+    }
+
+    // Render cart contents
+    function renderCart(cart, summary) {
+      const hasPhysicalItems = cart.items.some(item => !item.isDigital);
+
+      const itemsHTML = cart.items.map(item => {
+        const price = new Intl.NumberFormat('en-US', {
+          style: 'currency',
+          currency: 'USD'
+        }).format(item.price);
+
+        const totalPrice = new Intl.NumberFormat('en-US', {
+          style: 'currency',
+          currency: 'USD'
+        }).format(item.price * item.quantity);
+
+        return `
+          <div class="cart-item" data-product-id="${item.productId}">
+            <img src="${item.image || '/uploads/default-product.png'}" alt="${item.name}" class="cart-item-image">
+            <div class="cart-item-details">
+              <div class="cart-item-name">${item.name}</div>
+              <div class="cart-item-expert">Sold by: Expert Name</div>
+              <div class="cart-item-type ${item.isDigital ? 'digital-item' : ''}">
+                ${item.isDigital ? 'Digital Item' : 'Physical Item'}
+              </div>
+              <div class="cart-item-price">
+                ${price} each × ${item.quantity} = ${totalPrice}
+              </div>
+            </div>
+            <div class="cart-item-controls">
+              <div class="quantity-control">
+                <button class="quantity-btn" onclick="updateQuantity('${item.productId}', ${Math.max(1, item.quantity - 1)})">
+                  <i class="fas fa-minus"></i>
+                </button>
+                <input type="number" class="quantity-input" value="${item.quantity}" min="1"
+                  onchange="updateQuantity('${item.productId}', this.value)">
+                <button class="quantity-btn" onclick="updateQuantity('${item.productId}', ${item.quantity + 1})">
+                  <i class="fas fa-plus"></i>
+                </button>
+              </div>
+              <div class="cart-item-remove" onclick="removeItem('${item.productId}')">
+                <i class="fas fa-trash"></i>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      const summaryHTML = `
+        <div class="cart-summary">
+          <h2 class="summary-title">Order Summary</h2>
+          <div class="summary-row">
+            <span>Subtotal</span>
+            <span>${formatCurrency(summary.subtotal)}</span>
+          </div>
+          <div class="summary-row">
+            <span>Tax</span>
+            <span>${formatCurrency(summary.taxAmount)}</span>
+          </div>
+          ${hasPhysicalItems ? `
+            <div class="summary-row">
+              <span>Shipping</span>
+              <span>${formatCurrency(summary.shippingCost)}</span>
+            </div>
+          ` : ''}
+          <div class="summary-row total">
+            <span>Total</span>
+            <span>${formatCurrency(summary.totalAmount)}</span>
+          </div>
+          <button class="checkout-btn" onclick="proceedToCheckout()">
+            Proceed to Checkout
+          </button>
+        </div>
+      `;
+
+      cartContentContainer.innerHTML = `
+        <div class="cart-items">
+          ${itemsHTML}
+          <a href="store.html" class="continue-shopping">
+            <i class="fas fa-arrow-left"></i> Continue Shopping
+          </a>
+        </div>
+        ${summaryHTML}
+      `;
+    }
+
+    // Show empty cart
+    function showEmptyCart(message = 'Your cart is empty.', isLogin = false) {
+      cartContentContainer.innerHTML = `
+        <div class="empty-cart">
+          <i class="fas fa-shopping-cart"></i>
+          <h2>${message}</h2>
+          <p>Explore our expert products to find something you'll love.</p>
+          <a href="${isLogin ? 'login.html' : 'store.html'}">
+            ${isLogin ? 'Log In' : 'Go Shopping'}
+          </a>
+        </div>
+      `;
+    }
+
+    // Show error message
+    function showError(message) {
+      cartContentContainer.innerHTML = `
+        <div class="empty-cart" style="background-color: #f8d7da; color: #721c24;">
+          <i class="fas fa-exclamation-circle"></i>
+          <h2>Error</h2>
+          <p>${message}</p>
+          <a href="store.html">
+            Back to Store
+          </a>
+        </div>
+      `;
+    }
+
+    // Update item quantity
+    async function updateQuantity(productId, quantity) {
+      try {
+        // Ensure quantity is a positive integer
+        quantity = Math.max(1, parseInt(quantity));
+
+        const response = await fetch('/api/ecommerce/cart/update', {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${getToken()}`
+          },
+          body: JSON.stringify({
+            productId,
+            quantity
+          })
+        });
+
+        if (!response.ok) {
+          const error = await response.json();
+          throw new Error(error.message || 'Failed to update quantity');
+        }
+
+        // Reload the cart
+        await loadCart();
+      } catch (error) {
+        console.error('Error updating quantity:', error);
+        alert(error.message || 'Failed to update quantity');
+      }
+    }
+
+    // Remove item from cart
+    async function removeItem(productId) {
+      try {
+        if (!confirm('Are you sure you want to remove this item from your cart?')) {
+          return;
+        }
+
+        const response = await fetch(`/api/ecommerce/cart/remove/${productId}`, {
+          method: 'DELETE',
+          headers: {
+            'Authorization': `Bearer ${getToken()}`
+          }
+        });
+
+        if (!response.ok) {
+          const error = await response.json();
+          throw new Error(error.message || 'Failed to remove item');
+        }
+
+        // Reload the cart
+        await loadCart();
+      } catch (error) {
+        console.error('Error removing item:', error);
+        alert(error.message || 'Failed to remove item');
+      }
+    }
+
+    // Format currency
+    function formatCurrency(amount) {
+      return new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD'
+      }).format(amount);
+    }
+
+    // Proceed to checkout
+    function proceedToCheckout() {
+      window.location.href = 'checkout.html';
+    }
+
+    // Update auth UI based on login status
+    function updateAuthUI() {
+      const user = getCurrentUser();
+
+      if (user) {
+        document.getElementById('loginNav').style.display = 'none';
+        document.getElementById('userProfileNav').style.display = 'block';
+        document.getElementById('userProfileImage').src = user.profilePicture || '/uploads/default-avatar.png';
+        document.getElementById('userProfileLink').href = user.isExpert ? 'expert-dashboard.html' : 'chat.html';
+      } else {
+        document.getElementById('loginNav').style.display = 'block';
+        document.getElementById('userProfileNav').style.display = 'none';
+      }
+    }
+  </script>
+</body>
+</html>

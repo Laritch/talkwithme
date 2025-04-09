@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Appointments | Expert Marketplace</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="client-appointments.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <div class="logo">
+                <img src="/uploads/default-avatar.png" alt="Logo">
+                <span>Expert Marketplace</span>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="experts.html">Find Experts</a></li>
+                    <li><a href="categories.html">Categories</a></li>
+                    <li><a href="how-it-works.html">How It Works</a></li>
+                    <li><a href="expert-case-studies.html">Case Studies</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <div class="user-menu">
+                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330" alt="Client" class="user-avatar">
+                    <div class="user-dropdown">
+                        <a href="client-dashboard.html">My Dashboard</a>
+                        <a href="client-appointments.html" class="active">My Appointments</a>
+                        <a href="client-profile.html">My Profile</a>
+                        <a href="client-settings.html">Settings</a>
+                        <a href="login.html">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="dashboard-header">
+            <h1>My Appointments</h1>
+            <p class="dashboard-subtitle">Manage your scheduled sessions with experts</p>
+
+            <div class="dashboard-actions">
+                <button class="btn btn-primary" id="sync-calendar-btn">
+                    <i class="fas fa-sync-alt"></i> Sync with Calendar
+                </button>
+                <button class="btn btn-outline" id="get-reminders-btn">
+                    <i class="fas fa-bell"></i> Set Reminders
+                </button>
+            </div>
+        </div>
+
+        <div class="dashboard-tabs">
+            <button class="tab-btn active" data-tab="upcoming">Upcoming (3)</button>
+            <button class="tab-btn" data-tab="past">Past Sessions</button>
+            <button class="tab-btn" data-tab="requests">Pending (1)</button>
+        </div>
+
+        <div class="dashboard-content">
+            <!-- Upcoming Appointments Tab Content -->
+            <div class="tab-content active" id="upcoming-tab">
+                <div class="appointments-list">
+                    <!-- This week's appointments -->
+                    <div class="appointment-date-group">
+                        <h3 class="date-label">This Week</h3>
+
+                        <div class="appointment-card">
+                            <div class="appointment-time">
+                                <div class="day">Thu, Apr 3</div>
+                                <div class="time">2:30 PM</div>
+                                <div class="duration">60 min</div>
+                            </div>
+                            <div class="appointment-details">
+                                <div class="expert-info">
+                                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a" alt="Expert" class="expert-avatar">
+                                    <div>
+                                        <h4>James Wilson</h4>
+                                        <p>Business Growth Strategist</p>
+                                        <div class="expert-rating">
+                                            <div class="stars">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star-half-alt"></i>
+                                            </div>
+                                            <span>4.8</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="appointment-meta">
+                                    <span class="meta-item"><i class="fas fa-tag"></i> Strategy Session</span>
+                                    <span class="meta-item"><i class="fas fa-clipboard-list"></i> Based on: B2B Sales Acceleration Case Study</span>
+                                </div>
+                                <div class="appointment-topic">
+                                    <strong>Topic:</strong> Follow-up session to refine marketing funnel and discuss quarterly targets
+                                </div>
+                            </div>
+                            <div class="appointment-actions">
+                                <div class="countdown">Starts in: 1h 20m</div>
+                                <button class="btn btn-sm btn-primary join-btn"><i class="fas fa-video"></i> Join Session</button>
+                                <button class="btn btn-sm btn-outline reschedule-btn"><i class="fas fa-calendar-alt"></i> Reschedule</button>
+                                <button class="btn btn-sm btn-outline message-btn"><i class="fas fa-comment"></i> Message</button>
+                                <button class="btn btn-sm btn-text cancel-btn"><i class="fas fa-times"></i> Cancel</button>
+                            </div>
+                        </div>
+
+                        <div class="appointment-card">
+                            <div class="appointment-time">
+                                <div class="day">Fri, Apr 4</div>
+                                <div class="time">11:00 AM</div>
+                                <div class="duration">30 min</div>
+                            </div>
+                            <div class="appointment-details">
+                                <div class="expert-info">
+                                    <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e" alt="Expert" class="expert-avatar">
+                                    <div>
+                                        <h4>Amanda Rodriguez</h4>
+                                        <p>Customer Retention Expert</p>
+                                        <div class="expert-rating">
+                                            <div class="stars">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                            </div>
+                                            <span>5.0</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="appointment-meta">
+                                    <span class="meta-item"><i class="fas fa-tag"></i> Discovery Call</span>
+                                    <span class="meta-item"><i class="fas fa-clipboard-list"></i> Based on: SaaS Customer Retention Case Study</span>
+                                </div>
+                                <div class="appointment-topic">
+                                    <strong>Topic:</strong> Initial discussion about improving customer retention rates for your business
+                                </div>
+                            </div>
+                            <div class="appointment-actions">
+                                <div class="countdown">Tomorrow</div>
+                                <button class="btn btn-sm btn-outline reschedule-btn"><i class="fas fa-calendar-alt"></i> Reschedule</button>
+                                <button class="btn btn-sm btn-outline message-btn"><i class="fas fa-comment"></i> Message</button>
+                                <button class="btn btn-sm btn-text cancel-btn"><i class="fas fa-times"></i> Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Next week's appointments -->
+                    <div class="appointment-date-group">
+                        <h3 class="date-label">Next Week</h3>
+
+                        <div class="appointment-card">
+                            <div class="appointment-time">
+                                <div class="day">Mon, Apr 7</div>
+                                <div class="time">10:00 AM</div>
+                                <div class="duration">90 min</div>
+                            </div>
+                            <div class="appointment-details">
+                                <div class="expert-info">
+                                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a" alt="Expert" class="expert-avatar">
+                                    <div>
+                                        <h4>James Wilson</h4>
+                                        <p>Business Growth Strategist</p>
+                                        <div class="expert-rating">
+                                            <div class="stars">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star-half-alt"></i>
+                                            </div>
+                                            <span>4.8</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="appointment-meta">
+                                    <span class="meta-item"><i class="fas fa-tag"></i> Growth Package (Session 1 of 4)</span>
+                                    <span class="meta-item"><i class="fas fa-clipboard-list"></i> Based on: Startup Scaling Blueprint Case Study</span>
+                                </div>
+                                <div class="appointment-topic">
+                                    <strong>Topic:</strong> First session to develop comprehensive growth plan for your business
+                                </div>
+                            </div>
+                            <div class="appointment-actions">
+                                <div class="countdown">In 4 days</div>
+                                <button class="btn btn-sm btn-outline reschedule-btn"><i class="fas fa-calendar-alt"></i> Reschedule</button>
+                                <button class="btn btn-sm btn-outline message-btn"><i class="fas fa-comment"></i> Message</button>
+                                <button class="btn btn-sm btn-text cancel-btn"><i class="fas fa-times"></i> Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Past Sessions Tab Content -->
+            <div class="tab-content" id="past-tab">
+                <div class="past-appointments-list">
+                    <!-- Past appointments would be listed here -->
+                    <p class="tab-placeholder">Your past sessions will appear here when available</p>
+                </div>
+            </div>
+
+            <!-- Pending Requests Tab Content -->
+            <div class="tab-content" id="requests-tab">
+                <div class="pending-requests">
+                    <div class="pending-card">
+                        <div class="pending-header">
+                            <div class="expert-info">
+                                <img src="https://images.unsplash.com/photo-1542178243-bc20204b769f" alt="Expert" class="expert-avatar">
+                                <div>
+                                    <h4>Michael Chang</h4>
+                                    <p>Marketing Optimization Specialist</p>
+                                </div>
+                            </div>
+                            <div class="request-time">
+                                <i class="far fa-clock"></i> Requested yesterday
+                            </div>
+                        </div>
+                        <div class="pending-details">
+                            <div class="request-service">
+                                <strong>Service:</strong> Strategy Session ($199)
+                            </div>
+                            <div class="request-status">
+                                <strong>Status:</strong> <span class="status-badge">Awaiting Expert Response</span>
+                            </div>
+                            <div class="request-date">
+                                <strong>Preferred Date:</strong> April 12, 2025
+                            </div>
+                            <div class="request-time-slots">
+                                <strong>Preferred Times:</strong>
+                                <span class="time-slot-option">9:00 AM</span>
+                                <span class="time-slot-option">1:30 PM</span>
+                                <span class="time-slot-option">4:00 PM</span>
+                            </div>
+                            <div class="request-topic">
+                                <strong>Your Message:</strong> I'm looking to improve my conversion rates on my e-commerce site after seeing your case study. I'd like to discuss specific strategies for my niche (home decor).
+                            </div>
+                        </div>
+                        <div class="pending-actions">
+                            <button class="btn btn-outline"><i class="fas fa-pen"></i> Edit Request</button>
+                            <button class="btn btn-text"><i class="fas fa-times"></i> Cancel Request</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="quick-action-panel">
+            <h3>Need More Help?</h3>
+            <div class="action-buttons">
+                <a href="experts.html" class="btn btn-outline">
+                    <i class="fas fa-search"></i>
+                    Find More Experts
+                </a>
+                <a href="expert-case-studies.html" class="btn btn-outline">
+                    <i class="fas fa-clipboard-list"></i>
+                    Browse Case Studies
+                </a>
+                <a href="help-center.html" class="btn btn-outline">
+                    <i class="fas fa-question-circle"></i>
+                    Visit Help Center
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>Expert Marketplace</h3>
+                    <p>Connect with top professionals in every field and get the expert help you need.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4>For Clients</h4>
+                    <ul>
+                        <li><a href="#">How It Works</a></li>
+                        <li><a href="#">Find an Expert</a></li>
+                        <li><a href="#">Success Stories</a></li>
+                        <li><a href="#">Resources</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>For Experts</h4>
+                    <ul>
+                        <li><a href="#">Join as an Expert</a></li>
+                        <li><a href="#">Success Stories</a></li>
+                        <li><a href="#">Resources</a></li>
+                        <li><a href="#">Community</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Press</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Expert Marketplace. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Accessibility</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Calendar Integration Modal -->
+    <div class="modal" id="calendar-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Sync with Your Calendar</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p class="modal-description">Keep track of your expert sessions by syncing them with your preferred calendar.</p>
+                <div class="calendar-options">
+                    <div class="calendar-option">
+                        <i class="fab fa-google"></i>
+                        <h4>Google Calendar</h4>
+                        <p>Sync your bookings with Google Calendar</p>
+                        <button class="btn btn-primary">Connect</button>
+                    </div>
+                    <div class="calendar-option">
+                        <i class="fab fa-microsoft"></i>
+                        <h4>Microsoft Outlook</h4>
+                        <p>Sync your bookings with Outlook Calendar</p>
+                        <button class="btn btn-primary">Connect</button>
+                    </div>
+                    <div class="calendar-option">
+                        <i class="fas fa-calendar-alt"></i>
+                        <h4>Apple Calendar</h4>
+                        <p>Sync your bookings with Apple Calendar</p>
+                        <button class="btn btn-primary">Connect</button>
+                    </div>
+                    <div class="calendar-option">
+                        <i class="fas fa-file-code"></i>
+                        <h4>iCal Feed</h4>
+                        <p>Get an iCal link to use with any calendar</p>
+                        <button class="btn btn-primary">Generate Link</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reminder Settings Modal -->
+    <div class="modal" id="reminders-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Reminder Settings</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p class="modal-description">Set up how and when you'd like to receive reminders for your upcoming sessions.</p>
+
+                <form class="reminders-form">
+                    <div class="form-group">
+                        <label for="reminder-email">Email Reminders</label>
+                        <div class="checkbox-options">
+                            <label class="checkbox-option">
+                                <input type="checkbox" id="email-1-day" name="email-reminders" value="1-day" checked>
+                                <span>1 day before</span>
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" id="email-1-hour" name="email-reminders" value="1-hour" checked>
+                                <span>1 hour before</span>
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" id="email-15-min" name="email-reminders" value="15-min">
+                                <span>15 minutes before</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="reminder-sms">SMS Reminders</label>
+                        <div class="checkbox-options">
+                            <label class="checkbox-option">
+                                <input type="checkbox" id="sms-1-day" name="sms-reminders" value="1-day">
+                                <span>1 day before</span>
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" id="sms-1-hour" name="sms-reminders" value="1-hour" checked>
+                                <span>1 hour before</span>
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" id="sms-15-min" name="sms-reminders" value="15-min">
+                                <span>15 minutes before</span>
+                            </label>
+                        </div>
+                        <div class="form-row">
+                            <label for="phone-number">Phone Number for SMS</label>
+                            <input type="tel" id="phone-number" placeholder="+1 (555) 123-4567" value="+1 (555) 123-4567">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Additional Options</label>
+                        <div class="checkbox-options">
+                            <label class="checkbox-option full-width">
+                                <input type="checkbox" id="add-to-calendar" name="additional-options" value="add-to-calendar" checked>
+                                <span>Automatically add new bookings to my calendar</span>
+                            </label>
+                            <label class="checkbox-option full-width">
+                                <input type="checkbox" id="send-summary" name="additional-options" value="send-summary" checked>
+                                <span>Send me a summary of my upcoming sessions every Monday</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Save Settings</button>
+                        <button type="button" class="btn btn-text">Reset to Default</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts.js"></script>
+    <script src="client-appointments.js"></script>
+</body>
+</html>

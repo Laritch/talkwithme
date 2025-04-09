@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Client Dashboard | Expert Chat</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="css/client-dashboard.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header class="main-header">
+      <div class="logo">
+        <a href="index.html">
+          <img src="https://same-assets.com/expertapp_logo.png" alt="Expert Chat Logo">
+        </a>
+      </div>
+      <nav class="main-nav">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="store.html">Store</a></li>
+          <li><a href="expert-matching.html">Find Experts</a></li>
+          <li><a href="cart.html" class="cart-icon"><i class="fas fa-shopping-cart"></i> <span class="cart-count">0</span></a></li>
+          <li class="auth-links">
+            <a href="login.html" class="login-link">Login</a>
+            <a href="#" class="profile-link hidden">
+              <img src="uploads/default-avatar.png" alt="Profile" class="nav-profile-image">
+              <span class="username">User</span>
+            </a>
+            <div class="dropdown-menu">
+              <a href="client-dashboard.html" class="active">Dashboard</a>
+              <a href="loyalty-program.html">Loyalty Program</a>
+              <a href="#" class="logout-btn">Logout</a>
+            </div>
+          </li>
+        </ul>
+      </nav>
+      <div class="mobile-menu-toggle">
+        <i class="fas fa-bars"></i>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="dashboard-container">
+      <!-- Dashboard Header -->
+      <div class="dashboard-header">
+        <div class="user-welcome">
+          <h1>Welcome, <span class="user-name">Client</span>!</h1>
+          <p class="last-login">Last login: <span class="last-login-date">May 12, 2024</span></p>
+        </div>
+        <div class="quick-stats">
+          <div class="stat-card">
+            <div class="stat-icon">
+              <i class="fas fa-shopping-bag"></i>
+            </div>
+            <div class="stat-info">
+              <h3 class="stat-value order-count">0</h3>
+              <p class="stat-label">Orders</p>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">
+              <i class="fas fa-coins"></i>
+            </div>
+            <div class="stat-info">
+              <h3 class="stat-value loyalty-points">0</h3>
+              <p class="stat-label">Loyalty Points</p>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">
+              <i class="fas fa-comment-dots"></i>
+            </div>
+            <div class="stat-info">
+              <h3 class="stat-value chat-count">0</h3>
+              <p class="stat-label">Active Chats</p>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">
+              <i class="fas fa-calendar-check"></i>
+            </div>
+            <div class="stat-info">
+              <h3 class="stat-value consultation-count">0</h3>
+              <p class="stat-label">Consultations</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dashboard Navigation -->
+      <div class="dashboard-nav">
+        <button class="dashboard-nav-item active" data-section="overview">
+          <i class="fas fa-home"></i> Overview
+        </button>
+        <button class="dashboard-nav-item" data-section="orders">
+          <i class="fas fa-shopping-bag"></i> My Orders
+        </button>
+        <button class="dashboard-nav-item" data-section="chats">
+          <i class="fas fa-comment-dots"></i> My Chats
+        </button>
+        <button class="dashboard-nav-item" data-section="consultations">
+          <i class="fas fa-calendar-check"></i> Expert Consultations
+        </button>
+        <button class="dashboard-nav-item" data-section="saved">
+          <i class="fas fa-bookmark"></i> Saved Items
+        </button>
+        <button class="dashboard-nav-item" data-section="affiliate">
+          <i class="fas fa-link"></i> My Referrals
+        </button>
+        <button class="dashboard-nav-item" data-section="settings">
+          <i class="fas fa-cog"></i> Settings
+        </button>
+      </div>
+
+      <!-- Dashboard Content Sections -->
+      <div class="dashboard-content">
+        <!-- Overview Section -->
+        <section class="dashboard-section active" id="overview-section">
+          <div class="section-header">
+            <h2>Dashboard Overview</h2>
+          </div>
+          <div class="overview-grid">
+            <!-- Recent Orders -->
+            <div class="overview-card">
+              <div class="card-header">
+                <h3>Recent Orders</h3>
+                <a href="#" class="view-all" data-target="orders">View All</a>
+              </div>
+              <div class="card-content">
+                <div class="recent-orders-list">
+                  <div class="empty-state hidden">
+                    <i class="fas fa-shopping-bag"></i>
+                    <p>No orders yet</p>
+                    <a href="store.html" class="primary-button">Shop Now</a>
+                  </div>
+                  <!-- Recent orders will be added here dynamically -->
+                </div>
+              </div>
+            </div>
+
+            <!-- Recent Chats -->
+            <div class="overview-card">
+              <div class="card-header">
+                <h3>Recent Chats</h3>
+                <a href="#" class="view-all" data-target="chats">View All</a>
+              </div>
+              <div class="card-content">
+                <div class="recent-chats-list">
+                  <div class="empty-state hidden">
+                    <i class="fas fa-comment-dots"></i>
+                    <p>No active chats</p>
+                    <a href="expert-matching.html" class="primary-button">Find an Expert</a>
+                  </div>
+                  <!-- Recent chats will be added here dynamically -->
+                </div>
+              </div>
+            </div>
+
+            <!-- Loyalty Program Summary -->
+            <div class="overview-card">
+              <div class="card-header">
+                <h3>Loyalty Program</h3>
+                <a href="loyalty-program.html" class="view-all">View Details</a>
+              </div>
+              <div class="card-content">
+                <div class="loyalty-summary">
+                  <div class="loyalty-tier">
+                    <div class="tier-badge">
+                      <i class="fas fa-medal"></i>
+                    </div>
+                    <div class="tier-info">
+                      <h4 class="tier-name">Bronze</h4>
+                      <div class="progress-bar-container">
+                        <div class="progress-bar" style="width: 0%"></div>
+                      </div>
+                      <p class="tier-progress">0% to Silver</p>
+                    </div>
+                  </div>
+                  <div class="loyalty-points-info">
+                    <div class="points-balance">
+                      <span class="value">0</span>
+                      <span class="label">Points Balance</span>
+                    </div>
+                    <div class="available-rewards">
+                      <span class="value">0</span>
+                      <span class="label">Available Rewards</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Upcoming Consultations Preview -->
+            <div class="overview-card consultation-preview">
+              <div class="card-header">
+                <h3>Upcoming Consultations</h3>
+                <a href="#" class="view-all" data-target="consultations">View All</a>
+              </div>
+              <div class="card-content">
+                <div class="upcoming-consultations-list">
+                  <div class="empty-state hidden">
+                    <i class="fas fa-calendar-alt"></i>
+                    <p>No upcoming consultations</p>
+                    <a href="expert-matching.html" class="primary-button">Book a Consultation</a>
+                  </div>
+                  <!-- Upcoming consultations will be added here dynamically -->
+                </div>
+              </div>
+            </div>
+
+            <!-- Saved Items Preview -->
+            <div class="overview-card">
+              <div class="card-header">
+                <h3>Saved Items</h3>
+                <a href="#" class="view-all" data-target="saved">View All</a>
+              </div>
+              <div class="card-content">
+                <div class="saved-items-preview">
+                  <div class="empty-state hidden">
+                    <i class="fas fa-bookmark"></i>
+                    <p>No saved items yet</p>
+                    <a href="store.html" class="primary-button">Explore Products</a>
+                  </div>
+                  <!-- Saved items preview will be added here dynamically -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Orders Section -->
+        <section class="dashboard-section" id="orders-section">
+          <div class="section-header">
+            <h2>My Orders</h2>
+            <div class="section-actions">
+              <div class="search-box">
+                <input type="text" placeholder="Search orders..." id="orders-search">
+                <i class="fas fa-search"></i>
+              </div>
+              <div class="filter-dropdown">
+                <select id="orders-filter">
+                  <option value="all">All Orders</option>
+                  <option value="pending">Pending</option>
+                  <option value="processing">Processing</option>
+                  <option value="shipped">Shipped</option>
+                  <option value="delivered">Delivered</option>
+                  <option value="completed">Completed</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="orders-list">
+            <div class="empty-state hidden">
+              <i class="fas fa-shopping-bag"></i>
+              <p>No orders found</p>
+              <a href="store.html" class="primary-button">Shop Now</a>
+            </div>
+            <!-- Orders will be added here dynamically -->
+          </div>
+          <div class="pagination-controls">
+            <button class="pagination-prev disabled">Previous</button>
+            <div class="pagination-info">Page <span class="current-page">1</span> of <span class="total-pages">1</span></div>
+            <button class="pagination-next disabled">Next</button>
+          </div>
+        </section>
+
+        <!-- Chats Section -->
+        <section class="dashboard-section" id="chats-section">
+          <div class="section-header">
+            <h2>My Chats</h2>
+            <div class="section-actions">
+              <div class="search-box">
+                <input type="text" placeholder="Search chats..." id="chats-search">
+                <i class="fas fa-search"></i>
+              </div>
+              <div class="filter-dropdown">
+                <select id="chats-filter">
+                  <option value="all">All Chats</option>
+                  <option value="active">Active</option>
+                  <option value="archived">Archived</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="chats-list">
+            <div class="empty-state hidden">
+              <i class="fas fa-comment-dots"></i>
+              <p>No chats found</p>
+              <a href="expert-matching.html" class="primary-button">Find an Expert</a>
+            </div>
+            <!-- Chats will be added here dynamically -->
+          </div>
+          <div class="pagination-controls">
+            <button class="pagination-prev disabled">Previous</button>
+            <div class="pagination-info">Page <span class="current-page">1</span> of <span class="total-pages">1</span></div>
+            <button class="pagination-next disabled">Next</button>
+          </div>
+        </section>
+
+        <!-- Expert Consultations Section -->
+        <section class="dashboard-section" id="consultations-section">
+          <div class="section-header">
+            <h2>Expert Consultations</h2>
+            <div class="section-tabs">
+              <button class="section-tab active" data-tab="upcoming-consultations">Upcoming</button>
+              <button class="section-tab" data-tab="past-consultations">History</button>
+              <button class="section-tab" data-tab="find-experts">Find Experts</button>
+            </div>
+          </div>
+
+          <!-- Upcoming Consultations Tab -->
+          <div class="section-tab-content active" id="upcoming-consultations-content">
+            <div class="consultation-actions">
+              <button class="primary-button book-consultation-btn">
+                <i class="fas fa-plus"></i> Book New Consultation
+              </button>
+              <div class="search-box">
+                <input type="text" placeholder="Search consultations..." id="consultations-search">
+                <i class="fas fa-search"></i>
+              </div>
+            </div>
+            <div class="consultations-list">
+              <div class="empty-state hidden">
+                <i class="fas fa-calendar-alt"></i>
+                <p>No upcoming consultations</p>
+                <a href="expert-matching.html" class="primary-button">Book a Consultation</a>
+              </div>
+              <!-- Upcoming consultations will be added here dynamically -->
+            </div>
+          </div>
+
+          <!-- Past Consultations Tab -->
+          <div class="section-tab-content" id="past-consultations-content">
+            <div class="filter-row">
+              <div class="search-box">
+                <input type="text" placeholder="Search past consultations..." id="past-consultations-search">
+                <i class="fas fa-search"></i>
+              </div>
+              <div class="filter-dropdown">
+                <label for="consultation-period">Period:</label>
+                <select id="consultation-period">
+                  <option value="all">All Time</option>
+                  <option value="30">Last 30 Days</option>
+                  <option value="90">Last 90 Days</option>
+                  <option value="180">Last 6 Months</option>
+                  <option value="365">Last Year</option>
+                </select>
+              </div>
+            </div>
+            <div class="past-consultations-list">
+              <div class="empty-state hidden">
+                <i class="fas fa-history"></i>
+                <p>No past consultations</p>
+                <p class="secondary-text">Your completed consultations will appear here</p>
+              </div>
+              <!-- Past consultations will be added here dynamically -->
+            </div>
+            <div class="pagination-controls">
+              <button class="pagination-prev disabled">Previous</button>
+              <div class="pagination-info">Page <span class="current-page">1</span> of <span class="total-pages">1</span></div>
+              <button class="pagination-next disabled">Next</button>
+            </div>
+          </div>
+
+          <!-- Find Experts Tab -->
+          <div class="section-tab-content" id="find-experts-content">
+            <div class="experts-search-container">
+              <h3>Find Your Perfect Expert</h3>
+              <div class="experts-search-form">
+                <div class="search-row">
+                  <div class="form-group">
+                    <label for="expert-category">Category</label>
+                    <select id="expert-category">
+                      <option value="">All Categories</option>
+                      <option value="finance">Finance</option>
+                      <option value="health">Health & Wellness</option>
+                      <option value="career">Career Coaching</option>
+                      <option value="tech">Technology</option>
+                      <option value="legal">Legal</option>
+                      <option value="business">Business</option>
+                      <option value="education">Education</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="expert-rating">Minimum Rating</label>
+                    <select id="expert-rating">
+                      <option value="0">Any Rating</option>
+                      <option value="3">3+ Stars</option>
+                      <option value="4">4+ Stars</option>
+                      <option value="4.5">4.5+ Stars</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="expert-availability">Availability</label>
+                    <select id="expert-availability">
+                      <option value="any">Any Time</option>
+                      <option value="today">Today</option>
+                      <option value="tomorrow">Tomorrow</option>
+                      <option value="week">This Week</option>
+                      <option value="weekend">Weekend</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="search-row">
+                  <div class="search-box full-width">
+                    <input type="text" placeholder="Search by name, expertise, or keywords..." id="expert-search-input">
+                    <button class="search-btn" id="expert-search-btn">
+                      <i class="fas fa-search"></i> Search
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="experts-grid-container">
+              <div class="experts-grid-header">
+                <h3>Recommended Experts</h3>
+                <div class="experts-sort">
+                  <label for="experts-sort-select">Sort by:</label>
+                  <select id="experts-sort-select">
+                    <option value="recommended">Recommended</option>
+                    <option value="rating">Highest Rating</option>
+                    <option value="price-low">Price: Low to High</option>
+                    <option value="price-high">Price: High to Low</option>
+                    <option value="availability">Availability</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="experts-grid">
+                <div class="empty-state hidden">
+                  <i class="fas fa-user-tie"></i>
+                  <p>No experts match your criteria</p>
+                  <p class="secondary-text">Try adjusting your filters</p>
+                </div>
+                <!-- Experts will be added here dynamically -->
+              </div>
+
+              <div class="pagination-controls">
+                <button class="pagination-prev disabled">Previous</button>
+                <div class="pagination-info">Page <span class="current-page">1</span> of <span class="total-pages">1</span></div>
+                <button class="pagination-next disabled">Next</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Saved Items Section -->
+        <section class="dashboard-section" id="saved-section">
+          <div class="section-header">
+            <h2>Saved Items</h2>
+            <div class="section-tabs">
+              <button class="section-tab active" data-tab="saved-products">Products</button>
+              <button class="section-tab" data-tab="saved-experts">Experts</button>
+              <button class="section-tab" data-tab="saved-bundles">Bundles</button>
+            </div>
+          </div>
+
+          <!-- Saved Products Tab -->
+          <div class="section-tab-content active" id="saved-products-content">
+            <div class="saved-products-grid">
+              <div class="empty-state hidden">
+                <i class="fas fa-box"></i>
+                <p>No saved products yet</p>
+                <a href="store.html" class="primary-button">Explore Products</a>
+              </div>
+              <!-- Saved products will be added here dynamically -->
+            </div>
+          </div>
+
+          <!-- Saved Experts Tab -->
+          <div class="section-tab-content" id="saved-experts-content">
+            <div class="saved-experts-grid">
+              <div class="empty-state hidden">
+                <i class="fas fa-user-tie"></i>
+                <p>No saved experts yet</p>
+                <a href="expert-matching.html" class="primary-button">Find Experts</a>
+              </div>
+              <!-- Saved experts will be added here dynamically -->
+            </div>
+          </div>
+
+          <!-- Saved Bundles Tab -->
+          <div class="section-tab-content" id="saved-bundles-content">
+            <div class="saved-bundles-grid">
+              <div class="empty-state hidden">
+                <i class="fas fa-boxes-stacked"></i>
+                <p>No saved bundles yet</p>
+                <a href="store.html" class="primary-button">Explore Bundles</a>
+              </div>
+              <!-- Saved bundles will be added here dynamically -->
+            </div>
+          </div>
+        </section>
+
+        <!-- Affiliate Section -->
+        <section class="dashboard-section" id="affiliate-section">
+          <div class="section-header">
+            <h2>My Referrals</h2>
+          </div>
+
+          <div class="affiliate-content">
+            <div class="affiliate-info-card">
+              <h3>Your Referral Program</h3>
+              <p>Share your unique referral link with friends. When they sign up, you'll both earn rewards!</p>
+
+              <div class="referral-code-box">
+                <div class="referral-label">Your Referral Code:</div>
+                <div class="code-display">
+                  <span class="referral-code">Loading...</span>
+                  <button class="copy-btn" data-copy-target="referral-code">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+              </div>
+
+              <div class="referral-link-box">
+                <div class="referral-label">Share this link:</div>
+                <div class="link-display">
+                  <span class="referral-link">Loading...</span>
+                  <button class="copy-btn" data-copy-target="referral-link">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+              </div>
+
+              <div class="referral-sharing">
+                <p>Share via:</p>
+                <div class="social-sharing-buttons">
+                  <button class="share-btn facebook">
+                    <i class="fab fa-facebook-f"></i>
+                  </button>
+                  <button class="share-btn twitter">
+                    <i class="fab fa-twitter"></i>
+                  </button>
+                  <button class="share-btn email">
+                    <i class="fas fa-envelope"></i>
+                  </button>
+                  <button class="share-btn whatsapp">
+                    <i class="fab fa-whatsapp"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="affiliate-stats-card">
+              <h3>Your Referral Stats</h3>
+              <div class="stats-grid">
+                <div class="stat-item">
+                  <div class="stat-value">0</div>
+                  <div class="stat-label">Successful Referrals</div>
+                </div>
+                <div class="stat-item">
+                  <div class="stat-value">0</div>
+                  <div class="stat-label">Points Earned</div>
+                </div>
+                <div class="stat-item">
+                  <div class="stat-value">$0</div>
+                  <div class="stat-label">Discount Value</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="affiliate-history-card">
+              <h3>Referral History</h3>
+              <div class="referral-history-table">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Date</th>
+                      <th>User</th>
+                      <th>Status</th>
+                      <th>Rewards</th>
+                    </tr>
+                  </thead>
+                  <tbody class="referral-history-body">
+                    <!-- Referral history will be added dynamically -->
+                  </tbody>
+                </table>
+                <div class="empty-state hidden">
+                  <i class="fas fa-users"></i>
+                  <p>No referrals yet</p>
+                  <p class="secondary-text">Share your code to start earning rewards!</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Settings Section -->
+        <section class="dashboard-section" id="settings-section">
+          <div class="section-header">
+            <h2>Account Settings</h2>
+          </div>
+
+          <div class="settings-content">
+            <div class="settings-card">
+              <h3>Profile Information</h3>
+              <form id="profile-form" class="settings-form">
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="profile-name">Full Name</label>
+                    <input type="text" id="profile-name" name="name" placeholder="Your Name">
+                  </div>
+                  <div class="form-group">
+                    <label for="profile-email">Email Address</label>
+                    <input type="email" id="profile-email" name="email" placeholder="your@email.com" disabled>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="profile-phone">Phone Number</label>
+                    <input type="tel" id="profile-phone" name="phone" placeholder="Your Phone Number">
+                  </div>
+                  <div class="form-group">
+                    <label for="profile-birthday">Birthday</label>
+                    <input type="date" id="profile-birthday" name="birthday">
+                  </div>
+                </div>
+                <div class="form-row">
+                  <button type="submit" class="primary-button">Save Changes</button>
+                </div>
+              </form>
+            </div>
+
+            <div class="settings-card">
+              <h3>Change Password</h3>
+              <form id="password-form" class="settings-form">
+                <div class="form-group">
+                  <label for="current-password">Current Password</label>
+                  <input type="password" id="current-password" name="currentPassword" placeholder="Enter current password">
+                </div>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="new-password">New Password</label>
+                    <input type="password" id="new-password" name="newPassword" placeholder="Enter new password">
+                  </div>
+                  <div class="form-group">
+                    <label for="confirm-password">Confirm New Password</label>
+                    <input type="password" id="confirm-password" name="confirmPassword" placeholder="Confirm new password">
+                  </div>
+                </div>
+                <div class="form-row">
+                  <button type="submit" class="primary-button">Update Password</button>
+                </div>
+              </form>
+            </div>
+
+            <div class="settings-card">
+              <h3>Notification Preferences</h3>
+              <form id="notification-form" class="settings-form">
+                <div class="toggle-group">
+                  <label class="toggle-label">Email Notifications</label>
+                  <div class="toggle-options">
+                    <div class="toggle-option">
+                      <input type="checkbox" id="email-orders" name="emailOrders" checked>
+                      <label for="email-orders">Order Updates</label>
+                    </div>
+                    <div class="toggle-option">
+                      <input type="checkbox" id="email-chats" name="emailChats" checked>
+                      <label for="email-chats">Chat Messages</label>
+                    </div>
+                    <div class="toggle-option">
+                      <input type="checkbox" id="email-promotions" name="emailPromotions" checked>
+                      <label for="email-promotions">Promotions & Discounts</label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="toggle-group">
+                  <label class="toggle-label">SMS Notifications</label>
+                  <div class="toggle-options">
+                    <div class="toggle-option">
+                      <input type="checkbox" id="sms-orders" name="smsOrders">
+                      <label for="sms-orders">Order Updates</label>
+                    </div>
+                    <div class="toggle-option">
+                      <input type="checkbox" id="sms-chats" name="smsChats">
+                      <label for="sms-chats">Chat Messages</label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <button type="submit" class="primary-button">Save Preferences</button>
+                </div>
+              </form>
+            </div>
+
+            <div class="settings-card danger-zone">
+              <h3>Account Actions</h3>
+              <div class="danger-actions">
+                <button class="secondary-button" id="download-data-btn">Download My Data</button>
+                <button class="danger-button" id="delete-account-btn">Delete Account</button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Consultation Details Modal -->
+    <div class="modal" id="consultation-details-modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Consultation Details</h2>
+          <button class="close-modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="consultation-details-content">
+            <div class="expert-profile-snapshot">
+              <div class="expert-avatar">
+                <img src="uploads/default-avatar.png" alt="Expert" id="consultation-expert-img">
+              </div>
+              <div class="expert-info">
+                <h3 id="consultation-expert-name">Expert Name</h3>
+                <div class="expert-rating">
+                  <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                  </div>
+                  <span class="rating-count" id="consultation-expert-rating">4.5 (120 reviews)</span>
+                </div>
+                <div class="expert-category" id="consultation-expert-category">Finance Expert</div>
+              </div>
+            </div>
+
+            <div class="consultation-info-grid">
+              <div class="consultation-info-item">
+                <div class="info-label"><i class="fas fa-calendar"></i> Date</div>
+                <div class="info-value" id="consultation-date">May 15, 2024</div>
+              </div>
+              <div class="consultation-info-item">
+                <div class="info-label"><i class="fas fa-clock"></i> Time</div>
+                <div class="info-value" id="consultation-time">10:00 AM - 11:00 AM</div>
+              </div>
+              <div class="consultation-info-item">
+                <div class="info-label"><i class="fas fa-video"></i> Type</div>
+                <div class="info-value" id="consultation-type">Video Call</div>
+              </div>
+              <div class="consultation-info-item">
+                <div class="info-label"><i class="fas fa-tag"></i> Price</div>
+                <div class="info-value" id="consultation-price">$75.00</div>
+              </div>
+              <div class="consultation-info-item full-width">
+                <div class="info-label"><i class="fas fa-clipboard-list"></i> Status</div>
+                <div class="info-value status-confirmed" id="consultation-status">Confirmed</div>
+              </div>
+              <div class="consultation-info-item full-width">
+                <div class="info-label"><i class="fas fa-info-circle"></i> Description</div>
+                <div class="info-value" id="consultation-description">Initial consultation to discuss financial planning and investment strategies.</div>
+              </div>
+            </div>
+
+            <div class="consultation-preparation">
+              <h4>Prepare for Your Consultation</h4>
+              <div class="preparation-steps">
+                <div class="preparation-step">
+                  <div class="step-number">1</div>
+                  <div class="step-content">
+                    <h5>Review Materials</h5>
+                    <p>Check your email for any preparatory materials sent by your expert.</p>
+                  </div>
+                </div>
+                <div class="preparation-step">
+                  <div class="step-number">2</div>
+                  <div class="step-content">
+                    <h5>Test Your Setup</h5>
+                    <p>Ensure your camera and microphone are working properly before the call.</p>
+                  </div>
+                </div>
+                <div class="preparation-step">
+                  <div class="step-number">3</div>
+                  <div class="step-content">
+                    <h5>Join on Time</h5>
+                    <p>A join link will be available 5 minutes before the scheduled time.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div class="modal-footer-info" id="consultation-countdown">
+            Starts in: 2 days, 5 hours
+          </div>
+          <div class="modal-actions">
+            <button class="secondary-button" id="reschedule-consultation-btn">Reschedule</button>
+            <button class="danger-button" id="cancel-consultation-btn">Cancel Consultation</button>
+            <button class="primary-button hidden" id="join-consultation-btn">Join Now</button>
+            <button class="secondary-button hidden" id="message-expert-btn">Message Expert</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Feedback Modal -->
+    <div class="modal" id="feedback-modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Rate Your Consultation</h2>
+          <button class="close-modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="feedback-form">
+            <div class="expert-profile-snapshot small">
+              <div class="expert-avatar">
+                <img src="uploads/default-avatar.png" alt="Expert" id="feedback-expert-img">
+              </div>
+              <div class="expert-info">
+                <h3 id="feedback-expert-name">Expert Name</h3>
+                <div class="expert-category" id="feedback-expert-category">Finance Expert</div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>How would you rate your experience?</label>
+              <div class="rating-input">
+                <i class="far fa-star" data-rating="1"></i>
+                <i class="far fa-star" data-rating="2"></i>
+                <i class="far fa-star" data-rating="3"></i>
+                <i class="far fa-star" data-rating="4"></i>
+                <i class="far fa-star" data-rating="5"></i>
+              </div>
+              <input type="hidden" id="rating-value" value="0">
+            </div>
+
+            <div class="form-group">
+              <label for="feedback-comment">Your Comments</label>
+              <textarea id="feedback-comment" rows="4" placeholder="Share your experience with this expert..."></textarea>
+            </div>
+
+            <div class="feedback-categories">
+              <p>What did you like about this consultation? (Select all that apply)</p>
+              <div class="feedback-tags">
+                <label class="feedback-tag">
+                  <input type="checkbox" name="feedback-category" value="knowledgeable">
+                  <span>Knowledgeable</span>
+                </label>
+                <label class="feedback-tag">
+                  <input type="checkbox" name="feedback-category" value="professional">
+                  <span>Professional</span>
+                </label>
+                <label class="feedback-tag">
+                  <input type="checkbox" name="feedback-category" value="helpful">
+                  <span>Helpful</span>
+                </label>
+                <label class="feedback-tag">
+                  <input type="checkbox" name="feedback-category" value="clear-communication">
+                  <span>Clear Communication</span>
+                </label>
+                <label class="feedback-tag">
+                  <input type="checkbox" name="feedback-category" value="good-value">
+                  <span>Good Value</span>
+                </label>
+                <label class="feedback-tag">
+                  <input type="checkbox" name="feedback-category" value="on-time">
+                  <span>On Time</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="secondary-button" id="skip-feedback-btn">Skip</button>
+          <button class="primary-button" id="submit-feedback-btn" disabled>Submit Feedback</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+      <div class="footer-content">
+        <div class="footer-logo">
+          <img src="https://same-assets.com/expertapp_logo.png" alt="Expert Chat Logo">
+        </div>
+        <div class="footer-links">
+          <div class="footer-column">
+            <h3>Company</h3>
+            <ul>
+              <li><a href="#">About Us</a></li>
+              <li><a href="#">Our Experts</a></li>
+              <li><a href="#">Careers</a></li>
+              <li><a href="#">Contact Us</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h3>Services</h3>
+            <ul>
+              <li><a href="expert-matching.html">Find an Expert</a></li>
+              <li><a href="store.html">Store</a></li>
+              <li><a href="#">Book Consultation</a></li>
+              <li><a href="#">Become an Expert</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h3>Support</h3>
+            <ul>
+              <li><a href="#">Help Center</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="#">Terms of Service</a></li>
+              <li><a href="loyalty-program.html">Loyalty Program</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 Expert Chat. All rights reserved.</p>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Delete Account Confirmation Modal -->
+  <div class="modal" id="delete-account-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Delete Account</h3>
+        <button class="close-modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete your account? This action cannot be undone and all your data will be permanently removed.</p>
+        <div class="confirmation-input">
+          <label for="delete-confirmation">Type "DELETE" to confirm:</label>
+          <input type="text" id="delete-confirmation" placeholder="DELETE">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="secondary-button cancel-button">Cancel</button>
+        <button class="danger-button" id="confirm-delete-btn" disabled>Delete Account</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Order Details Modal -->
+  <div class="modal" id="order-details-modal">
+    <div class="modal-content large-modal">
+      <div class="modal-header">
+        <h3>Order Details</h3>
+        <button class="close-modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="order-details-content">
+          <!-- Order details will be dynamically added here -->
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="secondary-button close-button">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading Spinner -->
+  <div class="loading-spinner hidden">
+    <div class="spinner"></div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast-container">
+    <!-- Toast notifications will be dynamically added here -->
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/auth.js"></script>
+  <script src="js/client-dashboard.js"></script>
+</body>
+</html>

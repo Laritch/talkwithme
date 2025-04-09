@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authenticating...</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f5f6fa;
+        }
+
+        .loader-container {
+            text-align: center;
+        }
+
+        .loader {
+            border: 5px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 5px solid #4a6cf7;
+            width: 40px;
+            height: 40px;
+            margin: 0 auto 20px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #666;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="loader-container">
+        <div class="loader"></div>
+        <h1>Signing you in</h1>
+        <p>Please wait while we complete the authentication process...</p>
+    </div>
+
+    <script src="./services/auth0-service.js" type="module"></script>
+    <script>
+        // The Auth0 service will automatically handle the callback
+        // and redirect to the appropriate page
+
+        // If there's an issue or the redirect doesn't happen within 10 seconds,
+        // redirect to the login page as a fallback
+        setTimeout(function() {
+            if (window.location.hash && window.location.hash.includes('error')) {
+                // There was an authentication error
+                window.location.href = '/login.html?error=' + encodeURIComponent('Authentication failed. Please try again.');
+            } else if (window.location.pathname === '/callback.html') {
+                // We're still on the callback page after 10 seconds
+                window.location.href = '/login.html';
+            }
+        }, 10000);
+    </script>
+</body>
+</html>

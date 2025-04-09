@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify Case Study Results | Expert Marketplace</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="client-verification.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <div class="logo">
+                <img src="/uploads/default-avatar.png" alt="Logo">
+                <span>Expert Marketplace</span>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="experts.html">Find Experts</a></li>
+                    <li><a href="expert-case-studies.html">Case Studies</a></li>
+                    <li><a href="how-it-works.html">How It Works</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="verification-container">
+            <div class="verification-header">
+                <div class="security-badge">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h1>Case Study Verification</h1>
+                <p class="verification-subtitle">You've been invited to verify the results and testimonial for a case study</p>
+            </div>
+
+            <div class="verification-content">
+                <div class="expert-info">
+                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a" alt="James Wilson" class="expert-avatar">
+                    <div>
+                        <h2>James Wilson</h2>
+                        <p class="expert-title">Business Growth Strategist</p>
+                    </div>
+                </div>
+
+                <div class="case-study-summary">
+                    <h3>Case Study: Revenue Growth Acceleration</h3>
+                    <p>James Wilson has published a case study about the work completed for your company. This verification helps maintain the integrity and credibility of success stories on our platform.</p>
+                </div>
+
+                <div class="verification-sections">
+                    <div class="verification-section">
+                        <h3>Results to Verify</h3>
+                        <div class="results-list">
+                            <div class="result-item">
+                                <div class="result-value">250%</div>
+                                <div class="result-label">Revenue Growth</div>
+                                <div class="verification-controls">
+                                    <span>Accurate?</span>
+                                    <button class="verify-button" data-result="revenue-growth"><i class="fas fa-check"></i> Verify</button>
+                                    <button class="dispute-button" data-result="revenue-growth"><i class="fas fa-times"></i> Dispute</button>
+                                </div>
+                            </div>
+
+                            <div class="result-item">
+                                <div class="result-value">-35%</div>
+                                <div class="result-label">Customer Churn</div>
+                                <div class="verification-controls">
+                                    <span>Accurate?</span>
+                                    <button class="verify-button" data-result="customer-churn"><i class="fas fa-check"></i> Verify</button>
+                                    <button class="dispute-button" data-result="customer-churn"><i class="fas fa-times"></i> Dispute</button>
+                                </div>
+                            </div>
+
+                            <div class="result-item">
+                                <div class="result-value">135%</div>
+                                <div class="result-label">Conversion Rate</div>
+                                <div class="verification-controls">
+                                    <span>Accurate?</span>
+                                    <button class="verify-button" data-result="conversion-rate"><i class="fas fa-check"></i> Verify</button>
+                                    <button class="dispute-button" data-result="conversion-rate"><i class="fas fa-times"></i> Dispute</button>
+                                </div>
+                            </div>
+
+                            <div class="result-item">
+                                <div class="result-value">$4.2M</div>
+                                <div class="result-label">New ARR</div>
+                                <div class="verification-controls">
+                                    <span>Accurate?</span>
+                                    <button class="verify-button" data-result="new-arr"><i class="fas fa-check"></i> Verify</button>
+                                    <button class="dispute-button" data-result="new-arr"><i class="fas fa-times"></i> Dispute</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="verification-section">
+                        <h3>Testimonial to Verify</h3>
+                        <div class="testimonial-content">
+                            <div class="testimonial-quote">
+                                <i class="fas fa-quote-left"></i>
+                                <p>Working with James and his team was transformational for our business. Beyond the impressive numbers, they helped us build sustainable systems and processes that continue to drive growth long after the engagement ended. Their strategic insights and practical approach made all the difference.</p>
+                                <i class="fas fa-quote-right"></i>
+                            </div>
+                            <div class="testimonial-attribution">
+                                <p><strong>Robert Chen</strong></p>
+                                <p>CEO, ABC Software</p>
+                            </div>
+                            <div class="verification-controls testimonial-controls">
+                                <span>Approve this testimonial?</span>
+                                <button class="verify-button" data-result="testimonial"><i class="fas fa-check"></i> Approve</button>
+                                <button class="dispute-button" data-result="testimonial"><i class="fas fa-times"></i> Decline</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="verification-section custom-testimonial" style="display: none;">
+                        <h3>Provide Your Own Testimonial</h3>
+                        <p>If you'd prefer to provide a different testimonial, please enter it below:</p>
+                        <div class="form-group">
+                            <textarea id="custom-testimonial" placeholder="Write your testimonial here... Be specific about the results and experience."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-primary" id="submit-custom-testimonial">Submit Custom Testimonial</button>
+                        </div>
+                    </div>
+
+                    <div id="dispute-form" class="verification-section dispute-form" style="display: none;">
+                        <h3>Dispute Details</h3>
+                        <p>Please provide information about why you're disputing this result or testimonial:</p>
+                        <div class="form-group">
+                            <label for="dispute-item">Item Being Disputed</label>
+                            <input type="text" id="dispute-item" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="dispute-reason">Reason for Dispute</label>
+                            <select id="dispute-reason">
+                                <option value="">Select a reason...</option>
+                                <option value="inaccurate">The numbers/information are inaccurate</option>
+                                <option value="exaggerated">The results are exaggerated</option>
+                                <option value="misattributed">These results weren't primarily due to this expert</option>
+                                <option value="not-authorized">I'm not authorized to verify this information</option>
+                                <option value="other">Other reason</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="dispute-comments">Additional Comments</label>
+                            <textarea id="dispute-comments" placeholder="Please provide any additional details about your dispute..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-primary" id="submit-dispute">Submit Dispute</button>
+                            <button class="btn btn-outline" id="cancel-dispute">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="verification-complete" style="display: none;">
+                    <div class="verification-success">
+                        <i class="fas fa-check-circle"></i>
+                        <h2>Verification Complete</h2>
+                        <p>Thank you for verifying this case study. Your verification helps maintain the integrity of our platform and provides clients with confidence in the expert's results.</p>
+                        <div class="verification-badge">
+                            <i class="fas fa-shield-check"></i>
+                            <span>Client-Verified Results</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="verification-actions">
+                    <div class="verification-note">
+                        <i class="fas fa-info-circle"></i>
+                        <p>Your response is confidential and will only be used to verify the accuracy of the case study. The expert will be notified of your verification but won't see any disputed details.</p>
+                    </div>
+                    <div class="verification-buttons">
+                        <button class="btn btn-primary" id="verify-all">Verify All Results</button>
+                        <button class="btn btn-outline" id="provide-testimonial">Provide My Own Testimonial</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="/uploads/default-avatar.png" alt="Logo">
+                    <span>Expert Marketplace</span>
+                </div>
+                <div class="footer-links">
+                    <a href="privacy-policy.html">Privacy Policy</a>
+                    <a href="terms-of-service.html">Terms of Service</a>
+                    <a href="contact.html">Contact Us</a>
+                </div>
+                <div class="footer-copyright">
+                    <p>&copy; 2025 Expert Marketplace. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="client-verification.js"></script>
+</body>
+</html>

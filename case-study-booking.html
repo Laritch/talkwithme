@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book a Consultation | Expert Marketplace</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="case-studies.css">
+    <link rel="stylesheet" href="case-study-booking.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <div class="logo">
+                <img src="/uploads/default-avatar.png" alt="Logo">
+                <span>Expert Marketplace</span>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="experts.html">Find Experts</a></li>
+                    <li><a href="categories.html">Categories</a></li>
+                    <li><a href="how-it-works.html">How It Works</a></li>
+                    <li><a href="expert-case-studies.html">Case Studies</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <a href="login.html" class="btn btn-outline">Login</a>
+                <a href="signup.html" class="btn btn-primary">Sign Up</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="booking-container">
+            <div class="booking-header">
+                <a href="javascript:history.back()" class="back-link"><i class="fas fa-arrow-left"></i> Back to Case Study</a>
+                <h1>Book a Consultation</h1>
+                <p class="booking-subtitle">Schedule a session with the expert to discuss how they can help you achieve similar results</p>
+            </div>
+
+            <div class="booking-content">
+                <div class="booking-columns">
+                    <!-- Left Column: Expert Info and Case Study Summary -->
+                    <div class="booking-info-column">
+                        <div class="expert-card">
+                            <div class="expert-card-header">
+                                <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a" alt="James Wilson" class="expert-avatar">
+                                <div class="expert-info">
+                                    <h2>James Wilson</h2>
+                                    <p class="expert-title">Business Growth Strategist</p>
+                                    <div class="expert-rating">
+                                        <div class="stars">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star-half-alt"></i>
+                                        </div>
+                                        <span>4.8 (124 reviews)</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="expert-badges">
+                                <span class="expert-badge verified"><i class="fas fa-check-circle"></i> Verified Expert</span>
+                                <span class="expert-badge top-rated"><i class="fas fa-award"></i> Top Rated</span>
+                                <span class="expert-badge responsive"><i class="fas fa-bolt"></i> Usually responds in 2 hours</span>
+                            </div>
+                            <div class="expert-stats">
+                                <div class="stat-item">
+                                    <div class="stat-value">98%</div>
+                                    <div class="stat-label">Success Rate</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-value">142</div>
+                                    <div class="stat-label">Clients</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-value">8+</div>
+                                    <div class="stat-label">Years Exp.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="case-study-summary">
+                            <h3>Based on Case Study</h3>
+                            <div class="case-preview">
+                                <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40" alt="Case Study">
+                                <div class="case-info">
+                                    <h4>How We Increased Revenue by 250% in 6 Months</h4>
+                                    <div class="case-results">
+                                        <span class="verified-result"><i class="fas fa-check-circle"></i> 250% Revenue Growth</span>
+                                        <span class="verified-result"><i class="fas fa-check-circle"></i> 80% Churn Reduction</span>
+                                    </div>
+                                    <a href="case-study-detail.html?id=1" class="view-case-link">View Full Case Study</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="available-services">
+                            <h3>Available Services</h3>
+                            <div class="service-options">
+                                <label class="service-option">
+                                    <input type="radio" name="service" value="discovery-call" checked>
+                                    <div class="service-card">
+                                        <div class="service-info">
+                                            <h4>Discovery Call</h4>
+                                            <p>30-minute consultation to discuss your business challenges</p>
+                                            <div class="service-meta">
+                                                <span><i class="fas fa-clock"></i> 30 minutes</span>
+                                                <span><i class="fas fa-video"></i> Video Call</span>
+                                            </div>
+                                        </div>
+                                        <div class="service-price">Free</div>
+                                    </div>
+                                </label>
+                                <label class="service-option">
+                                    <input type="radio" name="service" value="strategy-session">
+                                    <div class="service-card">
+                                        <div class="service-info">
+                                            <h4>Strategy Session</h4>
+                                            <p>In-depth 60-minute session to develop an action plan</p>
+                                            <div class="service-meta">
+                                                <span><i class="fas fa-clock"></i> 60 minutes</span>
+                                                <span><i class="fas fa-video"></i> Video Call</span>
+                                            </div>
+                                        </div>
+                                        <div class="service-price">$199</div>
+                                    </div>
+                                </label>
+                                <label class="service-option">
+                                    <input type="radio" name="service" value="growth-package">
+                                    <div class="service-card">
+                                        <div class="service-info">
+                                            <h4>Growth Package</h4>
+                                            <p>Complete assessment and implementation plan with follow-ups</p>
+                                            <div class="service-meta">
+                                                <span><i class="fas fa-calendar-check"></i> 4 Sessions</span>
+                                                <span><i class="fas fa-file-alt"></i> Custom Plan</span>
+                                            </div>
+                                        </div>
+                                        <div class="service-price">$749</div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Booking Form and Calendar -->
+                    <div class="booking-form-column">
+                        <div class="form-card">
+                            <div class="form-card-header">
+                                <h3>Schedule Your Session</h3>
+                                <p>Select a date and time that works for you</p>
+                            </div>
+
+                            <div class="date-selector">
+                                <div class="month-nav">
+                                    <button class="month-nav-btn prev"><i class="fas fa-chevron-left"></i></button>
+                                    <div class="current-month">April 2025</div>
+                                    <button class="month-nav-btn next"><i class="fas fa-chevron-right"></i></button>
+                                </div>
+                                <div class="calendar-grid">
+                                    <div class="calendar-header">
+                                        <div>Sun</div>
+                                        <div>Mon</div>
+                                        <div>Tue</div>
+                                        <div>Wed</div>
+                                        <div>Thu</div>
+                                        <div>Fri</div>
+                                        <div>Sat</div>
+                                    </div>
+                                    <div class="calendar-days">
+                                        <div class="day prev-month">30</div>
+                                        <div class="day prev-month">31</div>
+                                        <div class="day">1</div>
+                                        <div class="day">2</div>
+                                        <div class="day">3</div>
+                                        <div class="day available">4</div>
+                                        <div class="day available">5</div>
+                                        <div class="day available">6</div>
+                                        <div class="day">7</div>
+                                        <div class="day available">8</div>
+                                        <div class="day available">9</div>
+                                        <div class="day">10</div>
+                                        <div class="day available">11</div>
+                                        <div class="day available">12</div>
+                                        <div class="day">13</div>
+                                        <div class="day">14</div>
+                                        <div class="day available">15</div>
+                                        <div class="day available">16</div>
+                                        <div class="day available">17</div>
+                                        <div class="day">18</div>
+                                        <div class="day">19</div>
+                                        <div class="day available">20</div>
+                                        <div class="day available">21</div>
+                                        <div class="day available">22</div>
+                                        <div class="day available">23</div>
+                                        <div class="day">24</div>
+                                        <div class="day available">25</div>
+                                        <div class="day">26</div>
+                                        <div class="day available">27</div>
+                                        <div class="day available">28</div>
+                                        <div class="day">29</div>
+                                        <div class="day">30</div>
+                                        <div class="day next-month">1</div>
+                                        <div class="day next-month">2</div>
+                                        <div class="day next-month">3</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="time-selector">
+                                <h4>Available Times for April 8, 2025</h4>
+                                <div class="time-slots">
+                                    <button class="time-slot">9:00 AM</button>
+                                    <button class="time-slot">10:30 AM</button>
+                                    <button class="time-slot">1:00 PM</button>
+                                    <button class="time-slot">2:30 PM</button>
+                                    <button class="time-slot">4:00 PM</button>
+                                    <button class="time-slot">5:30 PM</button>
+                                </div>
+                            </div>
+
+                            <form class="booking-form">
+                                <div class="form-group">
+                                    <label for="client-name">Your Name <span class="required">*</span></label>
+                                    <input type="text" id="client-name" name="clientName" required>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="client-email">Email <span class="required">*</span></label>
+                                        <input type="email" id="client-email" name="clientEmail" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="client-phone">Phone Number</label>
+                                        <input type="tel" id="client-phone" name="clientPhone">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="client-message">What would you like to discuss? <span class="required">*</span></label>
+                                    <textarea id="client-message" name="clientMessage" required placeholder="Include any specific questions or challenges you'd like to address during the session"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="referral-source">How did you find this case study?</label>
+                                    <select id="referral-source" name="referralSource">
+                                        <option value="">Please select</option>
+                                        <option value="search">Search Engine</option>
+                                        <option value="social">Social Media</option>
+                                        <option value="recommendation">Recommendation</option>
+                                        <option value="marketplace">Expert Marketplace</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                <div class="form-group checkbox-group">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="agreeTerms" required>
+                                        I agree to the <a href="terms.html">Terms of Service</a> and <a href="privacy.html">Privacy Policy</a>
+                                    </label>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-block">Confirm Booking</button>
+                            </form>
+
+                            <div class="booking-guarantees">
+                                <div class="guarantee-item">
+                                    <i class="fas fa-calendar-check"></i>
+                                    <p>Free rescheduling up to 24 hours before</p>
+                                </div>
+                                <div class="guarantee-item">
+                                    <i class="fas fa-shield-alt"></i>
+                                    <p>Secure payment processing</p>
+                                </div>
+                                <div class="guarantee-item">
+                                    <i class="fas fa-thumbs-up"></i>
+                                    <p>Satisfaction guarantee or money back</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="contact-alternative">
+                            <h3>Not ready to book yet?</h3>
+                            <p>Send a message to the expert to ask questions or discuss your needs</p>
+                            <button class="btn btn-outline btn-block" id="contact-expert-btn">
+                                <i class="fas fa-envelope"></i> Contact Expert
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Expert Modal -->
+        <div class="modal" id="contact-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Message James Wilson</h3>
+                    <button class="close-modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form class="contact-form">
+                        <div class="form-group">
+                            <label for="contact-name">Your Name <span class="required">*</span></label>
+                            <input type="text" id="contact-name" name="contactName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-email">Email <span class="required">*</span></label>
+                            <input type="email" id="contact-email" name="contactEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-subject">Subject <span class="required">*</span></label>
+                            <input type="text" id="contact-subject" name="contactSubject" required value="Regarding: How We Increased Revenue by 250% in 6 Months">
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-message">Message <span class="required">*</span></label>
+                            <textarea id="contact-message" name="contactMessage" required rows="6" placeholder="Enter your message here..."></textarea>
+                        </div>
+                        <div class="form-group checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="agreeContact" required>
+                                I agree to be contacted by the expert regarding my inquiry
+                            </label>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>Expert Marketplace</h3>
+                    <p>Connect with top professionals in every field and get the expert help you need.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4>For Clients</h4>
+                    <ul>
+                        <li><a href="#">How It Works</a></li>
+                        <li><a href="#">Find an Expert</a></li>
+                        <li><a href="#">Success Stories</a></li>
+                        <li><a href="#">Resources</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>For Experts</h4>
+                    <ul>
+                        <li><a href="#">Join as an Expert</a></li>
+                        <li><a href="#">Success Stories</a></li>
+                        <li><a href="#">Resources</a></li>
+                        <li><a href="#">Community</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Press</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Expert Marketplace. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Accessibility</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="scripts.js"></script>
+    <script src="case-study-booking.js"></script>
+</body>
+</html>

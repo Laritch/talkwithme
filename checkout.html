@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout | Expert Chat System</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .checkout-container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    .checkout-title {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      color: #333;
+    }
+
+    .checkout-content {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 2rem;
+    }
+
+    .checkout-form {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      padding: 1.5rem;
+    }
+
+    .section-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #eee;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+
+    .form-label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: #333;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 1rem;
+    }
+
+    .form-check {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .order-summary {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      padding: 1.5rem;
+      height: fit-content;
+    }
+
+    .summary-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #eee;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+      color: #666;
+    }
+
+    .summary-row.total {
+      font-weight: 600;
+      color: #333;
+      font-size: 1.1rem;
+      border-top: 1px solid #eee;
+      margin-top: 1rem;
+      padding-top: 1rem;
+    }
+
+    .summary-items {
+      margin-bottom: 1.5rem;
+    }
+
+    .summary-item {
+      display: flex;
+      margin-bottom: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #f5f5f5;
+    }
+
+    .summary-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .summary-item-image {
+      width: 50px;
+      height: 50px;
+      object-fit: cover;
+      border-radius: 4px;
+      margin-right: 1rem;
+    }
+
+    .summary-item-details {
+      flex: 1;
+    }
+
+    .summary-item-name {
+      font-weight: 500;
+      margin-bottom: 0.25rem;
+    }
+
+    .summary-item-info {
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    .place-order-btn {
+      width: 100%;
+      padding: 1rem;
+      background-color: #4a6cf7;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 1.5rem;
+      transition: background-color 0.3s ease;
+    }
+
+    .place-order-btn:hover {
+      background-color: #3a57d7;
+    }
+
+    .place-order-btn:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+
+    .continue-shopping {
+      display: inline-block;
+      margin-top: 1.5rem;
+      color: #4a6cf7;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .continue-shopping i {
+      margin-right: 0.5rem;
+    }
+
+    .error-message {
+      color: #dc3545;
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+    }
+
+    .payment-options {
+      margin-bottom: 1.5rem;
+    }
+
+    .payment-option {
+      display: flex;
+      align-items: center;
+      padding: 1rem;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      margin-bottom: 1rem;
+      cursor: pointer;
+      transition: border-color 0.3s ease;
+    }
+
+    .payment-option.selected {
+      border-color: #4a6cf7;
+      background-color: #f0f4ff;
+    }
+
+    .payment-option-radio {
+      margin-right: 1rem;
+    }
+
+    .payment-option-logo {
+      height: 24px;
+      margin-left: auto;
+    }
+
+    .payment-method-details {
+      margin-top: 1rem;
+      padding: 1rem;
+      border: 1px solid #eee;
+      border-radius: 4px;
+      background-color: #f9f9f9;
+    }
+
+    .card-element {
+      padding: 0.75rem;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      background-color: white;
+      margin-bottom: 1rem;
+    }
+
+    #card-errors {
+      color: #dc3545;
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+    }
+
+    .loading-spinner {
+      text-align: center;
+      padding: 2rem;
+      grid-column: span 2;
+    }
+
+    .loading-spinner i {
+      font-size: 2rem;
+      color: #4a6cf7;
+      animation: spin 1s infinite linear;
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .order-confirmation {
+      display: none;
+      text-align: center;
+      padding: 3rem;
+      background-color: #f0f4ff;
+      border-radius: 8px;
+      grid-column: span 2;
+    }
+
+    .order-confirmation i {
+      font-size: 3rem;
+      color: #4a6cf7;
+      margin-bottom: 1rem;
+    }
+
+    .order-confirmation h2 {
+      margin-bottom: 1rem;
+      color: #333;
+    }
+
+    .order-confirmation p {
+      color: #666;
+      margin-bottom: 0.5rem;
+    }
+
+    .order-confirmation .order-number {
+      font-weight: 600;
+      color: #4a6cf7;
+    }
+
+    .order-confirmation .button-group {
+      margin-top: 2rem;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .order-confirmation .btn {
+      padding: 0.8rem 1.5rem;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: background-color 0.3s ease;
+    }
+
+    .order-confirmation .btn-primary {
+      background-color: #4a6cf7;
+      color: white;
+    }
+
+    .order-confirmation .btn-secondary {
+      background-color: #f8f9fa;
+      color: #333;
+      border: 1px solid #ddd;
+    }
+
+    /* Mobile responsiveness */
+    @media (max-width: 768px) {
+      .checkout-content {
+        grid-template-columns: 1fr;
+      }
+
+      .order-summary {
+        order: -1; /* Display summary first on mobile */
+        margin-bottom: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="main-header">
+      <div class="logo">
+        <a href="index.html">Expert Chat System</a>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="expert-matching.html">Find Experts</a></li>
+          <li><a href="store.html">Expert Store</a></li>
+          <li><a href="cart.html"><i class="fas fa-shopping-cart"></i></a></li>
+          <li id="userProfileNav" style="display:none;">
+            <a href="#" id="userProfileLink">
+              <img id="userProfileImage" src="/uploads/default-avatar.png" alt="Profile" class="avatar-img">
+            </a>
+          </li>
+          <li id="loginNav">
+            <a href="login.html" class="btn-login">Login</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="checkout-container">
+      <h1 class="checkout-title">Checkout</h1>
+
+      <div id="checkoutContent" class="checkout-content">
+        <!-- Loading state will be replaced by checkout form or error message -->
+        <div class="loading-spinner">
+          <i class="fas fa-spinner fa-spin"></i> Loading checkout...
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Load Stripe.js -->
+  <script src="https://js.stripe.com/v3/"></script>
+  <script src="js/auth.js"></script>
+  <script>
+    // Global variables
+    let cart = null;
+    let orderSummary = null;
+    let stripe = null;
+    let cardElement = null;
+    let selectedPaymentMethod = 'credit_card';
+    let hasPhysicalItems = false;
+
+    // DOM elements
+    const checkoutContent = document.getElementById('checkoutContent');
+
+    // Check auth status and load checkout data
+    document.addEventListener('DOMContentLoaded', async () => {
+      updateAuthUI();
+
+      // Check if user is logged in
+      const user = getCurrentUser();
+      if (!user) {
+        showError('Please log in to proceed with checkout.');
+        return;
+      }
+
+      try {
+        // Initialize Stripe
+        stripe = Stripe('pk_test_sample'); // Replace with your actual Stripe publishable key
+
+        // Load cart data
+        await loadCheckoutData();
+      } catch (error) {
+        console.error('Error initializing checkout:', error);
+        showError('Failed to initialize checkout. Please try again later.');
+      }
+    });
+
+    // Load cart data and calculate order summary
+    async function loadCheckoutData() {
+      try {
+        // Get cart data
+        const cartResponse = await fetch('/api/ecommerce/cart', {
+          headers: {
+            'Authorization': `Bearer ${getToken()}`
+          }
+        });
+
+        if (!cartResponse.ok) {
+          throw new Error('Failed to load cart');
+        }
+
+        const cartData = await cartResponse.json();
+        cart = cartData.cart;
+
+        if (!cart || !cart.items || cart.items.length === 0) {
+          showError('Your cart is empty. Please add items to your cart before checkout.');
+          return;
+        }
+
+        // Calculate the order summary
+        const summaryResponse = await fetch('/api/ecommerce/cart/summary', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${getToken()}`
+          },
+          body: JSON.stringify({})
+        });
+
+        if (!summaryResponse.ok) {
+          throw new Error('Failed to calculate order summary');
+        }
+
+        const summaryData = await summaryResponse.json();
+        orderSummary = summaryData.summary;
+
+        // Check if cart has physical items
+        hasPhysicalItems = cart.items.some(item => !item.isDigital);
+
+        // Render checkout form
+        renderCheckoutForm();
+      } catch (error) {
+        console.error('Error loading checkout data:', error);
+        showError('Failed to load checkout data. Please try again later.');
+      }
+    }
+
+    // Render checkout form with cart summary
+    function renderCheckoutForm() {
+      const checkoutFormHTML = `
+        <div class="checkout-form">
+          <h2 class="section-title">Contact Information</h2>
+          <form id="checkoutForm">
+            <div class="form-group">
+              <label for="email" class="form-label">Email*</label>
+              <input type="email" id="email" class="form-control" required>
+            </div>
+
+            ${hasPhysicalItems ? `
+              <h2 class="section-title">Shipping Information</h2>
+              <div class="form-group">
+                <label for="fullName" class="form-label">Full Name*</label>
+                <input type="text" id="fullName" class="form-control" required>
+              </div>
+
+              <div class="form-group">
+                <label for="addressLine1" class="form-label">Address Line 1*</label>
+                <input type="text" id="addressLine1" class="form-control" required>
+              </div>
+
+              <div class="form-group">
+                <label for="addressLine2" class="form-label">Address Line 2</label>
+                <input type="text" id="addressLine2" class="form-control">
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="city" class="form-label">City*</label>
+                  <input type="text" id="city" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                  <label for="state" class="form-label">State/Province*</label>
+                  <input type="text" id="state" class="form-control" required>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="postalCode" class="form-label">Postal Code*</label>
+                  <input type="text" id="postalCode" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                  <label for="country" class="form-label">Country*</label>
+                  <select id="country" class="form-control" required>
+                    <option value="">Select a country</option>
+                    <option value="US">United States</option>
+                    <option value="CA">Canada</option>
+                    <option value="GB">United Kingdom</option>
+                    <option value="AU">Australia</option>
+                    <option value="DE">Germany</option>
+                    <option value="FR">France</option>
+                    <!-- Add more countries as needed -->
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="phoneNumber" class="form-label">Phone Number*</label>
+                <input type="tel" id="phoneNumber" class="form-control" required>
+              </div>
+
+              <div class="form-group">
+                <div class="form-check">
+                  <input type="checkbox" id="saveAddress" class="form-check-input">
+                  <label for="saveAddress" class="form-check-label">Save this address for future orders</label>
+                </div>
+              </div>
+            ` : ''}
+
+            <h2 class="section-title">Payment Method</h2>
+            <div class="payment-options">
+              <div class="payment-option selected" data-payment="credit_card" onclick="selectPaymentMethod('credit_card', this)">
+                <input type="radio" name="paymentMethod" value="credit_card" class="payment-option-radio" checked>
+                <div>
+                  <div><strong>Credit Card</strong></div>
+                  <div class="text-muted">Pay securely with your credit card</div>
+                </div>
+                <img src="https://cdn-icons-png.flaticon.com/512/179/179431.png" alt="Credit Card" class="payment-option-logo">
+              </div>
+
+              <div class="payment-option" data-payment="apple_pay" onclick="selectPaymentMethod('apple_pay', this)">
+                <input type="radio" name="paymentMethod" value="apple_pay" class="payment-option-radio">
+                <div>
+                  <div><strong>Apple Pay</strong></div>
+                  <div class="text-muted">Fast checkout with Apple Pay</div>
+                </div>
+                <img src="https://www.apple.com/v/apple-pay/i/images/overview/og_image.png?202401240156" alt="Apple Pay" class="payment-option-logo">
+              </div>
+
+              <div class="payment-option" data-payment="google_pay" onclick="selectPaymentMethod('google_pay', this)">
+                <input type="radio" name="paymentMethod" value="google_pay" class="payment-option-radio">
+                <div>
+                  <div><strong>Google Pay</strong></div>
+                  <div class="text-muted">Quick and easy payment with Google Pay</div>
+                </div>
+                <img src="https://developers.google.com/static/pay/api/images/brand-guidelines/google-pay-mark.png" alt="Google Pay" class="payment-option-logo">
+              </div>
+
+              <div class="payment-option" data-payment="paypal" onclick="selectPaymentMethod('paypal', this)">
+                <input type="radio" name="paymentMethod" value="paypal" class="payment-option-radio">
+                <div>
+                  <div><strong>PayPal</strong></div>
+                  <div class="text-muted">Pay with your PayPal account</div>
+                </div>
+                <img src="https://cdn-icons-png.flaticon.com/512/174/174861.png" alt="PayPal" class="payment-option-logo">
+              </div>
+            </div>
+
+            <div id="creditCardFields" class="payment-method-details">
+              <div id="card-element" class="card-element"></div>
+              <div id="card-errors" role="alert"></div>
+            </div>
+
+            <div id="applePayFields" class="payment-method-details" style="display: none;">
+              <p>Click the Apple Pay button below to complete your purchase.</p>
+              <div id="apple-pay-button" style="width: 200px; height: 40px; background-color: black; border-radius: 4px; margin: 20px 0; cursor: pointer; display: flex; align-items: center; justify-content: center;">
+                <img src="https://www.apple.com/v/apple-pay/i/images/overview/apple_pay_logo.svg" alt="Apple Pay" style="height: 60%;">
+              </div>
+            </div>
+
+            <div id="googlePayFields" class="payment-method-details" style="display: none;">
+              <p>Click the Google Pay button below to complete your purchase.</p>
+              <div id="google-pay-button" style="width: 200px; height: 40px; background-color: white; border: 1px solid #ccc; border-radius: 4px; margin: 20px 0; cursor: pointer; display: flex; align-items: center; justify-content: center;">
+                <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google Pay" style="height: 60%;">
+                <span style="margin-left: 8px; font-family: 'Google Sans', Arial, sans-serif; font-weight: 500;">Pay</span>
+              </div>
+            </div>
+
+            <div id="paypalFields" class="payment-method-details" style="display: none;">
+              <p>You will be redirected to PayPal to complete your payment after you place your order.</p>
+            </div>
+
+            <div class="form-group">
+              <div class="form-check">
+                <input type="checkbox" id="termsAgreed" class="form-check-input" required>
+                <label for="termsAgreed" class="form-check-label">I agree to the <a href="#" target="_blank">Terms and Conditions</a>*</label>
+              </div>
+            </div>
+
+            <button type="submit" id="placeOrderBtn" class="place-order-btn">
+              Place Order
+            </button>
+          </form>
+
+          <a href="store.html" class="continue-shopping">
+            <i class="fas fa-arrow-left"></i> Continue Shopping
+          </a>
+        </div>
+      `;
+
+      const orderSummaryHTML = `
+        <div class="order-summary">
+          <h2 class="summary-title">Order Summary</h2>
+
+          <div class="summary-items">
+            ${cart.items.map(item => `
+              <div class="summary-item">
+                <img src="${item.image || '/uploads/default-product.png'}" alt="${item.name}" class="summary-item-image">
+                <div class="summary-item-details">
+                  <div class="summary-item-name">${item.name}</div>
+                  <div class="summary-item-info">
+                    ${new Intl.NumberFormat('en-US', {
+                      style: 'currency',
+                      currency: 'USD'
+                    }).format(item.price)} × ${item.quantity}
+                  </div>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+
+          <div class="summary-row">
+            <span>Subtotal</span>
+            <span>${formatCurrency(orderSummary.subtotal)}</span>
+          </div>
+
+          <div class="summary-row">
+            <span>Tax</span>
+            <span>${formatCurrency(orderSummary.taxAmount)}</span>
+          </div>
+
+          ${hasPhysicalItems ? `
+            <div class="summary-row">
+              <span>Shipping</span>
+              <span>${formatCurrency(orderSummary.shippingCost)}</span>
+            </div>
+          ` : ''}
+
+          <div class="summary-row total">
+            <span>Total</span>
+            <span>${formatCurrency(orderSummary.totalAmount)}</span>
+          </div>
+        </div>
+      `;
+
+      checkoutContent.innerHTML = checkoutFormHTML + orderSummaryHTML;
+
+      // Set up Stripe card element
+      const elements = stripe.elements();
+      cardElement = elements.create('card');
+      cardElement.mount('#card-element');
+
+      cardElement.on('change', function(event) {
+        const displayError = document.getElementById('card-errors');
+        if (event.error) {
+          displayError.textContent = event.error.message;
+        } else {
+          displayError.textContent = '';
+        }
+      });
+
+      // Set up form submission
+      const checkoutForm = document.getElementById('checkoutForm');
+      checkoutForm.addEventListener('submit', handleCheckoutSubmit);
+    }
+
+    // Select payment method
+    function selectPaymentMethod(method, element) {
+      selectedPaymentMethod = method;
+
+      // Update UI
+      document.querySelectorAll('.payment-option').forEach(option => {
+        option.classList.remove('selected');
+      });
+      element.classList.add('selected');
+
+      // Update displayed fields
+      document.getElementById('creditCardFields').style.display = method === 'credit_card' ? 'block' : 'none';
+      document.getElementById('applePayFields').style.display = method === 'apple_pay' ? 'block' : 'none';
+      document.getElementById('googlePayFields').style.display = method === 'google_pay' ? 'block' : 'none';
+      document.getElementById('paypalFields').style.display = method === 'paypal' ? 'block' : 'none';
+
+      // Update radio button
+      element.querySelector('input[type="radio"]').checked = true;
+    }
+
+    // Handle checkout form submission
+    async function handleCheckoutSubmit(event) {
+      event.preventDefault();
+
+      const submitButton = document.getElementById('placeOrderBtn');
+      submitButton.disabled = true;
+      submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+
+      try {
+        // Gather shipping details if necessary
+        let shippingDetails = null;
+        if (hasPhysicalItems) {
+          shippingDetails = {
+            fullName: document.getElementById('fullName').value,
+            addressLine1: document.getElementById('addressLine1').value,
+            addressLine2: document.getElementById('addressLine2').value || '',
+            city: document.getElementById('city').value,
+            state: document.getElementById('state').value,
+            country: document.getElementById('country').value,
+            postalCode: document.getElementById('postalCode').value,
+            phoneNumber: document.getElementById('phoneNumber').value
+          };
+        }
+
+        // Process checkout based on payment method
+        if (selectedPaymentMethod === 'credit_card') {
+          await processStripePayment(shippingDetails);
+        } else if (selectedPaymentMethod === 'apple_pay') {
+          await processApplePayment(shippingDetails);
+        } else if (selectedPaymentMethod === 'google_pay') {
+          await processGooglePayment(shippingDetails);
+        } else {
+          await processPayPalPayment(shippingDetails);
+        }
+      } catch (error) {
+        console.error('Error processing checkout:', error);
+
+        // Display error to user
+        document.getElementById('card-errors').textContent = error.message || 'An error occurred during checkout. Please try again.';
+
+        // Re-enable submit button
+        submitButton.disabled = false;
+        submitButton.innerHTML = 'Place Order';
+      }
+    }
+
+    // Process payment with Stripe
+    async function processStripePayment(shippingDetails) {
+      try {
+        // Create checkout
+        const checkoutResponse = await fetch('/api/ecommerce/checkout', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${getToken()}`
+          },
+          body: JSON.stringify({
+            paymentDetails: {
+              paymentMethod: 'credit_card'
+            },
+            shippingDetails,
+            orderOptions: {
+              tax: orderSummary.taxAmount,
+              shippingCost: orderSummary.shippingCost
+            }
+          })
+        });
+
+        if (!checkoutResponse.ok) {
+          const errorData = await checkoutResponse.json();
+          throw new Error(errorData.message || 'Failed to process checkout');
+        }
+
+        const checkoutData = await checkoutResponse.json();
+
+        // Confirm card payment
+        if (checkoutData.paymentIntent) {
+          const { error, paymentIntent } = await stripe.confirmCardPayment(
+            checkoutData.paymentIntent.clientSecret, {
+              payment_method: {
+                card: cardElement,
+                billing_details: {
+                  email: document.getElementById('email').value
+                }
+              }
+            }
+          );
+
+          if (error) {
+            throw new Error(error.message);
+          } else if (paymentIntent.status === 'succeeded') {
+            // Confirm the payment on the server
+            await confirmPayment(paymentIntent.id, true);
+
+            // Show success
+            showOrderConfirmation(checkoutData.order);
+          } else {
+            throw new Error('Payment failed. Please try again.');
+          }
+        } else {
+          // For non-Stripe payments
+          showOrderConfirmation(checkoutData.order);
+        }
+      } catch (error) {
+        throw error;
+      }
+    }
+
+    // Process payment with Apple Pay
+    async function processApplePayment(shippingDetails) {
+      try {
+        // In a real implementation, this would use the Apple Pay JS API
+        // Here, we'll just simulate a successful Apple Pay payment
+
+        // First, check if Apple Pay is available
+        if (!window.ApplePaySession || !ApplePaySession.canMakePayments()) {
+          throw new Error('Apple Pay is not available on this device or browser');
+        }
+
+        // Create checkout
+        const checkoutResponse = await fetch('/api/ecommerce/checkout', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${getToken()}`
+          },
+          body: JSON.stringify({
+            paymentDetails: {
+              paymentMethod: 'apple_pay'
+            },
+            shippingDetails,
+            orderOptions: {
+              tax: orderSummary.taxAmount,
+              shippingCost: orderSummary.shippingCost
+            }
+          })
+        });
+
+        if (!checkoutResponse.ok) {
+          const errorData = await checkoutResponse.json();
+          throw new Error(errorData.message || 'Failed to process checkout');
+        }
+
+        const checkoutData = await checkoutResponse.json();
+
+        // Show success
+        showOrderConfirmation(checkoutData.order);
+      } catch (error) {
+        throw error;
+      }
+    }
+
+    // Process payment with Google Pay
+    async function processGooglePayment(shippingDetails) {
+      try {
+        // In a real implementation, this would use the Google Pay API
+        // Here, we'll just simulate a successful Google Pay payment
+
+        // Create checkout
+        const checkoutResponse = await fetch('/api/ecommerce/checkout', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${getToken()}`
+          },
+          body: JSON.stringify({
+            paymentDetails: {
+              paymentMethod: 'google_pay'
+            },
+            shippingDetails,
+            orderOptions: {
+              tax: orderSummary.taxAmount,
+              shippingCost: orderSummary.shippingCost
+            }
+          })
+        });
+
+        if (!checkoutResponse.ok) {
+          const errorData = await checkoutResponse.json();
+          throw new Error(errorData.message || 'Failed to process checkout');
+        }
+
+        const checkoutData = await checkoutResponse.json();
+
+        // Show success
+        showOrderConfirmation(checkoutData.order);
+      } catch (error) {
+        throw error;
+      }
+    }
+
+    // Process payment with PayPal
+    async function processPayPalPayment(shippingDetails) {
+      try {
+        // In a real implementation, this would redirect to PayPal
+        // Here, we'll just simulate a successful PayPal payment
+
+        // Create checkout
+        const checkoutResponse = await fetch('/api/ecommerce/checkout', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${getToken()}`
+          },
+          body: JSON.stringify({
+            paymentDetails: {
+              paymentMethod: 'paypal'
+            },
+            shippingDetails,
+            orderOptions: {
+              tax: orderSummary.taxAmount,
+              shippingCost: orderSummary.shippingCost
+            }
+          })
+        });
+
+        if (!checkoutResponse.ok) {
+          const errorData = await checkoutResponse.json();
+          throw new Error(errorData.message || 'Failed to process checkout');
+        }
+
+        const checkoutData = await checkoutResponse.json();
+
+        // In a real implementation, we would redirect to PayPal here
+        // For this example, we'll simulate a successful PayPal payment
+
+        // Show success
+        showOrderConfirmation(checkoutData.order);
+      } catch (error) {
+        throw error;
+      }
+    }
+
+    // Confirm payment with the server
+    async function confirmPayment(paymentIntentId, succeeded) {
+      try {
+        const response = await fetch('/api/ecommerce/confirm-payment', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${getToken()}`
+          },
+          body: JSON.stringify({
+            paymentIntentId,
+            succeeded
+          })
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.message || 'Failed to confirm payment');
+        }
+
+        return await response.json();
+      } catch (error) {
+        throw error;
+      }
+    }
+
+    // Show order confirmation
+    function showOrderConfirmation(order) {
+      checkoutContent.innerHTML = `
+        <div class="order-confirmation" style="display: block;">
+          <i class="fas fa-check-circle"></i>
+          <h2>Thank You for Your Order!</h2>
+          <p>Your order has been successfully placed.</p>
+          <p>Order Number: <span class="order-number">${order.orderNumber}</span></p>
+          <p>We've sent a confirmation email to your email address.</p>
+          ${hasPhysicalItems ? `
+            <p>We'll notify you when your order ships.</p>
+          ` : `
+            <p>You'll receive access to your digital products shortly.</p>
+          `}
+          <div class="button-group">
+            <a href="orders.html" class="btn btn-primary">View Your Orders</a>
+            <a href="store.html" class="btn btn-secondary">Continue Shopping</a>
+          </div>
+        </div>
+      `;
+    }
+
+    // Show error message
+    function showError(message) {
+      checkoutContent.innerHTML = `
+        <div class="empty-state" style="grid-column: span 2; background-color: #f8d7da; color: #721c24;">
+          <i class="fas fa-exclamation-circle"></i>
+          <h2>Checkout Error</h2>
+          <p>${message}</p>
+          <a href="cart.html" class="btn btn-primary">
+            Back to Cart
+          </a>
+        </div>
+      `;
+    }
+
+    // Format currency
+    function formatCurrency(amount) {
+      return new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD'
+      }).format(amount);
+    }
+
+    // Update auth UI based on login status
+    function updateAuthUI() {
+      const user = getCurrentUser();
+
+      if (user) {
+        document.getElementById('loginNav').style.display = 'none';
+        document.getElementById('userProfileNav').style.display = 'block';
+        document.getElementById('userProfileImage').src = user.profilePicture || '/uploads/default-avatar.png';
+        document.getElementById('userProfileLink').href = user.isExpert ? 'expert-dashboard.html' : 'chat.html';
+      } else {
+        document.getElementById('loginNav').style.display = 'block';
+        document.getElementById('userProfileNav').style.display = 'none';
+      }
+    }
+  </script>
+</body>
+</html>

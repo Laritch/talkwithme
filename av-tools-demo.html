@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AV Tools Demo - Collaborative Filters</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+      color: #333;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    header {
+      background-color: #4285F4;
+      color: white;
+      padding: 15px 0;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 28px;
+    }
+
+    .back-link {
+      color: white;
+      text-decoration: none;
+      position: absolute;
+      left: 20px;
+      top: 20px;
+      display: flex;
+      align-items: center;
+    }
+
+    .back-link i {
+      margin-right: 5px;
+    }
+
+    .demo-section {
+      padding: 30px 0;
+    }
+
+    .video-container {
+      background-color: #000;
+      border-radius: 8px;
+      overflow: hidden;
+      margin: 0 auto 20px;
+      width: 100%;
+      max-width: 800px;
+      height: 450px;
+      position: relative;
+    }
+
+    .video-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+    }
+
+    .video-placeholder i {
+      font-size: 48px;
+      margin-bottom: 15px;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    .control-btn {
+      background-color: #4285F4;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      padding: 12px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      transition: all 0.2s ease;
+    }
+
+    .control-btn:hover {
+      background-color: #3367d6;
+      transform: translateY(-2px);
+    }
+
+    .control-btn i {
+      margin-right: 8px;
+    }
+
+    .filters-section {
+      background-color: white;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      margin-top: 30px;
+    }
+
+    .filters-title {
+      font-size: 20px;
+      margin-top: 0;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .filters-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 15px;
+    }
+
+    .filter-card {
+      background-color: #f9f9f9;
+      border-radius: 8px;
+      overflow: hidden;
+      transition: transform 0.2s ease;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .filter-card:hover {
+      transform: scale(1.05);
+    }
+
+    .filter-card.active {
+      box-shadow: 0 0 0 3px #4285F4;
+    }
+
+    .filter-preview {
+      height: 100px;
+      background-color: #ddd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .filter-info {
+      padding: 10px;
+    }
+
+    .filter-name {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    .filter-votes {
+      margin: 5px 0 0;
+      font-size: 12px;
+      color: #666;
+    }
+
+    .vote-badge {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background-color: #4285F4;
+      color: white;
+      border-radius: 50%;
+      width: 25px;
+      height: 25px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .participants {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+
+    .participant {
+      background-color: white;
+      border-radius: 8px;
+      padding: 10px 15px;
+      margin: 5px;
+      display: flex;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .participant img {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+
+    .participant.speaking {
+      border: 2px solid #4285F4;
+    }
+
+    .active-filter-banner {
+      background-color: #673ab7;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .active-filter-banner i {
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Home</a>
+    <h1>AV Tools - Collaborative Filters Demo</h1>
+  </header>
+
+  <div class="demo-section">
+    <div class="container">
+      <div class="video-container">
+        <div class="video-placeholder">
+          <i class="fas fa-video"></i>
+          <p>Your camera will appear here</p>
+        </div>
+      </div>
+
+      <div class="controls">
+        <button class="control-btn"><i class="fas fa-camera"></i> Start Camera</button>
+        <button class="control-btn"><i class="fas fa-microphone"></i> Toggle Mic</button>
+        <button class="control-btn"><i class="fas fa-vote-yea"></i> Start Voting</button>
+        <button class="control-btn"><i class="fas fa-sync-alt"></i> Sync Filters</button>
+      </div>
+
+      <div class="active-filter-banner">
+        <i class="fas fa-check-circle"></i> Currently active: <strong>Blur Background</strong> (voted by 3 participants)
+      </div>
+
+      <div class="participants">
+        <div class="participant speaking">
+          <img src="https://same-assets.com/default-avatar.png" alt="User">
+          <span>You (Host)</span>
+        </div>
+        <div class="participant">
+          <img src="https://same-assets.com/default-avatar.png" alt="Sarah">
+          <span>Sarah</span>
+        </div>
+        <div class="participant">
+          <img src="https://same-assets.com/default-avatar.png" alt="Mike">
+          <span>Mike</span>
+        </div>
+        <div class="participant">
+          <img src="https://same-assets.com/default-avatar.png" alt="Jessica">
+          <span>Jessica</span>
+        </div>
+      </div>
+
+      <div class="filters-section">
+        <h3 class="filters-title">Collaborative Filters</h3>
+        <div class="filters-grid">
+          <div class="filter-card active">
+            <div class="filter-preview">
+              <i class="fas fa-clone fa-2x"></i>
+            </div>
+            <div class="filter-info">
+              <h4 class="filter-name">Blur Background</h4>
+              <p class="filter-votes">3 votes</p>
+            </div>
+            <span class="vote-badge">3</span>
+          </div>
+
+          <div class="filter-card">
+            <div class="filter-preview">
+              <i class="fas fa-sun fa-2x"></i>
+            </div>
+            <div class="filter-info">
+              <h4 class="filter-name">Brightness</h4>
+              <p class="filter-votes">1 vote</p>
+            </div>
+            <span class="vote-badge">1</span>
+          </div>
+
+          <div class="filter-card">
+            <div class="filter-preview">
+              <i class="fas fa-adjust fa-2x"></i>
+            </div>
+            <div class="filter-info">
+              <h4 class="filter-name">Contrast</h4>
+              <p class="filter-votes">0 votes</p>
+            </div>
+          </div>
+
+          <div class="filter-card">
+            <div class="filter-preview">
+              <i class="fas fa-palette fa-2x"></i>
+            </div>
+            <div class="filter-info">
+              <h4 class="filter-name">Sepia</h4>
+              <p class="filter-votes">0 votes</p>
+            </div>
+          </div>
+
+          <div class="filter-card">
+            <div class="filter-preview">
+              <i class="fas fa-mask fa-2x"></i>
+            </div>
+            <div class="filter-info">
+              <h4 class="filter-name">Face Mesh</h4>
+              <p class="filter-votes">0 votes</p>
+            </div>
+          </div>
+
+          <div class="filter-card">
+            <div class="filter-preview">
+              <i class="fas fa-magic fa-2x"></i>
+            </div>
+            <div class="filter-info">
+              <h4 class="filter-name">Pixelate</h4>
+              <p class="filter-votes">0 votes</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Simple demo script
+    document.addEventListener('DOMContentLoaded', function() {
+      const filterCards = document.querySelectorAll('.filter-card');
+
+      filterCards.forEach(card => {
+        card.addEventListener('click', function() {
+          // Reset all cards
+          filterCards.forEach(c => c.classList.remove('active'));
+
+          // Set this card as active
+          this.classList.add('active');
+
+          // Update the active filter banner
+          const filterName = this.querySelector('.filter-name').textContent;
+          const voteCount = this.querySelector('.vote-badge')?.textContent || '1';
+          document.querySelector('.active-filter-banner strong').textContent = filterName;
+          document.querySelector('.active-filter-banner').innerHTML =
+            `<i class="fas fa-check-circle"></i> Currently active: <strong>${filterName}</strong> (voted by ${voteCount} participants)`;
+        });
+      });
+
+      // Handle camera button
+      const cameraBtn = document.querySelector('.control-btn');
+      cameraBtn.addEventListener('click', function() {
+        const placeholder = document.querySelector('.video-placeholder');
+        placeholder.innerHTML = '<p>Camera access requested...</p>';
+
+        setTimeout(() => {
+          placeholder.innerHTML = '<p>Please allow camera access in your browser</p>';
+        }, 1000);
+      });
+    });
+  </script>
+</body>
+</html>
