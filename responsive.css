@@ -1,0 +1,294 @@
+/**
+ * Responsive CSS for Translation Application
+ *
+ * This file contains responsive styles to make the application
+ * work better on mobile devices and smaller screens.
+ */
+
+/* Global responsive adjustments */
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+
+  h1, h2 {
+    font-size: 1.5rem;
+  }
+
+  h3 {
+    font-size: 1.2rem;
+  }
+
+  .container {
+    padding: 10px;
+  }
+
+  button {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+}
+
+/* Mobile adjustments for TranslationEditor */
+@media (max-width: 768px) {
+  .translation-editor {
+    padding: 15px;
+    margin: 10px;
+    border-radius: 8px;
+  }
+
+  .editor-panels {
+    flex-direction: column;
+  }
+
+  .language-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .language-select, .voice-select {
+    margin-bottom: 10px;
+    width: 100%;
+  }
+
+  .language-direction {
+    display: none;
+  }
+
+  .voice-input-toggle, .history-toggle, .offline-toggle {
+    margin: 5px 0;
+    width: 100%;
+  }
+
+  .toggle-voice-btn, .history-btn, .offline-btn {
+    width: 100%;
+  }
+
+  .source-textarea, .translation-textarea {
+    height: 150px;
+  }
+
+  .translation-actions {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .translation-actions button {
+    width: 100%;
+  }
+
+  .comparison-panels {
+    flex-direction: column;
+  }
+
+  .comparison-panel {
+    margin-bottom: 15px;
+  }
+
+  .feedback-section button {
+    width: 100%;
+    margin: 5px 0;
+  }
+}
+
+/* Mobile adjustments for DocumentTranslation */
+@media (max-width: 768px) {
+  .document-translation {
+    padding: 15px;
+    margin: 10px;
+  }
+
+  .document-settings {
+    flex-direction: column;
+  }
+
+  .language-selector {
+    margin-bottom: 15px;
+  }
+
+  .file-upload-label {
+    height: 80px;
+  }
+
+  .document-actions {
+    flex-direction: column;
+  }
+
+  .document-actions button {
+    width: 100%;
+  }
+
+  .preview-toggle {
+    flex-direction: column;
+  }
+
+  .preview-content {
+    max-height: 300px;
+  }
+
+  .download-btn {
+    width: 100%;
+  }
+}
+
+/* Mobile adjustments for AdminDashboard */
+@media (max-width: 768px) {
+  .admin-dashboard {
+    padding: 15px;
+    margin: 10px;
+  }
+
+  .dashboard-tabs {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: 5px;
+  }
+
+  .tab-btn {
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+
+  .stat-cards,
+  .feedback-metrics,
+  .memory-summary,
+  .history-summary {
+    flex-direction: column;
+  }
+
+  .stat-card,
+  .feedback-metric,
+  .memory-metric,
+  .summary-metric {
+    margin-bottom: 10px;
+  }
+
+  .bar-chart {
+    overflow-x: auto;
+    padding-bottom: 10px;
+  }
+
+  .chart-bar {
+    width: 25px;
+  }
+
+  .chart-item {
+    min-width: 60px;
+  }
+
+  .memory-actions {
+    flex-direction: column;
+  }
+
+  .feedback-table {
+    overflow-x: auto;
+  }
+
+  .feedback-table table {
+    min-width: 500px;
+  }
+}
+
+/* Mobile adjustments for OfflineManager */
+@media (max-width: 768px) {
+  .offline-manager {
+    padding: 15px;
+    margin: 10px;
+  }
+
+  .offline-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .network-status {
+    margin-top: 8px;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+  }
+
+  .action-buttons button {
+    width: 100%;
+    margin: 5px 0;
+  }
+}
+
+/* Mobile adjustments for modal windows */
+@media (max-width: 768px) {
+  .translation-history {
+    max-width: 90%;
+    padding: 15px;
+  }
+
+  .history-controls {
+    flex-direction: column;
+  }
+
+  .filter-item {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .pagination {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+/* Touch improvements for mobile devices */
+@media (hover: none) {
+  button:active {
+    opacity: 0.7;
+  }
+
+  .star-rating .star {
+    font-size: 28px;
+    padding: 8px 5px;
+  }
+
+  /* Increase target size for touch */
+  select, input[type="radio"], input[type="checkbox"] {
+    min-height: 24px;
+    min-width: 24px;
+  }
+
+  /* Improve scrolling */
+  .preview-content,
+  .comparison-content,
+  .feedback-table {
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Screen orientation adjustments */
+@media (max-width: 768px) and (orientation: landscape) {
+  .source-textarea, .translation-textarea {
+    height: 100px;
+  }
+
+  .editor-panels {
+    flex-direction: row;
+  }
+
+  .stat-cards,
+  .feedback-metrics {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+
+/* High-density displays (retina, etc) */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .toggle-voice-btn,
+  .history-btn,
+  .offline-btn,
+  .translate-btn,
+  .reset-btn,
+  .save-correction-btn,
+  .feedback-btn,
+  .speak-btn {
+    font-weight: 500;
+  }
+}

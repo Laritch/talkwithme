@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Case Study | Expert Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="submit-case-study.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar Navigation -->
+        <aside class="dashboard-sidebar">
+            <div class="sidebar-header">
+                <img src="/uploads/default-avatar.png" alt="Logo" class="sidebar-logo">
+                <h2>Expert Dashboard</h2>
+            </div>
+
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="expert-dashboard.html"><i class="fas fa-th-large"></i> Overview</a></li>
+                    <li><a href="expert-profile-edit.html"><i class="fas fa-user-edit"></i> Edit Profile</a></li>
+                    <li><a href="expert-bookings.html"><i class="fas fa-calendar-check"></i> Bookings</a></li>
+                    <li><a href="live-sessions.html"><i class="fas fa-video"></i> Live Sessions</a></li>
+                    <li><a href="expert-posts-manage.html"><i class="fas fa-pen-square"></i> My Posts</a></li>
+                    <li><a href="expert-case-studies-manage.html" class="active"><i class="fas fa-chart-line"></i> Case Studies</a></li>
+                    <li><a href="expert-reviews.html"><i class="fas fa-star"></i> Reviews</a></li>
+                    <li><a href="expert-analytics.html"><i class="fas fa-chart-bar"></i> Analytics</a></li>
+                    <li><a href="expert-badges.html"><i class="fas fa-award"></i> Badges & Trust</a></li>
+                    <li><a href="expert-payments.html"><i class="fas fa-wallet"></i> Payments</a></li>
+                    <li><a href="expert-settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+                </ul>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="logout.html" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <div class="dashboard-header">
+                <h1><i class="fas fa-chart-line"></i> Submit New Case Study</h1>
+                <p class="dashboard-subtitle">Share your success stories to attract more clients</p>
+            </div>
+
+            <div class="dashboard-content">
+                <form id="case-study-form" class="case-study-form">
+                    <div class="form-progress">
+                        <div class="progress-step active" data-step="1">
+                            <div class="step-number">1</div>
+                            <div class="step-label">Basic Info</div>
+                        </div>
+                        <div class="progress-step" data-step="2">
+                            <div class="step-number">2</div>
+                            <div class="step-label">Client & Project</div>
+                        </div>
+                        <div class="progress-step" data-step="3">
+                            <div class="step-number">3</div>
+                            <div class="step-label">Results</div>
+                        </div>
+                        <div class="progress-step" data-step="4">
+                            <div class="step-number">4</div>
+                            <div class="step-label">Media</div>
+                        </div>
+                        <div class="progress-step" data-step="5">
+                            <div class="step-number">5</div>
+                            <div class="step-label">Review</div>
+                        </div>
+                    </div>
+
+                    <!-- Step 1: Basic Info -->
+                    <div class="form-step active" data-step="1">
+                        <div class="form-section">
+                            <h2>Basic Information</h2>
+                            <p class="form-section-desc">Start with the key details about your case study</p>
+
+                            <div class="form-group">
+                                <label for="case-study-title">Case Study Title <span class="required">*</span></label>
+                                <input type="text" id="case-study-title" name="title" required placeholder="E.g., 'How I Increased Client Revenue by 200% in 3 Months'" maxlength="80">
+                                <div class="char-count"><span id="title-char-count">0</span>/80</div>
+                                <div class="form-hint">Make it specific and results-focused. Good titles mention specific metrics and timeframes.</div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="case-study-summary">Summary <span class="required">*</span></label>
+                                <textarea id="case-study-summary" name="summary" required placeholder="Briefly summarize this case study in 2-3 sentences" maxlength="200"></textarea>
+                                <div class="char-count"><span id="summary-char-count">0</span>/200</div>
+                                <div class="form-hint">This appears in search results and case study listings. Be concise and compelling.</div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group half">
+                                    <label for="case-study-category">Primary Category <span class="required">*</span></label>
+                                    <select id="case-study-category" name="category" required>
+                                        <option value="">Select a category</option>
+                                        <option value="business">Business Strategy</option>
+                                        <option value="marketing">Digital Marketing</option>
+                                        <option value="technology">Technology & Software</option>
+                                        <option value="finance">Finance & Accounting</option>
+                                        <option value="health">Health & Wellness</option>
+                                        <option value="education">Education & Training</option>
+                                        <option value="legal">Legal Services</option>
+                                        <option value="creative">Creative & Design</option>
+                                        <option value="realestate">Real Estate</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group half">
+                                    <label for="case-study-industry">Client Industry <span class="required">*</span></label>
+                                    <select id="case-study-industry" name="industry" required>
+                                        <option value="">Select an industry</option>
+                                        <option value="tech">Technology & SaaS</option>
+                                        <option value="ecommerce">E-commerce & Retail</option>
+                                        <option value="healthcare">Healthcare</option>
+                                        <option value="finance">Finance & Banking</option>
+                                        <option value="education">Education</option>
+                                        <option value="manufacturing">Manufacturing</option>
+                                        <option value="professional">Professional Services</option>
+                                        <option value="hospitality">Hospitality & Travel</option>
+                                        <option value="nonprofit">Non-profit & NGO</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group half">
+                                    <label for="case-study-date">Project Date <span class="required">*</span></label>
+                                    <input type="month" id="case-study-date" name="projectDate" required>
+                                    <div class="form-hint">When did you complete this project?</div>
+                                </div>
+
+                                <div class="form-group half">
+                                    <label for="case-study-duration">Project Duration <span class="required">*</span></label>
+                                    <div class="input-with-select">
+                                        <input type="number" id="case-study-duration" name="projectDuration" required min="1" max="100" placeholder="Duration">
+                                        <select id="case-study-duration-unit" name="projectDurationUnit">
+                                            <option value="days">Days</option>
+                                            <option value="weeks" selected>Weeks</option>
+                                            <option value="months">Months</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Is this a premium case study?</label>
+                                <div class="toggle-container">
+                                    <input type="checkbox" id="premium-toggle" name="isPremium" class="toggle-input">
+                                    <label for="premium-toggle" class="toggle-label"></label>
+                                    <span class="toggle-text">Premium case studies appear at the top of listings and feature a special badge</span>
+                                </div>
+                            </div>
+
+                            <div class="premium-features" style="display: none;">
+                                <div class="feature-note">
+                                    <i class="fas fa-crown"></i>
+                                    <p>Premium case studies include enhanced features:</p>
+                                    <ul>
+                                        <li>Featured placement in search results and category listings</li>
+                                        <li>Premium badge to increase visibility and perceived value</li>
+                                        <li>Detailed analytics on views, clicks, and conversion rates</li>
+                                        <li>Highlighted in your expert profile and related content</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-navigation">
+                            <button type="button" class="btn btn-outline" id="save-draft-1">Save Draft</button>
+                            <button type="button" class="btn btn-primary" id="next-step-1">Next: Client & Project</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Client & Project -->
+                    <div class="form-step" data-step="2">
+                        <div class="form-section">
+                            <h2>Client & Project Details</h2>
+                            <p class="form-section-desc">Tell the story of the project and the challenges you solved</p>
+
+                            <div class="form-group">
+                                <label for="client-name">Client Name <span class="required">*</span></label>
+                                <input type="text" id="client-name" name="clientName" required placeholder="Company name or 'Anonymous Client'">
+                                <div class="form-hint">You can use a pseudonym if you have confidentiality agreements.</div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="case-challenge">Challenge Description <span class="required">*</span></label>
+                                <textarea id="case-challenge" name="challenge" required placeholder="Describe the challenges the client was facing before they hired you"></textarea>
+                                <div class="form-hint">Be specific about pain points, problems, and why they needed expert help.</div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="case-approach">Your Approach <span class="required">*</span></label>
+                                <textarea id="case-approach" name="approach" required placeholder="Explain your methodology and how you approached the problem"></textarea>
+                                <div class="form-hint">Detail your strategy, process, and why you chose this approach.</div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="case-solution">Solution Implemented <span class="required">*</span></label>
+                                <textarea id="case-solution" name="solution" required placeholder="Describe the specific solution you implemented"></textarea>
+                                <div class="form-hint">Focus on what you specifically delivered or implemented.</div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Project Timeline</label>
+                                <div class="timeline-builder">
+                                    <div class="timeline-entry">
+                                        <div class="form-row">
+                                            <div class="form-group two-thirds">
+                                                <input type="text" name="timeline[0][title]" placeholder="Timeline Phase Title" class="timeline-title">
+                                            </div>
+                                            <div class="form-group one-third">
+                                                <select name="timeline[0][week]" class="timeline-week">
+                                                    <option value="week1">Week 1</option>
+                                                    <option value="week2">Week 2</option>
+                                                    <option value="week3">Week 3</option>
+                                                    <option value="week4">Week 4</option>
+                                                    <option value="month2">Month 2</option>
+                                                    <option value="month3">Month 3+</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <textarea name="timeline[0][description]" placeholder="Describe what happened during this phase" class="timeline-description"></textarea>
+                                    </div>
+                                    <button type="button" id="add-timeline-entry" class="btn btn-outline btn-sm">
+                                        <i class="fas fa-plus"></i> Add Timeline Entry
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-navigation">
+                            <button type="button" class="btn btn-outline" id="prev-step-2">Previous</button>
+                            <button type="button" class="btn btn-outline" id="save-draft-2">Save Draft</button>
+                            <button type="button" class="btn btn-primary" id="next-step-2">Next: Results</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Results -->
+                    <div class="form-step" data-step="3">
+                        <div class="form-section">
+                            <h2>Results & Impact</h2>
+                            <p class="form-section-desc">Showcase the measurable results you achieved</p>
+
+                            <div class="form-group">
+                                <label for="case-results">Results Overview <span class="required">*</span></label>
+                                <textarea id="case-results" name="resultsOverview" required placeholder="Provide an overview of the results and impact of your work"></textarea>
+                                <div class="form-hint">Focus on measurable outcomes and the value you delivered.</div>
+                            </div>
+
+                            <div class="key-metrics">
+                                <label>Key Metrics <span class="required">*</span></label>
+                                <p class="form-hint">Add 2-4 specific, measurable results that demonstrate your impact</p>
+
+                                <div class="metrics-container">
+                                    <div class="metric-entry">
+                                        <div class="form-row">
+                                            <div class="form-group half">
+                                                <input type="text" name="metrics[0][value]" placeholder="Value (e.g., 200%)" required class="metric-value">
+                                            </div>
+                                            <div class="form-group half">
+                                                <input type="text" name="metrics[0][label]" placeholder="Label (e.g., Revenue Growth)" required class="metric-label">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="metric-entry">
+                                        <div class="form-row">
+                                            <div class="form-group half">
+                                                <input type="text" name="metrics[1][value]" placeholder="Value (e.g., 45%)" required class="metric-value">
+                                            </div>
+                                            <div class="form-group half">
+                                                <input type="text" name="metrics[1][label]" placeholder="Label (e.g., Cost Reduction)" required class="metric-label">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button type="button" id="add-metric" class="btn btn-outline btn-sm">
+                                    <i class="fas fa-plus"></i> Add Another Metric
+                                </button>
+                            </div>
+
+                            <div class="form-group verification-section">
+                                <label>Client Verification</label>
+                                <div class="verification-options">
+                                    <div class="verification-option">
+                                        <input type="radio" id="verification-testimonial" name="verification-type" value="testimonial" checked>
+                                        <label for="verification-testimonial">Add Client Testimonial</label>
+                                    </div>
+                                    <div class="verification-option">
+                                        <input type="radio" id="verification-email" name="verification-type" value="email">
+                                        <label for="verification-email">Request Client Verification via Email</label>
+                                    </div>
+                                    <div class="verification-option">
+                                        <input type="radio" id="verification-document" name="verification-type" value="document">
+                                        <label for="verification-document">Upload Verification Document</label>
+                                    </div>
+                                </div>
+
+                                <div class="verification-content" id="testimonial-content">
+                                    <div class="form-group">
+                                        <label for="testimonial-text">Client Testimonial <span class="required">*</span></label>
+                                        <textarea id="testimonial-text" name="testimonialText" placeholder="Add a direct quote from your client about the project and results"></textarea>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group half">
+                                            <label for="testimonial-name">Client Name <span class="required">*</span></label>
+                                            <input type="text" id="testimonial-name" name="testimonialName" placeholder="Name of the person providing the testimonial">
+                                        </div>
+                                        <div class="form-group half">
+                                            <label for="testimonial-position">Position/Title</label>
+                                            <input type="text" id="testimonial-position" name="testimonialPosition" placeholder="Their position at the company">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="verification-content" id="email-content" style="display: none;">
+                                    <div class="form-group">
+                                        <label for="verification-email-address">Client Email <span class="required">*</span></label>
+                                        <input type="email" id="verification-email-address" name="verificationEmail" placeholder="Enter client's email address">
+                                        <div class="form-hint">We'll send them a verification request after you submit</div>
+                                    </div>
+                                </div>
+
+                                <div class="verification-content" id="document-content" style="display: none;">
+                                    <div class="form-group">
+                                        <label for="verification-document-upload">Upload Document <span class="required">*</span></label>
+                                        <div class="file-upload">
+                                            <input type="file" id="verification-document-upload" name="verificationDocument" accept=".pdf,.doc,.docx,.jpg,.png">
+                                            <label for="verification-document-upload" class="file-upload-label">
+                                                <i class="fas fa-cloud-upload-alt"></i> Choose File
+                                            </label>
+                                            <span class="file-name">No file chosen</span>
+                                        </div>
+                                        <div class="form-hint">Upload a document showing project results or a signed testimonial (PDF, Word, or image)</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-navigation">
+                            <button type="button" class="btn btn-outline" id="prev-step-3">Previous</button>
+                            <button type="button" class="btn btn-outline" id="save-draft-3">Save Draft</button>
+                            <button type="button" class="btn btn-primary" id="next-step-3">Next: Media</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 4: Media -->
+                    <div class="form-step" data-step="4">
+                        <div class="form-section">
+                            <h2>Images & Media</h2>
+                            <p class="form-section-desc">Add visuals to make your case study more engaging</p>
+
+                            <div class="form-group">
+                                <label for="featured-image-upload">Featured Image <span class="required">*</span></label>
+                                <div class="featured-image-upload">
+                                    <div class="image-preview" id="featured-image-preview">
+                                        <i class="fas fa-image"></i>
+                                        <span>No image selected</span>
+                                    </div>
+                                    <div class="file-upload">
+                                        <input type="file" id="featured-image-upload" name="featuredImage" accept="image/*">
+                                        <label for="featured-image-upload" class="file-upload-label">
+                                            <i class="fas fa-cloud-upload-alt"></i> Choose Featured Image
+                                        </label>
+                                    </div>
+                                    <div class="form-hint">This will be the main image shown in listings and at the top of your case study. Recommended size: 1200×800px.</div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Additional Images</label>
+                                <div class="additional-images">
+                                    <div class="additional-images-container" id="additional-images-container">
+                                        <!-- Additional image previews will be added here -->
+                                    </div>
+                                    <div class="file-upload">
+                                        <input type="file" id="additional-images-upload" name="additionalImages" accept="image/*" multiple>
+                                        <label for="additional-images-upload" class="file-upload-label">
+                                            <i class="fas fa-images"></i> Add More Images
+                                        </label>
+                                    </div>
+                                    <div class="form-hint">You can add up to 5 additional images to enhance your case study.</div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="video-url">Video URL</label>
+                                <input type="url" id="video-url" name="videoUrl" placeholder="YouTube or Vimeo URL (optional)">
+                                <div class="form-hint">Include a video demonstration or testimonial if available.</div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="document-upload">Supporting Documents</label>
+                                <div class="file-upload">
+                                    <input type="file" id="document-upload" name="supportingDocuments" accept=".pdf,.doc,.docx,.ppt,.pptx" multiple>
+                                    <label for="document-upload" class="file-upload-label">
+                                        <i class="fas fa-file-alt"></i> Upload Documents
+                                    </label>
+                                    <span class="file-list" id="document-list">No files chosen</span>
+                                </div>
+                                <div class="form-hint">You can upload PDFs, Word docs, or presentations (max 5 files, 10MB each).</div>
+                            </div>
+                        </div>
+
+                        <div class="form-navigation">
+                            <button type="button" class="btn btn-outline" id="prev-step-4">Previous</button>
+                            <button type="button" class="btn btn-outline" id="save-draft-4">Save Draft</button>
+                            <button type="button" class="btn btn-primary" id="next-step-4">Next: Review</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 5: Review & Submit -->
+                    <div class="form-step" data-step="5">
+                        <div class="form-section">
+                            <h2>Review & Submit</h2>
+                            <p class="form-section-desc">Review your case study before submission</p>
+
+                            <div class="case-study-preview" id="case-study-preview">
+                                <!-- Preview will be generated by JavaScript -->
+                                <div class="preview-loading">
+                                    <i class="fas fa-spinner fa-spin"></i>
+                                    <p>Generating preview...</p>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Publishing Options</label>
+                                <div class="publishing-options">
+                                    <div class="publishing-option">
+                                        <input type="radio" id="publish-now" name="publishOption" value="now" checked>
+                                        <label for="publish-now">Publish Now</label>
+                                    </div>
+                                    <div class="publishing-option">
+                                        <input type="radio" id="publish-later" name="publishOption" value="later">
+                                        <label for="publish-later">Schedule Publication</label>
+                                    </div>
+                                    <div class="publishing-option">
+                                        <input type="radio" id="publish-draft" name="publishOption" value="draft">
+                                        <label for="publish-draft">Save as Draft</label>
+                                    </div>
+                                </div>
+
+                                <div class="schedule-date-container" style="display: none;">
+                                    <label for="schedule-date">Publication Date</label>
+                                    <input type="datetime-local" id="schedule-date" name="scheduleDate">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="terms-container">
+                                    <input type="checkbox" id="terms-agreement" name="termsAgreement" required>
+                                    <label for="terms-agreement">I confirm that I have the right to share this information and that all results and testimonials are accurate</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-navigation">
+                            <button type="button" class="btn btn-outline" id="prev-step-5">Previous</button>
+                            <button type="button" class="btn btn-outline" id="save-draft-5">Save Draft</button>
+                            <button type="submit" class="btn btn-primary" id="submit-case-study">Submit Case Study</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <script src="scripts.js"></script>
+    <script src="submit-case-study.js"></script>
+</body>
+</html>

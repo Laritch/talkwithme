@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Subscription Management | Expert Chat System</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="css/subscription.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <div class="container">
+    <header class="main-header">
+      <div class="logo">
+        <a href="index.html">Expert Chat System</a>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="expert-matching.html">Find Experts</a></li>
+          <li><a href="store.html">Expert Store</a></li>
+          <li><a href="cart.html"><i class="fas fa-shopping-cart"></i></a></li>
+          <li id="userProfileNav" style="display:none;">
+            <a href="#" id="userProfileLink">
+              <img id="userProfileImage" src="/uploads/default-avatar.png" alt="Profile" class="avatar-img">
+            </a>
+          </li>
+          <li id="loginNav">
+            <a href="login.html" class="btn-login">Login</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Client dashboard navigation -->
+    <div class="dashboard-nav">
+      <ul>
+        <li><a href="client-dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+        <li><a href="orders.html"><i class="fas fa-shopping-bag"></i> Orders</a></li>
+        <li class="active"><a href="subscription-management.html"><i class="fas fa-sync-alt"></i> Subscriptions</a></li>
+        <li><a href="chat-history.html"><i class="fas fa-comments"></i> Chat History</a></li>
+        <li><a href="loyalty-rewards.html"><i class="fas fa-award"></i> Loyalty Rewards</a></li>
+        <li><a href="profile.html"><i class="fas fa-user-circle"></i> Profile</a></li>
+      </ul>
+    </div>
+
+    <main class="subscription-main">
+      <section class="page-header">
+        <h1>Subscription Management</h1>
+        <p>Manage your subscription plans and payment methods.</p>
+      </section>
+
+      <!-- Current Subscriptions Section -->
+      <section class="subscription-section" id="active-subscriptions">
+        <div class="section-header">
+          <h2>Active Subscriptions</h2>
+          <a href="#subscription-plans" class="btn btn-secondary btn-sm">Upgrade Plan</a>
+        </div>
+
+        <div class="subscription-cards" id="subscription-cards">
+          <!-- Loading state -->
+          <div class="loading-spinner" id="subscription-loading">
+            <i class="fas fa-spinner fa-spin"></i>
+            <span>Loading your subscriptions...</span>
+          </div>
+
+          <!-- No subscriptions state -->
+          <div class="no-subscriptions" id="no-subscriptions" style="display: none;">
+            <div class="empty-state">
+              <i class="fas fa-sync-alt"></i>
+              <h3>No Active Subscriptions</h3>
+              <p>You don't have any active subscriptions. Subscribe to a plan to unlock premium features and benefits.</p>
+              <a href="#subscription-plans" class="btn btn-primary">View Plans</a>
+            </div>
+          </div>
+
+          <!-- Subscription card template (will be populated by JS) -->
+          <!-- This is just a template and will be hidden initially -->
+          <div class="subscription-card template" id="subscription-template" style="display: none;">
+            <div class="subscription-header">
+              <div class="subscription-plan-icon">
+                <i class="fas fa-crown"></i>
+              </div>
+              <div class="subscription-plan-info">
+                <h3 class="subscription-plan-name">Premium Plan</h3>
+                <span class="subscription-status">Active</span>
+              </div>
+            </div>
+
+            <div class="subscription-details">
+              <div class="subscription-detail">
+                <span class="detail-label">Next Billing</span>
+                <span class="next-billing-date detail-value">March 15, 2025</span>
+              </div>
+              <div class="subscription-detail">
+                <span class="detail-label">Amount</span>
+                <span class="billing-amount detail-value">$49.99/month</span>
+              </div>
+              <div class="subscription-detail">
+                <span class="detail-label">Payment Method</span>
+                <span class="payment-method detail-value">
+                  <i class="fab fa-cc-visa"></i>
+                  <span class="card-last-four">•••• 1234</span>
+                </span>
+              </div>
+              <div class="subscription-detail">
+                <span class="detail-label">Started On</span>
+                <span class="start-date detail-value">January 15, 2025</span>
+              </div>
+            </div>
+
+            <div class="subscription-benefits">
+              <ul class="benefits-list">
+                <li><i class="fas fa-check"></i> Unlimited expert consultations</li>
+                <li><i class="fas fa-check"></i> Priority matching</li>
+                <li><i class="fas fa-check"></i> Exclusive content access</li>
+                <li><i class="fas fa-check"></i> Double loyalty points</li>
+              </ul>
+            </div>
+
+            <div class="subscription-actions">
+              <button class="btn btn-outline cancel-subscription">Cancel Subscription</button>
+              <button class="btn btn-secondary update-payment">Update Payment</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Payment Methods Section -->
+      <section class="subscription-section" id="payment-methods">
+        <div class="section-header">
+          <h2>Payment Methods</h2>
+          <button class="btn btn-primary btn-sm" id="add-payment-method">
+            <i class="fas fa-plus"></i> Add Payment Method
+          </button>
+        </div>
+
+        <div class="payment-methods-list" id="payment-methods-list">
+          <!-- Loading state -->
+          <div class="loading-spinner" id="payment-methods-loading">
+            <i class="fas fa-spinner fa-spin"></i>
+            <span>Loading your payment methods...</span>
+          </div>
+
+          <!-- No payment methods state -->
+          <div class="no-payment-methods" id="no-payment-methods" style="display: none;">
+            <div class="empty-state">
+              <i class="fas fa-credit-card"></i>
+              <h3>No Payment Methods</h3>
+              <p>You haven't added any payment methods yet. Add a payment method to subscribe to plans.</p>
+              <button class="btn btn-primary" id="add-first-payment">Add Payment Method</button>
+            </div>
+          </div>
+
+          <!-- Payment methods will be inserted here by JS -->
+          <div class="payment-method-card template" id="payment-method-template" style="display: none;">
+            <div class="payment-method-icon">
+              <i class="fab fa-cc-visa"></i>
+            </div>
+            <div class="payment-method-details">
+              <h3 class="payment-method-name">Visa •••• 1234</h3>
+              <p class="payment-method-expiry">Expires 12/2025</p>
+            </div>
+            <div class="payment-method-actions">
+              <button class="btn btn-sm btn-outline remove-payment">Remove</button>
+              <button class="btn btn-sm btn-secondary set-default">Set as Default</button>
+            </div>
+            <div class="default-badge" style="display: none;">Default</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Available Subscription Plans Section -->
+      <section class="subscription-section" id="subscription-plans">
+        <div class="section-header">
+          <h2>Subscription Plans</h2>
+        </div>
+
+        <div class="subscription-plans-list">
+          <!-- Basic Plan -->
+          <div class="plan-card">
+            <div class="plan-header">
+              <div class="plan-name">Basic</div>
+              <div class="plan-price">
+                <span class="price">$9.99</span>
+                <span class="period">/month</span>
+              </div>
+            </div>
+            <div class="plan-features">
+              <ul>
+                <li><i class="fas fa-check"></i> 5 expert consultations/month</li>
+                <li><i class="fas fa-check"></i> Standard matching</li>
+                <li><i class="fas fa-check"></i> Basic content access</li>
+                <li><i class="fas fa-check"></i> 1x loyalty points</li>
+                <li><i class="fas fa-times"></i> Priority support</li>
+              </ul>
+            </div>
+            <div class="plan-actions">
+              <button class="btn btn-outline select-plan" data-plan-id="basic">Select Plan</button>
+            </div>
+          </div>
+
+          <!-- Premium Plan -->
+          <div class="plan-card recommended">
+            <div class="recommended-badge">Recommended</div>
+            <div class="plan-header">
+              <div class="plan-name">Premium</div>
+              <div class="plan-price">
+                <span class="price">$29.99</span>
+                <span class="period">/month</span>
+              </div>
+            </div>
+            <div class="plan-features">
+              <ul>
+                <li><i class="fas fa-check"></i> 15 expert consultations/month</li>
+                <li><i class="fas fa-check"></i> Priority matching</li>
+                <li><i class="fas fa-check"></i> Premium content access</li>
+                <li><i class="fas fa-check"></i> 2x loyalty points</li>
+                <li><i class="fas fa-check"></i> Priority support</li>
+              </ul>
+            </div>
+            <div class="plan-actions">
+              <button class="btn btn-primary select-plan" data-plan-id="premium">Select Plan</button>
+            </div>
+          </div>
+
+          <!-- Professional Plan -->
+          <div class="plan-card">
+            <div class="plan-header">
+              <div class="plan-name">Professional</div>
+              <div class="plan-price">
+                <span class="price">$49.99</span>
+                <span class="period">/month</span>
+              </div>
+            </div>
+            <div class="plan-features">
+              <ul>
+                <li><i class="fas fa-check"></i> Unlimited expert consultations</li>
+                <li><i class="fas fa-check"></i> VIP matching</li>
+                <li><i class="fas fa-check"></i> All content access</li>
+                <li><i class="fas fa-check"></i> 3x loyalty points</li>
+                <li><i class="fas fa-check"></i> 24/7 dedicated support</li>
+              </ul>
+            </div>
+            <div class="plan-actions">
+              <button class="btn btn-outline select-plan" data-plan-id="professional">Select Plan</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Billing History Section -->
+      <section class="subscription-section" id="billing-history">
+        <div class="section-header">
+          <h2>Billing History</h2>
+          <button class="btn btn-sm btn-secondary" id="download-invoices">
+            <i class="fas fa-download"></i> Download All Invoices
+          </button>
+        </div>
+
+        <div class="billing-history-container">
+          <!-- Loading state -->
+          <div class="loading-spinner" id="billing-history-loading">
+            <i class="fas fa-spinner fa-spin"></i>
+            <span>Loading your billing history...</span>
+          </div>
+
+          <!-- No billing history state -->
+          <div class="no-billing-history" id="no-billing-history" style="display: none;">
+            <div class="empty-state">
+              <i class="fas fa-file-invoice-dollar"></i>
+              <h3>No Billing History</h3>
+              <p>You don't have any billing history yet. Your invoices will appear here after your first payment.</p>
+            </div>
+          </div>
+
+          <table class="billing-history-table" id="billing-history-table" style="display: none;">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Description</th>
+                <th>Amount</th>
+                <th>Status</th>
+                <th>Invoice</th>
+              </tr>
+            </thead>
+            <tbody id="billing-history-body">
+              <!-- Billing history will be inserted here by JS -->
+            </tbody>
+          </table>
+
+          <div class="pagination" id="billing-pagination" style="display: none;">
+            <button class="pagination-btn" id="prev-page" disabled>
+              <i class="fas fa-chevron-left"></i> Previous
+            </button>
+            <span class="pagination-info">Page <span id="current-page">1</span> of <span id="total-pages">1</span></span>
+            <button class="pagination-btn" id="next-page">
+              Next <i class="fas fa-chevron-right"></i>
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Add Payment Method Modal -->
+  <div class="modal" id="payment-method-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Add Payment Method</h2>
+        <button class="modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="payment-method-form">
+          <div class="form-group">
+            <label for="card-element">Credit or Debit Card</label>
+            <div id="card-element" class="card-element"></div>
+            <div id="card-errors" class="card-errors" role="alert"></div>
+          </div>
+
+          <div class="form-group">
+            <label>
+              <input type="checkbox" id="make-default">
+              Set as default payment method
+            </label>
+          </div>
+
+          <div class="form-group">
+            <label>
+              <input type="checkbox" id="save-for-future">
+              Save card for future payments
+            </label>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary modal-close-btn">Cancel</button>
+        <button class="btn btn-primary" id="save-payment-method">Add Payment Method</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Subscription Plan Modal -->
+  <div class="modal" id="subscription-plan-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Subscribe to <span id="selected-plan-name">Plan</span></h2>
+        <button class="modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="plan-summary">
+          <h3>Plan Summary</h3>
+          <div class="plan-summary-row">
+            <span class="summary-label">Plan:</span>
+            <span class="summary-value" id="summary-plan-name">Premium</span>
+          </div>
+          <div class="plan-summary-row">
+            <span class="summary-label">Price:</span>
+            <span class="summary-value" id="summary-plan-price">$29.99/month</span>
+          </div>
+          <div class="plan-summary-row">
+            <span class="summary-label">Billing Cycle:</span>
+            <span class="summary-value" id="summary-billing-cycle">Monthly</span>
+          </div>
+          <div class="plan-summary-row loyalty-discount" style="display: none;">
+            <span class="summary-label">Loyalty Discount:</span>
+            <span class="summary-value" id="summary-loyalty-discount">-$0.00</span>
+          </div>
+          <div class="plan-summary-row total">
+            <span class="summary-label">Total:</span>
+            <span class="summary-value" id="summary-total">$29.99</span>
+          </div>
+        </div>
+
+        <div class="payment-selection">
+          <h3>Payment Method</h3>
+          <div id="payment-methods-select">
+            <!-- Payment methods will be inserted here by JS -->
+            <div class="no-payment-methods-warning" style="display: none;">
+              <p>You don't have any payment methods. Please add a payment method to continue.</p>
+              <button class="btn btn-secondary btn-sm" id="add-payment-from-subscription">Add Payment Method</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary modal-close-btn">Cancel</button>
+        <button class="btn btn-primary" id="confirm-subscription">Confirm Subscription</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cancel Subscription Modal -->
+  <div class="modal" id="cancel-subscription-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Cancel Subscription</h2>
+        <button class="modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="cancel-warning">
+          <i class="fas fa-exclamation-triangle"></i>
+          <h3>Are you sure you want to cancel?</h3>
+          <p>Your subscription will remain active until the end of your current billing period on <span id="subscription-end-date">March 15, 2025</span>.</p>
+        </div>
+
+        <div class="cancellation-feedback">
+          <h3>Please tell us why you're cancelling</h3>
+          <div class="form-group">
+            <select id="cancellation-reason">
+              <option value="">Select a reason</option>
+              <option value="too_expensive">Too expensive</option>
+              <option value="not_using">Not using enough</option>
+              <option value="missing_features">Missing features I need</option>
+              <option value="switching">Switching to another service</option>
+              <option value="technical_issues">Technical issues</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="form-group" id="other-reason-group" style="display: none;">
+            <textarea id="cancellation-other-reason" placeholder="Please tell us more..."></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary modal-close-btn">Keep Subscription</button>
+        <button class="btn btn-danger" id="confirm-cancellation">Cancel Subscription</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://js.stripe.com/v3/"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/subscription-management.js"></script>
+</body>
+</html>

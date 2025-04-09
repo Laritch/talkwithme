@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up | Expert Platform</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-panel">
+            <div class="login-header">
+                <div class="logo">
+                    <img src="/uploads/default-avatar.png" alt="Expert Platform Logo">
+                    <h1>Expert Platform</h1>
+                </div>
+                <p class="login-subtitle">Create your expert account</p>
+            </div>
+
+            <div class="login-form-container">
+                <div id="error-message" class="error-message" style="display: none;"></div>
+
+                <form id="signup-form" class="login-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="first_name">First Name</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-user"></i>
+                                <input type="text" id="first_name" name="first_name" required placeholder="Enter your first name">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="last_name">Last Name</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-user"></i>
+                                <input type="text" id="last_name" name="last_name" required placeholder="Enter your last name">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="email" name="email" required placeholder="Enter your email">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="password" name="password" required placeholder="Create a password">
+                        </div>
+                        <div class="password-requirements">
+                            <p>Password must contain at least:</p>
+                            <ul>
+                                <li id="length-check">8 characters</li>
+                                <li id="uppercase-check">1 uppercase letter</li>
+                                <li id="lowercase-check">1 lowercase letter</li>
+                                <li id="number-check">1 number</li>
+                                <li id="special-check">1 special character</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password_confirm">Confirm Password</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="password_confirm" name="password_confirm" required placeholder="Confirm your password">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="account_type">Account Type</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-users"></i>
+                            <select id="account_type" name="account_type" required class="select-input">
+                                <option value="" disabled selected>Select your account type</option>
+                                <option value="client">Client (I need expert services)</option>
+                                <option value="expert">Expert (I provide services)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-options">
+                        <div class="remember-me">
+                            <input type="checkbox" id="terms" name="terms" required>
+                            <label for="terms">I agree to the <a href="/terms.html">Terms of Service</a> and <a href="/privacy.html">Privacy Policy</a></label>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-login">
+                        <span class="btn-text">Create Account</span>
+                        <span class="btn-loader" style="display: none;">
+                            <i class="fas fa-circle-notch fa-spin"></i>
+                        </span>
+                    </button>
+                </form>
+
+                <div class="social-login">
+                    <div class="social-login-divider">
+                        <span>OR</span>
+                    </div>
+
+                    <button id="social-login-google" class="btn-social google">
+                        <i class="fab fa-google"></i>
+                        <span>Sign up with Google</span>
+                    </button>
+
+                    <button id="social-login-microsoft" class="btn-social microsoft">
+                        <i class="fab fa-microsoft"></i>
+                        <span>Sign up with Microsoft</span>
+                    </button>
+                </div>
+
+                <div class="register-link">
+                    <p>Already have an account? <a href="/login.html">Sign in</a></p>
+                </div>
+            </div>
+
+            <div class="login-footer">
+                <p>&copy; 2025 Expert Platform. All rights reserved.</p>
+            </div>
+        </div>
+
+        <div class="login-info-panel">
+            <div class="info-content">
+                <h2>Join Expert Platform</h2>
+                <p>Sign up to gain access to our powerful tax management tools and become part of our expert network.</p>
+
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <i class="fas fa-file-invoice-dollar"></i>
+                        <div>
+                            <h3>Streamlined Tax Documents</h3>
+                            <p>Manage all your tax forms in one convenient location</p>
+                        </div>
+                    </div>
+
+                    <div class="feature-item">
+                        <i class="fas fa-chart-line"></i>
+                        <div>
+                            <h3>Compliance Insights</h3>
+                            <p>Get AI-powered recommendations to improve compliance</p>
+                        </div>
+                    </div>
+
+                    <div class="feature-item">
+                        <i class="fas fa-shield-alt"></i>
+                        <div>
+                            <h3>Enterprise-Grade Security</h3>
+                            <p>Your data is protected with industry-leading security measures</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import auth0Service from './services/auth0-service.js';
+
+        // Check URL for error messages
+        function checkForErrors() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const error = urlParams.get('error');
+
+            if (error) {
+                showError(decodeURIComponent(error));
+            }
+        }
+
+        // Show error message
+        function showError(message) {
+            const errorElement = document.getElementById('error-message');
+            errorElement.textContent = message;
+            errorElement.style.display = 'block';
+        }
+
+        // Password validation
+        const passwordInput = document.getElementById('password');
+        passwordInput.addEventListener('input', validatePassword);
+
+        function validatePassword() {
+            const password = passwordInput.value;
+
+            // Check length (min 8 characters)
+            const lengthCheck = document.getElementById('length-check');
+            if (password.length >= 8) {
+                lengthCheck.classList.add('valid');
+            } else {
+                lengthCheck.classList.remove('valid');
+            }
+
+            // Check uppercase
+            const uppercaseCheck = document.getElementById('uppercase-check');
+            if (/[A-Z]/.test(password)) {
+                uppercaseCheck.classList.add('valid');
+            } else {
+                uppercaseCheck.classList.remove('valid');
+            }
+
+            // Check lowercase
+            const lowercaseCheck = document.getElementById('lowercase-check');
+            if (/[a-z]/.test(password)) {
+                lowercaseCheck.classList.add('valid');
+            } else {
+                lowercaseCheck.classList.remove('valid');
+            }
+
+            // Check number
+            const numberCheck = document.getElementById('number-check');
+            if (/[0-9]/.test(password)) {
+                numberCheck.classList.add('valid');
+            } else {
+                numberCheck.classList.remove('valid');
+            }
+
+            // Check special character
+            const specialCheck = document.getElementById('special-check');
+            if (/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password)) {
+                specialCheck.classList.add('valid');
+            } else {
+                specialCheck.classList.remove('valid');
+            }
+        }
+
+        // Handle form submission
+        document.getElementById('signup-form').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const firstName = document.getElementById('first_name').value;
+            const lastName = document.getElementById('last_name').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const passwordConfirm = document.getElementById('password_confirm').value;
+            const termsAccepted = document.getElementById('terms').checked;
+            const accountType = document.getElementById('account_type').value;
+
+            // Validate form
+            if (!firstName || !lastName || !email || !password || !accountType) {
+                showError('Please fill out all required fields');
+                return;
+            }
+
+            if (password !== passwordConfirm) {
+                showError('Passwords do not match');
+                return;
+            }
+
+            if (!termsAccepted) {
+                showError('You must accept the Terms of Service and Privacy Policy');
+                return;
+            }
+
+            // Password complexity validation
+            if (password.length < 8 ||
+                !/[A-Z]/.test(password) ||
+                !/[a-z]/.test(password) ||
+                !/[0-9]/.test(password) ||
+                !/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password)) {
+                showError('Password does not meet complexity requirements');
+                return;
+            }
+
+            // Show loading state
+            const submitBtn = this.querySelector('.btn-login');
+            const btnText = submitBtn.querySelector('.btn-text');
+            const btnLoader = submitBtn.querySelector('.btn-loader');
+
+            btnText.style.display = 'none';
+            btnLoader.style.display = 'inline-block';
+            submitBtn.disabled = true;
+
+            try {
+                // Create additional user metadata
+                const userMetadata = {
+                    first_name: firstName,
+                    last_name: lastName,
+                    full_name: `${firstName} ${lastName}`,
+                    account_type: accountType
+                };
+
+                await auth0Service.signup(email, password, userMetadata, accountType);
+                // Auth0 service will handle the redirect after successful signup
+            } catch (error) {
+                console.error('Signup error:', error);
+                showError(error.description || 'Failed to create account. Please try again.');
+
+                // Reset button state
+                btnText.style.display = 'inline-block';
+                btnLoader.style.display = 'none';
+                submitBtn.disabled = false;
+            }
+        });
+
+        // Social signup handlers
+        document.getElementById('social-login-google').addEventListener('click', function() {
+            auth0Service.login({ connection: 'google-oauth2' });
+        });
+
+        document.getElementById('social-login-microsoft').addEventListener('click', function() {
+            auth0Service.login({ connection: 'windowslive' });
+        });
+
+        // Check for redirect error messages
+        document.addEventListener('DOMContentLoaded', checkForErrors);
+
+        // Check if user is already authenticated
+        if (auth0Service.isAuthenticated()) {
+            // Redirect to dashboard
+            window.location.href = '/admin-tax-management.html';
+        }
+    </script>
+</body>
+</html>

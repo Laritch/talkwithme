@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Chat</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fb;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Chat Container */
+        .chat-container {
+            max-width: 900px;
+            margin: 20px auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            height: calc(100vh - 40px);
+            overflow: hidden;
+        }
+
+        /* Chat Header */
+        .chat-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 20px;
+            background: #4a69bd;
+            color: white;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        .chat-header h1 {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .online-status {
+            display: flex;
+            align-items: center;
+            font-size: 0.9rem;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #2ecc71;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+
+        /* Messages Area */
+        .messages-area {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .message {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        .message-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+
+        .message-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .message-content {
+            background-color: #f1f3f7;
+            padding: 10px 15px;
+            border-radius: 18px;
+            max-width: 70%;
+        }
+
+        .message.outgoing {
+            flex-direction: row-reverse;
+        }
+
+        .message.outgoing .message-avatar {
+            margin-right: 0;
+            margin-left: 10px;
+        }
+
+        .message.outgoing .message-content {
+            background-color: #4a69bd;
+            color: white;
+        }
+
+        .message-sender {
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .message-time {
+            font-size: 0.75rem;
+            color: #999;
+            margin-left: 5px;
+        }
+
+        .message.outgoing .message-time {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .message-text {
+            font-size: 0.95rem;
+            word-break: break-word;
+        }
+
+        /* Input Area */
+        .input-area {
+            display: flex;
+            padding: 15px;
+            background-color: white;
+            border-top: 1px solid #eee;
+        }
+
+        .input-field {
+            flex: 1;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            padding: 10px 15px;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .input-field:focus {
+            border-color: #4a69bd;
+        }
+
+        .send-button {
+            background-color: #4a69bd;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            margin-left: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.2s;
+        }
+
+        .send-button:hover {
+            background-color: #3a5a9d;
+        }
+
+        .attach-button {
+            background: none;
+            border: none;
+            color: #777;
+            margin-right: 10px;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+
+        /* Responsiveness */
+        @media (max-width: 768px) {
+            .chat-container {
+                margin: 0;
+                height: 100vh;
+                border-radius: 0;
+            }
+
+            .chat-header {
+                border-radius: 0;
+            }
+
+            .message-content {
+                max-width: 85%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">
+            <h1>Simple Chat</h1>
+            <div class="online-status">
+                <div class="status-dot"></div>
+                <span>Online: 3</span>
+            </div>
+        </div>
+
+        <div class="messages-area">
+            <!-- Incoming message example -->
+            <div class="message">
+                <div class="message-avatar">
+                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=50&h=50&crop=faces&auto=format&fit=crop" alt="Sarah">
+                </div>
+                <div class="message-content">
+                    <div class="message-sender">
+                        Sarah <span class="message-time">10:30 AM</span>
+                    </div>
+                    <div class="message-text">
+                        Hi there! How's everyone doing today?
+                    </div>
+                </div>
+            </div>
+
+            <!-- Outgoing message example -->
+            <div class="message outgoing">
+                <div class="message-avatar">
+                    <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=50&h=50&crop=faces&auto=format&fit=crop" alt="You">
+                </div>
+                <div class="message-content">
+                    <div class="message-sender">
+                        You <span class="message-time">10:32 AM</span>
+                    </div>
+                    <div class="message-text">
+                        I'm doing great! Just finished the project we've been working on.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Another incoming message -->
+            <div class="message">
+                <div class="message-avatar">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=50&h=50&crop=faces&auto=format&fit=crop" alt="Michael">
+                </div>
+                <div class="message-content">
+                    <div class="message-sender">
+                        Michael <span class="message-time">10:35 AM</span>
+                    </div>
+                    <div class="message-text">
+                        That's awesome! Can't wait to see it. I've been working on the new UI design.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="input-area">
+            <button class="attach-button">
+                <i class="fas fa-paperclip"></i>
+            </button>
+            <input type="text" class="input-field" placeholder="Type a message...">
+            <button class="send-button">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Simple chat functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const inputField = document.querySelector('.input-field');
+            const sendButton = document.querySelector('.send-button');
+            const messagesArea = document.querySelector('.messages-area');
+
+            // Function to add a new message
+            function addMessage(text, isOutgoing = true) {
+                if (!text.trim()) return;
+
+                const now = new Date();
+                const hours = now.getHours().toString().padStart(2, '0');
+                const minutes = now.getMinutes().toString().padStart(2, '0');
+                const timeString = `${hours}:${minutes}`;
+
+                const messageDiv = document.createElement('div');
+                messageDiv.className = isOutgoing ? 'message outgoing' : 'message';
+
+                messageDiv.innerHTML = `
+                    <div class="message-avatar">
+                        <img src="${isOutgoing ? 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=50&h=50&crop=faces&auto=format&fit=crop' : 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=50&h=50&crop=faces&auto=format&fit=crop'}" alt="${isOutgoing ? 'You' : 'Sarah'}">
+                    </div>
+                    <div class="message-content">
+                        <div class="message-sender">
+                            ${isOutgoing ? 'You' : 'Sarah'} <span class="message-time">${timeString}</span>
+                        </div>
+                        <div class="message-text">
+                            ${text}
+                        </div>
+                    </div>
+                `;
+
+                messagesArea.appendChild(messageDiv);
+                messagesArea.scrollTop = messagesArea.scrollHeight;
+            }
+
+            // Send message on button click
+            sendButton.addEventListener('click', function() {
+                const text = inputField.value;
+                if (text.trim()) {
+                    addMessage(text);
+                    inputField.value = '';
+
+                    // Simulate a response after a delay
+                    setTimeout(() => {
+                        const responses = [
+                            "That's interesting!",
+                            "Thanks for sharing!",
+                            "Could you tell me more about that?",
+                            "I see what you mean.",
+                            "That's a great point!"
+                        ];
+                        const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                        addMessage(randomResponse, false);
+                    }, 2000);
+                }
+            });
+
+            // Send message on Enter key
+            inputField.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendButton.click();
+                    e.preventDefault();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

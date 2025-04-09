@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LetsChat Test Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            line-height: 1.6;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            color: #4a69bd;
+        }
+        .status {
+            padding: 10px;
+            background-color: #e6f7ff;
+            border-left: 4px solid #1890ff;
+            margin-bottom: 20px;
+        }
+        .test-item {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #eee;
+            background-color: white;
+        }
+        .success {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>LetsChat Server Test</h1>
+
+        <div class="status">
+            <p>This page confirms that the static file server is working correctly.</p>
+        </div>
+
+        <h2>Server Status Tests</h2>
+
+        <div class="test-item">
+            <h3>Static File Serving</h3>
+            <p class="success">✓ Working! This HTML file is being served correctly.</p>
+        </div>
+
+        <div class="test-item">
+            <h3>Server Time</h3>
+            <p>Current server time: <span id="server-time"></span></p>
+        </div>
+
+        <div class="test-item">
+            <h3>Avatar Test</h3>
+            <p>The following image should be a placeholder for the admin avatar:</p>
+            <img src="/uploads/avatars/admin1.png" alt="Admin Avatar" style="border: 1px solid #ddd; max-width: 150px;">
+        </div>
+
+        <p>Return to <a href="/">Home Page</a></p>
+    </div>
+
+    <script>
+        // Display current time
+        document.getElementById('server-time').textContent = new Date().toLocaleString();
+    </script>
+</body>
+</html>

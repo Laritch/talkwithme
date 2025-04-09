@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat System Feature Test</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/message-search.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow: auto;
+            color: #333;
+            background-color: #f5f7fb;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background-color: #667eea;
+            color: white;
+            padding: 15px 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        h1, h2, h3 {
+            margin-top: 0;
+        }
+
+        .feature-section {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .test-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            background-color: #667eea;
+            color: white;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #5a70d8;
+        }
+
+        .test-results {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            border-left: 4px solid #667eea;
+        }
+
+        .mock-chat {
+            display: flex;
+            flex-direction: column;
+            height: 300px;
+            border: 1px solid #e1e1e1;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .mock-chat-header {
+            padding: 10px 15px;
+            background-color: #f5f7fb;
+            border-bottom: 1px solid #e1e1e1;
+            display: flex;
+            align-items: center;
+        }
+
+        .mock-chat-messages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            background-color: #f9f9f9;
+        }
+
+        .mock-chat-input {
+            padding: 10px 15px;
+            border-top: 1px solid #e1e1e1;
+            display: flex;
+            align-items: center;
+            background-color: white;
+        }
+
+        .mock-chat-input input {
+            flex: 1;
+            padding: 8px 12px;
+            border: 1px solid #e1e1e1;
+            border-radius: 20px;
+            outline: none;
+        }
+
+        .mock-chat-input button {
+            margin-left: 10px;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            padding: 0;
+        }
+
+        .message {
+            padding: 10px 15px;
+            border-radius: 18px;
+            margin-bottom: 10px;
+            max-width: 70%;
+            position: relative;
+        }
+
+        .message.sent {
+            align-self: flex-end;
+            background-color: #667eea;
+            color: white;
+            margin-left: auto;
+        }
+
+        .message.received {
+            align-self: flex-start;
+            background-color: white;
+            border: 1px solid #e1e1e1;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Chat System Feature Test</h1>
+    </header>
+
+    <div class="container">
+        <div class="feature-section">
+            <h2>1. Error Handling & Notifications</h2>
+            <p>Test the error handling and notification system.</p>
+
+            <div class="test-buttons">
+                <button id="show-success">Show Success Notification</button>
+                <button id="show-info">Show Info Notification</button>
+                <button id="show-warning">Show Warning Notification</button>
+                <button id="show-error">Show Error Notification</button>
+                <button id="trigger-error">Trigger Socket Error</button>
+            </div>
+
+            <div class="test-results" id="error-test-results">
+                Click any button above to see results here.
+            </div>
+        </div>
+
+        <div class="feature-section">
+            <h2>2. Typing Indicators</h2>
+            <p>Test the typing indicator feature.</p>
+
+            <div class="mock-chat">
+                <div class="mock-chat-header">
+                    <h3>Test Chat</h3>
+                </div>
+                <div class="mock-chat-messages" id="typing-test-messages">
+                    <div class="message received">
+                        <div class="message-content">Hey, how are you?</div>
+                    </div>
+                    <div class="message sent">
+                        <div class="message-content">I'm good, thanks! What about you?</div>
+                    </div>
+                    <div id="typing-indicator" class="typing-indicator hidden">
+                        User is typing...
+                    </div>
+                </div>
+                <div class="mock-chat-input">
+                    <input type="text" id="typing-test-input" placeholder="Type a message...">
+                    <button><i class="fas fa-paper-plane"></i></button>
+                </div>
+            </div>
+
+            <div class="test-buttons" style="margin-top: 15px;">
+                <button id="simulate-typing">Simulate Typing</button>
+                <button id="stop-typing">Stop Typing</button>
+            </div>
+        </div>
+
+        <div class="feature-section">
+            <h2>3. Notification Sounds</h2>
+            <p>Test the notification sound system. Make sure your speakers are turned on.</p>
+
+            <div class="test-buttons">
+                <button id="play-message-sound">Message Sound</button>
+                <button id="play-group-sound">Group Message Sound</button>
+                <button id="play-status-sound">Status Change Sound</button>
+                <button id="play-error-sound">Error Sound</button>
+            </div>
+
+            <div class="test-results" id="sound-test-results">
+                Click any button above to play a sound.
+            </div>
+
+            <div class="notification-settings" style="margin-top: 20px;">
+                <h3>Sound Settings</h3>
+                <div class="setting-row">
+                    <div class="setting-label">Enable Sounds</div>
+                    <label class="switch">
+                        <input type="checkbox" id="sound-toggle" checked>
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <div class="setting-row">
+                    <div class="setting-label">Volume</div>
+                    <input type="range" id="sound-volume" min="0" max="1" step="0.1" value="0.5">
+                </div>
+            </div>
+        </div>
+
+        <div class="feature-section">
+            <h2>4. Message Read Receipts</h2>
+            <p>Test the read receipt functionality.</p>
+
+            <div class="mock-chat">
+                <div class="mock-chat-header">
+                    <h3>Read Receipts Demo</h3>
+                </div>
+                <div class="mock-chat-messages" id="read-receipt-messages">
+                    <div class="message sent" data-message-id="msg1">
+                        <div class="message-content">
+                            <p>Hi there! This is a test message.</p>
+                            <div class="message-time">10:30 AM</div>
+                            <div class="read-status">
+                                <i class="fas fa-check"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="message sent" data-message-id="msg2">
+                        <div class="message-content">
+                            <p>This message has been read.</p>
+                            <div class="message-time">10:32 AM</div>
+                            <div class="read-status">
+                                <i class="fas fa-check-double"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="test-buttons" style="margin-top: 15px;">
+                <button id="mark-as-read">Mark Message as Read</button>
+                <button id="mark-as-delivered">Mark Message as Delivered</button>
+            </div>
+        </div>
+
+        <div class="feature-section">
+            <h2>5. Status Indicators</h2>
+            <p>Test the user status indicators.</p>
+
+            <div style="position: relative; width: 50px; height: 50px; margin: 20px auto;">
+                <img src="/uploads/default-avatar.png" style="width: 50px; height: 50px; border-radius: 50%;">
+                <div class="status-indicator">
+                    <i class="fas fa-circle status-online"></i>
+                </div>
+            </div>
+
+            <div class="test-buttons">
+                <button id="status-online">Set Online</button>
+                <button id="status-away">Set Away</button>
+                <button id="status-busy">Set Busy</button>
+                <button id="status-offline">Set Offline</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create audio container -->
+    <div id="audio-container" style="display: none;">
+        <audio id="message-sound" preload="auto">
+            <source src="/sounds/message.mp3" type="audio/mpeg">
+            <source src="/sounds/message.ogg" type="audio/ogg">
+        </audio>
+        <audio id="group-message-sound" preload="auto">
+            <source src="/sounds/group-message.mp3" type="audio/mpeg">
+            <source src="/sounds/group-message.ogg" type="audio/ogg">
+        </audio>
+        <audio id="status-change-sound" preload="auto">
+            <source src="/sounds/status-change.mp3" type="audio/mpeg">
+            <source src="/sounds/status-change.ogg" type="audio/ogg">
+        </audio>
+        <audio id="error-sound" preload="auto">
+            <source src="/sounds/error.mp3" type="audio/mpeg">
+            <source src="/sounds/error.ogg" type="audio/ogg">
+        </audio>
+    </div>
+
+    <script>
+        // Constants
+        const SOUNDS = {
+            MESSAGE: 'message-sound',
+            GROUP_MESSAGE: 'group-message-sound',
+            STATUS_CHANGE: 'status-change-sound',
+            ERROR: 'error-sound'
+        };
+
+        // DOM Elements
+        const errorTestResults = document.getElementById('error-test-results');
+        const typingIndicator = document.getElementById('typing-indicator');
+        const typingTestInput = document.getElementById('typing-test-input');
+        const soundTestResults = document.getElementById('sound-test-results');
+
+        // Initialize notification containers
+        let notificationContainer = document.createElement('div');
+        notificationContainer.id = 'notification-container';
+        document.body.appendChild(notificationContainer);
+
+        // Notification function
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `notification notification-${type}`;
+
+            const getIconForType = (type) => {
+                switch (type) {
+                    case 'success': return 'fa-check-circle';
+                    case 'error': return 'fa-exclamation-circle';
+                    case 'warning': return 'fa-exclamation-triangle';
+                    default: return 'fa-info-circle';
+                }
+            };
+
+            notification.innerHTML = `
+                <div class="notification-content">
+                    <i class="fas ${getIconForType(type)}"></i>
+                    <span>${message}</span>
+                </div>
+                <button class="notification-close">&times;</button>
+            `;
+
+            notification.querySelector('.notification-close').addEventListener('click', () => {
+                notification.classList.add('notification-hiding');
+                setTimeout(() => {
+                    notification.remove();
+                }, 300);
+            });
+
+            notificationContainer.appendChild(notification);
+
+            setTimeout(() => {
+                notification.classList.add('notification-hiding');
+                setTimeout(() => {
+                    if (notification.parentElement) {
+                        notification.remove();
+                    }
+                }, 300);
+            }, 5000);
+        }
+
+        // Sound functions
+        function playSound(soundId) {
+            // Check if notifications are muted
+            const soundToggle = document.getElementById('sound-toggle');
+            const soundVolume = document.getElementById('sound-volume');
+
+            if (!soundToggle.checked) return;
+
+            const sound = document.getElementById(soundId);
+            if (sound) {
+                sound.volume = soundVolume.value;
+                sound.pause();
+                sound.currentTime = 0;
+
+                const playPromise = sound.play();
+
+                if (playPromise !== undefined) {
+                    playPromise.catch(error => {
+                        console.error(`Error playing sound: ${error}`);
+                        soundTestResults.textContent = `Error playing sound: ${error.message}`;
+                    });
+                }
+
+                soundTestResults.textContent = `Playing ${soundId}`;
+            }
+        }
+
+        // Notification Test Event Listeners
+        document.getElementById('show-success').addEventListener('click', () => {
+            showNotification('This is a success notification!', 'success');
+            errorTestResults.textContent = 'Showing success notification';
+        });
+
+        document.getElementById('show-info').addEventListener('click', () => {
+            showNotification('This is an info notification!', 'info');
+            errorTestResults.textContent = 'Showing info notification';
+        });
+
+        document.getElementById('show-warning').addEventListener('click', () => {
+            showNotification('This is a warning notification!', 'warning');
+            errorTestResults.textContent = 'Showing warning notification';
+        });
+
+        document.getElementById('show-error').addEventListener('click', () => {
+            showNotification('This is an error notification!', 'error');
+            errorTestResults.textContent = 'Showing error notification';
+        });
+
+        document.getElementById('trigger-error').addEventListener('click', () => {
+            showNotification('Socket connection error!', 'error');
+            playSound(SOUNDS.ERROR);
+            errorTestResults.textContent = 'Triggered a simulated socket error with sound';
+        });
+
+        // Typing Indicator Test
+        let typingTimeout = null;
+
+        document.getElementById('simulate-typing').addEventListener('click', () => {
+            typingIndicator.classList.remove('hidden');
+
+            if (typingTimeout) {
+                clearTimeout(typingTimeout);
+            }
+
+            typingTimeout = setTimeout(() => {
+                typingIndicator.classList.add('hidden');
+                typingTimeout = null;
+            }, 3000);
+        });
+
+        document.getElementById('stop-typing').addEventListener('click', () => {
+            typingIndicator.classList.add('hidden');
+
+            if (typingTimeout) {
+                clearTimeout(typingTimeout);
+                typingTimeout = null;
+            }
+        });
+
+        typingTestInput.addEventListener('input', () => {
+            if (typingTestInput.value.trim().length > 0) {
+                typingIndicator.classList.remove('hidden');
+
+                if (typingTimeout) {
+                    clearTimeout(typingTimeout);
+                }
+
+                typingTimeout = setTimeout(() => {
+                    typingIndicator.classList.add('hidden');
+                    typingTimeout = null;
+                }, 3000);
+            } else {
+                typingIndicator.classList.add('hidden');
+
+                if (typingTimeout) {
+                    clearTimeout(typingTimeout);
+                    typingTimeout = null;
+                }
+            }
+        });
+
+        // Sound Test Event Listeners
+        document.getElementById('play-message-sound').addEventListener('click', () => {
+            playSound(SOUNDS.MESSAGE);
+        });
+
+        document.getElementById('play-group-sound').addEventListener('click', () => {
+            playSound(SOUNDS.GROUP_MESSAGE);
+        });
+
+        document.getElementById('play-status-sound').addEventListener('click', () => {
+            playSound(SOUNDS.STATUS_CHANGE);
+        });
+
+        document.getElementById('play-error-sound').addEventListener('click', () => {
+            playSound(SOUNDS.ERROR);
+        });
+
+        // Read Receipt Test
+        document.getElementById('mark-as-read').addEventListener('click', () => {
+            const message = document.querySelector('[data-message-id="msg1"]');
+            const readStatus = message.querySelector('.read-status');
+
+            readStatus.innerHTML = '<i class="fas fa-check-double"></i>';
+            readStatus.title = 'Read at ' + new Date().toLocaleString();
+
+            showNotification('Message marked as read', 'success');
+        });
+
+        document.getElementById('mark-as-delivered').addEventListener('click', () => {
+            const message = document.querySelector('[data-message-id="msg2"]');
+            const readStatus = message.querySelector('.read-status');
+
+            readStatus.innerHTML = '<i class="fas fa-check"></i>';
+            readStatus.title = 'Delivered';
+
+            showNotification('Message marked as delivered', 'info');
+        });
+
+        // Status Indicator Test
+        document.getElementById('status-online').addEventListener('click', () => {
+            document.querySelector('.status-indicator i').className = 'fas fa-circle status-online';
+            showNotification('Status changed to Online', 'info');
+            playSound(SOUNDS.STATUS_CHANGE);
+        });
+
+        document.getElementById('status-away').addEventListener('click', () => {
+            document.querySelector('.status-indicator i').className = 'fas fa-circle status-away';
+            showNotification('Status changed to Away', 'info');
+            playSound(SOUNDS.STATUS_CHANGE);
+        });
+
+        document.getElementById('status-busy').addEventListener('click', () => {
+            document.querySelector('.status-indicator i').className = 'fas fa-circle status-busy';
+            showNotification('Status changed to Busy', 'info');
+            playSound(SOUNDS.STATUS_CHANGE);
+        });
+
+        document.getElementById('status-offline').addEventListener('click', () => {
+            document.querySelector('.status-indicator i').className = 'fas fa-circle status-offline';
+            showNotification('Status changed to Offline', 'info');
+            playSound(SOUNDS.STATUS_CHANGE);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,268 @@
+/* Rich Text Editor Styles */
+
+.rich-text-editor {
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  overflow: hidden;
+  background-color: #fff;
+  position: relative;
+}
+
+.editor-toolbar {
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+  border-bottom: 1px solid #e2e8f0;
+  background-color: #f8fafc;
+  flex-wrap: wrap;
+}
+
+.editor-toolbar-group {
+  display: flex;
+  margin-right: 10px;
+  border-right: 1px solid #e2e8f0;
+  padding-right: 10px;
+}
+
+.editor-toolbar-group:last-child {
+  border-right: none;
+}
+
+.editor-button {
+  background: none;
+  border: none;
+  color: #64748b;
+  width: 28px;
+  height: 28px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-right: 2px;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.editor-button:hover {
+  background-color: #e2e8f0;
+  color: #334155;
+}
+
+.editor-button.is-active {
+  background-color: #e2e8f0;
+  color: #6366f1;
+}
+
+.editor-button.has-dropdown {
+  position: relative;
+}
+
+.editor-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+  width: 180px;
+  display: none;
+  padding: 5px;
+}
+
+.editor-dropdown.show {
+  display: block;
+}
+
+.editor-dropdown-item {
+  display: flex;
+  align-items: center;
+  padding: 6px 8px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.editor-dropdown-item:hover {
+  background-color: #f1f5f9;
+}
+
+.editor-dropdown-item i {
+  margin-right: 5px;
+  width: 16px;
+  text-align: center;
+}
+
+/* Color picker */
+.color-picker {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+  padding: 5px;
+}
+
+.color-option {
+  width: 20px;
+  height: 20px;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.color-option:hover {
+  transform: scale(1.1);
+}
+
+/* Editor content area */
+.editor-content {
+  padding: 10px 12px;
+  min-height: 40px;
+  max-height: 200px;
+  overflow-y: auto;
+  outline: none;
+  color: #334155;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.editor-content p {
+  margin: 0 0 8px 0;
+}
+
+.editor-content p:last-child {
+  margin-bottom: 0;
+}
+
+.editor-content strong {
+  font-weight: 600;
+}
+
+.editor-content em {
+  font-style: italic;
+}
+
+.editor-content a {
+  color: #6366f1;
+  text-decoration: underline;
+  text-decoration-color: #a5b4fc;
+  text-decoration-thickness: 1px;
+}
+
+.editor-content code {
+  background-color: #f1f5f9;
+  border-radius: 3px;
+  padding: 2px 4px;
+  font-family: monospace;
+  font-size: 0.9em;
+}
+
+.editor-content ul,
+.editor-content ol {
+  margin-left: 20px;
+  margin-bottom: 8px;
+}
+
+.editor-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+.editor-placeholder {
+  color: #94a3b8;
+  pointer-events: none;
+  position: absolute;
+  top: 10px;
+  left: 12px;
+}
+
+.editor-mention {
+  background-color: #eff6ff;
+  border-radius: 4px;
+  padding: 1px 2px;
+  color: #2563eb;
+  font-weight: 500;
+}
+
+/* Compact mode for small screens */
+@media (max-width: 576px) {
+  .editor-toolbar {
+    padding: 3px 5px;
+  }
+
+  .editor-button {
+    width: 24px;
+    height: 24px;
+    font-size: 12px;
+  }
+
+  .editor-toolbar-group {
+    margin-right: 5px;
+    padding-right: 5px;
+  }
+}
+
+/* Dark mode styles */
+@media (prefers-color-scheme: dark) {
+  .rich-text-editor {
+    border-color: #374151;
+    background-color: #1f2937;
+  }
+
+  .editor-toolbar {
+    border-bottom-color: #374151;
+    background-color: #111827;
+  }
+
+  .editor-toolbar-group {
+    border-right-color: #374151;
+  }
+
+  .editor-button {
+    color: #9ca3af;
+  }
+
+  .editor-button:hover {
+    background-color: #374151;
+    color: #e5e7eb;
+  }
+
+  .editor-button.is-active {
+    background-color: #374151;
+    color: #a5b4fc;
+  }
+
+  .editor-dropdown {
+    background-color: #1f2937;
+    border-color: #374151;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  }
+
+  .editor-dropdown-item:hover {
+    background-color: #374151;
+  }
+
+  .editor-content {
+    color: #e5e7eb;
+  }
+
+  .editor-content a {
+    color: #a5b4fc;
+    text-decoration-color: #818cf8;
+  }
+
+  .editor-content code {
+    background-color: #1a2234;
+  }
+
+  .editor-placeholder {
+    color: #6b7280;
+  }
+
+  .editor-mention {
+    background-color: #1e3a8a;
+    color: #93c5fd;
+  }
+}

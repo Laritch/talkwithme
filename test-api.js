@@ -1,226 +1,120 @@
 /**
- * API Testing Script
- *
- * This script tests the LetsChat API endpoints to ensure they are working correctly.
- * It requires the server to be running before execution.
- *
- * Run with: node scripts/test-api.js
+ * Test script to simulate API requests
  */
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-const http = require('http');
-const https = require('https');
-const querystring = require('querystring');
-const { URL } = require('url');
+// Get the directory name
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-// Configuration
-const API_BASE = 'http://localhost:4000/api';
-let authToken = null;
+// Create logs directory if it doesn't exist
+const resultsDir = path.join(__dirname, 'test-results');
+if (!fs.existsSync(resultsDir)) {
+  fs.mkdirSync(resultsDir, { recursive: true });
+}
 
-// Helper function to make HTTP requests
-function request(method, path, data = null, token = null) {
-  return new Promise((resolve, reject) => {
-    const url = new URL(path.startsWith('http') ? path : `${API_BASE}${path}`);
+// Create test results file
+const resultsFile = path.join(resultsDir, `test-results-${Date.now()}.log`);
+
+// Log to both console and file
+const log = (message) => {
+  console.log(message);
+  fs.appendFileSync(resultsFile, message + '\n');
+};
+
+const makeRequest = async (url, method = 'GET', body = null) => {
+  try {
     const options = {
-      method: method.toUpperCase(),
+      method,
       headers: {
-        'Content-Type': 'application/json',
-      },
+        'Content-Type': 'application/json'
+      }
     };
 
-    if (token) {
-      options.headers['Authorization'] = `Bearer ${token}`;
+    if (body) {
+      options.body = JSON.stringify(body);
     }
 
-    // Use the right client based on protocol
-    const client = url.protocol === 'https:' ? https : http;
+    log(`${method} ${url}...`);
 
-    const req = client.request(url, options, (res) => {
-      let responseData = '';
+    try {
+      const response = await fetch(url, options);
+      const status = response.status;
 
-      res.on('data', (chunk) => {
-        responseData += chunk;
-      });
+      try {
+        const data = await response.json();
+        log(`Response (${status}): ${JSON.stringify(data, null, 2)}`);
+        return { status, data };
+      } catch (jsonError) {
+        const text = await response.text();
+        log(`Response (${status}): ${text}`);
+        return { status, text };
+      }
+    } catch (fetchError) {
+      log(`Fetch error: ${fetchError.message}`);
+      return { error: fetchError.message };
+    }
+  } catch (error) {
+    log(`Error: ${error.message}`);
+    return { error: error.message };
+  }
+};
 
-      res.on('end', () => {
-        try {
-          const parsedData = responseData ? JSON.parse(responseData) : {};
-          resolve({
-            statusCode: res.statusCode,
-            headers: res.headers,
-            data: parsedData
-          });
-        } catch (error) {
-          console.error('Error parsing response:', error);
-          reject(error);
-        }
-      });
+// Run a series of tests
+const runTests = async () => {
+  log('Starting API tests...');
+  log(`Test results will be saved to: ${resultsFile}`);
+  log(`Timestamp: ${new Date().toISOString()}`);
+  log('-'.repeat(50));
+
+  try {
+    // Test the test endpoint
+    log('\n1. Testing /api/test endpoint:');
+    await makeRequest('http://localhost:3004/api/test');
+
+    // Add delay between requests
+    await new Promise(resolve => setTimeout(resolve, 500));
+
+    // Test the error endpoint
+    log('\n2. Testing /api/error endpoint:');
+    await makeRequest('http://localhost:3004/api/error');
+
+    await new Promise(resolve => setTimeout(resolve, 500));
+
+    // Test validation with invalid data
+    log('\n3. Testing validation with invalid data:');
+    await makeRequest('http://localhost:3004/api/validate', 'POST', {
+      name: 'Jo', // too short
+      email: 'not-an-email' // invalid email
     });
 
-    req.on('error', (error) => {
-      console.error(`Request error: ${error.message}`);
-      reject(error);
+    await new Promise(resolve => setTimeout(resolve, 500));
+
+    // Test validation with valid data
+    log('\n4. Testing validation with valid data:');
+    await makeRequest('http://localhost:3004/api/validate', 'POST', {
+      name: 'John Doe',
+      email: 'john@example.com'
     });
 
-    if (data) {
-      req.write(JSON.stringify(data));
-    }
+    await new Promise(resolve => setTimeout(resolve, 500));
 
-    req.end();
-  });
-}
-
-// Test functions
-async function testLoginEndpoint() {
-  console.log('\n----- Testing Login Endpoint -----');
-
-  try {
-    // Try with invalid credentials first
-    console.log('Testing with invalid credentials...');
-    const invalidResponse = await request('POST', '/auth/login', {
-      email: 'nonexistent@example.com',
-      password: 'wrongpassword'
-    });
-
-    console.log(`Status code: ${invalidResponse.statusCode}`);
-    console.log(`Response: ${JSON.stringify(invalidResponse.data, null, 2)}`);
-
-    // Now try with valid credentials
-    console.log('\nTesting with valid credentials...');
-    const validResponse = await request('POST', '/auth/login', {
-      email: 'admin@chat.com',
-      password: 'admin123'
-    });
-
-    console.log(`Status code: ${validResponse.statusCode}`);
-    console.log(`Success: ${validResponse.statusCode === 200}`);
-
-    if (validResponse.statusCode === 200 && validResponse.data.token) {
-      authToken = validResponse.data.token;
-      console.log('Successfully obtained authentication token');
-    } else {
-      console.error('Failed to obtain authentication token');
-    }
+    // Test a non-existent endpoint
+    log('\n5. Testing non-existent endpoint:');
+    await makeRequest('http://localhost:3004/api/nonexistent');
   } catch (error) {
-    console.error('Error testing login endpoint:', error);
-  }
-}
-
-async function testGetUsers() {
-  console.log('\n----- Testing Get Users Endpoint -----');
-
-  if (!authToken) {
-    console.error('Authentication token not available. Please login first.');
-    return;
+    log(`Test execution error: ${error.message}`);
   }
 
-  try {
-    const response = await request('GET', '/users', null, authToken);
-
-    console.log(`Status code: ${response.statusCode}`);
-    console.log(`Success: ${response.statusCode === 200}`);
-
-    if (response.statusCode === 200) {
-      console.log(`Retrieved ${response.data.length} users`);
-    }
-  } catch (error) {
-    console.error('Error testing get users endpoint:', error);
-  }
-}
-
-async function testGetMessages() {
-  console.log('\n----- Testing Get Messages Endpoint -----');
-
-  if (!authToken) {
-    console.error('Authentication token not available. Please login first.');
-    return;
-  }
-
-  try {
-    const response = await request('GET', '/messages', null, authToken);
-
-    console.log(`Status code: ${response.statusCode}`);
-    console.log(`Success: ${response.statusCode === 200}`);
-
-    if (response.statusCode === 200) {
-      console.log(`Retrieved ${response.data.length} messages`);
-    }
-  } catch (error) {
-    console.error('Error testing get messages endpoint:', error);
-  }
-}
-
-async function testGetResources() {
-  console.log('\n----- Testing Get Resources Endpoint -----');
-
-  if (!authToken) {
-    console.error('Authentication token not available. Please login first.');
-    return;
-  }
-
-  try {
-    const response = await request('GET', '/resources', null, authToken);
-
-    console.log(`Status code: ${response.statusCode}`);
-    console.log(`Success: ${response.statusCode === 200}`);
-
-    if (response.statusCode === 200) {
-      console.log(`Retrieved ${response.data.length} resources`);
-    }
-  } catch (error) {
-    console.error('Error testing get resources endpoint:', error);
-  }
-}
-
-async function testLogoutEndpoint() {
-  console.log('\n----- Testing Logout Endpoint -----');
-
-  if (!authToken) {
-    console.error('Authentication token not available. Please login first.');
-    return;
-  }
-
-  try {
-    const response = await request('POST', '/auth/logout', null, authToken);
-
-    console.log(`Status code: ${response.statusCode}`);
-    console.log(`Success: ${response.statusCode === 200}`);
-
-    if (response.statusCode === 200) {
-      authToken = null;
-      console.log('Successfully logged out');
-    }
-  } catch (error) {
-    console.error('Error testing logout endpoint:', error);
-  }
-}
+  log('-'.repeat(50));
+  log('API tests completed!');
+  log(`See full results in: ${resultsFile}`);
+};
 
 // Run tests
-async function runTests() {
-  console.log('Starting API tests...');
-  console.log('======================');
-
-  try {
-    // Test authentication
-    await testLoginEndpoint();
-
-    if (authToken) {
-      // Test data endpoints
-      await testGetUsers();
-      await testGetMessages();
-      await testGetResources();
-
-      // Logout
-      await testLogoutEndpoint();
-    }
-
-    console.log('\n======================');
-    console.log('API tests completed');
-  } catch (error) {
-    console.error('Error running tests:', error);
-  }
-}
-
-// Entry point
 runTests().catch(error => {
-  console.error('Fatal error:', error);
+  console.error('Test run failed:', error);
+  fs.appendFileSync(resultsFile, `FATAL ERROR: ${error.message}\n`);
 });
