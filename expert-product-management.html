@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage Products | Expert Portal</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    .dashboard-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+
+    .btn-primary {
+      background-color: #4a6cf7;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      background-color: #3a57d7;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .product-card {
+      border: 1px solid #eaeaea;
+      border-radius: 8px;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .product-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-bottom: 1px solid #eaeaea;
+    }
+
+    .product-info {
+      padding: 1rem;
+    }
+
+    .product-status {
+      display: inline-block;
+      font-size: 0.8rem;
+      padding: 0.3rem 0.6rem;
+      border-radius: 20px;
+      margin-bottom: 0.5rem;
+    }
+
+    .status-active {
+      background-color: #e0f7e0;
+      color: #28a745;
+    }
+
+    .status-draft {
+      background-color: #f8f9fa;
+      color: #6c757d;
+    }
+
+    .status-archived {
+      background-color: #f8d7da;
+      color: #dc3545;
+    }
+
+    .product-title {
+      font-weight: 600;
+      margin: 0.5rem 0;
+      font-size: 1.1rem;
+      color: #333;
+    }
+
+    .product-price {
+      font-weight: 700;
+      color: #4a6cf7;
+      font-size: 1.2rem;
+      margin: 0.5rem 0;
+    }
+
+    .product-stats {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      color: #6c757d;
+    }
+
+    .product-stat {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .product-actions {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid #eaeaea;
+    }
+
+    .product-action {
+      padding: 0.5rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #6c757d;
+      transition: color 0.3s ease;
+    }
+
+    .product-action:hover {
+      color: #4a6cf7;
+    }
+
+    .product-action.delete:hover {
+      color: #dc3545;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 3rem;
+      background-color: #f8f9fa;
+      border-radius: 8px;
+      margin-bottom: 2rem;
+    }
+
+    .empty-state i {
+      font-size: 3rem;
+      color: #adb5bd;
+      margin-bottom: 1rem;
+    }
+
+    .modal-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      display: none;
+    }
+
+    .modal {
+      background-color: white;
+      border-radius: 8px;
+      width: 90%;
+      max-width: 800px;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 2rem;
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #eaeaea;
+    }
+
+    .modal-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #333;
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #6c757d;
+    }
+
+    .modal-body {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: #333;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 1rem;
+    }
+
+    textarea.form-control {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .form-check {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .modal-footer {
+      display: flex;
+      justify-content: flex-end;
+      gap: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid #eaeaea;
+    }
+
+    .btn-secondary {
+      background-color: #6c757d;
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 500;
+    }
+
+    .btn-secondary:hover {
+      background-color: #5a6268;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="main-header">
+      <div class="logo">
+        <a href="index.html">Expert Chat System</a>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="expert-dashboard.html">Dashboard</a></li>
+          <li><a href="expert-booking.html">Bookings</a></li>
+          <li><a href="expert-messages.html">Messages</a></li>
+          <li><a href="expert-products.html" class="active">Products</a></li>
+          <li><a href="expert-sales.html">Sales</a></li>
+          <li id="userProfileNav">
+            <a href="#" id="userProfileLink">
+              <img id="userProfileImage" src="/uploads/default-expert.png" alt="Profile" class="avatar-img">
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="dashboard-header">
+      <h1>My Products</h1>
+      <button id="addProductBtn" class="btn-primary">
+        <i class="fas fa-plus"></i> Add New Product
+      </button>
+    </div>
+
+    <div id="productsContainer">
+      <!-- This will be filled with products or an empty state message -->
+      <div class="loading-spinner">
+        <i class="fas fa-spinner fa-spin"></i> Loading your products...
+      </div>
+    </div>
+  </div>
+
+  <!-- Add/Edit Product Modal -->
+  <div id="productModal" class="modal-backdrop">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 id="modalTitle" class="modal-title">Add New Product</h2>
+        <button class="modal-close" onclick="closeModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="productForm">
+          <input type="hidden" id="productId">
+
+          <div class="form-group">
+            <label for="productName" class="form-label">Product Name*</label>
+            <input type="text" id="productName" class="form-control" required>
+          </div>
+
+          <div class="form-group">
+            <label for="productDescription" class="form-label">Description*</label>
+            <textarea id="productDescription" class="form-control" required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="productCategory" class="form-label">Category*</label>
+            <select id="productCategory" class="form-control" required>
+              <option value="">Select a category</option>
+              <option value="Book">Book</option>
+              <option value="Course">Course</option>
+              <option value="Template">Template</option>
+              <option value="Tool">Tool</option>
+              <option value="Subscription">Subscription</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="productPrice" class="form-label">Price ($)*</label>
+            <input type="number" id="productPrice" class="form-control" min="0" step="0.01" required>
+          </div>
+
+          <div class="form-group">
+            <label for="productDiscountPrice" class="form-label">Discount Price ($)</label>
+            <input type="number" id="productDiscountPrice" class="form-control" min="0" step="0.01">
+            <small>Leave empty for no discount</small>
+          </div>
+
+          <div class="form-group">
+            <div class="form-check">
+              <input type="checkbox" id="isDigital" class="form-check-input">
+              <label for="isDigital" class="form-check-label">This is a digital product (downloadable)</label>
+            </div>
+          </div>
+
+          <div id="digitalUrlField" class="form-group" style="display: none;">
+            <label for="digitalFileUrl" class="form-label">Digital File URL</label>
+            <input type="text" id="digitalFileUrl" class="form-control">
+            <small>URL to the digital product file (PDF, ZIP, etc.)</small>
+          </div>
+
+          <div id="physicalFields">
+            <div class="form-group">
+              <label for="productStock" class="form-label">Stock Quantity*</label>
+              <input type="number" id="productStock" class="form-control" min="0" value="1" required>
+            </div>
+
+            <div class="form-group">
+              <label for="productWeight" class="form-label">Weight (grams)</label>
+              <input type="number" id="productWeight" class="form-control" min="0">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="productImages" class="form-label">Images</label>
+            <input type="file" id="productImages" multiple accept="image/*">
+            <small>Select up to 5 images. First image will be the main product image.</small>
+          </div>
+
+          <div id="imagesPreview" class="form-group">
+            <!-- Images preview will appear here -->
+          </div>
+
+          <div class="form-group">
+            <div class="form-check">
+              <input type="checkbox" id="isFeatured" class="form-check-input">
+              <label for="isFeatured" class="form-check-label">Feature this product in the store</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="productStatus" class="form-label">Status</label>
+            <select id="productStatus" class="form-control">
+              <option value="active">Active - Visible in store</option>
+              <option value="draft">Draft - Hidden from store</option>
+              <option value="archived">Archived - Hidden and unavailable</option>
+            </select>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-secondary" onclick="closeModal()">Cancel</button>
+        <button type="button" class="btn-primary" onclick="saveProduct()">Save Product</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/auth.js"></script>
+  <script>
+    // DOM elements
+    const productsContainer = document.getElementById('productsContainer');
+    const productModal = document.getElementById('productModal');
+    const addProductBtn = document.getElementById('addProductBtn');
+    const modalTitle = document.getElementById('modalTitle');
+    const productForm = document.getElementById('productForm');
+    const isDigitalCheckbox = document.getElementById('isDigital');
+    const digitalUrlField = document.getElementById('digitalUrlField');
+    const physicalFields = document.getElementById('physicalFields');
+
+    // Event listeners
+    document.addEventListener('DOMContentLoaded', async () => {
+      // Check if user is an expert
+      const user = getCurrentUser();
+      if (!user || !user.isExpert) {
+        window.location.href = 'login.html';
+        return;
+      }
+
+      // Update UI with user info
+      updateUserInfo(user);
+
+      // Load products
+      await loadProducts();
+
+      // Setup event listeners
+      addProductBtn.addEventListener('click', () => openAddProductModal());
+      isDigitalCheckbox.addEventListener('change', toggleDigitalFields);
+    });
+
+    // Load expert's products
+    async function loadProducts() {
+      try {
+        const response = await fetch('/api/ecommerce/products/expert/me', {
+          headers: {
+            'Authorization': `Bearer ${getToken()}`
+          }
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to load products');
+        }
+
+        const data = await response.json();
+
+        if (!data.products || data.products.length === 0) {
+          showEmptyState();
+        } else {
+          renderProducts(data.products);
+        }
+      } catch (error) {
+        console.error('Error loading products:', error);
+        showError('Failed to load your products. Please try again later.');
+      }
+    }
+
+    // Render products grid
+    function renderProducts(products) {
+      const productsHTML = products.map(product => {
+        const statusClass = `status-${product.status}`;
+        const statusText = product.status.charAt(0).toUpperCase() + product.status.slice(1);
+
+        const price = new Intl.NumberFormat('en-US', {
+          style: 'currency',
+          currency: 'USD'
+        }).format(product.price);
+
+        const imageUrl = product.images && product.images.length > 0
+          ? product.images[0].url
+          : '/uploads/default-product.png';
+
+        return `
+          <div class="product-card" data-product-id="${product._id}">
+            <img src="${imageUrl}" alt="${product.name}" class="product-image">
+            <div class="product-info">
+              <div class="product-status ${statusClass}">${statusText}</div>
+              <h3 class="product-title">${product.name}</h3>
+              <div class="product-price">${price}</div>
+              <div class="product-stats">
+                <div class="product-stat">
+                  <i class="fas fa-eye"></i> ${product.viewCount || 0}
+                </div>
+                <div class="product-stat">
+                  <i class="fas fa-shopping-cart"></i> ${product.salesCount || 0}
+                </div>
+                <div class="product-stat">
+                  <i class="fas fa-star"></i> ${product.rating?.average || 0}
+                </div>
+              </div>
+              <div class="product-actions">
+                <button class="product-action" onclick="viewProduct('${product._id}')">
+                  <i class="fas fa-eye"></i>
+                </button>
+                <button class="product-action" onclick="editProduct('${product._id}')">
+                  <i class="fas fa-edit"></i>
+                </button>
+                <button class="product-action delete" onclick="deleteProduct('${product._id}')">
+                  <i class="fas fa-trash"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      productsContainer.innerHTML = `<div class="products-grid">${productsHTML}</div>`;
+    }
+
+    // Show empty state
+    function showEmptyState() {
+      productsContainer.innerHTML = `
+        <div class="empty-state">
+          <i class="fas fa-box-open"></i>
+          <h2>No Products Yet</h2>
+          <p>You haven't added any products to your store yet. Add your first product to start selling!</p>
+          <button class="btn-primary" onclick="openAddProductModal()">
+            <i class="fas fa-plus"></i> Add New Product
+          </button>
+        </div>
+      `;
+    }
+
+    // Show error message
+    function showError(message) {
+      productsContainer.innerHTML = `
+        <div class="empty-state" style="background-color: #f8d7da; color: #721c24;">
+          <i class="fas fa-exclamation-circle"></i>
+          <h2>Error</h2>
+          <p>${message}</p>
+          <button class="btn-primary" onclick="loadProducts()">
+            <i class="fas fa-sync"></i> Try Again
+          </button>
+        </div>
+      `;
+    }
+
+    // Open add product modal
+    function openAddProductModal() {
+      modalTitle.textContent = 'Add New Product';
+      productForm.reset();
+      document.getElementById('productId').value = '';
+      document.getElementById('imagesPreview').innerHTML = '';
+      document.getElementById('productStatus').value = 'active';
+
+      toggleDigitalFields();
+      productModal.style.display = 'flex';
+    }
+
+    // Open edit product modal
+    async function editProduct(productId) {
+      try {
+        modalTitle.textContent = 'Edit Product';
+
+        // Get product details
+        const response = await fetch(`/api/ecommerce/products/${productId}`, {
+          headers: {
+            'Authorization': `Bearer ${getToken()}`
+          }
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to load product details');
+        }
+
+        const data = await response.json();
+        const product = data.product;
+
+        // Fill form with product data
+        document.getElementById('productId').value = product._id;
+        document.getElementById('productName').value = product.name;
+        document.getElementById('productDescription').value = product.description;
+        document.getElementById('productCategory').value = product.category;
+        document.getElementById('productPrice').value = product.price;
+        document.getElementById('productDiscountPrice').value = product.discountPrice || '';
+        document.getElementById('isDigital').checked = product.isDigital;
+        document.getElementById('digitalFileUrl').value = product.digitalFileUrl || '';
+        document.getElementById('productStock').value = product.stock;
+        document.getElementById('productWeight').value = product.weight || '';
+        document.getElementById('isFeatured').checked = product.featured;
+        document.getElementById('productStatus').value = product.status;
+
+        // Show image previews
+        const imagesPreview = document.getElementById('imagesPreview');
+        imagesPreview.innerHTML = '';
+
+        if (product.images && product.images.length > 0) {
+          product.images.forEach(image => {
+            const imgContainer = document.createElement('div');
+            imgContainer.style.display = 'inline-block';
+            imgContainer.style.marginRight = '10px';
+
+            const img = document.createElement('img');
+            img.src = image.url;
+            img.alt = image.alt || product.name;
+            img.style.height = '80px';
+            img.style.marginBottom = '5px';
+
+            const removeBtn = document.createElement('button');
+            removeBtn.textContent = 'Remove';
+            removeBtn.className = 'btn-secondary';
+            removeBtn.style.fontSize = '0.8rem';
+            removeBtn.style.padding = '0.3rem 0.5rem';
+            removeBtn.onclick = () => removeImage(imgContainer, image.url);
+
+            imgContainer.appendChild(img);
+            imgContainer.appendChild(document.createElement('br'));
+            imgContainer.appendChild(removeBtn);
+
+            imagesPreview.appendChild(imgContainer);
+          });
+        }
+
+        toggleDigitalFields();
+        productModal.style.display = 'flex';
+      } catch (error) {
+        console.error('Error loading product details:', error);
+        alert('Failed to load product details. Please try again.');
+      }
+    }
+
+    // View product details in the store
+    function viewProduct(productId) {
+      window.open(`/store/product/${productId}`, '_blank');
+    }
+
+    // Delete product
+    async function deleteProduct(productId) {
+      if (!confirm('Are you sure you want to delete this product? This action cannot be undone.')) {
+        return;
+      }
+
+      try {
+        const response = await fetch(`/api/ecommerce/products/${productId}`, {
+          method: 'DELETE',
+          headers: {
+            'Authorization': `Bearer ${getToken()}`
+          }
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to delete product');
+        }
+
+        // Reload products
+        await loadProducts();
+        alert('Product deleted successfully');
+      } catch (error) {
+        console.error('Error deleting product:', error);
+        alert('Failed to delete product. Please try again.');
+      }
+    }
+
+    // Toggle digital product fields
+    function toggleDigitalFields() {
+      const isDigital = isDigitalCheckbox.checked;
+
+      digitalUrlField.style.display = isDigital ? 'block' : 'none';
+      physicalFields.style.display = isDigital ? 'none' : 'block';
+
+      if (isDigital) {
+        document.getElementById('productStock').value = 999999;
+      } else {
+        document.getElementById('productStock').value = 1;
+      }
+    }
+
+    // Remove image from preview
+    function removeImage(container, imageUrl) {
+      // In a real implementation, you would send a request to remove the image
+      container.remove();
+    }
+
+    // Close modal
+    function closeModal() {
+      productModal.style.display = 'none';
+    }
+
+    // Save product
+    async function saveProduct() {
+      // Validate form
+      if (!productForm.checkValidity()) {
+        alert('Please fill in all required fields');
+        return;
+      }
+
+      const productId = document.getElementById('productId').value;
+      const isNewProduct = !productId;
+
+      // Prepare product data
+      const productData = {
+        name: document.getElementById('productName').value,
+        description: document.getElementById('productDescription').value,
+        category: document.getElementById('productCategory').value,
+        price: parseFloat(document.getElementById('productPrice').value),
+        discountPrice: document.getElementById('productDiscountPrice').value
+          ? parseFloat(document.getElementById('productDiscountPrice').value)
+          : 0,
+        isDigital: document.getElementById('isDigital').checked,
+        digitalFileUrl: document.getElementById('digitalFileUrl').value,
+        stock: parseInt(document.getElementById('productStock').value),
+        weight: document.getElementById('productWeight').value
+          ? parseFloat(document.getElementById('productWeight').value)
+          : 0,
+        featured: document.getElementById('isFeatured').checked,
+        status: document.getElementById('productStatus').value
+      };
+
+      try {
+        // Handle image uploads
+        const imageInput = document.getElementById('productImages');
+        if (imageInput.files.length > 0) {
+          // In a real implementation, you would upload images and get their URLs
+          // For this example, we'll just mock it
+          productData.images = [];
+          for (let i = 0; i < imageInput.files.length; i++) {
+            productData.images.push({
+              url: URL.createObjectURL(imageInput.files[i]),
+              alt: productData.name
+            });
+          }
+        }
+
+        // Send request
+        const url = isNewProduct
+          ? '/api/ecommerce/products'
+          : `/api/ecommerce/products/${productId}`;
+
+        const method = isNewProduct ? 'POST' : 'PUT';
+
+        const response = await fetch(url, {
+          method,
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${getToken()}`
+          },
+          body: JSON.stringify(productData)
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to save product');
+        }
+
+        // Close modal and reload products
+        closeModal();
+        await loadProducts();
+        alert(`Product ${isNewProduct ? 'created' : 'updated'} successfully`);
+      } catch (error) {
+        console.error('Error saving product:', error);
+        alert('Failed to save product. Please try again.');
+      }
+    }
+
+    // Update user info in the header
+    function updateUserInfo(user) {
+      const userProfileImage = document.getElementById('userProfileImage');
+      userProfileImage.src = user.profilePicture || '/uploads/default-expert.png';
+
+      // Update other user-specific UI elements if needed
+    }
+
+    // Handle clicking outside the modal to close it
+    window.onclick = function(event) {
+      if (event.target === productModal) {
+        closeModal();
+      }
+    };
+  </script>
+</body>
+</html>

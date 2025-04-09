@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Experts Showcase - Expert Chat System</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+      color: #333;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    header {
+      background-color: #4285F4;
+      color: white;
+      padding: 15px 0;
+      text-align: center;
+      position: relative;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 28px;
+    }
+
+    .back-link {
+      color: white;
+      text-decoration: none;
+      position: absolute;
+      left: 20px;
+      top: 20px;
+      display: flex;
+      align-items: center;
+    }
+
+    .back-link i {
+      margin-right: 5px;
+    }
+
+    .search-section {
+      background-color: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
+    }
+
+    .search-container {
+      display: flex;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .search-input {
+      flex: 1;
+      padding: 12px 20px;
+      border: 2px solid #ddd;
+      border-radius: 30px 0 0 30px;
+      font-size: 16px;
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+
+    .search-input:focus {
+      border-color: #4285F4;
+    }
+
+    .search-btn {
+      background-color: #4285F4;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 0 30px 30px 0;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    .search-btn:hover {
+      background-color: #3367d6;
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+      justify-content: center;
+    }
+
+    .filter-pill {
+      background-color: #eee;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 30px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .filter-pill:hover, .filter-pill.active {
+      background-color: #4285F4;
+      color: white;
+    }
+
+    .experts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 25px;
+    }
+
+    .expert-card {
+      background-color: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .expert-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .expert-header {
+      display: flex;
+      padding: 20px;
+      align-items: center;
+      border-bottom: 1px solid #eee;
+    }
+
+    .expert-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-right: 15px;
+    }
+
+    .expert-title {
+      flex: 1;
+    }
+
+    .expert-name {
+      margin: 0 0 5px;
+      font-size: 20px;
+    }
+
+    .expert-specialty {
+      margin: 0;
+      color: #666;
+      font-size: 14px;
+    }
+
+    .expert-rating {
+      display: flex;
+      align-items: center;
+      margin-top: 8px;
+    }
+
+    .stars {
+      color: #fbbc05;
+      font-size: 14px;
+      margin-right: 5px;
+    }
+
+    .review-count {
+      color: #666;
+      font-size: 14px;
+    }
+
+    .expert-body {
+      padding: 20px;
+    }
+
+    .expert-bio {
+      margin-top: 0;
+      margin-bottom: 15px;
+      line-height: 1.6;
+      color: #555;
+    }
+
+    .expert-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 15px;
+    }
+
+    .expert-tag {
+      background-color: #f0f0f0;
+      padding: 5px 10px;
+      border-radius: 15px;
+      font-size: 12px;
+      color: #555;
+    }
+
+    .expert-stats {
+      display: flex;
+      justify-content: space-between;
+      border-top: 1px solid #eee;
+      padding-top: 15px;
+      margin-top: 15px;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-value {
+      font-weight: bold;
+      font-size: 18px;
+      margin: 0;
+    }
+
+    .stat-label {
+      color: #666;
+      font-size: 12px;
+      margin: 5px 0 0;
+    }
+
+    .expert-footer {
+      background-color: #f9f9f9;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .expert-price {
+      font-weight: bold;
+      font-size: 18px;
+      color: #34a853;
+    }
+
+    .expert-price-period {
+      font-size: 14px;
+      color: #666;
+    }
+
+    .book-btn {
+      background-color: #4285F4;
+      color: white;
+      border: none;
+      padding: 8px 20px;
+      border-radius: 30px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    .book-btn:hover {
+      background-color: #3367d6;
+    }
+
+    .top-experts {
+      margin-bottom: 40px;
+    }
+
+    .section-title {
+      font-size: 24px;
+      margin-bottom: 20px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    .section-title::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 50px;
+      height: 3px;
+      background-color: #4285F4;
+    }
+
+    .featured-badge {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background-color: #fbbc05;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 15px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .pagination {
+      display: flex;
+      justify-content: center;
+      margin-top: 40px;
+    }
+
+    .page-btn {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #ddd;
+      margin: 0 5px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .page-btn:hover, .page-btn.active {
+      background-color: #4285F4;
+      color: white;
+      border-color: #4285F4;
+    }
+
+    .testimonial {
+      background-color: #f9f9f9;
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 15px;
+      font-style: italic;
+      color: #555;
+      position: relative;
+    }
+
+    .testimonial::before {
+      content: '"';
+      position: absolute;
+      top: 0;
+      left: 10px;
+      font-size: 40px;
+      color: #ddd;
+      font-family: sans-serif;
+      line-height: 1;
+    }
+
+    .testimonial-author {
+      margin-top: 10px;
+      text-align: right;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Home</a>
+    <h1>Find Your Expert</h1>
+  </header>
+
+  <div class="container">
+    <section class="search-section">
+      <div class="search-container">
+        <input type="text" class="search-input" placeholder="Search by name, specialty, or keyword...">
+        <button class="search-btn"><i class="fas fa-search"></i> Search</button>
+      </div>
+      <div class="filters">
+        <button class="filter-pill active">All Categories</button>
+        <button class="filter-pill">Business</button>
+        <button class="filter-pill">Technology</button>
+        <button class="filter-pill">Health</button>
+        <button class="filter-pill">Education</button>
+        <button class="filter-pill">Creative Arts</button>
+        <button class="filter-pill">Legal</button>
+        <button class="filter-pill">Finance</button>
+      </div>
+    </section>
+
+    <section class="top-experts">
+      <h2 class="section-title">Featured Experts</h2>
+      <div class="experts-grid">
+        <!-- Expert 1 -->
+        <div class="expert-card">
+          <div class="featured-badge">Featured</div>
+          <div class="expert-header">
+            <img src="https://images.unsplash.com/photo-1557862921-37829c790f19?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8YnVzaW5lc3MlMjBtYW58ZW58MHx8MHx8fDA%3D" alt="Dr. Alex Johnson" class="expert-avatar">
+            <div class="expert-title">
+              <h3 class="expert-name">Dr. Alex Johnson</h3>
+              <p class="expert-specialty">Business Strategy Expert</p>
+              <div class="expert-rating">
+                <div class="stars">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star-half-alt"></i>
+                </div>
+                <span class="review-count">(128 reviews)</span>
+              </div>
+            </div>
+          </div>
+          <div class="expert-body">
+            <p class="expert-bio">Harvard MBA with 15+ years experience in business strategy and market expansion. Helped over 200 companies scale their operations globally.</p>
+            <div class="expert-tags">
+              <span class="expert-tag">Business Strategy</span>
+              <span class="expert-tag">Market Analysis</span>
+              <span class="expert-tag">Scaling</span>
+              <span class="expert-tag">Global Markets</span>
+            </div>
+            <div class="testimonial">
+              "Dr. Johnson's strategic advice was instrumental in our company's 300% growth last year. His insights on market positioning completely transformed our approach."
+              <div class="testimonial-author">- Sarah Williams, CEO</div>
+            </div>
+            <div class="expert-stats">
+              <div class="stat">
+                <p class="stat-value">543</p>
+                <p class="stat-label">Sessions</p>
+              </div>
+              <div class="stat">
+                <p class="stat-value">15+</p>
+                <p class="stat-label">Years Exp.</p>
+              </div>
+              <div class="stat">
+                <p class="stat-value">97%</p>
+                <p class="stat-label">Satisfaction</p>
+              </div>
+            </div>
+          </div>
+          <div class="expert-footer">
+            <div>
+              <span class="expert-price">$150</span>
+              <span class="expert-price-period">/hour</span>
+            </div>
+            <button class="book-btn">Book Consultation</button>
+          </div>
+        </div>
+
+        <!-- Expert 2 -->
+        <div class="expert-card">
+          <div class="expert-header">
+            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fHdvbWFufGVufDB8fDB8fHww" alt="Maria Rodriguez" class="expert-avatar">
+            <div class="expert-title">
+              <h3 class="expert-name">Maria Rodriguez</h3>
+              <p class="expert-specialty">UX/UI Design Specialist</p>
+              <div class="expert-rating">
+                <div class="stars">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                </div>
+                <span class="review-count">(95 reviews)</span>
+              </div>
+            </div>
+          </div>
+          <div class="expert-body">
+            <p class="expert-bio">Award-winning UI/UX designer with experience at top tech companies. Specializing in user-centered design processes and design systems.</p>
+            <div class="expert-tags">
+              <span class="expert-tag">UX Design</span>
+              <span class="expert-tag">UI Systems</span>
+              <span class="expert-tag">User Research</span>
+              <span class="expert-tag">Prototyping</span>
+            </div>
+            <div class="testimonial">
+              "Maria completely transformed our product. Her user-centered approach increased our conversion rate by 45% in just two months. An absolute design genius!"
+              <div class="testimonial-author">- David Chen, Product Lead</div>
+            </div>
+            <div class="expert-stats">
+              <div class="stat">
+                <p class="stat-value">312</p>
+                <p class="stat-label">Sessions</p>
+              </div>
+              <div class="stat">
+                <p class="stat-value">8+</p>
+                <p class="stat-label">Years Exp.</p>
+              </div>
+              <div class="stat">
+                <p class="stat-value">99%</p>
+                <p class="stat-label">Satisfaction</p>
+              </div>
+            </div>
+          </div>
+          <div class="expert-footer">
+            <div>
+              <span class="expert-price">$125</span>
+              <span class="expert-price-period">/hour</span>
+            </div>
+            <button class="book-btn">Book Consultation</button>
+          </div>
+        </div>
+
+        <!-- Expert 3 -->
+        <div class="expert-card">
+          <div class="featured-badge">Featured</div>
+          <div class="expert-header">
+            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8YnVzaW5lc3MlMjBtYW58ZW58MHx8MHx8fDA%3D" alt="Dr. James Wilson" class="expert-avatar">
+            <div class="expert-title">
+              <h3 class="expert-name">Dr. James Wilson</h3>
+              <p class="expert-specialty">AI & Machine Learning Expert</p>
+              <div class="expert-rating">
+                <div class="stars">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                </div>
+                <span class="review-count">(204 reviews)</span>
+              </div>
+            </div>
+          </div>
+          <div class="expert-body">
+            <p class="expert-bio">PhD in Computer Science with specialization in AI. Former research lead at Google AI, now helping businesses implement practical machine learning solutions.</p>
+            <div class="expert-tags">
+              <span class="expert-tag">Machine Learning</span>
+              <span class="expert-tag">Deep Learning</span>
+              <span class="expert-tag">NLP</span>
+              <span class="expert-tag">Computer Vision</span>
+            </div>
+            <div class="testimonial">
+              "Dr. Wilson helped us implement an AI solution that automated 70% of our document processing. His ability to translate complex AI concepts into business value is remarkable."
+              <div class="testimonial-author">- Michael Torres, CTO</div>
+            </div>
+            <div class="expert-stats">
+              <div class="stat">
+                <p class="stat-value">687</p>
+                <p class="stat-label">Sessions</p>
+              </div>
+              <div class="stat">
+                <p class="stat-value">12+</p>
+                <p class="stat-label">Years Exp.</p>
+              </div>
+              <div class="stat">
+                <p class="stat-value">98%</p>
+                <p class="stat-label">Satisfaction</p>
+              </div>
+            </div>
+          </div>
+          <div class="expert-footer">
+            <div>
+              <span class="expert-price">$200</span>
+              <span class="expert-price-period">/hour</span>
+            </div>
+            <button class="book-btn">Book Consultation</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">All Experts</h2>
+      <div class="experts-grid">
+        <!-- Expert 4 -->
+        <div class="expert-card">
+          <div class="expert-header">
+            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8YnVzaW5lc3MlMjB3b21hbnxlbnwwfHwwfHx8MA%3D%3D" alt="Emma Thompson" class="expert-avatar">
+            <div class="expert-title">
+              <h3 class="expert-name">Emma Thompson</h3>
+              <p class="expert-specialty">Digital Marketing Strategist</p>
+              <div class="expert-rating">
+                <div class="stars">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="far fa-star"></i>
+                </div>
+                <span class="review-count">(78 reviews)</span>
+              </div>
+            </div>
+          </div>
+          <div class="expert-body">
+            <p class="expert-bio">CMO with experience at Fortune 500 companies. Specialized in data-driven marketing strategies that deliver measurable ROI.</p>
+            <div class="expert-tags">
+              <span class="expert-tag">SEO</span>
+              <span class="expert-tag">PPC</span>
+              <span class="expert-tag">Content Strategy</span>
+              <span class="expert-tag">Analytics</span>
+            </div>
+            <div class="expert-stats">
+              <div class="stat">
+                <p class="stat-value">215</p>
+                <p class="stat-label">Sessions</p>
+              </div>
+              <div class="stat">
+                <p class="stat-value">10+</p>
+                <p class="stat-label">Years Exp.</p>
+              </div>
+              <div class="stat">
+                <p class="stat-value">92%</p>
+                <p class="stat-label">Satisfaction</p>
+              </div>
+            </div>
+          </div>
+          <div class="expert-footer">
+            <div>
+              <span class="expert-price">$130</span>
+              <span class="expert-price-period">/hour</span>
+            </div>
+            <button class="book-btn">Book Consultation</button>
+          </div>
+        </div>
+
+        <!-- Expert 5 -->
+        <div class="expert-card">
+          <div class="expert-header">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fG1hbnxlbnwwfHwwfHx8MA%3D%3D" alt="Robert Kim" class="expert-avatar">
+            <div class="expert-title">
+              <h3 class="expert-name">Robert Kim</h3>
+              <p class="expert-specialty">Blockchain & Cryptocurrency Expert</p>
+              <div class="expert-rating">
+                <div class="stars">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star-half-alt"></i>
+                  <i class="far fa-star"></i>
+                </div>
+                <span class="review-count">(41 reviews)</span>
+              </div>
+            </div>
+          </div>
+          <div class="expert-body">
+            <p class="expert-bio">Early Bitcoin adopter and blockchain developer. Helped launch 3 successful ICOs and advises companies on blockchain integration.</p>
+            <div class="expert-tags">
+              <span class="expert-tag">Blockchain</span>
+              <span class="expert-tag">Cryptocurrency</span>
+              <span class="expert-tag">Smart Contracts</span>
+              <span class="expert-tag">DeFi</span>
+            </div>
+            <div class="expert-stats">
+              <div class="stat">
+                <p class="stat-value">124</p>
+                <p class="stat-label">Sessions</p>
+              </div>
+              <div class="stat">
+                <p class="stat-value">7+</p>
+                <p class="stat-label">Years Exp.</p>
+              </div>
+              <div class="stat">
+                <p class="stat-value">87%</p>
+                <p class="stat-label">Satisfaction</p>
+              </div>
+            </div>
+          </div>
+          <div class="expert-footer">
+            <div>
+              <span class="expert-price">$175</span>
+              <span class="expert-price-period">/hour</span>
+            </div>
+            <button class="book-btn">Book Consultation</button>
+          </div>
+        </div>
+
+        <!-- Expert 6 -->
+        <div class="expert-card">
+          <div class="expert-header">
+            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8d29tYW58ZW58MHx8MHx8fDA%3D" alt="Dr. Lisa Chen" class="expert-avatar">
+            <div class="expert-title">
+              <h3 class="expert-name">Dr. Lisa Chen</h3>
+              <p class="expert-specialty">Health & Wellness Coach</p>
+              <div class="expert-rating">
+                <div class="stars">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star-half-alt"></i>
+                </div>
+                <span class="review-count">(156 reviews)</span>
+              </div>
+            </div>
+          </div>
+          <div class="expert-body">
+            <p class="expert-bio">MD with specialty in integrative medicine. Helps clients develop personalized wellness plans combining traditional and holistic approaches.</p>
+            <div class="expert-tags">
+              <span class="expert-tag">Nutrition</span>
+              <span class="expert-tag">Stress Management</span>
+              <span class="expert-tag">Fitness</span>
+              <span class="expert-tag">Mental Health</span>
+            </div>
+            <div class="expert-stats">
+              <div class="stat">
+                <p class="stat-value">412</p>
+                <p class="stat-label">Sessions</p>
+              </div>
+              <div class="stat">
+                <p class="stat-value">12+</p>
+                <p class="stat-label">Years Exp.</p>
+              </div>
+              <div class="stat">
+                <p class="stat-value">96%</p>
+                <p class="stat-label">Satisfaction</p>
+              </div>
+            </div>
+          </div>
+          <div class="expert-footer">
+            <div>
+              <span class="expert-price">$120</span>
+              <span class="expert-price-period">/hour</span>
+            </div>
+            <button class="book-btn">Book Consultation</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="pagination">
+      <div class="page-btn active">1</div>
+      <div class="page-btn">2</div>
+      <div class="page-btn">3</div>
+      <div class="page-btn">4</div>
+      <div class="page-btn">5</div>
+      <div class="page-btn"><i class="fas fa-ellipsis-h"></i></div>
+      <div class="page-btn"><i class="fas fa-angle-right"></i></div>
+    </div>
+  </div>
+
+  <script>
+    // Simple script for demo functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      // Filter pills
+      const filterPills = document.querySelectorAll('.filter-pill');
+      filterPills.forEach(pill => {
+        pill.addEventListener('click', function() {
+          filterPills.forEach(p => p.classList.remove('active'));
+          this.classList.add('active');
+        });
+      });
+
+      // Pagination
+      const pageButtons = document.querySelectorAll('.page-btn');
+      pageButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+          if (!this.innerHTML.includes('fa-')) { // Skip icons
+            pageButtons.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+          }
+        });
+      });
+
+      // Book buttons
+      const bookButtons = document.querySelectorAll('.book-btn');
+      bookButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+          const expertName = this.closest('.expert-card').querySelector('.expert-name').textContent;
+          alert(`Booking a session with ${expertName}. This would redirect to the booking page in a real application.`);
+        });
+      });
+    });
+  </script>
+</body>
+</html>

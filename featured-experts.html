@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Featured Experts | Expert Marketplace</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="featured-experts.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <div class="logo">
+                <img src="/uploads/default-avatar.png" alt="Logo">
+                <span>Expert Marketplace</span>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="experts.html" class="active">Find Experts</a></li>
+                    <li><a href="categories.html">Categories</a></li>
+                    <li><a href="how-it-works.html">How It Works</a></li>
+                    <li><a href="blog.html">Expert Posts</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <a href="login.html" class="btn btn-outline">Login</a>
+                <a href="signup.html" class="btn btn-primary">Sign Up</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-section">
+            <div class="container">
+                <h1>Featured Experts</h1>
+                <p class="hero-subtitle">Connect with top-rated professionals in their fields</p>
+                <div class="search-container">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search for experts by name, specialty, or keyword...">
+                        <button class="btn btn-primary">Search</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="filter-section">
+            <div class="container">
+                <div class="filter-tabs">
+                    <button class="filter-tab active" data-filter="all">All Categories</button>
+                    <button class="filter-tab" data-filter="business">Business</button>
+                    <button class="filter-tab" data-filter="technology">Technology</button>
+                    <button class="filter-tab" data-filter="health">Health</button>
+                    <button class="filter-tab" data-filter="creative">Creative</button>
+                    <button class="filter-tab" data-filter="legal">Legal</button>
+                    <button class="filter-tab" data-filter="finance">Finance</button>
+                </div>
+
+                <div class="filter-dropdown-row">
+                    <div class="filter-dropdown">
+                        <label for="price-range">Price Range:</label>
+                        <select id="price-range">
+                            <option value="all">All Prices</option>
+                            <option value="budget">$50 - $100/hr</option>
+                            <option value="mid">$100 - $200/hr</option>
+                            <option value="premium">$200+/hr</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-dropdown">
+                        <label for="availability">Availability:</label>
+                        <select id="availability">
+                            <option value="all">Any Time</option>
+                            <option value="this-week">This Week</option>
+                            <option value="today">Today</option>
+                            <option value="weekend">Weekend</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-dropdown">
+                        <label for="rating">Rating:</label>
+                        <select id="rating">
+                            <option value="all">All Ratings</option>
+                            <option value="4.5">4.5+ Stars</option>
+                            <option value="4">4+ Stars</option>
+                            <option value="3.5">3.5+ Stars</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-dropdown">
+                        <label for="sort">Sort By:</label>
+                        <select id="sort">
+                            <option value="featured">Featured</option>
+                            <option value="rating">Highest Rated</option>
+                            <option value="sessions">Most Sessions</option>
+                            <option value="price-low">Price: Low to High</option>
+                            <option value="price-high">Price: High to Low</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="promoted-experts-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Elite Experts</h2>
+                    <p>Our verified top performers with proven results</p>
+                </div>
+
+                <div class="experts-carousel">
+                    <!-- Elite Expert 1 -->
+                    <div class="expert-card promoted">
+                        <div class="promotion-badge elite">
+                            <i class="fas fa-crown"></i> Elite Expert
+                        </div>
+                        <div class="expert-card-header">
+                            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a" alt="James Wilson" class="expert-avatar">
+                            <div class="expert-basic-info">
+                                <h3 class="expert-name">Dr. James Wilson</h3>
+                                <p class="expert-headline">AI & Machine Learning Expert</p>
+                                <div class="expert-rating">
+                                    <div class="stars">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <span class="rating-score">4.9</span>
+                                    </div>
+                                    <span class="review-count">(204)</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="expert-video">
+                            <video poster="video-thumbnail.jpg">
+                                <source src="expert-intro-video.mp4" type="video/mp4">
+                            </video>
+                            <div class="video-play-button">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+
+                        <div class="expert-details">
+                            <div class="expert-bio">
+                                Former Google AI Research Lead with 12+ years of experience helping businesses implement practical machine learning solutions.
+                            </div>
+
+                            <div class="expert-tags">
+                                <span class="expert-tag">Machine Learning</span>
+                                <span class="expert-tag">AI Strategy</span>
+                                <span class="expert-tag">Data Science</span>
+                            </div>
+
+                            <div class="expert-stats">
+                                <div class="stat">
+                                    <div class="stat-value">687</div>
+                                    <div class="stat-label">Sessions</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat-value">12+</div>
+                                    <div class="stat-label">Years Exp.</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat-value">98%</div>
+                                    <div class="stat-label">Satisfaction</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="expert-card-footer">
+                            <div class="expert-pricing">
+                                <span class="price">$200</span>
+                                <span class="price-period">/hour</span>
+                            </div>
+                            <a href="expert-profile.html" class="btn btn-outline">View Profile</a>
+                            <a href="#" class="btn btn-primary">Book Now</a>
+                        </div>
+                    </div>
+
+                    <!-- Elite Expert 2 -->
+                    <div class="expert-card promoted">
+                        <div class="promotion-badge elite">
+                            <i class="fas fa-crown"></i> Elite Expert
+                        </div>
+                        <div class="expert-card-header">
+                            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2" alt="Emma Thompson" class="expert-avatar">
+                            <div class="expert-basic-info">
+                                <h3 class="expert-name">Emma Thompson</h3>
+                                <p class="expert-headline">CMO & Digital Marketing Strategist</p>
+                                <div class="expert-rating">
+                                    <div class="stars">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star-half-alt"></i>
+                                        <span class="rating-score">4.7</span>
+                                    </div>
+                                    <span class="review-count">(187)</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="expert-video">
+                            <video poster="video-thumbnail-2.jpg">
+                                <source src="expert-intro-video-2.mp4" type="video/mp4">
+                            </video>
+                            <div class="video-play-button">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+
+                        <div class="expert-details">
+                            <div class="expert-bio">
+                                Fortune 500 marketing executive specializing in data-driven strategies that deliver measurable ROI for businesses of all sizes.
+                            </div>
+
+                            <div class="expert-tags">
+                                <span class="expert-tag">Digital Marketing</span>
+                                <span class="expert-tag">Brand Strategy</span>
+                                <span class="expert-tag">Analytics</span>
+                            </div>
+
+                            <div class="expert-stats">
+                                <div class="stat">
+                                    <div class="stat-value">412</div>
+                                    <div class="stat-label">Sessions</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat-value">15+</div>
+                                    <div class="stat-label">Years Exp.</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat-value">96%</div>
+                                    <div class="stat-label">Satisfaction</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="expert-card-footer">
+                            <div class="expert-pricing">
+                                <span class="price">$185</span>
+                                <span class="price-period">/hour</span>
+                            </div>
+                            <a href="#" class="btn btn-outline">View Profile</a>
+                            <a href="#" class="btn btn-primary">Book Now</a>
+                        </div>
+                    </div>
+
+                    <!-- More elite experts would go here -->
+
+                    <div class="carousel-controls">
+                        <button class="carousel-arrow prev">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="carousel-arrow next">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="premium-experts-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Premium Experts</h2>
+                    <p>Highly qualified professionals with specialized expertise</p>
+                </div>
+
+                <div class="experts-grid">
+                    <!-- Premium Expert 1 -->
+                    <div class="expert-card">
+                        <div class="promotion-badge premium">
+                            <i class="fas fa-star"></i> Premium Expert
+                        </div>
+                        <div class="expert-card-header">
+                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330" alt="Dr. Lisa Chen" class="expert-avatar">
+                            <div class="expert-basic-info">
+                                <h3 class="expert-name">Dr. Lisa Chen</h3>
+                                <p class="expert-headline">Health & Wellness Coach</p>
+                                <div class="expert-rating">
+                                    <div class="stars">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star-half-alt"></i>
+                                        <span class="rating-score">4.5</span>
+                                    </div>
+                                    <span class="review-count">(156)</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="expert-details">
+                            <div class="expert-bio">
+                                MD with specialty in integrative medicine, helping clients develop personalized wellness plans that work.
+                            </div>
+
+                            <div class="expert-tags">
+                                <span class="expert-tag">Nutrition</span>
+                                <span class="expert-tag">Fitness</span>
+                                <span class="expert-tag">Wellness</span>
+                            </div>
+                        </div>
+
+                        <div class="expert-card-footer">
+                            <div class="expert-pricing">
+                                <span class="price">$150</span>
+                                <span class="price-period">/hour</span>
+                            </div>
+                            <a href="#" class="btn btn-outline">View Profile</a>
+                            <a href="#" class="btn btn-primary">Book Now</a>
+                        </div>
+                    </div>
+
+                    <!-- Premium Expert 2 -->
+                    <div class="expert-card">
+                        <div class="promotion-badge premium">
+                            <i class="fas fa-star"></i> Premium Expert
+                        </div>
+                        <div class="expert-card-header">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d" alt="Michael Torres" class="expert-avatar">
+                            <div class="expert-basic-info">
+                                <h3 class="expert-name">Michael Torres</h3>
+                                <p class="expert-headline">Startup & Investment Advisor</p>
+                                <div class="expert-rating">
+                                    <div class="stars">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <span class="rating-score">4.8</span>
+                                    </div>
+                                    <span class="review-count">(132)</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="expert-details">
+                            <div class="expert-bio">
+                                Former VC and serial entrepreneur with expertise in fundraising, startup strategy, and growth optimization.
+                            </div>
+
+                            <div class="expert-tags">
+                                <span class="expert-tag">Fundraising</span>
+                                <span class="expert-tag">Startup Strategy</span>
+                                <span class="expert-tag">Pitch Coaching</span>
+                            </div>
+                        </div>
+
+                        <div class="expert-card-footer">
+                            <div class="expert-pricing">
+                                <span class="price">$175</span>
+                                <span class="price-period">/hour</span>
+                            </div>
+                            <a href="#" class="btn btn-outline">View Profile</a>
+                            <a href="#" class="btn btn-primary">Book Now</a>
+                        </div>
+                    </div>
+
+                    <!-- Premium Expert 3 -->
+                    <div class="expert-card">
+                        <div class="promotion-badge premium">
+                            <i class="fas fa-star"></i> Premium Expert
+                        </div>
+                        <div class="expert-card-header">
+                            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956" alt="Maria Rodriguez" class="expert-avatar">
+                            <div class="expert-basic-info">
+                                <h3 class="expert-name">Maria Rodriguez</h3>
+                                <p class="expert-headline">UX/UI Design Specialist</p>
+                                <div class="expert-rating">
+                                    <div class="stars">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <span class="rating-score">5.0</span>
+                                    </div>
+                                    <span class="review-count">(98)</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="expert-details">
+                            <div class="expert-bio">
+                                Award-winning designer with experience at top tech companies, specialized in user-centered design.
+                            </div>
+
+                            <div class="expert-tags">
+                                <span class="expert-tag">UX Design</span>
+                                <span class="expert-tag">UI Systems</span>
+                                <span class="expert-tag">Prototyping</span>
+                            </div>
+                        </div>
+
+                        <div class="expert-card-footer">
+                            <div class="expert-pricing">
+                                <span class="price">$165</span>
+                                <span class="price-period">/hour</span>
+                            </div>
+                            <a href="#" class="btn btn-outline">View Profile</a>
+                            <a href="#" class="btn btn-primary">Book Now</a>
+                        </div>
+                    </div>
+
+                    <!-- Premium Expert 4 -->
+                    <div class="expert-card">
+                        <div class="promotion-badge premium">
+                            <i class="fas fa-star"></i> Premium Expert
+                        </div>
+                        <div class="expert-card-header">
+                            <img src="https://images.unsplash.com/photo-1556157382-97eda2d62296" alt="David Chen" class="expert-avatar">
+                            <div class="expert-basic-info">
+                                <h3 class="expert-name">David Chen</h3>
+                                <p class="expert-headline">Product Management Consultant</p>
+                                <div class="expert-rating">
+                                    <div class="stars">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <span class="rating-score">4.2</span>
+                                    </div>
+                                    <span class="review-count">(87)</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="expert-details">
+                            <div class="expert-bio">
+                                Product leader with experience at startups and Fortune 500 companies, specializing in go-to-market strategy.
+                            </div>
+
+                            <div class="expert-tags">
+                                <span class="expert-tag">Product Strategy</span>
+                                <span class="expert-tag">Go-to-Market</span>
+                                <span class="expert-tag">Product Roadmap</span>
+                            </div>
+                        </div>
+
+                        <div class="expert-card-footer">
+                            <div class="expert-pricing">
+                                <span class="price">$145</span>
+                                <span class="price-period">/hour</span>
+                            </div>
+                            <a href="#" class="btn btn-outline">View Profile</a>
+                            <a href="#" class="btn btn-primary">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="view-more-container">
+                    <button class="btn btn-outline btn-large">View More Premium Experts</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="all-experts-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>All Experts</h2>
+                    <p>Browse our full directory of professional experts</p>
+                </div>
+
+                <div class="experts-grid">
+                    <!-- More expert cards would go here, similar structure to the ones above but without promotion badges -->
+                </div>
+
+                <div class="pagination">
+                    <button class="pagination-arrow prev disabled">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="pagination-number active">1</button>
+                    <button class="pagination-number">2</button>
+                    <button class="pagination-number">3</button>
+                    <button class="pagination-number">4</button>
+                    <button class="pagination-dots">...</button>
+                    <button class="pagination-number">12</button>
+                    <button class="pagination-arrow next">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="become-expert-cta">
+            <div class="container">
+                <div class="cta-content">
+                    <h2>Are You an Expert?</h2>
+                    <p>Join our marketplace of professionals and grow your client base.</p>
+                    <div class="cta-features">
+                        <div class="cta-feature">
+                            <i class="fas fa-users"></i>
+                            <span>Get discovered by thousands of potential clients</span>
+                        </div>
+                        <div class="cta-feature">
+                            <i class="fas fa-calendar-check"></i>
+                            <span>Manage bookings with our easy scheduling system</span>
+                        </div>
+                        <div class="cta-feature">
+                            <i class="fas fa-credit-card"></i>
+                            <span>Get paid securely for your expertise</span>
+                        </div>
+                    </div>
+                    <a href="expert-register.html" class="btn btn-primary btn-large">Become an Expert</a>
+                </div>
+                <div class="cta-image">
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978" alt="Become an Expert">
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-columns">
+                <div class="footer-column">
+                    <h3>Expert Marketplace</h3>
+                    <p>Connect with top professionals in various fields for personalized 1-on-1 consultations.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Find an Expert</a></li>
+                        <li><a href="#">Become an Expert</a></li>
+                        <li><a href="#">How It Works</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Categories</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Technology</a></li>
+                        <li><a href="#">Business</a></li>
+                        <li><a href="#">Health</a></li>
+                        <li><a href="#">Creative</a></li>
+                        <li><a href="#">Legal</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Trust & Safety</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2023 Expert Marketplace. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="scripts.js"></script>
+</body>
+</html>

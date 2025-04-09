@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sales Dashboard | Expert Portal</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    .dashboard-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    .dashboard-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+
+    .date-filter {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .date-filter select {
+      padding: 0.5rem;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 0.9rem;
+    }
+
+    .stats-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .stat-card {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .stat-card-title {
+      font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-card-value {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-card-change {
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .stat-card-change.positive {
+      color: #28a745;
+    }
+
+    .stat-card-change.negative {
+      color: #dc3545;
+    }
+
+    .stat-card-icon {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      width: 40px;
+      height: 40px;
+      background-color: #f0f4ff;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #4a6cf7;
+    }
+
+    .chart-container {
+      margin-bottom: 2rem;
+    }
+
+    .chart-card {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .chart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .chart-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #333;
+    }
+
+    .chart-canvas {
+      width: 100%;
+      height: 300px;
+    }
+
+    .data-table-section {
+      margin-bottom: 2rem;
+    }
+
+    .data-table-card {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      padding: 1.5rem;
+      overflow-x: auto;
+    }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .data-table th,
+    .data-table td {
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 1px solid #eee;
+    }
+
+    .data-table th {
+      font-weight: 600;
+      color: #333;
+      background-color: #f9f9f9;
+    }
+
+    .data-table tbody tr:hover {
+      background-color: #f9f9f9;
+    }
+
+    .data-table .product-name {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .data-table .product-image {
+      width: 40px;
+      height: 40px;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+
+    .data-table .status {
+      padding: 0.3rem 0.6rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+    }
+
+    .data-table .status.completed {
+      background-color: #e0f7e0;
+      color: #28a745;
+    }
+
+    .data-table .status.processing {
+      background-color: #f0f4ff;
+      color: #4a6cf7;
+    }
+
+    .data-table .status.shipped {
+      background-color: #fff3cd;
+      color: #ffc107;
+    }
+
+    .data-table .actions {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .data-table .action-btn {
+      width: 30px;
+      height: 30px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #f8f9fa;
+      color: #666;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .data-table .action-btn:hover {
+      background-color: #e9ecef;
+      color: #333;
+    }
+
+    .pagination {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 1.5rem;
+      gap: 0.5rem;
+    }
+
+    .pagination-btn {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      background-color: #fff;
+      color: #333;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .pagination-btn.active {
+      background-color: #4a6cf7;
+      color: #fff;
+      border-color: #4a6cf7;
+    }
+
+    .pagination-btn:hover:not(.active) {
+      background-color: #f8f9fa;
+    }
+
+    .loading-spinner {
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .loading-spinner i {
+      font-size: 2rem;
+      color: #4a6cf7;
+      animation: spin 1s infinite linear;
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 3rem;
+      background-color: #f8f9fa;
+      border-radius: 8px;
+    }
+
+    .empty-state i {
+      font-size: 3rem;
+      color: #adb5bd;
+      margin-bottom: 1rem;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    /* Mobile responsiveness */
+    @media (max-width: 768px) {
+      .stats-cards {
+        grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
+      }
+
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+
+      .data-table th,
+      .data-table td {
+        padding: 0.75rem 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="main-header">
+      <div class="logo">
+        <a href="index.html">Expert Chat System</a>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="expert-dashboard.html">Dashboard</a></li>
+          <li><a href="expert-booking.html">Bookings</a></li>
+          <li><a href="expert-messages.html">Messages</a></li>
+          <li><a href="expert-products.html">Products</a></li>
+          <li><a href="expert-sales.html" class="active">Sales</a></li>
+          <li id="userProfileNav">
+            <a href="#" id="userProfileLink">
+              <img id="userProfileImage" src="/uploads/default-expert.png" alt="Profile" class="avatar-img">
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="dashboard-container">
+      <div class="dashboard-header">
+        <h1>Sales Dashboard</h1>
+        <div class="date-filter">
+          <label for="timeRange">Time Period:</label>
+          <select id="timeRange" onchange="updateDashboard()">
+            <option value="7">Last 7 days</option>
+            <option value="30" selected>Last 30 days</option>
+            <option value="90">Last 90 days</option>
+            <option value="180">Last 6 months</option>
+            <option value="365">Last year</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="salesStatsCards" class="stats-cards">
+        <!-- Loading spinner -->
+        <div class="loading-spinner">
+          <i class="fas fa-spinner fa-spin"></i> Loading sales data...
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="chart-card">
+          <div class="chart-header">
+            <h2 class="chart-title">Revenue Trend</h2>
+          </div>
+          <canvas id="revenueChart" class="chart-canvas"></canvas>
+        </div>
+
+        <div class="chart-card">
+          <div class="chart-header">
+            <h2 class="chart-title">Sales by Product Category</h2>
+          </div>
+          <canvas id="categoryChart" class="chart-canvas"></canvas>
+        </div>
+      </div>
+
+      <div class="data-table-section">
+        <div class="chart-card">
+          <div class="chart-header">
+            <h2 class="chart-title">Top Products</h2>
+          </div>
+          <div id="topProductsTable">
+            <div class="loading-spinner">
+              <i class="fas fa-spinner fa-spin"></i> Loading top products...
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="data-table-section">
+        <div class="chart-card">
+          <div class="chart-header">
+            <h2 class="chart-title">Recent Orders</h2>
+          </div>
+          <div id="recentOrdersTable">
+            <div class="loading-spinner">
+              <i class="fas fa-spinner fa-spin"></i> Loading recent orders...
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/auth.js"></script>
+  <script>
+    // Global variables
+    let revenueChart;
+    let categoryChart;
+    let currentTimeRange = 30;
+
+    // DOM elements
+    const salesStatsCards = document.getElementById('salesStatsCards');
+    const topProductsTable = document.getElementById('topProductsTable');
+    const recentOrdersTable = document.getElementById('recentOrdersTable');
+
+    // Check auth status and load dashboard data
+    document.addEventListener('DOMContentLoaded', async () => {
+      // Check if user is an expert
+      const user = getCurrentUser();
+      if (!user || !user.isExpert) {
+        window.location.href = 'login.html';
+        return;
+      }
+
+      // Update UI with user info
+      updateUserInfo(user);
+
+      // Load dashboard data
+      await loadDashboardData();
+    });
+
+    // Load dashboard data
+    async function loadDashboardData() {
+      try {
+        // Get time range
+        const timeRangeSelect = document.getElementById('timeRange');
+        currentTimeRange = parseInt(timeRangeSelect.value);
+
+        // Load sales stats
+        await loadSalesStats();
+
+        // Load charts
+        initCharts();
+
+        // Load top products
+        await loadTopProducts();
+
+        // Load recent orders
+        await loadRecentOrders();
+      } catch (error) {
+        console.error('Error loading dashboard data:', error);
+        showError('Failed to load dashboard data. Please try again later.');
+      }
+    }
+
+    // Load sales statistics cards
+    async function loadSalesStats() {
+      try {
+        // Fetch sales stats
+        const response = await fetch(`/api/ecommerce/expert/sales-stats?period=${currentTimeRange}`, {
+          headers: {
+            'Authorization': `Bearer ${getToken()}`
+          }
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to load sales statistics');
+        }
+
+        const data = await response.json();
+
+        // Render stats cards
+        salesStatsCards.innerHTML = `
+          <div class="stat-card">
+            <div class="stat-card-icon">
+              <i class="fas fa-dollar-sign"></i>
+            </div>
+            <div class="stat-card-title">Total Revenue</div>
+            <div class="stat-card-value">${formatCurrency(data.totalRevenue)}</div>
+            <div class="stat-card-change ${data.revenueChange >= 0 ? 'positive' : 'negative'}">
+              <i class="fas fa-${data.revenueChange >= 0 ? 'arrow-up' : 'arrow-down'}"></i>
+              ${Math.abs(data.revenueChange)}% from previous period
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-card-icon">
+              <i class="fas fa-shopping-cart"></i>
+            </div>
+            <div class="stat-card-title">Total Orders</div>
+            <div class="stat-card-value">${data.totalOrders}</div>
+            <div class="stat-card-change ${data.ordersChange >= 0 ? 'positive' : 'negative'}">
+              <i class="fas fa-${data.ordersChange >= 0 ? 'arrow-up' : 'arrow-down'}"></i>
+              ${Math.abs(data.ordersChange)}% from previous period
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-card-icon">
+              <i class="fas fa-box"></i>
+            </div>
+            <div class="stat-card-title">Items Sold</div>
+            <div class="stat-card-value">${data.itemsSold}</div>
+            <div class="stat-card-change ${data.itemsChange >= 0 ? 'positive' : 'negative'}">
+              <i class="fas fa-${data.itemsChange >= 0 ? 'arrow-up' : 'arrow-down'}"></i>
+              ${Math.abs(data.itemsChange)}% from previous period
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-card-icon">
+              <i class="fas fa-chart-line"></i>
+            </div>
+            <div class="stat-card-title">Conversion Rate</div>
+            <div class="stat-card-value">${data.conversionRate}%</div>
+            <div class="stat-card-change ${data.conversionChange >= 0 ? 'positive' : 'negative'}">
+              <i class="fas fa-${data.conversionChange >= 0 ? 'arrow-up' : 'arrow-down'}"></i>
+              ${Math.abs(data.conversionChange)}% from previous period
+            </div>
+          </div>
+        `;
+      } catch (error) {
+        console.error('Error loading sales stats:', error);
+        salesStatsCards.innerHTML = `
+          <div class="empty-state" style="grid-column: 1 / -1;">
+            <i class="fas fa-exclamation-circle"></i>
+            <h3>Failed to load sales statistics</h3>
+            <p>Please try refreshing the page</p>
+          </div>
+        `;
+      }
+    }
+
+    // Initialize charts
+    function initCharts() {
+      // Create revenue trend chart
+      const revenueCtx = document.getElementById('revenueChart').getContext('2d');
+      revenueChart = new Chart(revenueCtx, {
+        type: 'line',
+        data: {
+          labels: [], // Will be filled with dates
+          datasets: [{
+            label: 'Revenue',
+            backgroundColor: 'rgba(74, 108, 247, 0.1)',
+            borderColor: 'rgba(74, 108, 247, 1)',
+            data: [], // Will be filled with revenue data
+            fill: true,
+            tension: 0.4
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: {
+                callback: function(value) {
+                  return '$' + value;
+                }
+              }
+            }
+          },
+          plugins: {
+            legend: {
+              display: false
+            },
+            tooltip: {
+              callbacks: {
+                label: function(context) {
+                  return '$' + context.raw;
+                }
+              }
+            }
+          }
+        }
+      });
+
+      // Create category chart
+      const categoryCtx = document.getElementById('categoryChart').getContext('2d');
+      categoryChart = new Chart(categoryCtx, {
+        type: 'doughnut',
+        data: {
+          labels: ['Books', 'Courses', 'Templates', 'Tools', 'Subscriptions', 'Other'],
+          datasets: [{
+            data: [0, 0, 0, 0, 0, 0], // Will be filled with category data
+            backgroundColor: [
+              '#4a6cf7',
+              '#28a745',
+              '#ffc107',
+              '#dc3545',
+              '#6f42c1',
+              '#fd7e14'
+            ]
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: 'right'
+            },
+            tooltip: {
+              callbacks: {
+                label: function(context) {
+                  const label = context.label || '';
+                  const value = context.raw || 0;
+                  const total = context.dataset.data.reduce((acc, curr) => acc + curr, 0);
+                  const percentage = Math.round((value / total) * 100);
+                  return `${label}: ${percentage}% ($${value})`;
+                }
+              }
+            }
+          }
+        }
+      });
+
+      // Fetch chart data
+      fetchChartData();
+    }
+
+    // Fetch data for charts
+    async function fetchChartData() {
+      try {
+        // Fetch revenue trend data
+        const revenueResponse = await fetch(`/api/ecommerce/expert/revenue-trend?period=${currentTimeRange}`, {
+          headers: {
+            'Authorization': `Bearer ${getToken()}`
+          }
+        });
+
+        if (!revenueResponse.ok) {
+          throw new Error('Failed to load revenue trend data');
+        }
+
+        const revenueData = await revenueResponse.json();
+
+        // Update revenue chart
+        revenueChart.data.labels = revenueData.labels;
+        revenueChart.data.datasets[0].data = revenueData.data;
+        revenueChart.update();
+
+        // Fetch category data
+        const categoryResponse = await fetch(`/api/ecommerce/expert/category-sales?period=${currentTimeRange}`, {
+          headers: {
+            'Authorization': `Bearer ${getToken()}`
+          }
+        });
+
+        if (!categoryResponse.ok) {
+          throw new Error('Failed to load category sales data');
+        }
+
+        const categoryData = await categoryResponse.json();
+
+        // Update category chart
+        categoryChart.data.datasets[0].data = [
+          categoryData.Book || 0,
+          categoryData.Course || 0,
+          categoryData.Template || 0,
+          categoryData.Tool || 0,
+          categoryData.Subscription || 0,
+          categoryData.Other || 0
+        ];
+        categoryChart.update();
+      } catch (error) {
+        console.error('Error loading chart data:', error);
+      }
+    }
+
+    // Load top products table
+    async function loadTopProducts() {
+      try {
+        // Fetch top products
+        const response = await fetch(`/api/ecommerce/expert/top-products?period=${currentTimeRange}`, {
+          headers: {
+            'Authorization': `Bearer ${getToken()}`
+          }
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to load top products');
+        }
+
+        const data = await response.json();
+
+        // Check if there are any products
+        if (!data.products || data.products.length === 0) {
+          topProductsTable.innerHTML = `
+            <div class="empty-state">
+              <i class="fas fa-box-open"></i>
+              <h3>No products sold yet</h3>
+              <p>When you start selling products, you'll see your top-performing items here.</p>
+            </div>
+          `;
+          return;
+        }
+
+        // Render top products table
+        const tableHTML = `
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>Category</th>
+                <th>Units Sold</th>
+                <th>Revenue</th>
+                <th>Conversion Rate</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${data.products.map(product => `
+                <tr>
+                  <td>
+                    <div class="product-name">
+                      <img src="${product.image || '/uploads/default-product.png'}" alt="${product.name}" class="product-image">
+                      <div>${product.name}</div>
+                    </div>
+                  </td>
+                  <td>${product.category}</td>
+                  <td>${product.unitsSold}</td>
+                  <td>${formatCurrency(product.revenue)}</td>
+                  <td>${product.conversionRate}%</td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        `;
+
+        topProductsTable.innerHTML = tableHTML;
+      } catch (error) {
+        console.error('Error loading top products:', error);
+        topProductsTable.innerHTML = `
+          <div class="empty-state">
+            <i class="fas fa-exclamation-circle"></i>
+            <h3>Failed to load top products</h3>
+            <p>Please try refreshing the page</p>
+          </div>
+        `;
+      }
+    }
+
+    // Load recent orders table
+    async function loadRecentOrders() {
+      try {
+        // Fetch recent orders
+        const response = await fetch('/api/ecommerce/expert/orders?limit=10', {
+          headers: {
+            'Authorization': `Bearer ${getToken()}`
+          }
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to load recent orders');
+        }
+
+        const data = await response.json();
+
+        // Check if there are any orders
+        if (!data.orders || data.orders.length === 0) {
+          recentOrdersTable.innerHTML = `
+            <div class="empty-state">
+              <i class="fas fa-shopping-cart"></i>
+              <h3>No orders yet</h3>
+              <p>When customers purchase your products, their orders will appear here.</p>
+            </div>
+          `;
+          return;
+        }
+
+        // Render recent orders table
+        const tableHTML = `
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Order ID</th>
+                <th>Date</th>
+                <th>Customer</th>
+                <th>Items</th>
+                <th>Total</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${data.orders.map(order => `
+                <tr>
+                  <td>${order.orderNumber}</td>
+                  <td>${formatDate(order.createdAt)}</td>
+                  <td>${order.customerName}</td>
+                  <td>${order.itemCount}</td>
+                  <td>${formatCurrency(order.totalAmount)}</td>
+                  <td><span class="status ${order.status.toLowerCase()}">${capitalizeFirst(order.status)}</span></td>
+                  <td>
+                    <div class="actions">
+                      <div class="action-btn" onclick="viewOrder('${order._id}')" title="View Order">
+                        <i class="fas fa-eye"></i>
+                      </div>
+                      <div class="action-btn" onclick="downloadInvoice('${order._id}')" title="Download Invoice">
+                        <i class="fas fa-file-invoice-dollar"></i>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+
+          <div class="pagination">
+            <div class="pagination-btn"><i class="fas fa-chevron-left"></i></div>
+            <div class="pagination-btn active">1</div>
+            <div class="pagination-btn">2</div>
+            <div class="pagination-btn">3</div>
+            <div class="pagination-btn"><i class="fas fa-chevron-right"></i></div>
+          </div>
+        `;
+
+        recentOrdersTable.innerHTML = tableHTML;
+      } catch (error) {
+        console.error('Error loading recent orders:', error);
+        recentOrdersTable.innerHTML = `
+          <div class="empty-state">
+            <i class="fas fa-exclamation-circle"></i>
+            <h3>Failed to load recent orders</h3>
+            <p>Please try refreshing the page</p>
+          </div>
+        `;
+      }
+    }
+
+    // Update dashboard when time range changes
+    async function updateDashboard() {
+      // Reset loading state
+      salesStatsCards.innerHTML = `
+        <div class="loading-spinner" style="grid-column: 1 / -1;">
+          <i class="fas fa-spinner fa-spin"></i> Loading sales data...
+        </div>
+      `;
+
+      topProductsTable.innerHTML = `
+        <div class="loading-spinner">
+          <i class="fas fa-spinner fa-spin"></i> Loading top products...
+        </div>
+      `;
+
+      recentOrdersTable.innerHTML = `
+        <div class="loading-spinner">
+          <i class="fas fa-spinner fa-spin"></i> Loading recent orders...
+        </div>
+      `;
+
+      // Reload dashboard data
+      await loadDashboardData();
+    }
+
+    // View order details
+    function viewOrder(orderId) {
+      // In a real implementation, this would open a modal with order details
+      // or navigate to an order details page
+      console.log('View order:', orderId);
+      alert('Order details functionality will be implemented soon.');
+    }
+
+    // Download invoice
+    function downloadInvoice(orderId) {
+      // In a real implementation, this would generate and download an invoice
+      console.log('Download invoice for order:', orderId);
+      alert('Invoice download functionality will be implemented soon.');
+    }
+
+    // Format currency
+    function formatCurrency(amount) {
+      return new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      }).format(amount);
+    }
+
+    // Format date
+    function formatDate(dateString) {
+      const date = new Date(dateString);
+      return new Intl.DateTimeFormat('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric'
+      }).format(date);
+    }
+
+    // Capitalize first letter
+    function capitalizeFirst(string) {
+      return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+    }
+
+    // Update user info in the header
+    function updateUserInfo(user) {
+      const userProfileImage = document.getElementById('userProfileImage');
+      userProfileImage.src = user.profilePicture || '/uploads/default-expert.png';
+    }
+
+    // Show error message
+    function showError(message) {
+      salesStatsCards.innerHTML = `
+        <div class="empty-state" style="grid-column: 1 / -1; background-color: #f8d7da; color: #721c24;">
+          <i class="fas fa-exclamation-circle"></i>
+          <h3>Error</h3>
+          <p>${message}</p>
+          <button class="btn-primary" onclick="loadDashboardData()">
+            <i class="fas fa-sync"></i> Try Again
+          </button>
+        </div>
+      `;
+    }
+  </script>
+</body>
+</html>

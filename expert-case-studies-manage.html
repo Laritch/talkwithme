@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Case Studies | Expert Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="expert-case-studies-manage.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar Navigation -->
+        <aside class="dashboard-sidebar">
+            <div class="sidebar-header">
+                <img src="/uploads/default-avatar.png" alt="Logo" class="sidebar-logo">
+                <h2>Expert Dashboard</h2>
+            </div>
+
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="expert-dashboard.html"><i class="fas fa-th-large"></i> Overview</a></li>
+                    <li><a href="expert-profile-edit.html"><i class="fas fa-user-edit"></i> Edit Profile</a></li>
+                    <li><a href="expert-bookings.html"><i class="fas fa-calendar-check"></i> Bookings</a></li>
+                    <li><a href="live-sessions.html"><i class="fas fa-video"></i> Live Sessions</a></li>
+                    <li><a href="expert-posts-manage.html"><i class="fas fa-pen-square"></i> My Posts</a></li>
+                    <li><a href="expert-case-studies-manage.html" class="active"><i class="fas fa-chart-line"></i> Case Studies</a></li>
+                    <li><a href="expert-reviews.html"><i class="fas fa-star"></i> Reviews</a></li>
+                    <li><a href="expert-analytics.html"><i class="fas fa-chart-bar"></i> Analytics</a></li>
+                    <li><a href="expert-badges.html"><i class="fas fa-award"></i> Badges & Trust</a></li>
+                    <li><a href="expert-payments.html"><i class="fas fa-wallet"></i> Payments</a></li>
+                    <li><a href="expert-settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+                </ul>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="logout.html" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <div class="dashboard-header">
+                <h1><i class="fas fa-chart-line"></i> My Case Studies</h1>
+                <p class="dashboard-subtitle">Manage your success stories and case studies</p>
+                <a href="submit-case-study.html" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> Create New Case Study
+                </a>
+            </div>
+
+            <!-- Success Message -->
+            <div id="submission-success" class="alert-success" style="display: none;">
+                <i class="fas fa-check-circle"></i>
+                <div>
+                    <h4>Case Study Submitted Successfully!</h4>
+                    <p>Your case study has been submitted and is now live on the platform.</p>
+                </div>
+                <button class="close-alert"><i class="fas fa-times"></i></button>
+            </div>
+
+            <!-- Case Studies Statistics -->
+            <div class="stats-cards">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>5</h3>
+                        <p>Total Case Studies</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>1,258</h3>
+                        <p>Total Views</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-mouse-pointer"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>128</h3>
+                        <p>Profile Clicks</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>14</h3>
+                        <p>Booking Conversions</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Case Studies Filters -->
+            <div class="filters-container">
+                <div class="search-box">
+                    <input type="text" placeholder="Search case studies..." id="search-case-studies">
+                    <button class="search-button"><i class="fas fa-search"></i></button>
+                </div>
+                <div class="filter-group">
+                    <select id="status-filter">
+                        <option value="all">All Status</option>
+                        <option value="published">Published</option>
+                        <option value="draft">Draft</option>
+                        <option value="pending">Pending Verification</option>
+                    </select>
+                    <select id="category-filter">
+                        <option value="all">All Categories</option>
+                        <option value="business">Business Strategy</option>
+                        <option value="marketing">Digital Marketing</option>
+                        <option value="technology">Technology</option>
+                        <option value="finance">Finance</option>
+                        <option value="health">Health & Wellness</option>
+                    </select>
+                    <select id="sort-filter">
+                        <option value="date-desc">Newest First</option>
+                        <option value="date-asc">Oldest First</option>
+                        <option value="views-desc">Most Views</option>
+                        <option value="conversion-desc">Highest Conversion</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Case Studies Table -->
+            <div class="case-studies-table-container">
+                <table class="case-studies-table">
+                    <thead>
+                        <tr>
+                            <th class="case-preview">Case Study</th>
+                            <th class="case-category">Category</th>
+                            <th class="case-status">Status</th>
+                            <th class="case-verification">Verification</th>
+                            <th class="case-stats">Performance</th>
+                            <th class="case-actions">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Published, Premium, Verified Case Study -->
+                        <tr>
+                            <td class="case-preview">
+                                <div class="case-preview-content">
+                                    <div class="case-thumbnail">
+                                        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40" alt="Case Study">
+                                        <span class="premium-badge"><i class="fas fa-crown"></i></span>
+                                    </div>
+                                    <div class="case-info">
+                                        <h4>How We Increased Revenue by 250% in 6 Months</h4>
+                                        <p class="case-client">Client: ABC Software</p>
+                                        <p class="case-date">Published: June 15, 2024</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="case-category">
+                                <span class="category-badge business">Business Strategy</span>
+                            </td>
+                            <td class="case-status">
+                                <span class="status-badge published">Published</span>
+                            </td>
+                            <td class="case-verification">
+                                <span class="verification-badge verified">
+                                    <i class="fas fa-check-circle"></i> Verified
+                                </span>
+                            </td>
+                            <td class="case-stats">
+                                <div class="stat-item">
+                                    <i class="fas fa-eye"></i> 524 Views
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-mouse-pointer"></i> 48 Clicks
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-chart-line"></i> 9.2% Conversion
+                                </div>
+                            </td>
+                            <td class="case-actions">
+                                <div class="action-buttons">
+                                    <a href="case-study-detail.html?id=1" class="btn-icon btn-view" title="View"><i class="fas fa-eye"></i></a>
+                                    <a href="submit-case-study.html?edit=1" class="btn-icon btn-edit" title="Edit"><i class="fas fa-edit"></i></a>
+                                    <button class="btn-icon btn-delete" title="Delete"><i class="fas fa-trash-alt"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <!-- Published, Regular, Verified Case Study -->
+                        <tr>
+                            <td class="case-preview">
+                                <div class="case-preview-content">
+                                    <div class="case-thumbnail">
+                                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f" alt="Case Study">
+                                    </div>
+                                    <div class="case-info">
+                                        <h4>Scaling Social Media Presence for a Local Business</h4>
+                                        <p class="case-client">Client: Bella's Bistro</p>
+                                        <p class="case-date">Published: May 22, 2024</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="case-category">
+                                <span class="category-badge marketing">Digital Marketing</span>
+                            </td>
+                            <td class="case-status">
+                                <span class="status-badge published">Published</span>
+                            </td>
+                            <td class="case-verification">
+                                <span class="verification-badge verified">
+                                    <i class="fas fa-check-circle"></i> Verified
+                                </span>
+                            </td>
+                            <td class="case-stats">
+                                <div class="stat-item">
+                                    <i class="fas fa-eye"></i> 348 Views
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-mouse-pointer"></i> 32 Clicks
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-chart-line"></i> 9.2% Conversion
+                                </div>
+                            </td>
+                            <td class="case-actions">
+                                <div class="action-buttons">
+                                    <a href="case-study-detail.html?id=2" class="btn-icon btn-view" title="View"><i class="fas fa-eye"></i></a>
+                                    <a href="submit-case-study.html?edit=2" class="btn-icon btn-edit" title="Edit"><i class="fas fa-edit"></i></a>
+                                    <button class="btn-icon btn-delete" title="Delete"><i class="fas fa-trash-alt"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <!-- Pending Verification Case Study -->
+                        <tr>
+                            <td class="case-preview">
+                                <div class="case-preview-content">
+                                    <div class="case-thumbnail">
+                                        <img src="https://images.unsplash.com/photo-1504639725590-34d0984388bd" alt="Case Study">
+                                    </div>
+                                    <div class="case-info">
+                                        <h4>Optimizing Legacy Code for Modern Performance</h4>
+                                        <p class="case-client">Client: E-commerce Solutions Inc.</p>
+                                        <p class="case-date">Submitted: April 30, 2024</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="case-category">
+                                <span class="category-badge technology">Technology</span>
+                            </td>
+                            <td class="case-status">
+                                <span class="status-badge published">Published</span>
+                            </td>
+                            <td class="case-verification">
+                                <span class="verification-badge pending">
+                                    <i class="fas fa-clock"></i> Pending
+                                </span>
+                            </td>
+                            <td class="case-stats">
+                                <div class="stat-item">
+                                    <i class="fas fa-eye"></i> 186 Views
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-mouse-pointer"></i> 14 Clicks
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-chart-line"></i> 7.5% Conversion
+                                </div>
+                            </td>
+                            <td class="case-actions">
+                                <div class="action-buttons">
+                                    <a href="case-study-detail.html?id=3" class="btn-icon btn-view" title="View"><i class="fas fa-eye"></i></a>
+                                    <a href="submit-case-study.html?edit=3" class="btn-icon btn-edit" title="Edit"><i class="fas fa-edit"></i></a>
+                                    <button class="btn-icon btn-delete" title="Delete"><i class="fas fa-trash-alt"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <!-- Draft Case Study -->
+                        <tr>
+                            <td class="case-preview">
+                                <div class="case-preview-content">
+                                    <div class="case-thumbnail draft">
+                                        <i class="fas fa-file-alt"></i>
+                                    </div>
+                                    <div class="case-info">
+                                        <h4>Financial Restructuring for a Growing Startup</h4>
+                                        <p class="case-client">Client: Growth Ventures</p>
+                                        <p class="case-date">Last edited: April 18, 2024</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="case-category">
+                                <span class="category-badge finance">Finance</span>
+                            </td>
+                            <td class="case-status">
+                                <span class="status-badge draft">Draft</span>
+                            </td>
+                            <td class="case-verification">
+                                <span class="verification-badge none">
+                                    <i class="fas fa-minus-circle"></i> Not Started
+                                </span>
+                            </td>
+                            <td class="case-stats">
+                                <div class="stat-item disabled">
+                                    <i class="fas fa-eye"></i> Not Published
+                                </div>
+                            </td>
+                            <td class="case-actions">
+                                <div class="action-buttons">
+                                    <a href="submit-case-study.html?edit=4" class="btn-icon btn-edit" title="Edit"><i class="fas fa-edit"></i></a>
+                                    <button class="btn-icon btn-delete" title="Delete"><i class="fas fa-trash-alt"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <!-- Scheduled Case Study -->
+                        <tr>
+                            <td class="case-preview">
+                                <div class="case-preview-content">
+                                    <div class="case-thumbnail">
+                                        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b" alt="Case Study">
+                                        <span class="premium-badge"><i class="fas fa-crown"></i></span>
+                                    </div>
+                                    <div class="case-info">
+                                        <h4>Wellness Program Implementation for Corporate Staff</h4>
+                                        <p class="case-client">Client: HealthFirst Corp</p>
+                                        <p class="case-date">Scheduled: June 30, 2024</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="case-category">
+                                <span class="category-badge health">Health & Wellness</span>
+                            </td>
+                            <td class="case-status">
+                                <span class="status-badge scheduled">Scheduled</span>
+                            </td>
+                            <td class="case-verification">
+                                <span class="verification-badge verified">
+                                    <i class="fas fa-check-circle"></i> Verified
+                                </span>
+                            </td>
+                            <td class="case-stats">
+                                <div class="stat-item disabled">
+                                    <i class="fas fa-calendar"></i> Publishing Soon
+                                </div>
+                            </td>
+                            <td class="case-actions">
+                                <div class="action-buttons">
+                                    <a href="submit-case-study.html?edit=5" class="btn-icon btn-edit" title="Edit"><i class="fas fa-edit"></i></a>
+                                    <button class="btn-icon btn-publish-now" title="Publish Now"><i class="fas fa-rocket"></i></button>
+                                    <button class="btn-icon btn-delete" title="Delete"><i class="fas fa-trash-alt"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+
+        <!-- Performance Sidebar -->
+        <aside class="performance-sidebar">
+            <div class="sidebar-section">
+                <h3>Performance Insights</h3>
+                <div class="chart-container">
+                    <canvas id="viewsChart"></canvas>
+                </div>
+                <p class="chart-title">Case Study Views - Last 30 Days</p>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>Conversion Metrics</h3>
+                <div class="metrics-container">
+                    <div class="metric-item">
+                        <div class="metric-header">
+                            <h4>View-to-Profile Click</h4>
+                            <span class="metric-value">9.8%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 9.8%"></div>
+                        </div>
+                        <p class="metric-benchmark">Industry avg: 7.2%</p>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-header">
+                            <h4>Profile-to-Booking</h4>
+                            <span class="metric-value">11.2%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 11.2%"></div>
+                        </div>
+                        <p class="metric-benchmark">Industry avg: 8.5%</p>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-header">
+                            <h4>Overall Conversion</h4>
+                            <span class="metric-value">1.1%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 1.1%"></div>
+                        </div>
+                        <p class="metric-benchmark">Industry avg: 0.6%</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>Top Performing Case Studies</h3>
+                <div class="top-case-studies">
+                    <div class="top-case-study">
+                        <div class="rank">1</div>
+                        <div class="top-case-content">
+                            <h4>How We Increased Revenue by 250% in 6 Months</h4>
+                            <div class="top-case-stats">
+                                <span><i class="fas fa-eye"></i> 524</span>
+                                <span><i class="fas fa-mouse-pointer"></i> 48</span>
+                                <span><i class="fas fa-calendar-check"></i> 6</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="top-case-study">
+                        <div class="rank">2</div>
+                        <div class="top-case-content">
+                            <h4>Scaling Social Media Presence for a Local Business</h4>
+                            <div class="top-case-stats">
+                                <span><i class="fas fa-eye"></i> 348</span>
+                                <span><i class="fas fa-mouse-pointer"></i> 32</span>
+                                <span><i class="fas fa-calendar-check"></i> 4</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="top-case-study">
+                        <div class="rank">3</div>
+                        <div class="top-case-content">
+                            <h4>Optimizing Legacy Code for Modern Performance</h4>
+                            <div class="top-case-stats">
+                                <span><i class="fas fa-eye"></i> 186</span>
+                                <span><i class="fas fa-mouse-pointer"></i> 14</span>
+                                <span><i class="fas fa-calendar-check"></i> 2</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>Improvement Tips</h3>
+                <div class="tips-container">
+                    <div class="tip-item">
+                        <i class="fas fa-lightbulb"></i>
+                        <div class="tip-content">
+                            <h4>Add more metrics</h4>
+                            <p>Case studies with 3+ quantifiable results get 40% more engagement</p>
+                        </div>
+                    </div>
+                    <div class="tip-item">
+                        <i class="fas fa-lightbulb"></i>
+                        <div class="tip-content">
+                            <h4>Upgrade to premium</h4>
+                            <p>Premium case studies receive 2.5x more profile clicks</p>
+                        </div>
+                    </div>
+                    <div class="tip-item">
+                        <i class="fas fa-lightbulb"></i>
+                        <div class="tip-content">
+                            <h4>Verify your results</h4>
+                            <p>Verified case studies convert 35% better than unverified ones</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="scripts.js"></script>
+    <script src="expert-case-studies-manage.js"></script>
+</body>
+</html>

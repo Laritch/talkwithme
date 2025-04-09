@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Client Matching - Service Marketplace</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f7fb;
+            color: #333;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px 0;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar-header {
+            padding: 0 20px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .sidebar-logo {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 5px;
+        }
+
+        .sidebar-menu a {
+            display: block;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            padding: 12px 20px;
+            transition: all 0.3s;
+        }
+
+        .sidebar-menu a:hover, .sidebar-menu a.active {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-left: 4px solid #3498db;
+        }
+
+        .sidebar-menu a i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e1e1e1;
+        }
+
+        .page-title h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .card-header {
+            padding: 15px 20px;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 15px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+        }
+
+        .btn-success {
+            background-color: #2ecc71;
+        }
+
+        .btn-success:hover {
+            background-color: #27ae60;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid #3498db;
+            color: #3498db;
+        }
+
+        .btn-outline:hover {
+            background-color: #3498db;
+            color: white;
+        }
+
+        /* AI Matching Styles */
+        .matching-intro {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .matching-intro h2 {
+            color: #2c3e50;
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+
+        .matching-intro p {
+            color: #7f8c8d;
+            font-size: 16px;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .ai-visual {
+            position: relative;
+            height: 300px;
+            margin: 40px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .node {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background-color: #3498db;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 40px;
+            position: absolute;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .node.expert {
+            left: 10%;
+            background-color: #3498db;
+        }
+
+        .node.client {
+            right: 10%;
+            background-color: #e74c3c;
+        }
+
+        .node.ai {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 160px;
+            height: 160px;
+            background-color: #9b59b6;
+            z-index: 10;
+        }
+
+        .connection {
+            position: absolute;
+            height: 4px;
+            background-color: #bdc3c7;
+            z-index: 5;
+        }
+
+        .connection.expert-ai {
+            width: 30%;
+            left: 20%;
+            top: 50%;
+            transform: rotate(0deg);
+        }
+
+        .connection.ai-client {
+            width: 30%;
+            right: 20%;
+            top: 50%;
+            transform: rotate(0deg);
+        }
+
+        .connection .pulse {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #3498db;
+            top: -8px;
+            animation: pulse 3s infinite;
+        }
+
+        .connection.expert-ai .pulse {
+            background-color: #3498db;
+            left: 40%;
+        }
+
+        .connection.ai-client .pulse {
+            background-color: #e74c3c;
+            right: 40%;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.8); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.5; }
+            100% { transform: scale(0.8); opacity: 1; }
+        }
+
+        .factors {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .factor-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            padding: 25px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .factor-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .factor-icon {
+            font-size: 36px;
+            color: #3498db;
+            margin-bottom: 15px;
+        }
+
+        .factor-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #2c3e50;
+        }
+
+        .factor-desc {
+            color: #7f8c8d;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        .match-samples {
+            margin: 40px 0;
+        }
+
+        .match-example {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .client-query {
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .client-query h3 {
+            margin-top: 0;
+            font-size: 18px;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+        }
+
+        .client-query h3 i {
+            color: #e74c3c;
+            margin-right: 10px;
+            font-size: 20px;
+        }
+
+        .client-query p {
+            margin-bottom: 0;
+            color: #7f8c8d;
+        }
+
+        .matches {
+            padding: 0 20px;
+        }
+
+        .match {
+            padding: 15px 0;
+            border-bottom: 1px solid #f1f1f1;
+            display: flex;
+            align-items: center;
+        }
+
+        .match:last-child {
+            border-bottom: none;
+        }
+
+        .match-rank {
+            width: 30px;
+            height: 30px;
+            background-color: #3498db;
+            border-radius: 50%;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 600;
+            margin-right: 15px;
+        }
+
+        .match-details {
+            flex: 1;
+        }
+
+        .match-name {
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+
+        .match-meta {
+            display: flex;
+            font-size: 12px;
+            color: #7f8c8d;
+            margin-bottom: 5px;
+        }
+
+        .match-meta div {
+            margin-right: 15px;
+        }
+
+        .match-meta i {
+            margin-right: 4px;
+        }
+
+        .match-reason {
+            font-size: 13px;
+            color: #7f8c8d;
+            background-color: #f8f9fa;
+            padding: 8px 12px;
+            border-radius: 4px;
+            margin-top: 8px;
+        }
+
+        .match-actions {
+            margin-left: 15px;
+        }
+
+        .match-confidence {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-top: 5px;
+        }
+
+        .confidence-high {
+            background-color: #e8f7ee;
+            color: #2ecc71;
+        }
+
+        .confidence-medium {
+            background-color: #fff5e6;
+            color: #f39c12;
+        }
+
+        .confidence-low {
+            background-color: #fee;
+            color: #e74c3c;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+                padding: 10px 0;
+            }
+            .node.expert {
+                left: 5%;
+                width: 90px;
+                height: 90px;
+                font-size: 30px;
+            }
+            .node.client {
+                right: 5%;
+                width: 90px;
+                height: 90px;
+                font-size: 30px;
+            }
+            .node.ai {
+                width: 120px;
+                height: 120px;
+                font-size: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">Service Marketplace</div>
+                <div class="sidebar-subtitle">Expert Portal</div>
+            </div>
+            <ul class="sidebar-menu">
+                <li><a href="expert-dashboard.html" data-tab="dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li><a href="expert-dashboard.html" data-tab="consultations"><i class="fas fa-calendar-alt"></i> Consultations</a></li>
+                <li><a href="expert-dashboard.html" data-tab="clients"><i class="fas fa-users"></i> Clients</a></li>
+                <li><a href="expert-dashboard.html" data-tab="analytics"><i class="fas fa-chart-bar"></i> Analytics</a></li>
+                <li><a href="expert-membership.html" data-tab="membership"><i class="fas fa-star"></i> Membership</a></li>
+                <li><a href="#" class="active" data-tab="matching"><i class="fas fa-robot"></i> AI Matching</a></li>
+                <li><a href="expert-dashboard.html" data-tab="profile"><i class="fas fa-user-circle"></i> Profile</a></li>
+                <li><a href="expert-dashboard.html" data-tab="settings"><i class="fas fa-cog"></i> Settings</a></li>
+                <li><a href="expert-login.html" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="page-header">
+                <div class="page-title">
+                    <h1>AI-Powered Client Matching</h1>
+                </div>
+            </div>
+
+            <!-- AI Matching Introduction -->
+            <div class="matching-intro">
+                <h2>How Our AI Connects You With Ideal Clients</h2>
+                <p>Our advanced matching algorithm analyzes client needs and expert qualifications to create perfect connections, optimizing for successful consultations and long-term relationships.</p>
+            </div>
+
+            <!-- AI Visual Representation -->
+            <div class="ai-visual">
+                <div class="node expert">
+                    <i class="fas fa-user-tie"></i>
+                </div>
+                <div class="connection expert-ai">
+                    <div class="pulse"></div>
+                </div>
+                <div class="node ai">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <div class="connection ai-client">
+                    <div class="pulse"></div>
+                </div>
+                <div class="node client">
+                    <i class="fas fa-user"></i>
+                </div>
+            </div>
+
+            <!-- Matching Factors -->
+            <div class="card">
+                <div class="card-header">
+                    Key Matching Factors
+                </div>
+                <div class="card-body">
+                    <p>Our AI system considers numerous factors to ensure optimal matches between clients and experts. Here are the primary factors that influence matching:</p>
+
+                    <div class="factors">
+                        <div class="factor-card">
+                            <div class="factor-icon">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <div class="factor-title">Expertise Alignment</div>
+                            <div class="factor-desc">The AI analyzes the specific areas of expertise, specializations, and skill levels to match client needs with the most qualified experts.</div>
+                        </div>
+
+                        <div class="factor-card">
+                            <div class="factor-icon">
+                                <i class="fas fa-comments"></i>
+                            </div>
+                            <div class="factor-title">Communication Style</div>
+                            <div class="factor-desc">Based on past interactions, the system matches clients with experts whose communication style aligns with their preferences.</div>
+                        </div>
+
+                        <div class="factor-card">
+                            <div class="factor-icon">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="factor-title">Satisfaction Patterns</div>
+                            <div class="factor-desc">Using feedback and ratings from previous consultations to identify patterns in which types of clients are most satisfied with which experts.</div>
+                        </div>
+
+                        <div class="factor-card">
+                            <div class="factor-icon">
+                                <i class="fas fa-calendar-check"></i>
+                            </div>
+                            <div class="factor-title">Availability Match</div>
+                            <div class="factor-desc">The system considers client urgency and expert availability to ensure timely consultations without long waiting times.</div>
+                        </div>
+
+                        <div class="factor-card">
+                            <div class="factor-icon">
+                                <i class="fas fa-money-bill-wave"></i>
+                            </div>
+                            <div class="factor-title">Budget Compatibility</div>
+                            <div class="factor-desc">Clients are matched with experts whose pricing aligns with their budget expectations to increase booking probability.</div>
+                        </div>
+
+                        <div class="factor-card">
+                            <div class="factor-icon">
+                                <i class="fas fa-language"></i>
+                            </div>
+                            <div class="factor-title">Language & Culture</div>
+                            <div class="factor-desc">Considers language proficiency and cultural background to facilitate comfortable and effective communication.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Example Matches -->
+            <div class="card">
+                <div class="card-header">
+                    Example Client Matches
+                </div>
+                <div class="card-body">
+                    <p>Here are some recent examples of how our AI successfully matched clients with experts:</p>
+
+                    <div class="match-samples">
+                        <!-- Example 1 -->
+                        <div class="match-example">
+                            <div class="client-query">
+                                <h3><i class="fas fa-user-circle"></i> Client Request</h3>
+                                <p>"I need a nutritionist who specializes in plant-based diets for athletes. I'm training for a marathon and want to improve my recovery time."</p>
+                            </div>
+                            <div class="matches">
+                                <div class="match">
+                                    <div class="match-rank">1</div>
+                                    <div class="match-details">
+                                        <div class="match-name">Dr. Sarah Johnson</div>
+                                        <div class="match-meta">
+                                            <div><i class="fas fa-star"></i> 4.9 (87 reviews)</div>
+                                            <div><i class="fas fa-clock"></i> Response in ~2 hours</div>
+                                            <div><i class="fas fa-check-circle"></i> Verified Expert</div>
+                                        </div>
+                                        <div class="match-confidence confidence-high">98% Match</div>
+                                        <div class="match-reason">
+                                            <strong>AI Reasoning:</strong> Dr. Johnson specializes in sports nutrition with a focus on plant-based diets. She has worked with 12 marathon runners in the past 6 months with a 100% satisfaction rate.
+                                        </div>
+                                    </div>
+                                    <div class="match-actions">
+                                        <button class="btn btn-sm">View Profile</button>
+                                    </div>
+                                </div>
+
+                                <div class="match">
+                                    <div class="match-rank">2</div>
+                                    <div class="match-details">
+                                        <div class="match-name">Michael Chen, MS</div>
+                                        <div class="match-meta">
+                                            <div><i class="fas fa-star"></i> 4.7 (52 reviews)</div>
+                                            <div><i class="fas fa-clock"></i> Response in ~6 hours</div>
+                                            <div><i class="fas fa-check-circle"></i> Verified Expert</div>
+                                        </div>
+                                        <div class="match-confidence confidence-medium">85% Match</div>
+                                        <div class="match-reason">
+                                            <strong>AI Reasoning:</strong> Michael specializes in endurance sports nutrition. While he has experience with plant-based diets, it's not his primary focus, but his clients report excellent recovery results.
+                                        </div>
+                                    </div>
+                                    <div class="match-actions">
+                                        <button class="btn btn-sm">View Profile</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Example 2 -->
+                        <div class="match-example">
+                            <div class="client-query">
+                                <h3><i class="fas fa-user-circle"></i> Client Request</h3>
+                                <p>"Looking for a financial advisor to help with retirement planning. I'm 15 years from retirement and want to be aggressive but not too risky."</p>
+                            </div>
+                            <div class="matches">
+                                <div class="match">
+                                    <div class="match-rank">1</div>
+                                    <div class="match-details">
+                                        <div class="match-name">Robert Williams, CFP</div>
+                                        <div class="match-meta">
+                                            <div><i class="fas fa-star"></i> 4.8 (124 reviews)</div>
+                                            <div><i class="fas fa-clock"></i> Response in ~1 hour</div>
+                                            <div><i class="fas fa-check-circle"></i> Verified Expert</div>
+                                        </div>
+                                        <div class="match-confidence confidence-high">96% Match</div>
+                                        <div class="match-reason">
+                                            <strong>AI Reasoning:</strong> Robert specializes in mid-career retirement planning with a balanced approach to risk. 92% of his clients in a similar age range report satisfaction with their portfolio growth.
+                                        </div>
+                                    </div>
+                                    <div class="match-actions">
+                                        <button class="btn btn-sm">View Profile</button>
+                                    </div>
+                                </div>
+
+                                <div class="match">
+                                    <div class="match-rank">2</div>
+                                    <div class="match-details">
+                                        <div class="match-name">Lisa Martinez, CFA</div>
+                                        <div class="match-meta">
+                                            <div><i class="fas fa-star"></i> 4.9 (78 reviews)</div>
+                                            <div><i class="fas fa-clock"></i> Response in ~4 hours</div>
+                                            <div><i class="fas fa-check-circle"></i> Verified Expert</div>
+                                        </div>
+                                        <div class="match-confidence confidence-medium">89% Match</div>
+                                        <div class="match-reason">
+                                            <strong>AI Reasoning:</strong> Lisa specializes in aggressive growth strategies. While highly rated, her approach may be slightly more risk-tolerant than the client specified, though her returns are excellent.
+                                        </div>
+                                    </div>
+                                    <div class="match-actions">
+                                        <button class="btn btn-sm">View Profile</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Optimize Your Profile -->
+            <div class="card">
+                <div class="card-header">
+                    Optimize Your Profile for Better Matches
+                </div>
+                <div class="card-body">
+                    <p>Follow these recommendations to improve your visibility in the AI matching system and increase your chances of being matched with ideal clients:</p>
+
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 20px;">
+                        <div>
+                            <h3><i class="fas fa-check-square" style="color: #3498db;"></i> Complete Your Profile</h3>
+                            <p>Profiles with complete information receive 3.5x more client matches. Be sure to fill out all sections including specializations, experience, and credentials.</p>
+
+                            <h3><i class="fas fa-tag" style="color: #3498db;"></i> Use Specific Keywords</h3>
+                            <p>Include specific terms and keywords related to your expertise. Our AI analyzes client queries and matches them to relevant expert profiles.</p>
+                        </div>
+
+                        <div>
+                            <h3><i class="fas fa-clock" style="color: #3498db;"></i> Keep Availability Updated</h3>
+                            <p>Experts with up-to-date availability calendars are 2.8x more likely to be matched with clients seeking immediate consultations.</p>
+
+                            <h3><i class="fas fa-comment" style="color: #3498db;"></i> Respond Quickly</h3>
+                            <p>Experts with faster response times receive priority in matching. Our data shows that experts who respond within 2 hours have a 78% higher booking rate.</p>
+                        </div>
+                    </div>
+
+                    <div style="text-align: center; margin-top: 30px;">
+                        <a href="expert-dashboard.html" class="btn btn-success">Update Your Profile Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/expert-matching.js"></script>
+</body>
+</html>

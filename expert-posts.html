@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expert Posts | Expert Marketplace</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="expert-posts.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <div class="logo">
+                <img src="/uploads/default-avatar.png" alt="Logo">
+                <span>Expert Marketplace</span>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="experts.html">Find Experts</a></li>
+                    <li><a href="categories.html">Categories</a></li>
+                    <li><a href="how-it-works.html">How It Works</a></li>
+                    <li><a href="expert-posts.html" class="active">Expert Posts</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <a href="login.html" class="btn btn-outline">Login</a>
+                <a href="signup.html" class="btn btn-primary">Sign Up</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-section">
+            <div class="container">
+                <h1>Expert Insights</h1>
+                <p class="hero-subtitle">Discover valuable tips, case studies, and knowledge from our top experts</p>
+                <div class="search-container">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search posts by topic, expert name, or keyword...">
+                        <button class="btn btn-primary">Search</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="filter-section">
+            <div class="container">
+                <div class="filter-tabs">
+                    <button class="filter-tab active" data-filter="all">All Topics</button>
+                    <button class="filter-tab" data-filter="business">Business</button>
+                    <button class="filter-tab" data-filter="technology">Technology</button>
+                    <button class="filter-tab" data-filter="health">Health</button>
+                    <button class="filter-tab" data-filter="creative">Creative</button>
+                    <button class="filter-tab" data-filter="legal">Legal</button>
+                    <button class="filter-tab" data-filter="finance">Finance</button>
+                    <button class="filter-tab" data-filter="lifestyle">Lifestyle</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="trending-posts-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Trending Posts</h2>
+                    <p>The most popular expert insights this week</p>
+                </div>
+
+                <div class="trending-grid">
+                    <!-- Trending Post 1 -->
+                    <div class="trending-post">
+                        <div class="trending-post-image">
+                            <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4" alt="AI in Business">
+                            <div class="trending-badge">
+                                <i class="fas fa-fire"></i> Trending
+                            </div>
+                        </div>
+                        <div class="trending-post-content">
+                            <h3 class="post-title">The Future of AI in Business: 5 Trends to Watch</h3>
+                            <div class="post-meta">
+                                <div class="post-author">
+                                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a" alt="Dr. James Wilson" class="author-avatar">
+                                    <div class="author-info">
+                                        <div class="author-name">Dr. James Wilson</div>
+                                        <div class="author-title">AI & Machine Learning Expert</div>
+                                    </div>
+                                </div>
+                                <div class="post-stats">
+                                    <span><i class="far fa-eye"></i> 12.4k</span>
+                                    <span><i class="far fa-comment"></i> 87</span>
+                                    <span><i class="far fa-calendar-alt"></i> 3 days ago</span>
+                                </div>
+                            </div>
+                            <p class="post-excerpt">
+                                Exploring emerging AI technologies that are set to transform how businesses operate in the next decade, from autonomous decision systems to ethical AI frameworks...
+                            </p>
+                            <div class="post-tags">
+                                <a href="#" class="post-tag">AI</a>
+                                <a href="#" class="post-tag">Business Strategy</a>
+                                <a href="#" class="post-tag">Future Trends</a>
+                            </div>
+                            <div class="post-footer">
+                                <a href="#" class="read-more-link">Read Full Post</a>
+                                <a href="#" class="book-now-link">Book Expert</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Trending Post 2 -->
+                    <div class="trending-post">
+                        <div class="trending-post-image">
+                            <img src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e" alt="Digital Marketing">
+                            <div class="trending-badge">
+                                <i class="fas fa-fire"></i> Trending
+                            </div>
+                        </div>
+                        <div class="trending-post-content">
+                            <h3 class="post-title">Why Your Social Media Strategy Isn't Working (And How to Fix It)</h3>
+                            <div class="post-meta">
+                                <div class="post-author">
+                                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2" alt="Emma Thompson" class="author-avatar">
+                                    <div class="author-info">
+                                        <div class="author-name">Emma Thompson</div>
+                                        <div class="author-title">Digital Marketing Strategist</div>
+                                    </div>
+                                </div>
+                                <div class="post-stats">
+                                    <span><i class="far fa-eye"></i> 9.2k</span>
+                                    <span><i class="far fa-comment"></i> 54</span>
+                                    <span><i class="far fa-calendar-alt"></i> 5 days ago</span>
+                                </div>
+                            </div>
+                            <p class="post-excerpt">
+                                Most businesses are getting social media all wrong. In this post, I break down the three most common mistakes I see and provide actionable solutions...
+                            </p>
+                            <div class="post-tags">
+                                <a href="#" class="post-tag">Social Media</a>
+                                <a href="#" class="post-tag">Marketing</a>
+                                <a href="#" class="post-tag">Strategy</a>
+                            </div>
+                            <div class="post-footer">
+                                <a href="#" class="read-more-link">Read Full Post</a>
+                                <a href="#" class="book-now-link">Book Expert</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="recent-posts-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Recent Posts</h2>
+                    <p>Fresh insights from our community of experts</p>
+                </div>
+
+                <div class="posts-grid">
+                    <!-- Post 1 -->
+                    <div class="post-card">
+                        <div class="post-header">
+                            <div class="post-author">
+                                <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956" alt="Maria Rodriguez" class="author-avatar">
+                                <div class="author-info">
+                                    <div class="author-name">Maria Rodriguez</div>
+                                    <div class="author-title">UX/UI Design Specialist</div>
+                                </div>
+                            </div>
+                            <div class="post-date">
+                                <i class="far fa-calendar-alt"></i> Yesterday
+                            </div>
+                        </div>
+                        <div class="post-image">
+                            <img src="https://images.unsplash.com/photo-1586717791821-3f44a563fa4c" alt="UX Design">
+                        </div>
+                        <div class="post-content">
+                            <h3 class="post-title">5 UX Mistakes That Are Costing You Conversions</h3>
+                            <p class="post-excerpt">
+                                Simple design fixes that can dramatically increase your website's conversion rate and keep users engaged longer...
+                            </p>
+                            <div class="post-tags">
+                                <a href="#" class="post-tag">UX Design</a>
+                                <a href="#" class="post-tag">Conversion</a>
+                            </div>
+                        </div>
+                        <div class="post-footer">
+                            <div class="post-stats">
+                                <span><i class="far fa-eye"></i> 3.7k</span>
+                                <span><i class="far fa-comment"></i> 24</span>
+                                <span><i class="far fa-heart"></i> 127</span>
+                            </div>
+                            <div class="post-actions">
+                                <a href="#" class="read-more-link">Read More</a>
+                                <a href="#" class="book-now-link">Book Expert</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Post 2 -->
+                    <div class="post-card">
+                        <div class="post-header">
+                            <div class="post-author">
+                                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330" alt="Dr. Lisa Chen" class="author-avatar">
+                                <div class="author-info">
+                                    <div class="author-name">Dr. Lisa Chen</div>
+                                    <div class="author-title">Health & Wellness Coach</div>
+                                </div>
+                            </div>
+                            <div class="post-date">
+                                <i class="far fa-calendar-alt"></i> 2 days ago
+                            </div>
+                        </div>
+                        <div class="post-image">
+                            <img src="https://images.unsplash.com/photo-1498837167922-ddd27525d352" alt="Nutrition">
+                        </div>
+                        <div class="post-content">
+                            <h3 class="post-title">The Science-Backed Approach to Sustainable Weight Management</h3>
+                            <p class="post-excerpt">
+                                Forget fad diets. Here's what scientific research actually tells us about maintaining a healthy weight long-term...
+                            </p>
+                            <div class="post-tags">
+                                <a href="#" class="post-tag">Nutrition</a>
+                                <a href="#" class="post-tag">Health</a>
+                                <a href="#" class="post-tag">Weight Management</a>
+                            </div>
+                        </div>
+                        <div class="post-footer">
+                            <div class="post-stats">
+                                <span><i class="far fa-eye"></i> 5.2k</span>
+                                <span><i class="far fa-comment"></i> 41</span>
+                                <span><i class="far fa-heart"></i> 214</span>
+                            </div>
+                            <div class="post-actions">
+                                <a href="#" class="read-more-link">Read More</a>
+                                <a href="#" class="book-now-link">Book Expert</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Post 3 -->
+                    <div class="post-card">
+                        <div class="post-header">
+                            <div class="post-author">
+                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d" alt="Michael Torres" class="author-avatar">
+                                <div class="author-info">
+                                    <div class="author-name">Michael Torres</div>
+                                    <div class="author-title">Startup Advisor</div>
+                                </div>
+                            </div>
+                            <div class="post-date">
+                                <i class="far fa-calendar-alt"></i> 3 days ago
+                            </div>
+                        </div>
+                        <div class="post-image">
+                            <img src="https://images.unsplash.com/photo-1559136555-9303baea8ebd" alt="Startup Funding">
+                        </div>
+                        <div class="post-content">
+                            <h3 class="post-title">How We Raised $2.5M with a Non-Traditional Pitch Deck</h3>
+                            <p class="post-excerpt">
+                                The unconventional approach that helped my client secure seed funding in a challenging market environment...
+                            </p>
+                            <div class="post-tags">
+                                <a href="#" class="post-tag">Fundraising</a>
+                                <a href="#" class="post-tag">Startup</a>
+                                <a href="#" class="post-tag">Pitch</a>
+                            </div>
+                        </div>
+                        <div class="post-footer">
+                            <div class="post-stats">
+                                <span><i class="far fa-eye"></i> 8.9k</span>
+                                <span><i class="far fa-comment"></i> 37</span>
+                                <span><i class="far fa-heart"></i> 192</span>
+                            </div>
+                            <div class="post-actions">
+                                <a href="#" class="read-more-link">Read More</a>
+                                <a href="#" class="book-now-link">Book Expert</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Post 4 -->
+                    <div class="post-card">
+                        <div class="post-header">
+                            <div class="post-author">
+                                <img src="https://images.unsplash.com/photo-1607990281513-2c110a25bd8c" alt="Robert Kim" class="author-avatar">
+                                <div class="author-info">
+                                    <div class="author-name">Robert Kim</div>
+                                    <div class="author-title">Legal Consultant</div>
+                                </div>
+                            </div>
+                            <div class="post-date">
+                                <i class="far fa-calendar-alt"></i> 4 days ago
+                            </div>
+                        </div>
+                        <div class="post-content">
+                            <h3 class="post-title">The 3 Legal Documents Every Small Business Owner Needs</h3>
+                            <p class="post-excerpt">
+                                Protect your business with these essential legal agreements. I explain what they cover and why they matter...
+                            </p>
+                            <div class="post-tags">
+                                <a href="#" class="post-tag">Legal</a>
+                                <a href="#" class="post-tag">Small Business</a>
+                                <a href="#" class="post-tag">Contracts</a>
+                            </div>
+                        </div>
+                        <div class="post-footer">
+                            <div class="post-stats">
+                                <span><i class="far fa-eye"></i> 4.3k</span>
+                                <span><i class="far fa-comment"></i> 19</span>
+                                <span><i class="far fa-heart"></i> 95</span>
+                            </div>
+                            <div class="post-actions">
+                                <a href="#" class="read-more-link">Read More</a>
+                                <a href="#" class="book-now-link">Book Expert</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Post 5 -->
+                    <div class="post-card">
+                        <div class="post-header">
+                            <div class="post-author">
+                                <img src="https://images.unsplash.com/photo-1531891437562-4301cf35b7e4" alt="David Chen" class="author-avatar">
+                                <div class="author-info">
+                                    <div class="author-name">David Chen</div>
+                                    <div class="author-title">Product Management Consultant</div>
+                                </div>
+                            </div>
+                            <div class="post-date">
+                                <i class="far fa-calendar-alt"></i> 5 days ago
+                            </div>
+                        </div>
+                        <div class="post-image">
+                            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978" alt="Product Management">
+                        </div>
+                        <div class="post-content">
+                            <h3 class="post-title">Product-Market Fit: How to Know When You've Found It</h3>
+                            <p class="post-excerpt">
+                                The quantitative and qualitative signals that indicate you've reached product-market fit, based on my experience with 50+ products...
+                            </p>
+                            <div class="post-tags">
+                                <a href="#" class="post-tag">Product Management</a>
+                                <a href="#" class="post-tag">Startup</a>
+                            </div>
+                        </div>
+                        <div class="post-footer">
+                            <div class="post-stats">
+                                <span><i class="far fa-eye"></i> 6.1k</span>
+                                <span><i class="far fa-comment"></i> 28</span>
+                                <span><i class="far fa-heart"></i> 143</span>
+                            </div>
+                            <div class="post-actions">
+                                <a href="#" class="read-more-link">Read More</a>
+                                <a href="#" class="book-now-link">Book Expert</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Post 6 -->
+                    <div class="post-card">
+                        <div class="post-header">
+                            <div class="post-author">
+                                <img src="https://images.unsplash.com/photo-1558203728-00f45181dd84" alt="Sarah Johnson" class="author-avatar">
+                                <div class="author-info">
+                                    <div class="author-name">Sarah Johnson</div>
+                                    <div class="author-title">Financial Advisor</div>
+                                </div>
+                            </div>
+                            <div class="post-date">
+                                <i class="far fa-calendar-alt"></i> 6 days ago
+                            </div>
+                        </div>
+                        <div class="post-content">
+                            <h3 class="post-title">Passive Income Streams That Actually Work in 2023</h3>
+                            <p class="post-excerpt">
+                                Beyond the usual advice, here are 5 realistic ways to build passive income that my clients have successfully implemented...
+                            </p>
+                            <div class="post-tags">
+                                <a href="#" class="post-tag">Finance</a>
+                                <a href="#" class="post-tag">Passive Income</a>
+                                <a href="#" class="post-tag">Investment</a>
+                            </div>
+                        </div>
+                        <div class="post-footer">
+                            <div class="post-stats">
+                                <span><i class="far fa-eye"></i> 10.2k</span>
+                                <span><i class="far fa-comment"></i> 59</span>
+                                <span><i class="far fa-heart"></i> 247</span>
+                            </div>
+                            <div class="post-actions">
+                                <a href="#" class="read-more-link">Read More</a>
+                                <a href="#" class="book-now-link">Book Expert</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pagination">
+                    <button class="pagination-arrow prev disabled">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="pagination-number active">1</button>
+                    <button class="pagination-number">2</button>
+                    <button class="pagination-number">3</button>
+                    <button class="pagination-number">4</button>
+                    <button class="pagination-dots">...</button>
+                    <button class="pagination-number">10</button>
+                    <button class="pagination-arrow next">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="newsletter-section">
+            <div class="container">
+                <div class="newsletter-box">
+                    <div class="newsletter-content">
+                        <h2>Get Expert Insights Delivered</h2>
+                        <p>Subscribe to receive the best posts from our experts directly in your inbox.</p>
+                        <form class="newsletter-form">
+                            <input type="email" placeholder="Your email address">
+                            <button type="submit" class="btn btn-primary">Subscribe</button>
+                        </form>
+                        <div class="newsletter-disclaimer">
+                            We respect your privacy. Unsubscribe at any time.
+                        </div>
+                    </div>
+                    <div class="newsletter-image">
+                        <img src="https://images.unsplash.com/photo-1616469829581-cf6a5182ef18" alt="Newsletter">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-columns">
+                <div class="footer-column">
+                    <h3>Expert Marketplace</h3>
+                    <p>Connect with top professionals in various fields for personalized 1-on-1 consultations.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Find an Expert</a></li>
+                        <li><a href="#">Become an Expert</a></li>
+                        <li><a href="#">How It Works</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Categories</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Technology</a></li>
+                        <li><a href="#">Business</a></li>
+                        <li><a href="#">Health</a></li>
+                        <li><a href="#">Creative</a></li>
+                        <li><a href="#">Legal</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Trust & Safety</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2023 Expert Marketplace. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="scripts.js"></script>
+</body>
+</html>

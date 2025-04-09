@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expert Registration - Service Marketplace</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fb;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        .register-container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            width: 90%;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 40px;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo img {
+            width: 80px;
+            height: 80px;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .form-section {
+            margin-bottom: 30px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+        }
+
+        .form-section:last-child {
+            border-bottom: none;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #555;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #e1e1e1;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+            background-color: #fff;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .file-upload {
+            position: relative;
+            overflow: hidden;
+            margin-top: 10px;
+            display: inline-block;
+        }
+
+        .file-upload input[type=file] {
+            position: absolute;
+            top: 0;
+            right: 0;
+            min-width: 100%;
+            min-height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .upload-btn {
+            display: inline-block;
+            background-color: #f1f5f9;
+            color: #475569;
+            border: 1px dashed #cbd5e1;
+            border-radius: 5px;
+            padding: 10px 15px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .upload-btn:hover {
+            background-color: #e2e8f0;
+        }
+
+        .file-list {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        .file-item {
+            background-color: #f1f5f9;
+            border-radius: 4px;
+            padding: 5px 10px;
+            margin-bottom: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .file-item .file-name {
+            max-width: 70%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .remove-file {
+            color: #ef4444;
+            cursor: pointer;
+        }
+
+        .availability-container {
+            max-height: 200px;
+            overflow-y: auto;
+            border: 1px solid #e1e1e1;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .availability-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .availability-row:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .availability-day {
+            width: 30%;
+            padding-right: 10px;
+        }
+
+        .availability-times {
+            width: 65%;
+            display: flex;
+            align-items: center;
+        }
+
+        .availability-times input {
+            width: 45%;
+        }
+
+        .availability-times span {
+            margin: 0 10px;
+        }
+
+        .availability-actions {
+            width: 5%;
+            text-align: right;
+        }
+
+        .remove-time {
+            color: #ef4444;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-size: 16px;
+        }
+
+        .add-time-btn {
+            background-color: #f1f5f9;
+            color: #475569;
+            border: 1px solid #cbd5e1;
+            border-radius: 5px;
+            padding: 8px 15px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .add-time-btn:hover {
+            background-color: #e2e8f0;
+        }
+
+        .consultation-types {
+            margin-bottom: 20px;
+        }
+
+        .consultation-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .consultation-row:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .consultation-duration, .consultation-price {
+            width: 25%;
+            padding-right: 10px;
+        }
+
+        .consultation-description {
+            width: 45%;
+        }
+
+        .consultation-actions {
+            width: 5%;
+            text-align: right;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 30px;
+        }
+
+        button {
+            background-color: #667eea;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 12px 15px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #5a70d8;
+        }
+
+        .back-link {
+            font-size: 14px;
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .error-message {
+            background-color: #ffebee;
+            color: #d32f2f;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            display: none;
+        }
+
+        .info-message {
+            background-color: #e3f2fd;
+            color: #1976d2;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .register-container {
+                width: 95%;
+                padding: 20px;
+                margin: 20px auto;
+            }
+
+            .availability-day, .availability-times {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            .availability-row {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .consultation-duration, .consultation-price, .consultation-description {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            .consultation-row {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        <div class="logo">
+            <img src="/uploads/default-avatar.png" alt="Logo">
+        </div>
+        <h1>Expert Registration</h1>
+        <p class="subtitle">Join our marketplace of professionals and grow your client base</p>
+
+        <div id="register-error" class="error-message"></div>
+        <div class="info-message">
+            <strong>Note:</strong> All applications are reviewed by our team. You will be notified once your account has been verified.
+        </div>
+
+        <form id="expert-register-form" enctype="multipart/form-data">
+            <!-- Personal Information -->
+            <div class="form-section">
+                <h2 class="section-title">Personal Information</h2>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="name">Full Name *</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password *</label>
+                        <input type="password" id="password" name="password" required minlength="8">
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm-password">Confirm Password *</label>
+                        <input type="password" id="confirm-password" name="confirmPassword" required minlength="8">
+                    </div>
+                    <div class="form-group">
+                        <label for="profile-picture">Profile Picture</label>
+                        <div class="file-upload">
+                            <div class="upload-btn">
+                                <i class="fas fa-upload"></i> Upload Profile Picture
+                            </div>
+                            <input type="file" id="profile-picture" name="profilePicture" accept="image/*">
+                        </div>
+                        <div id="profile-picture-name" class="file-name"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Professional Information -->
+            <div class="form-section">
+                <h2 class="section-title">Professional Information</h2>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="category">Category *</label>
+                        <select id="category" name="category" required>
+                            <option value="">Select a category</option>
+                            <option value="Nutrition">Nutrition</option>
+                            <option value="Legal">Legal</option>
+                            <option value="Financial">Financial</option>
+                            <option value="Medical">Medical</option>
+                            <option value="Technical">Technical</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="specialization">Specialization *</label>
+                        <input type="text" id="specialization" name="specialization" required placeholder="e.g., Tax Law, Pediatrics, Web Development">
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="bio">Professional Bio *</label>
+                        <textarea id="bio" name="bio" required placeholder="Describe your professional background, expertise, and approach to consulting."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="years-experience">Years of Experience *</label>
+                        <input type="number" id="years-experience" name="yearsOfExperience" min="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="languages">Languages Spoken *</label>
+                        <input type="text" id="languages" name="languages" required placeholder="e.g., English, Spanish, French">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Credentials -->
+            <div class="form-section">
+                <h2 class="section-title">Credentials & Verification</h2>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="degree">Highest Degree/Certification *</label>
+                        <input type="text" id="degree" name="degree" required placeholder="e.g., MD, JD, PhD, MBA">
+                    </div>
+                    <div class="form-group">
+                        <label for="institution">Institution *</label>
+                        <input type="text" id="institution" name="institution" required placeholder="e.g., Harvard University, Stanford">
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="certifications">Other Certifications (comma separated)</label>
+                        <input type="text" id="certifications" name="certifications" placeholder="e.g., CPA, PMP, RD">
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="document-uploads">Credential Documents * (Max 5 documents)</label>
+                        <p style="font-size: 12px; color: #666; margin-bottom: 10px;">
+                            Please upload credentials, licenses, or certifications that verify your expertise.
+                        </p>
+                        <div class="file-upload">
+                            <div class="upload-btn">
+                                <i class="fas fa-upload"></i> Upload Documents
+                            </div>
+                            <input type="file" id="document-uploads" name="documentUploads" multiple accept=".pdf,.jpg,.jpeg,.png">
+                        </div>
+                        <div id="document-list" class="file-list"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Availability & Consultation Types -->
+            <div class="form-section">
+                <h2 class="section-title">Availability & Consultation Types</h2>
+
+                <div class="form-group">
+                    <label>Your Weekly Availability *</label>
+                    <div id="availability-container" class="availability-container">
+                        <!-- Will be populated with JavaScript -->
+                    </div>
+                    <button type="button" id="add-availability" class="add-time-btn">
+                        <i class="fas fa-plus"></i> Add Availability Slot
+                    </button>
+                </div>
+
+                <div class="form-group" style="margin-top: 20px;">
+                    <label>Consultation Types & Pricing *</label>
+                    <div id="consultation-container" class="consultation-types">
+                        <!-- Will be populated with JavaScript -->
+                    </div>
+                    <button type="button" id="add-consultation" class="add-time-btn">
+                        <i class="fas fa-plus"></i> Add Consultation Type
+                    </button>
+                </div>
+            </div>
+
+            <!-- Social Profiles -->
+            <div class="form-section">
+                <h2 class="section-title">Social Profiles (Optional)</h2>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="linkedin">LinkedIn Profile</label>
+                        <input type="url" id="linkedin" name="linkedin" placeholder="https://linkedin.com/in/your-profile">
+                    </div>
+                    <div class="form-group">
+                        <label for="twitter">Twitter Profile</label>
+                        <input type="url" id="twitter" name="twitter" placeholder="https://twitter.com/your-handle">
+                    </div>
+                    <div class="form-group">
+                        <label for="website">Personal/Professional Website</label>
+                        <input type="url" id="website" name="website" placeholder="https://your-website.com">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h2 class="section-title">Terms & Conditions</h2>
+                <div class="form-group">
+                    <div style="margin-bottom: 15px;">
+                        <input type="checkbox" id="terms" name="terms" required>
+                        <label for="terms" style="display: inline-block; margin-left: 10px;">
+                            I agree to the <a href="#" style="color: #667eea;">Terms of Service</a> and <a href="#" style="color: #667eea;">Privacy Policy</a>
+                        </label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="verification" name="verification" required>
+                        <label for="verification" style="display: inline-block; margin-left: 10px;">
+                            I understand that my application requires verification before I can offer services, and I certify that all provided information is accurate.
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="button-container">
+                <a href="/expert-login.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Login</a>
+                <button type="submit">Submit Application</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="js/expert-register.js"></script>
+</body>
+</html>

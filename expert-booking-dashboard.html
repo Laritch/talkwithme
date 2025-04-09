@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expert Booking Dashboard | Expert Marketplace</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="expert-booking-dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <div class="logo">
+                <img src="/uploads/default-avatar.png" alt="Logo">
+                <span>Expert Marketplace</span>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="expert-profile.html">My Profile</a></li>
+                    <li><a href="expert-case-studies-manage.html">Case Studies</a></li>
+                    <li><a href="expert-booking-dashboard.html" class="active">Bookings</a></li>
+                    <li><a href="expert-analytics.html">Analytics</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <div class="user-menu">
+                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a" alt="Expert" class="user-avatar">
+                    <div class="user-dropdown">
+                        <a href="expert-profile.html">My Profile</a>
+                        <a href="expert-settings.html">Settings</a>
+                        <a href="login.html">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="dashboard-header">
+            <h1>Booking Management</h1>
+            <p class="dashboard-subtitle">Manage your client bookings and availability in one place</p>
+
+            <div class="dashboard-actions">
+                <button class="btn btn-primary" id="sync-calendar-btn">
+                    <i class="fas fa-sync-alt"></i> Sync with Calendar
+                </button>
+                <div class="dropdown">
+                    <button class="btn btn-outline dropdown-toggle">
+                        <i class="fas fa-cog"></i> Settings
+                    </button>
+                    <div class="dropdown-menu">
+                        <a href="#" id="edit-availability">Edit Availability</a>
+                        <a href="#" id="manage-services">Manage Service Offerings</a>
+                        <a href="#" id="notification-settings">Notification Settings</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-tabs">
+            <button class="tab-btn active" data-tab="upcoming">Upcoming (12)</button>
+            <button class="tab-btn" data-tab="pending">Pending Approval (3)</button>
+            <button class="tab-btn" data-tab="past">Past Sessions</button>
+            <button class="tab-btn" data-tab="availability">Availability</button>
+            <button class="tab-btn" data-tab="services">Services</button>
+        </div>
+
+        <div class="dashboard-content">
+            <!-- Upcoming Bookings Tab Content -->
+            <div class="tab-content active" id="upcoming-tab">
+                <div class="booking-filters">
+                    <div class="search-box">
+                        <input type="text" placeholder="Search bookings...">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="filter-options">
+                        <select class="filter-select">
+                            <option value="all">All Services</option>
+                            <option value="discovery-call">Discovery Call</option>
+                            <option value="strategy-session">Strategy Session</option>
+                            <option value="growth-package">Growth Package</option>
+                        </select>
+                        <select class="filter-select">
+                            <option value="all">All Time</option>
+                            <option value="today">Today</option>
+                            <option value="tomorrow">Tomorrow</option>
+                            <option value="this-week">This Week</option>
+                            <option value="next-week">Next Week</option>
+                            <option value="this-month">This Month</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="bookings-list">
+                    <!-- Today's Bookings -->
+                    <div class="booking-date-group">
+                        <h3 class="date-label">Today, April 3, 2025</h3>
+
+                        <div class="booking-card">
+                            <div class="booking-time">
+                                <div class="time">9:00 AM</div>
+                                <div class="duration">30 min</div>
+                            </div>
+                            <div class="booking-details">
+                                <div class="client-info">
+                                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80" alt="Client" class="client-avatar">
+                                    <div>
+                                        <h4>Sarah Johnson</h4>
+                                        <p>Discovery Call</p>
+                                    </div>
+                                </div>
+                                <div class="booking-meta">
+                                    <span class="meta-item"><i class="fas fa-clipboard-list"></i> Case Study: Retail Growth Strategy</span>
+                                    <span class="meta-item"><i class="fas fa-clock"></i> Booked 2 days ago</span>
+                                </div>
+                                <div class="booking-topic">
+                                    <strong>Topic:</strong> Interested in discussing how to implement growth strategies for her e-commerce store
+                                </div>
+                            </div>
+                            <div class="booking-actions">
+                                <button class="btn btn-sm btn-outline join-btn"><i class="fas fa-video"></i> Join</button>
+                                <button class="btn btn-sm btn-outline reschedule-btn"><i class="fas fa-calendar-alt"></i></button>
+                                <button class="btn btn-sm btn-outline message-btn"><i class="fas fa-comment"></i></button>
+                                <button class="btn btn-sm btn-outline more-btn"><i class="fas fa-ellipsis-v"></i></button>
+                            </div>
+                        </div>
+
+                        <div class="booking-card">
+                            <div class="booking-time">
+                                <div class="time">2:30 PM</div>
+                                <div class="duration">60 min</div>
+                            </div>
+                            <div class="booking-details">
+                                <div class="client-info">
+                                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d" alt="Client" class="client-avatar">
+                                    <div>
+                                        <h4>Michael Brown</h4>
+                                        <p>Strategy Session</p>
+                                    </div>
+                                </div>
+                                <div class="booking-meta">
+                                    <span class="meta-item"><i class="fas fa-clipboard-list"></i> Case Study: B2B Sales Acceleration</span>
+                                    <span class="meta-item"><i class="fas fa-clock"></i> Booked 1 week ago</span>
+                                </div>
+                                <div class="booking-topic">
+                                    <strong>Topic:</strong> Follow-up session to refine marketing funnel and discuss quarterly targets
+                                </div>
+                            </div>
+                            <div class="booking-actions">
+                                <button class="btn btn-sm btn-outline join-btn"><i class="fas fa-video"></i> Join</button>
+                                <button class="btn btn-sm btn-outline reschedule-btn"><i class="fas fa-calendar-alt"></i></button>
+                                <button class="btn btn-sm btn-outline message-btn"><i class="fas fa-comment"></i></button>
+                                <button class="btn btn-sm btn-outline more-btn"><i class="fas fa-ellipsis-v"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tomorrow's Bookings -->
+                    <div class="booking-date-group">
+                        <h3 class="date-label">Tomorrow, April 4, 2025</h3>
+
+                        <div class="booking-card">
+                            <div class="booking-time">
+                                <div class="time">11:00 AM</div>
+                                <div class="duration">30 min</div>
+                            </div>
+                            <div class="booking-details">
+                                <div class="client-info">
+                                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330" alt="Client" class="client-avatar">
+                                    <div>
+                                        <h4>Emily Davis</h4>
+                                        <p>Discovery Call</p>
+                                    </div>
+                                </div>
+                                <div class="booking-meta">
+                                    <span class="meta-item"><i class="fas fa-clipboard-list"></i> Case Study: SaaS Customer Retention</span>
+                                    <span class="meta-item"><i class="fas fa-clock"></i> Booked 3 days ago</span>
+                                </div>
+                                <div class="booking-topic">
+                                    <strong>Topic:</strong> Wants to discuss improving customer retention rates for her software company
+                                </div>
+                            </div>
+                            <div class="booking-actions">
+                                <button class="btn btn-sm btn-outline reschedule-btn"><i class="fas fa-calendar-alt"></i></button>
+                                <button class="btn btn-sm btn-outline message-btn"><i class="fas fa-comment"></i></button>
+                                <button class="btn btn-sm btn-outline more-btn"><i class="fas fa-ellipsis-v"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Later Bookings -->
+                    <div class="booking-date-group">
+                        <h3 class="date-label">Monday, April 7, 2025</h3>
+
+                        <div class="booking-card">
+                            <div class="booking-time">
+                                <div class="time">10:00 AM</div>
+                                <div class="duration">90 min</div>
+                            </div>
+                            <div class="booking-details">
+                                <div class="client-info">
+                                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e" alt="Client" class="client-avatar">
+                                    <div>
+                                        <h4>David Wilson</h4>
+                                        <p>Growth Package (Session 1 of 4)</p>
+                                    </div>
+                                </div>
+                                <div class="booking-meta">
+                                    <span class="meta-item"><i class="fas fa-clipboard-list"></i> Case Study: Startup Scaling Blueprint</span>
+                                    <span class="meta-item"><i class="fas fa-clock"></i> Booked 5 days ago</span>
+                                </div>
+                                <div class="booking-topic">
+                                    <strong>Topic:</strong> First session to develop comprehensive growth plan for new tech startup
+                                </div>
+                            </div>
+                            <div class="booking-actions">
+                                <button class="btn btn-sm btn-outline reschedule-btn"><i class="fas fa-calendar-alt"></i></button>
+                                <button class="btn btn-sm btn-outline message-btn"><i class="fas fa-comment"></i></button>
+                                <button class="btn btn-sm btn-outline more-btn"><i class="fas fa-ellipsis-v"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="show-more">
+                        <button class="btn btn-text">Show More Bookings <i class="fas fa-chevron-down"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pending Approval Tab Content -->
+            <div class="tab-content" id="pending-tab">
+                <div class="booking-filters">
+                    <div class="search-box">
+                        <input type="text" placeholder="Search pending requests...">
+                        <i class="fas fa-search"></i>
+                    </div>
+                </div>
+
+                <div class="pending-requests">
+                    <div class="pending-card">
+                        <div class="pending-header">
+                            <div class="client-info">
+                                <img src="https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb" alt="Client" class="client-avatar">
+                                <div>
+                                    <h4>Jennifer Adams</h4>
+                                    <span class="pending-label">New Client</span>
+                                </div>
+                            </div>
+                            <div class="request-time">
+                                <i class="far fa-clock"></i> Requested 6 hours ago
+                            </div>
+                        </div>
+                        <div class="pending-details">
+                            <div class="request-service">
+                                <strong>Service:</strong> Strategy Session ($199)
+                            </div>
+                            <div class="request-date">
+                                <strong>Preferred Date:</strong> April 5, 2025
+                            </div>
+                            <div class="request-time-slots">
+                                <strong>Preferred Times:</strong>
+                                <span class="time-slot-option">9:00 AM</span>
+                                <span class="time-slot-option">11:30 AM</span>
+                                <span class="time-slot-option">2:00 PM</span>
+                            </div>
+                            <div class="request-topic">
+                                <strong>Topic:</strong> I need help with my content strategy after reading your case study about the 250% revenue growth. I run a health and wellness blog that I'm trying to monetize more effectively.
+                            </div>
+                            <div class="request-referral">
+                                <strong>Referral:</strong> Found via your "Content Strategy Makeover" case study
+                            </div>
+                        </div>
+                        <div class="pending-actions">
+                            <button class="btn btn-primary">Accept & Schedule</button>
+                            <button class="btn btn-outline">Suggest Alternative</button>
+                            <button class="btn btn-text">Decline</button>
+                        </div>
+                    </div>
+
+                    <div class="pending-card">
+                        <div class="pending-header">
+                            <div class="client-info">
+                                <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d" alt="Client" class="client-avatar">
+                                <div>
+                                    <h4>Robert Chen</h4>
+                                    <span class="pending-label returning-label">Returning Client</span>
+                                </div>
+                            </div>
+                            <div class="request-time">
+                                <i class="far fa-clock"></i> Requested 1 day ago
+                            </div>
+                        </div>
+                        <div class="pending-details">
+                            <div class="request-service">
+                                <strong>Service:</strong> Growth Package ($749)
+                            </div>
+                            <div class="request-date">
+                                <strong>Preferred Start Date:</strong> April 10, 2025
+                            </div>
+                            <div class="request-time-slots">
+                                <strong>Preferred Times:</strong>
+                                <span class="time-slot-option">11:00 AM</span>
+                                <span class="time-slot-option">1:30 PM</span>
+                            </div>
+                            <div class="request-topic">
+                                <strong>Topic:</strong> After our successful strategy session last month, I'd like to move forward with implementing the full growth plan for my e-commerce business.
+                            </div>
+                        </div>
+                        <div class="pending-actions">
+                            <button class="btn btn-primary">Accept & Schedule</button>
+                            <button class="btn btn-outline">Suggest Alternative</button>
+                            <button class="btn btn-text">Decline</button>
+                        </div>
+                    </div>
+
+                    <div class="pending-card">
+                        <div class="pending-header">
+                            <div class="client-info">
+                                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2" alt="Client" class="client-avatar">
+                                <div>
+                                    <h4>Lisa Thompson</h4>
+                                    <span class="pending-label">New Client</span>
+                                </div>
+                            </div>
+                            <div class="request-time">
+                                <i class="far fa-clock"></i> Requested 2 days ago
+                            </div>
+                        </div>
+                        <div class="pending-details">
+                            <div class="request-service">
+                                <strong>Service:</strong> Discovery Call (Free)
+                            </div>
+                            <div class="request-date">
+                                <strong>Preferred Date:</strong> April 6, 2025
+                            </div>
+                            <div class="request-time-slots">
+                                <strong>Preferred Times:</strong>
+                                <span class="time-slot-option">10:00 AM</span>
+                                <span class="time-slot-option">4:30 PM</span>
+                            </div>
+                            <div class="request-topic">
+                                <strong>Topic:</strong> I'm looking to revamp our marketing approach for our small law firm. Your case study on professional services marketing caught my attention.
+                            </div>
+                            <div class="request-referral">
+                                <strong>Referral:</strong> LinkedIn share of your case study
+                            </div>
+                        </div>
+                        <div class="pending-actions">
+                            <button class="btn btn-primary">Accept & Schedule</button>
+                            <button class="btn btn-outline">Suggest Alternative</button>
+                            <button class="btn btn-text">Decline</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Past Sessions Tab Content -->
+            <div class="tab-content" id="past-tab">
+                <div class="booking-filters">
+                    <div class="search-box">
+                        <input type="text" placeholder="Search past sessions...">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="filter-options">
+                        <select class="filter-select">
+                            <option value="all">All Services</option>
+                            <option value="discovery-call">Discovery Call</option>
+                            <option value="strategy-session">Strategy Session</option>
+                            <option value="growth-package">Growth Package</option>
+                        </select>
+                        <select class="filter-select">
+                            <option value="all">All Time</option>
+                            <option value="this-week">This Week</option>
+                            <option value="last-week">Last Week</option>
+                            <option value="this-month">This Month</option>
+                            <option value="last-month">Last Month</option>
+                            <option value="last-3-months">Last 3 Months</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="past-sessions-list">
+                    <!-- Past sessions would be listed here -->
+                    <p class="tab-placeholder">Past sessions content will be loaded here</p>
+                </div>
+            </div>
+
+            <!-- Availability Tab Content -->
+            <div class="tab-content" id="availability-tab">
+                <div class="availability-management">
+                    <!-- Availability management interface would be here -->
+                    <p class="tab-placeholder">Availability management content will be loaded here</p>
+                </div>
+            </div>
+
+            <!-- Services Tab Content -->
+            <div class="tab-content" id="services-tab">
+                <div class="services-management">
+                    <!-- Services management interface would be here -->
+                    <p class="tab-placeholder">Services management content will be loaded here</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>Expert Marketplace</h3>
+                    <p>Connect with top professionals in every field and get the expert help you need.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4>For Clients</h4>
+                    <ul>
+                        <li><a href="#">How It Works</a></li>
+                        <li><a href="#">Find an Expert</a></li>
+                        <li><a href="#">Success Stories</a></li>
+                        <li><a href="#">Resources</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>For Experts</h4>
+                    <ul>
+                        <li><a href="#">Join as an Expert</a></li>
+                        <li><a href="#">Success Stories</a></li>
+                        <li><a href="#">Resources</a></li>
+                        <li><a href="#">Community</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Press</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Expert Marketplace. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Accessibility</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Calendar Integration Modal -->
+    <div class="modal" id="calendar-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Sync with Calendar</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="calendar-options">
+                    <div class="calendar-option">
+                        <i class="fab fa-google"></i>
+                        <h4>Google Calendar</h4>
+                        <p>Sync your bookings with Google Calendar</p>
+                        <button class="btn btn-primary">Connect</button>
+                    </div>
+                    <div class="calendar-option">
+                        <i class="fab fa-microsoft"></i>
+                        <h4>Microsoft Outlook</h4>
+                        <p>Sync your bookings with Outlook Calendar</p>
+                        <button class="btn btn-primary">Connect</button>
+                    </div>
+                    <div class="calendar-option">
+                        <i class="fas fa-calendar-alt"></i>
+                        <h4>Apple Calendar</h4>
+                        <p>Sync your bookings with Apple Calendar</p>
+                        <button class="btn btn-primary">Connect</button>
+                    </div>
+                    <div class="calendar-option">
+                        <i class="fas fa-file-code"></i>
+                        <h4>iCal Feed</h4>
+                        <p>Get an iCal link to use with any calendar</p>
+                        <button class="btn btn-primary">Generate Link</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts.js"></script>
+    <script src="expert-booking-dashboard.js"></script>
+</body>
+</html>
