@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transaction History | Expert Chat System</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="css/transaction-history.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+</head>
+<body>
+  <div class="container">
+    <header class="main-header">
+      <div class="logo">
+        <a href="index.html">Expert Chat System</a>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="expert-matching.html">Find Experts</a></li>
+          <li><a href="store.html">Expert Store</a></li>
+          <li><a href="cart.html"><i class="fas fa-shopping-cart"></i></a></li>
+          <li id="userProfileNav" style="display:none;">
+            <a href="#" id="userProfileLink">
+              <img id="userProfileImage" src="/uploads/default-avatar.png" alt="Profile" class="avatar-img">
+            </a>
+          </li>
+          <li id="loginNav">
+            <a href="login.html" class="btn-login">Login</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Client dashboard navigation -->
+    <div class="dashboard-nav">
+      <ul>
+        <li><a href="client-dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+        <li><a href="orders.html"><i class="fas fa-shopping-bag"></i> Orders</a></li>
+        <li class="active"><a href="transaction-history.html"><i class="fas fa-history"></i> Transactions</a></li>
+        <li><a href="subscription-management.html"><i class="fas fa-sync-alt"></i> Subscriptions</a></li>
+        <li><a href="chat-history.html"><i class="fas fa-comments"></i> Chat History</a></li>
+        <li><a href="loyalty-rewards.html"><i class="fas fa-award"></i> Loyalty Rewards</a></li>
+        <li><a href="profile.html"><i class="fas fa-user-circle"></i> Profile</a></li>
+        <li><a href="payment-preferences.html"><i class="fas fa-credit-card"></i> Payment Preferences</a></li>
+      </ul>
+    </div>
+
+    <main class="transaction-main">
+      <section class="page-header">
+        <h1>Transaction History</h1>
+        <p>View and manage your payment history across all services and processors.</p>
+
+        <!-- Test mode controls - only visible in development -->
+        <div class="test-controls" id="test-controls">
+          <button id="test-mode-btn" class="btn btn-outline">
+            <i class="fas fa-vial"></i> Test with Mock Data
+          </button>
+          <div class="version-info">Version 27</div>
+        </div>
+      </section>
+
+      <!-- Filters section -->
+      <section class="filters-section">
+        <div class="filters-container">
+          <div class="filter-group">
+            <label for="date-range">Date Range</label>
+            <input type="text" id="date-range" placeholder="Select date range">
+          </div>
+
+          <div class="filter-group">
+            <label for="payment-method">Payment Method</label>
+            <select id="payment-method">
+              <option value="">All Methods</option>
+              <optgroup label="Payment Methods">
+                <option value="card">Credit/Debit Card</option>
+                <option value="mpesa">M-Pesa</option>
+                <option value="paypal">PayPal</option>
+                <option value="bank">Bank Transfer</option>
+                <option value="apple">Apple Pay</option>
+                <option value="google">Google Pay</option>
+              </optgroup>
+              <optgroup label="Payment Processors">
+                <option value="stripe">Stripe</option>
+                <option value="square">Square</option>
+                <option value="adyen">Adyen</option>
+                <option value="razorpay">Razorpay</option>
+              </optgroup>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label for="transaction-type">Type</label>
+            <select id="transaction-type">
+              <option value="">All Types</option>
+              <option value="order">Orders</option>
+              <option value="subscription">Subscriptions</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label for="transaction-status">Status</label>
+            <select id="transaction-status">
+              <option value="">All Status</option>
+              <option value="completed">Completed</option>
+              <option value="pending">Pending</option>
+              <option value="failed">Failed</option>
+              <option value="refunded">Refunded</option>
+            </select>
+          </div>
+
+          <button id="apply-filters" class="btn btn-primary">Apply Filters</button>
+          <button id="reset-filters" class="btn btn-outline">Reset</button>
+        </div>
+      </section>
+
+      <!-- Transactions list -->
+      <section class="transactions-section">
+        <div class="transaction-list" id="transaction-list">
+          <!-- Loading indicator -->
+          <div class="loading-container" id="loading-transactions">
+            <div class="loading-spinner"></div>
+            <p>Loading your transactions...</p>
+          </div>
+
+          <!-- No transactions state -->
+          <div class="no-transactions" id="no-transactions" style="display: none;">
+            <div class="empty-state">
+              <i class="fas fa-receipt"></i>
+              <h3>No Transactions Found</h3>
+              <p>You don't have any transactions that match your filters. Try adjusting your filters or make a purchase to get started.</p>
+            </div>
+          </div>
+
+          <!-- Transaction list will be inserted here by JS -->
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination" id="pagination" style="display: none;">
+          <button class="pagination-btn" id="prev-page" disabled>
+            <i class="fas fa-chevron-left"></i> Previous
+          </button>
+          <span class="pagination-info">Page <span id="current-page">1</span> of <span id="total-pages">1</span></span>
+          <button class="pagination-btn" id="next-page">
+            Next <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Transaction Details Modal -->
+  <div class="modal" id="transaction-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Transaction Details</h2>
+        <button class="modal-close">&times;</button>
+      </div>
+      <div class="modal-body" id="transaction-details">
+        <!-- Loading state -->
+        <div class="loading-container" id="loading-transaction-details">
+          <div class="loading-spinner"></div>
+          <p>Loading transaction details...</p>
+        </div>
+
+        <!-- Transaction details will be inserted here by JS -->
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="download-receipt">Download Receipt</button>
+        <button class="btn btn-primary modal-close-btn">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/test-transaction-data.js"></script>
+  <script src="js/transaction-history.js"></script>
+
+  <script>
+    // Initialize test mode button
+    document.addEventListener('DOMContentLoaded', function() {
+      const testModeBtn = document.getElementById('test-mode-btn');
+      const isProduction = window.location.hostname !== 'localhost' &&
+                          !window.location.hostname.includes('127.0.0.1') &&
+                          !window.location.hostname.includes('test') &&
+                          !window.location.hostname.includes('dev');
+
+      // Hide test controls in production
+      if (isProduction) {
+        const testControls = document.getElementById('test-controls');
+        if (testControls) {
+          testControls.style.display = 'none';
+        }
+      } else {
+        // In development, add test button functionality
+        if (testModeBtn) {
+          testModeBtn.addEventListener('click', function() {
+            testTransactionData.insertMockDataForTesting();
+
+            // Visual indication that test mode is active
+            this.classList.remove('btn-outline');
+            this.classList.add('btn-secondary');
+            this.innerHTML = '<i class="fas fa-vial"></i> Test Mode Active';
+
+            // Reload transactions to show test data
+            if (typeof loadTransactions === 'function') {
+              loadTransactions(1);
+            }
+          });
+        }
+      }
+    });
+  </script>
+</body>
+</html>

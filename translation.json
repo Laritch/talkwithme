@@ -1,0 +1,56 @@
+{
+  "common": {
+    "welcome": "Bienvenido al Sistema de Chat del Instructor",
+    "login": "Iniciar Sesión",
+    "logout": "Cerrar Sesión",
+    "register": "Registrarse",
+    "settings": "Configuración",
+    "cancel": "Cancelar",
+    "save": "Guardar",
+    "search": "Buscar",
+    "notifications": "Notificaciones",
+    "profile": "Perfil",
+    "dashboard": "Panel de Control"
+  },
+  "chat": {
+    "newMessage": "Nuevo Mensaje",
+    "sendMessage": "Enviar Mensaje",
+    "typing": "escribiendo...",
+    "attachFile": "Adjuntar Archivo",
+    "recording": "Grabando...",
+    "sendAudio": "Enviar Audio",
+    "messageHistory": "Historial de Mensajes",
+    "deleteConversation": "Eliminar Conversación",
+    "exportChat": "Exportar Chat",
+    "messagePlaceholder": "Escribe tu mensaje aquí..."
+  },
+  "auth": {
+    "email": "Correo Electrónico",
+    "password": "Contraseña",
+    "confirmPassword": "Confirmar Contraseña",
+    "forgotPassword": "¿Olvidaste tu Contraseña?",
+    "resetPassword": "Restablecer Contraseña",
+    "loginSuccess": "Inicio de Sesión Exitoso",
+    "loginError": "Error al Iniciar Sesión",
+    "registerSuccess": "Registro Exitoso",
+    "registerError": "Error al Registrarse",
+    "logoutSuccess": "Has cerrado sesión",
+    "passwordReset": "Correo de restablecimiento de contraseña enviado",
+    "passwordMatch": "Las contraseñas no coinciden"
+  },
+  "errors": {
+    "general": "Algo salió mal",
+    "connection": "Error de conexión. Por favor, verifica tu conexión a internet",
+    "notFound": "Página no encontrada",
+    "forbidden": "No tienes permiso para acceder a este recurso",
+    "serverError": "Error del servidor. Por favor, intenta de nuevo más tarde"
+  },
+  "accessibility": {
+    "skipToContent": "Saltar al contenido",
+    "darkMode": "Modo Oscuro",
+    "lightMode": "Modo Claro",
+    "increaseFontSize": "Aumentar tamaño de fuente",
+    "decreaseFontSize": "Disminuir tamaño de fuente",
+    "screenReader": "Modo de lector de pantalla"
+  }
+}

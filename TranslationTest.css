@@ -1,0 +1,244 @@
+/* Main container */
+.translation-test {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin: 20px auto;
+  max-width: 1200px;
+  padding: 25px;
+}
+
+.translation-test h1 {
+  color: #2a2f45;
+  font-size: 28px;
+  margin-top: 0;
+  text-align: center;
+}
+
+.description {
+  color: #666;
+  font-size: 16px;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+/* Mode toggle */
+.mode-toggle {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.mode-btn {
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.mode-btn:first-child {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.mode-btn:last-child {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.mode-btn.active {
+  background-color: #385ae8;
+  color: white;
+  border-color: #385ae8;
+}
+
+/* Language controls */
+.language-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 20px;
+  align-items: flex-end;
+}
+
+.language-select, .voice-select {
+  flex: 1;
+  min-width: 150px;
+}
+
+.language-select label, .voice-select label {
+  display: block;
+  margin-bottom: 5px;
+  color: #555;
+  font-size: 14px;
+}
+
+.language-select select, .voice-select select {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #dce0e6;
+  border-radius: 4px;
+  font-size: 14px;
+  background-color: #f5f7fa;
+}
+
+.language-direction {
+  font-size: 20px;
+  color: #888;
+  margin: 0 5px;
+  align-self: center;
+  padding-bottom: 5px;
+}
+
+/* Status message */
+.status-message {
+  padding: 10px 15px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+.status-message.error {
+  background-color: #ffecec;
+  border-left: 4px solid #e74c3c;
+  color: #c0392b;
+}
+
+.status-message.warning {
+  background-color: #fff9ec;
+  border-left: 4px solid #f39c12;
+  color: #9a6909;
+}
+
+.status-message.success {
+  background-color: #eeffee;
+  border-left: 4px solid #27ae60;
+  color: #1e8449;
+}
+
+/* Translation containers */
+.translation-container, .batch-container {
+  margin-bottom: 20px;
+}
+
+/* Input/output elements */
+textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #dce0e6;
+  border-radius: 4px;
+  font-size: 15px;
+  resize: vertical;
+}
+
+.confidence-indicator {
+  background-color: #e6e6e6;
+  border-radius: 4px;
+  color: #666;
+  display: inline-block;
+  font-size: 12px;
+  margin-bottom: 10px;
+  padding: 4px 8px;
+}
+
+.confidence-high {
+  background-color: #d4f7e7;
+  color: #1e8449;
+}
+
+.confidence-medium {
+  background-color: #fcf3d7;
+  color: #9a6909;
+}
+
+.confidence-low {
+  background-color: #fde3dd;
+  color: #c0392b;
+}
+
+.fallback-indicator {
+  background-color: #fff9ec;
+  border-radius: 4px;
+  color: #9a6909;
+  font-size: 13px;
+  margin-bottom: 15px;
+  padding: 8px 12px;
+}
+
+/* Batch translation */
+.batch-item {
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.batch-input {
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.remove-batch-btn {
+  background-color: #e74c3c;
+  border: none;
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  font-size: 12px;
+  height: 20px;
+  position: absolute;
+  right: -10px;
+  top: -10px;
+  width: 20px;
+}
+
+.add-batch-btn {
+  background-color: #3498db;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 8px 16px;
+}
+
+/* Action buttons */
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.translate-btn, .reset-btn, .speak-btn {
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 8px 16px;
+  transition: all 0.2s ease;
+}
+
+.translate-btn {
+  background-color: #385ae8;
+  color: white;
+}
+
+.reset-btn {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.speak-btn {
+  background-color: #27ae60;
+  color: white;
+}
+
+.speak-btn.speaking {
+  background-color: #e74c3c;
+}
+
+button:disabled {
+  background-color: #e6e6e6;
+  color: #999;
+  cursor: not-allowed;
+}

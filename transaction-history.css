@@ -1,0 +1,834 @@
+/**
+ * Transaction History Styles
+ */
+
+/* Main layout */
+.transaction-main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.page-header {
+  margin-bottom: 2rem;
+}
+
+.page-header h1 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 0.5rem;
+}
+
+.page-header p {
+  color: #718096;
+  font-size: 1rem;
+}
+
+/* Filters section */
+.filters-section {
+  margin-bottom: 2rem;
+}
+
+.filters-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  background-color: #fff;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  min-width: 160px;
+  flex: 1;
+}
+
+.filter-group label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  color: #4a5568;
+}
+
+.filter-group input,
+.filter-group select {
+  padding: 0.625rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  background-color: #fff;
+}
+
+.filter-group input:focus,
+.filter-group select:focus {
+  outline: none;
+  border-color: #4a6cf7;
+  box-shadow: 0 0 0 1px #4a6cf7;
+}
+
+/* Styled select with optgroups */
+.filter-group select optgroup {
+  font-weight: 600;
+  color: #4a5568;
+}
+
+.filter-group select option {
+  font-weight: normal;
+  padding: 0.5rem;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.625rem 1rem;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+  min-height: 38px;
+}
+
+.btn-primary {
+  background-color: #4a6cf7;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #3a57d7;
+}
+
+.btn-secondary {
+  background-color: #e2e8f0;
+  color: #4a5568;
+}
+
+.btn-secondary:hover {
+  background-color: #cbd5e0;
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: #4a5568;
+  border: 1px solid #e2e8f0;
+}
+
+.btn-outline:hover {
+  background-color: #f7fafc;
+}
+
+/* Transactions list */
+.transactions-section {
+  background-color: #fff;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.transaction-list {
+  min-height: 400px;
+}
+
+.transaction-item {
+  display: flex;
+  align-items: center;
+  padding: 1.25rem;
+  border-bottom: 1px solid #e2e8f0;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+}
+
+.transaction-item:last-child {
+  border-bottom: none;
+}
+
+.transaction-item:hover {
+  background-color: #f7fafc;
+}
+
+.transaction-icon {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.5rem;
+  background-color: #ebf4ff;
+  color: #4a6cf7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  margin-right: 1rem;
+  flex-shrink: 0;
+}
+
+.transaction-icon.order {
+  background-color: #ebf4ff;
+  color: #4a6cf7;
+}
+
+.transaction-icon.subscription {
+  background-color: #e6fffa;
+  color: #38b2ac;
+}
+
+.transaction-icon.refund {
+  background-color: #feebc8;
+  color: #dd6b20;
+}
+
+.transaction-content {
+  flex: 1;
+}
+
+.transaction-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.transaction-title {
+  font-weight: 600;
+  color: #2d3748;
+  font-size: 1rem;
+}
+
+.transaction-amount {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.transaction-amount.positive {
+  color: #38a169;
+}
+
+.transaction-amount.negative {
+  color: #e53e3e;
+}
+
+.transaction-details {
+  display: flex;
+  justify-content: space-between;
+}
+
+.transaction-info {
+  color: #718096;
+  font-size: 0.875rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.transaction-date {
+  margin-right: 1rem;
+}
+
+.transaction-method {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 0.75rem;
+}
+
+.transaction-method i {
+  margin-right: 0.25rem;
+}
+
+/* Processor display */
+.transaction-processor {
+  display: inline-flex;
+  align-items: center;
+  background-color: #f0f5ff;
+  padding: 0.1rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  color: #4a6cf7;
+  font-weight: 500;
+}
+
+.transaction-status {
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  text-transform: capitalize;
+}
+
+.transaction-status.completed {
+  background-color: #c6f6d5;
+  color: #2f855a;
+}
+
+.transaction-status.pending {
+  background-color: #feebc8;
+  color: #c05621;
+}
+
+.transaction-status.failed {
+  background-color: #fed7d7;
+  color: #c53030;
+}
+
+.transaction-status.refunded {
+  background-color: #e9d8fd;
+  color: #6b46c1;
+}
+
+/* Payment method specific styles */
+.payment-method-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  margin-right: 0.5rem;
+  background-color: #f7fafc;
+  color: #4a5568;
+}
+
+.payment-method-mpesa .payment-method-icon {
+  background-color: #e3fcec;
+  color: #38a169;
+}
+
+.payment-method-square .payment-method-icon {
+  background-color: #ebf8ff;
+  color: #3182ce;
+}
+
+.payment-method-adyen .payment-method-icon {
+  background-color: #e9d8fd;
+  color: #6b46c1;
+}
+
+.payment-method-razorpay .payment-method-icon {
+  background-color: #ebf8ff;
+  color: #2c5282;
+}
+
+/* Loading state */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 0;
+  color: #a0aec0;
+}
+
+.loading-spinner {
+  width: 3rem;
+  height: 3rem;
+  border: 3px solid #e2e8f0;
+  border-top-color: #4a6cf7;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Empty state */
+.empty-state {
+  text-align: center;
+  padding: 3rem 2rem;
+}
+
+.empty-state i {
+  font-size: 3rem;
+  color: #cbd5e0;
+  margin-bottom: 1rem;
+}
+
+.empty-state h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #4a5568;
+  margin-bottom: 0.5rem;
+}
+
+.empty-state p {
+  color: #718096;
+  max-width: 400px;
+  margin: 0 auto 1.5rem;
+}
+
+/* Pagination */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem;
+  border-top: 1px solid #e2e8f0;
+}
+
+.pagination-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border: 1px solid #e2e8f0;
+  background-color: #fff;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  color: #4a5568;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pagination-btn:hover:not(:disabled) {
+  background-color: #f7fafc;
+}
+
+.pagination-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pagination-btn i {
+  font-size: 0.75rem;
+}
+
+.pagination-info {
+  margin: 0 1rem;
+  font-size: 0.875rem;
+  color: #718096;
+}
+
+/* Modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background-color: #fff;
+  border-radius: 0.5rem;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  width: 100%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: modal-appear 0.3s ease-out;
+}
+
+@keyframes modal-appear {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #2d3748;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #a0aec0;
+  cursor: pointer;
+}
+
+.modal-body {
+  padding: 1.5rem;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  border-top: 1px solid #e2e8f0;
+}
+
+/* Transaction detail styles */
+.transaction-detail-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.transaction-detail-icon {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 0.5rem;
+  background-color: #ebf4ff;
+  color: #4a6cf7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin-right: 1rem;
+}
+
+.transaction-detail-icon.order {
+  background-color: #ebf4ff;
+  color: #4a6cf7;
+}
+
+.transaction-detail-icon.subscription {
+  background-color: #e6fffa;
+  color: #38b2ac;
+}
+
+.transaction-detail-icon.refund {
+  background-color: #feebc8;
+  color: #dd6b20;
+}
+
+.transaction-detail-title h3 {
+  margin: 0 0 0.25rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #2d3748;
+}
+
+.transaction-detail-title p {
+  margin: 0;
+  color: #718096;
+  font-size: 0.875rem;
+}
+
+.transaction-summary {
+  background-color: #f7fafc;
+  border-radius: 0.5rem;
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.transaction-summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.transaction-summary-row:last-child {
+  margin-bottom: 0;
+}
+
+.transaction-summary-label {
+  font-size: 0.875rem;
+  color: #718096;
+}
+
+.transaction-summary-value {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #2d3748;
+  display: flex;
+  align-items: center;
+}
+
+.transaction-summary-value i {
+  margin-right: 0.375rem;
+}
+
+/* Processor-specific styling in summary */
+.processor-badge {
+  display: inline-flex;
+  align-items: center;
+  background-color: #f0f5ff;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  color: #4a6cf7;
+}
+
+.processor-badge.mpesa {
+  background-color: #e3fcec;
+  color: #38a169;
+}
+
+.processor-badge.square {
+  background-color: #ebf8ff;
+  color: #3182ce;
+}
+
+.processor-badge.adyen {
+  background-color: #e9d8fd;
+  color: #6b46c1;
+}
+
+.processor-badge.razorpay {
+  background-color: #e6fffa;
+  color: #319795;
+}
+
+.transaction-summary-row.total {
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid #e2e8f0;
+}
+
+.transaction-summary-row.total .transaction-summary-label,
+.transaction-summary-row.total .transaction-summary-value {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.transaction-items {
+  margin-bottom: 1.5rem;
+}
+
+.transaction-items h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin: 0 0 1rem;
+}
+
+.transaction-item-list {
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.transaction-list-item {
+  display: flex;
+  padding: 1rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.transaction-list-item:last-child {
+  border-bottom: none;
+}
+
+.transaction-item-details {
+  flex: 1;
+}
+
+.transaction-item-name {
+  font-weight: 500;
+  color: #2d3748;
+  margin-bottom: 0.25rem;
+}
+
+.transaction-item-meta {
+  font-size: 0.75rem;
+  color: #718096;
+}
+
+.transaction-item-price {
+  font-weight: 500;
+  color: #2d3748;
+}
+
+.transaction-additional-info {
+  margin-top: 1.5rem;
+}
+
+.transaction-additional-info h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin: 0 0 1rem;
+}
+
+.transaction-additional-info h5 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #4a5568;
+}
+
+.info-card {
+  background-color: #f7fafc;
+  border-radius: 0.5rem;
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.info-card h5 {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #4a5568;
+  margin: 0 0 0.75rem;
+}
+
+.info-card p {
+  margin: 0;
+  font-size: 0.875rem;
+  color: #718096;
+}
+
+.info-card address {
+  font-style: normal;
+  font-size: 0.875rem;
+  color: #718096;
+  line-height: 1.5;
+}
+
+/* Loyalty points in transaction detail */
+.loyalty-points-earned {
+  display: flex;
+  align-items: center;
+  background-color: #ebf8ff;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-top: 1.5rem;
+}
+
+.loyalty-points-earned i {
+  font-size: 1.5rem;
+  color: #4299e1;
+  margin-right: 1rem;
+}
+
+.loyalty-points-text {
+  flex: 1;
+}
+
+.loyalty-points-text h4 {
+  margin: 0 0 0.25rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2c5282;
+}
+
+.loyalty-points-text p {
+  margin: 0;
+  font-size: 0.875rem;
+  color: #4a5568;
+}
+
+/* Error toast */
+.error-toast {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  background-color: white;
+  color: #e53e3e;
+  padding: 0.75rem 1rem;
+  border-radius: 0.375rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 24rem;
+  z-index: 1001;
+}
+
+.error-toast-content {
+  display: flex;
+  align-items: center;
+}
+
+.error-toast-content i {
+  margin-right: 0.5rem;
+}
+
+.error-toast-close {
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  cursor: pointer;
+  color: #a0aec0;
+}
+
+/* Test mode controls */
+.test-controls {
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+  padding: 0.75rem 1rem;
+  background-color: #f7fafc;
+  border-radius: 0.375rem;
+  border: 1px dashed #cbd5e0;
+}
+
+.test-controls button {
+  margin-right: 1rem;
+}
+
+.version-info {
+  font-size: 0.75rem;
+  color: #718096;
+  background-color: #e2e8f0;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .filters-container {
+    flex-direction: column;
+  }
+
+  .filter-group {
+    width: 100%;
+  }
+
+  .transaction-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .transaction-amount {
+    margin-top: 0.5rem;
+  }
+
+  .transaction-details {
+    flex-direction: column;
+  }
+
+  .transaction-status {
+    margin-top: 0.5rem;
+  }
+
+  .modal-content {
+    max-width: 90%;
+  }
+}
+
+/* Specific processor styling */
+.transaction-processor-mpesa {
+  color: #38a169;
+}
+
+.transaction-processor-square {
+  color: #3182ce;
+}
+
+.transaction-processor-adyen {
+  color: #6b46c1;
+}
+
+.transaction-processor-razorpay {
+  color: #319795;
+}
+
+.transaction-processor-stripe {
+  color: #6772e5;
+}

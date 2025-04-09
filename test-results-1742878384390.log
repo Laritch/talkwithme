@@ -1,0 +1,27 @@
+Starting API tests...
+Test results will be saved to: /home/project/chat-system/test-results/test-results-1742878384390.log
+Timestamp: 2025-03-25T04:53:04.390Z
+--------------------------------------------------
+
+1. Testing /api/test endpoint:
+GET http://localhost:3004/api/test...
+Fetch error: Unable to connect. Is the computer able to access the url?
+
+2. Testing /api/error endpoint:
+GET http://localhost:3004/api/error...
+Fetch error: Unable to connect. Is the computer able to access the url?
+
+3. Testing validation with invalid data:
+POST http://localhost:3004/api/validate...
+Fetch error: Unable to connect. Is the computer able to access the url?
+
+4. Testing validation with valid data:
+POST http://localhost:3004/api/validate...
+Fetch error: Unable to connect. Is the computer able to access the url?
+
+5. Testing non-existent endpoint:
+GET http://localhost:3004/api/nonexistent...
+Fetch error: Unable to connect. Is the computer able to access the url?
+--------------------------------------------------
+API tests completed!
+See full results in: /home/project/chat-system/test-results/test-results-1742878384390.log
