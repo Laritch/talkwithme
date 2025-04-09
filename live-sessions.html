@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Q&A Sessions | Expert Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="live-sessions.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar Navigation -->
+        <aside class="dashboard-sidebar">
+            <div class="sidebar-header">
+                <img src="/uploads/default-avatar.png" alt="Logo" class="sidebar-logo">
+                <h2>Expert Dashboard</h2>
+            </div>
+
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="expert-dashboard.html"><i class="fas fa-th-large"></i> Overview</a></li>
+                    <li><a href="expert-profile-edit.html"><i class="fas fa-user-edit"></i> Edit Profile</a></li>
+                    <li><a href="expert-bookings.html"><i class="fas fa-calendar-check"></i> Bookings</a></li>
+                    <li><a href="live-sessions.html" class="active"><i class="fas fa-video"></i> Live Sessions</a></li>
+                    <li><a href="expert-posts-manage.html"><i class="fas fa-pen-square"></i> My Posts</a></li>
+                    <li><a href="expert-reviews.html"><i class="fas fa-star"></i> Reviews</a></li>
+                    <li><a href="expert-analytics.html"><i class="fas fa-chart-line"></i> Analytics</a></li>
+                    <li><a href="expert-badges.html"><i class="fas fa-award"></i> Badges & Trust</a></li>
+                    <li><a href="expert-payments.html"><i class="fas fa-wallet"></i> Payments</a></li>
+                    <li><a href="expert-settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+                </ul>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="logout.html" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <header class="dashboard-header">
+                <div class="header-title">
+                    <h1>Live Q&A Sessions</h1>
+                    <p>Create and manage your live Q&A sessions</p>
+                </div>
+
+                <div class="header-actions">
+                    <div class="notification-bell">
+                        <i class="far fa-bell"></i>
+                        <span class="notification-badge">3</span>
+                    </div>
+                    <div class="user-profile">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a" alt="User" class="profile-image">
+                        <span class="profile-name">Dr. James Wilson</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+            </header>
+
+            <div class="dashboard-content">
+                <div class="content-header">
+                    <div class="header-left">
+                        <h2>Your Live Sessions</h2>
+                    </div>
+                    <div class="header-right">
+                        <button id="create-session-btn" class="btn btn-primary">
+                            <i class="fas fa-plus"></i> Create New Session
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Tabs -->
+                <div class="tabs-container">
+                    <div class="tabs">
+                        <button class="tab-btn active" data-tab="upcoming">Upcoming <span class="count">(2)</span></button>
+                        <button class="tab-btn" data-tab="past">Past <span class="count">(8)</span></button>
+                        <button class="tab-btn" data-tab="drafts">Drafts <span class="count">(1)</span></button>
+                    </div>
+
+                    <!-- Tab Content: Upcoming Sessions -->
+                    <div class="tab-content active" id="upcoming-tab">
+                        <!-- Session Card -->
+                        <div class="session-card">
+                            <div class="session-header">
+                                <div class="session-title">AI for Small Business: Where to Start</div>
+                                <div class="session-status active">Upcoming</div>
+                            </div>
+
+                            <div class="session-info">
+                                <div class="session-datetime">
+                                    <div class="info-item">
+                                        <i class="far fa-calendar-alt"></i>
+                                        <span>May 15, 2023</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <i class="far fa-clock"></i>
+                                        <span>2:00 PM - 3:30 PM EST</span>
+                                    </div>
+                                </div>
+
+                                <div class="session-stats">
+                                    <div class="info-item">
+                                        <i class="fas fa-user-friends"></i>
+                                        <span>47 Registered</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <i class="fas fa-ticket-alt"></i>
+                                        <span>Free</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="session-description">
+                                <p>Join this interactive session where I'll answer your questions about implementing AI in small to medium businesses with limited resources.</p>
+                            </div>
+
+                            <div class="session-actions">
+                                <button class="btn btn-outline btn-sm">
+                                    <i class="fas fa-edit"></i> Edit
+                                </button>
+                                <button class="btn btn-outline btn-sm">
+                                    <i class="fas fa-link"></i> Copy Link
+                                </button>
+                                <button class="btn btn-outline btn-sm">
+                                    <i class="fas fa-share"></i> Share
+                                </button>
+                                <button class="btn btn-primary btn-sm">
+                                    <i class="fas fa-video"></i> Start Session
+                                </button>
+                            </div>
+
+                            <div class="session-countdown">
+                                <div class="countdown-label">Starting in:</div>
+                                <div class="countdown-timer" data-time="2023-05-15T14:00:00-04:00">
+                                    <div class="countdown-item">
+                                        <span class="count-value days">07</span>
+                                        <span class="count-label">Days</span>
+                                    </div>
+                                    <div class="countdown-item">
+                                        <span class="count-value hours">21</span>
+                                        <span class="count-label">Hours</span>
+                                    </div>
+                                    <div class="countdown-item">
+                                        <span class="count-value minutes">45</span>
+                                        <span class="count-label">Minutes</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Session Card 2 -->
+                        <div class="session-card">
+                            <div class="session-header">
+                                <div class="session-title">Deep Learning Applications: Ask Me Anything</div>
+                                <div class="session-status active">Upcoming</div>
+                            </div>
+
+                            <div class="session-info">
+                                <div class="session-datetime">
+                                    <div class="info-item">
+                                        <i class="far fa-calendar-alt"></i>
+                                        <span>June 3, 2023</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <i class="far fa-clock"></i>
+                                        <span>1:00 PM - 2:00 PM EST</span>
+                                    </div>
+                                </div>
+
+                                <div class="session-stats">
+                                    <div class="info-item">
+                                        <i class="fas fa-user-friends"></i>
+                                        <span>32 Registered</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <i class="fas fa-ticket-alt"></i>
+                                        <span>$15 per person</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="session-description">
+                                <p>A technical deep dive into neural networks and their practical applications. Bring your specific questions about implementation challenges.</p>
+                            </div>
+
+                            <div class="session-actions">
+                                <button class="btn btn-outline btn-sm">
+                                    <i class="fas fa-edit"></i> Edit
+                                </button>
+                                <button class="btn btn-outline btn-sm">
+                                    <i class="fas fa-link"></i> Copy Link
+                                </button>
+                                <button class="btn btn-outline btn-sm">
+                                    <i class="fas fa-share"></i> Share
+                                </button>
+                                <button class="btn btn-outline btn-sm">
+                                    <i class="fas fa-video"></i> Start Session
+                                </button>
+                            </div>
+
+                            <div class="session-countdown">
+                                <div class="countdown-label">Starting in:</div>
+                                <div class="countdown-timer" data-time="2023-06-03T13:00:00-04:00">
+                                    <div class="countdown-item">
+                                        <span class="count-value days">26</span>
+                                        <span class="count-label">Days</span>
+                                    </div>
+                                    <div class="countdown-item">
+                                        <span class="count-value hours">08</span>
+                                        <span class="count-label">Hours</span>
+                                    </div>
+                                    <div class="countdown-item">
+                                        <span class="count-value minutes">15</span>
+                                        <span class="count-label">Minutes</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="empty-state" style="display: none;">
+                            <div class="empty-icon">
+                                <i class="far fa-calendar-times"></i>
+                            </div>
+                            <h3>No Upcoming Sessions</h3>
+                            <p>You don't have any upcoming live Q&A sessions scheduled.</p>
+                            <button class="btn btn-primary">Create Your First Session</button>
+                        </div>
+                    </div>
+
+                    <!-- Tab Content: Past Sessions -->
+                    <div class="tab-content" id="past-tab">
+                        <!-- Past Session Card -->
+                        <div class="session-card past">
+                            <div class="session-header">
+                                <div class="session-title">Introduction to Neural Networks</div>
+                                <div class="session-status completed">Completed</div>
+                            </div>
+
+                            <div class="session-info">
+                                <div class="session-datetime">
+                                    <div class="info-item">
+                                        <i class="far fa-calendar-alt"></i>
+                                        <span>April 10, 2023</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <i class="far fa-clock"></i>
+                                        <span>2:00 PM - 3:30 PM EST</span>
+                                    </div>
+                                </div>
+
+                                <div class="session-stats">
+                                    <div class="info-item">
+                                        <i class="fas fa-user-friends"></i>
+                                        <span>63 Attended</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <i class="fas fa-ticket-alt"></i>
+                                        <span>$10 per person</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="session-actions">
+                                <button class="btn btn-outline btn-sm">
+                                    <i class="fas fa-play-circle"></i> View Recording
+                                </button>
+                                <button class="btn btn-outline btn-sm">
+                                    <i class="fas fa-comment"></i> View Q&A
+                                </button>
+                                <button class="btn btn-outline btn-sm">
+                                    <i class="fas fa-chart-bar"></i> Analytics
+                                </button>
+                                <button class="btn btn-primary btn-sm">
+                                    <i class="fas fa-redo"></i> Schedule Again
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- More past sessions would be listed here -->
+                        <div class="load-more">
+                            <button class="btn btn-outline">Load More Past Sessions</button>
+                        </div>
+                    </div>
+
+                    <!-- Tab Content: Drafts -->
+                    <div class="tab-content" id="drafts-tab">
+                        <!-- Draft Session Card -->
+                        <div class="session-card draft">
+                            <div class="session-header">
+                                <div class="session-title">AI Ethics and Responsible Implementation</div>
+                                <div class="session-status draft">Draft</div>
+                            </div>
+
+                            <div class="session-description">
+                                <p>Discussing the ethical considerations when implementing AI in various industries and how to ensure responsible AI development.</p>
+                            </div>
+
+                            <div class="session-actions">
+                                <button class="btn btn-outline btn-sm">
+                                    <i class="fas fa-trash"></i> Delete
+                                </button>
+                                <button class="btn btn-primary btn-sm">
+                                    <i class="fas fa-edit"></i> Continue Editing
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="empty-state" style="display: none;">
+                            <div class="empty-icon">
+                                <i class="far fa-file"></i>
+                            </div>
+                            <h3>No Draft Sessions</h3>
+                            <p>You don't have any draft sessions saved.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Create Session Modal -->
+    <div class="modal" id="create-session-modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-container">
+            <div class="modal-header">
+                <h2>Create Live Q&A Session</h2>
+                <button class="modal-close"><i class="fas fa-times"></i></button>
+            </div>
+
+            <div class="modal-body">
+                <form id="session-form">
+                    <div class="form-group">
+                        <label for="session-title">Session Title *</label>
+                        <input type="text" id="session-title" placeholder="E.g., AI for Beginners: Ask Me Anything" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="session-date">Date *</label>
+                            <input type="date" id="session-date" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="session-start-time">Start Time *</label>
+                            <input type="time" id="session-start-time" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="session-end-time">End Time *</label>
+                            <input type="time" id="session-end-time" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="session-timezone">Timezone *</label>
+                            <select id="session-timezone" required>
+                                <option value="America/New_York">Eastern Time (ET)</option>
+                                <option value="America/Chicago">Central Time (CT)</option>
+                                <option value="America/Denver">Mountain Time (MT)</option>
+                                <option value="America/Los_Angeles">Pacific Time (PT)</option>
+                                <option value="Etc/UTC">UTC</option>
+                                <!-- More timezones would be available -->
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="session-price">Price ($) *</label>
+                            <input type="number" id="session-price" min="0" step="0.01" placeholder="0 for free sessions" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="session-description">Description *</label>
+                        <textarea id="session-description" rows="4" placeholder="Describe what your session is about and what attendees will learn..." required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="session-categories">Categories *</label>
+                        <select id="session-categories" multiple required>
+                            <option value="ai">Artificial Intelligence</option>
+                            <option value="machine-learning">Machine Learning</option>
+                            <option value="data-science">Data Science</option>
+                            <option value="business">Business</option>
+                            <option value="technology">Technology</option>
+                            <option value="career">Career Development</option>
+                            <!-- More categories would be available -->
+                        </select>
+                        <div class="help-text">Hold Ctrl (Cmd on Mac) to select multiple categories</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="session-tags">Tags (comma separated)</label>
+                        <input type="text" id="session-tags" placeholder="E.g., beginners, neural networks, practical ai">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="session-image">Cover Image</label>
+                        <div class="file-upload">
+                            <input type="file" id="session-image" accept="image/*">
+                            <div class="upload-button">
+                                <i class="fas fa-cloud-upload-alt"></i> Choose Image
+                            </div>
+                            <div class="file-name"></div>
+                        </div>
+                        <div class="help-text">Recommended size: 1200 x 630 pixels (16:9 ratio)</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Session Settings</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox">
+                                <input type="checkbox" id="enable-registration" checked>
+                                <span>Enable Registration</span>
+                            </label>
+
+                            <label class="checkbox">
+                                <input type="checkbox" id="record-session" checked>
+                                <span>Record Session</span>
+                            </label>
+
+                            <label class="checkbox">
+                                <input type="checkbox" id="allow-questions-before">
+                                <span>Allow Questions Before Session</span>
+                            </label>
+
+                            <label class="checkbox">
+                                <input type="checkbox" id="email-reminders" checked>
+                                <span>Send Email Reminders (24h and 1h before)</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-outline" id="save-draft-btn">Save as Draft</button>
+                        <button type="submit" class="btn btn-primary">Create Session</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts.js"></script>
+    <script src="live-sessions.js"></script>
+</body>
+</html>

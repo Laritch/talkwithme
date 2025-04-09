@@ -1,0 +1,699 @@
+/* Loyalty Program Styles */
+
+/* Main Container */
+.loyalty-container {
+  max-width: 1200px;
+  margin: 30px auto;
+  padding: 0 20px;
+}
+
+.loyalty-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.loyalty-header h1 {
+  font-size: 32px;
+  font-weight: 700;
+  color: #2a2a2a;
+  margin-bottom: 10px;
+}
+
+.loyalty-header p {
+  font-size: 18px;
+  color: #666;
+}
+
+/* Loyalty Status Section */
+.loyalty-status-section {
+  margin-bottom: 40px;
+}
+
+.loyalty-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.loyalty-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px;
+  background: linear-gradient(135deg, #4a6cf7, #3a56d4);
+  color: white;
+}
+
+.tier-info {
+  display: flex;
+  align-items: center;
+}
+
+.user-tier {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.tier-badge {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 15px;
+}
+
+.tier-badge i {
+  font-size: 20px;
+}
+
+.points-info {
+  text-align: right;
+}
+
+.points-value {
+  display: block;
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.points-label {
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+.loyalty-card-body {
+  padding: 30px;
+}
+
+.tier-progress {
+  margin-bottom: 30px;
+}
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #666;
+}
+
+.next-tier-info {
+  font-weight: 600;
+  color: #4a6cf7;
+}
+
+.points-to-next {
+  color: #888;
+  font-weight: normal;
+}
+
+.progress-bar-container {
+  height: 10px;
+  background-color: #e9ecef;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #4a6cf7, #3a56d4);
+  border-radius: 5px;
+  transition: width 0.5s ease;
+}
+
+.progress-percentage {
+  font-size: 14px;
+  color: #666;
+  text-align: right;
+  display: block;
+}
+
+.loyalty-stats {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.stat-item {
+  flex: 1;
+  min-width: 150px;
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  border-radius: 8px;
+  background-color: #f8f9fa;
+  margin: 0 5px;
+}
+
+.stat-item i {
+  font-size: 24px;
+  color: #4a6cf7;
+  margin-right: 15px;
+}
+
+.stat-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-value {
+  font-size: 20px;
+  font-weight: 700;
+  color: #2a2a2a;
+}
+
+.stat-label {
+  font-size: 14px;
+  color: #666;
+}
+
+/* Loyalty Rewards Section */
+.loyalty-rewards-section {
+  margin-bottom: 40px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  padding: 30px;
+}
+
+.loyalty-rewards-section h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.loyalty-tabs {
+  display: flex;
+  overflow-x: auto;
+  border-bottom: 1px solid #e9ecef;
+  margin-bottom: 25px;
+}
+
+.tab-button {
+  padding: 15px 20px;
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  color: #666;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+}
+
+.tab-button:hover {
+  color: #4a6cf7;
+}
+
+.tab-button.active {
+  color: #4a6cf7;
+  border-bottom-color: #4a6cf7;
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+  animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Available Rewards Tab */
+.rewards-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.reward-card {
+  border-radius: 8px;
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  padding: 20px;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.reward-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.reward-type {
+  font-size: 14px;
+  font-weight: 600;
+  color: #4a6cf7;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.reward-value {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 15px;
+  color: #2a2a2a;
+}
+
+.reward-code {
+  background: #e9ecef;
+  border-radius: 4px;
+  padding: 8px 12px;
+  font-family: monospace;
+  letter-spacing: 1px;
+  display: inline-block;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+.reward-expiry {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.use-reward-btn {
+  width: 100%;
+  padding: 10px;
+  background-color: #4a6cf7;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.use-reward-btn:hover {
+  background-color: #3a56d4;
+}
+
+.no-rewards-message {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.no-rewards-message i {
+  font-size: 48px;
+  color: #e9ecef;
+  margin-bottom: 15px;
+}
+
+.no-rewards-message p {
+  font-size: 18px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.no-rewards-message .primary-button {
+  background-color: #4a6cf7;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.no-rewards-message .primary-button:hover {
+  background-color: #3a56d4;
+}
+
+/* Redeem Points Tab */
+.redeem-instructions {
+  margin-bottom: 25px;
+}
+
+.redeem-instructions h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.redeem-instructions p {
+  color: #666;
+}
+
+.redeem-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.redeem-option-card {
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.redeem-option-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.redeem-icon {
+  font-size: 32px;
+  color: #4a6cf7;
+  margin-bottom: 15px;
+}
+
+.redeem-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.redeem-description {
+  color: #666;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+.redeem-cost {
+  font-weight: 700;
+  color: #2a2a2a;
+  margin-bottom: 15px;
+  font-size: 16px;
+}
+
+.redeem-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #4a6cf7;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.redeem-button:hover {
+  background-color: #3a56d4;
+}
+
+.redeem-button:disabled {
+  background-color: #e9ecef;
+  color: #888;
+  cursor: not-allowed;
+}
+
+/* Points History Tab */
+.history-filter {
+  text-align: right;
+  margin-bottom: 20px;
+}
+
+.history-filter select {
+  padding: 8px 12px;
+  border-radius: 4px;
+  border: 1px solid #e9ecef;
+  background-color: #f8f9fa;
+  color: #2a2a2a;
+}
+
+.history-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.history-table th,
+.history-table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.history-table th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+  color: #2a2a2a;
+}
+
+.history-table tr:hover {
+  background-color: #f8f9fa;
+}
+
+.points-earned {
+  color: #28a745;
+  font-weight: 600;
+}
+
+.points-spent {
+  color: #dc3545;
+  font-weight: 600;
+}
+
+.no-history-message {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.no-history-message i {
+  font-size: 48px;
+  color: #e9ecef;
+  margin-bottom: 15px;
+}
+
+.no-history-message p {
+  font-size: 18px;
+  color: #666;
+}
+
+/* Referral Program Tab */
+.referral-info {
+  margin-bottom: 25px;
+}
+
+.referral-info h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.referral-info p {
+  color: #666;
+}
+
+.referral-code-container {
+  margin-bottom: 25px;
+}
+
+.referral-code-box,
+.referral-link-box {
+  display: flex;
+  align-items: center;
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 4px;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
+.referral-code,
+.referral-link {
+  flex: 1;
+  font-family: monospace;
+  font-size: 16px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.copy-button {
+  background: none;
+  border: none;
+  color: #4a6cf7;
+  cursor: pointer;
+  font-size: 18px;
+  margin-left: 10px;
+}
+
+.copy-button:hover {
+  color: #3a56d4;
+}
+
+.referral-stats {
+  display: flex;
+  justify-content: flex-start;
+  gap: 20px;
+}
+
+/* Loyalty Tiers Section */
+.loyalty-tiers-section {
+  margin-bottom: 40px;
+}
+
+.loyalty-tiers-section h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.tier-cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.tier-card {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.tier-card:hover {
+  transform: translateY(-5px);
+}
+
+.tier-card-header {
+  padding: 20px;
+  text-align: center;
+  position: relative;
+}
+
+.tier-card-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 15px;
+}
+
+.tier-card-icon i {
+  font-size: 30px;
+  color: white;
+}
+
+.tier-name {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.min-points {
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+.tier-card-body {
+  padding: 20px;
+  border-top: 1px solid #e9ecef;
+}
+
+.tier-card-body ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tier-card-body li {
+  padding: 8px 0;
+  display: flex;
+  align-items: center;
+}
+
+.tier-card-body li i {
+  color: #28a745;
+  margin-right: 10px;
+}
+
+.tier-card-body li .fa-times {
+  color: #dc3545;
+}
+
+.tier-description {
+  margin-top: 15px;
+  font-size: 14px;
+  color: #666;
+}
+
+.current-tier-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #28a745;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* Utilities */
+.hidden {
+  display: none !important;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .loyalty-card-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 15px;
+  }
+
+  .loyalty-stats {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .stat-item {
+    margin: 5px 0;
+  }
+
+  .loyalty-tabs {
+    overflow-x: auto;
+    padding-bottom: 5px;
+  }
+
+  .tab-button {
+    padding: 10px 15px;
+    font-size: 14px;
+  }
+
+  .tier-cards-container {
+    grid-template-columns: 1fr;
+  }
+
+  .rewards-list,
+  .redeem-options {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Color variants for different tiers */
+.bronze-theme {
+  background: linear-gradient(135deg, #CD7F32, #A05214);
+}
+
+.silver-theme {
+  background: linear-gradient(135deg, #C0C0C0, #7D7D7D);
+}
+
+.gold-theme {
+  background: linear-gradient(135deg, #FFD700, #B8860B);
+}
+
+.platinum-theme {
+  background: linear-gradient(135deg, #E5E4E2, #9F9F9F);
+}

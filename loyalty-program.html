@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loyalty Program | Expert Chat</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="css/loyalty-program.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header class="main-header">
+      <div class="logo">
+        <a href="index.html">
+          <img src="https://same-assets.com/expertapp_logo.png" alt="Expert Chat Logo">
+        </a>
+      </div>
+      <nav class="main-nav">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="store.html">Store</a></li>
+          <li><a href="expert-matching.html">Find Experts</a></li>
+          <li><a href="cart.html" class="cart-icon"><i class="fas fa-shopping-cart"></i> <span class="cart-count">0</span></a></li>
+          <li class="auth-links">
+            <a href="login.html" class="login-link">Login</a>
+            <a href="#" class="profile-link hidden">
+              <img src="uploads/default-avatar.png" alt="Profile" class="nav-profile-image">
+              <span class="username">User</span>
+            </a>
+            <div class="dropdown-menu">
+              <a href="account.html">My Account</a>
+              <a href="loyalty-program.html" class="active">Loyalty Program</a>
+              <a href="#" class="logout-btn">Logout</a>
+            </div>
+          </li>
+        </ul>
+      </nav>
+      <div class="mobile-menu-toggle">
+        <i class="fas fa-bars"></i>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="loyalty-container">
+      <div class="loyalty-header">
+        <h1>Loyalty Program</h1>
+        <p>Earn points with every purchase and unlock exclusive rewards</p>
+      </div>
+
+      <!-- Loyalty Status Section -->
+      <section class="loyalty-status-section">
+        <div class="loyalty-card">
+          <div class="loyalty-card-header">
+            <div class="tier-info">
+              <h2 class="user-tier">Bronze</h2>
+              <div class="tier-badge">
+                <i class="fas fa-medal"></i>
+              </div>
+            </div>
+            <div class="points-info">
+              <span class="points-value">0</span>
+              <span class="points-label">POINTS</span>
+            </div>
+          </div>
+          <div class="loyalty-card-body">
+            <div class="tier-progress">
+              <div class="progress-info">
+                <span>Progress to next tier</span>
+                <span class="next-tier-info">Silver <span class="points-to-next">1000 points</span></span>
+              </div>
+              <div class="progress-bar-container">
+                <div class="progress-bar" style="width: 0%"></div>
+              </div>
+              <span class="progress-percentage">0%</span>
+            </div>
+            <div class="loyalty-stats">
+              <div class="stat-item">
+                <i class="fas fa-shopping-bag"></i>
+                <div class="stat-details">
+                  <span class="stat-value purchase-count">0</span>
+                  <span class="stat-label">Purchases</span>
+                </div>
+              </div>
+              <div class="stat-item">
+                <i class="fas fa-dollar-sign"></i>
+                <div class="stat-details">
+                  <span class="stat-value total-spent">$0</span>
+                  <span class="stat-label">Total Spent</span>
+                </div>
+              </div>
+              <div class="stat-item">
+                <i class="fas fa-award"></i>
+                <div class="stat-details">
+                  <span class="stat-value total-points-earned">0</span>
+                  <span class="stat-label">Total Points Earned</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Loyalty Rewards Section -->
+      <section class="loyalty-rewards-section">
+        <h2>Your Rewards</h2>
+        <div class="loyalty-tabs">
+          <button class="tab-button active" data-tab="available-rewards">Available Rewards</button>
+          <button class="tab-button" data-tab="redeem-points">Redeem Points</button>
+          <button class="tab-button" data-tab="points-history">Points History</button>
+          <button class="tab-button" data-tab="referral-program">Referral Program</button>
+        </div>
+
+        <div class="tab-content active" id="available-rewards">
+          <div class="rewards-list">
+            <div class="no-rewards-message hidden">
+              <i class="fas fa-gift"></i>
+              <p>You don't have any rewards yet</p>
+              <button class="primary-button" data-tab-target="redeem-points">Redeem Points</button>
+            </div>
+            <!-- Rewards will be dynamically added here -->
+          </div>
+        </div>
+
+        <div class="tab-content" id="redeem-points">
+          <div class="redeem-instructions">
+            <h3>Redeem Your Points</h3>
+            <p>Exchange your points for exclusive rewards and discounts</p>
+          </div>
+          <div class="redeem-options">
+            <!-- Redeem options will be dynamically added here -->
+          </div>
+        </div>
+
+        <div class="tab-content" id="points-history">
+          <div class="history-filter">
+            <label for="history-limit">Show:</label>
+            <select id="history-limit">
+              <option value="10">Last 10 transactions</option>
+              <option value="20" selected>Last 20 transactions</option>
+              <option value="50">Last 50 transactions</option>
+              <option value="100">Last 100 transactions</option>
+            </select>
+          </div>
+          <div class="transaction-history">
+            <table class="history-table">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Description</th>
+                  <th>Points</th>
+                  <th>Balance</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Transaction history will be dynamically added here -->
+              </tbody>
+            </table>
+            <div class="no-history-message hidden">
+              <i class="fas fa-history"></i>
+              <p>No transaction history yet</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-content" id="referral-program">
+          <div class="referral-info">
+            <h3>Refer Friends, Earn Rewards!</h3>
+            <p>Share your unique referral code with friends. When they sign up, you'll both receive bonus points!</p>
+          </div>
+          <div class="referral-code-container">
+            <div class="referral-code-box">
+              <span class="referral-code">Loading your code...</span>
+              <button class="copy-button" title="Copy to clipboard">
+                <i class="fas fa-copy"></i>
+              </button>
+            </div>
+            <div class="referral-link-box">
+              <span class="referral-link">Loading your link...</span>
+              <button class="copy-button" title="Copy to clipboard">
+                <i class="fas fa-copy"></i>
+              </button>
+            </div>
+          </div>
+          <div class="referral-stats">
+            <div class="stat-item">
+              <i class="fas fa-users"></i>
+              <div class="stat-details">
+                <span class="stat-value referral-count">0</span>
+                <span class="stat-label">Referrals</span>
+              </div>
+            </div>
+            <div class="stat-item">
+              <i class="fas fa-coins"></i>
+              <div class="stat-details">
+                <span class="stat-value referral-points">0</span>
+                <span class="stat-label">Points Earned</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Loyalty Tiers Section -->
+      <section class="loyalty-tiers-section">
+        <h2>Loyalty Tiers</h2>
+        <div class="tier-cards-container">
+          <!-- Tier cards will be dynamically added here -->
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+      <div class="footer-content">
+        <div class="footer-logo">
+          <img src="https://same-assets.com/expertapp_logo.png" alt="Expert Chat Logo">
+        </div>
+        <div class="footer-links">
+          <div class="footer-column">
+            <h3>Company</h3>
+            <ul>
+              <li><a href="#">About Us</a></li>
+              <li><a href="#">Our Experts</a></li>
+              <li><a href="#">Careers</a></li>
+              <li><a href="#">Contact Us</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h3>Services</h3>
+            <ul>
+              <li><a href="expert-matching.html">Find an Expert</a></li>
+              <li><a href="store.html">Store</a></li>
+              <li><a href="#">Book Consultation</a></li>
+              <li><a href="#">Become an Expert</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h3>Support</h3>
+            <ul>
+              <li><a href="#">Help Center</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="#">Terms of Service</a></li>
+              <li><a href="loyalty-program.html">Loyalty Program</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 Expert Chat. All rights reserved.</p>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Loading Spinner -->
+  <div class="loading-spinner hidden">
+    <div class="spinner"></div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast-container">
+    <!-- Toast notifications will be dynamically added here -->
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/auth.js"></script>
+  <script src="js/loyalty-program.js"></script>
+</body>
+</html>
