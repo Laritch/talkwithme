@@ -1,0 +1,149 @@
+.handwriting-input {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 16px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.handwriting-canvas-container {
+  position: relative;
+  width: 100%;
+  min-height: 200px;
+  background-color: #f9f9f9;
+  border-bottom: 1px solid #eee;
+}
+
+.handwriting-canvas {
+  display: block;
+  width: 100%;
+  touch-action: none; /* Prevent browser gestures on touch */
+  cursor: crosshair;
+}
+
+.handwriting-placeholder {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #aaa;
+  font-size: 16px;
+  pointer-events: none; /* Allow clicks to pass through */
+  text-align: center;
+  width: 100%;
+  padding: 0 16px;
+}
+
+.handwriting-controls {
+  display: flex;
+  padding: 12px;
+  background-color: #f0f0f0;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.handwriting-button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.2s, transform 0.1s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 80px;
+}
+
+.handwriting-button:active {
+  transform: translateY(1px);
+}
+
+.handwriting-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.handwriting-button.clear {
+  background-color: #f44336;
+  color: white;
+}
+
+.handwriting-button.clear:hover {
+  background-color: #e53935;
+}
+
+.handwriting-button.recognize {
+  background-color: #2196f3;
+  color: white;
+}
+
+.handwriting-button.recognize:hover {
+  background-color: #1e88e5;
+}
+
+.handwriting-button.upload {
+  background-color: #4caf50;
+  color: white;
+  cursor: pointer;
+}
+
+.handwriting-button.upload:hover {
+  background-color: #43a047;
+}
+
+.handwriting-unavailable {
+  padding: 24px;
+  text-align: center;
+  color: #666;
+  background-color: #f9f9f9;
+}
+
+/* Mobile optimizations */
+@media (max-width: 600px) {
+  .handwriting-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .handwriting-button {
+    width: 100%;
+    margin-bottom: 8px;
+  }
+
+  .handwriting-button:last-child {
+    margin-bottom: 0;
+  }
+}
+
+/* Dark theme support */
+@media (prefers-color-scheme: dark) {
+  .handwriting-input {
+    border-color: #444;
+    background-color: #333;
+  }
+
+  .handwriting-canvas-container {
+    background-color: #222;
+    border-bottom-color: #444;
+  }
+
+  .handwriting-placeholder {
+    color: #888;
+  }
+
+  .handwriting-controls {
+    background-color: #222;
+  }
+
+  .handwriting-unavailable {
+    background-color: #222;
+    color: #aaa;
+  }
+}
