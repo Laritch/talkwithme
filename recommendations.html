@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Recommendations - Service Marketplace</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Socket.IO client -->
+  <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+  <!-- Custom JS -->
+  <script src="js/realtime-recommendations.js"></script>
+  <style>
+    :root {
+      --primary: #4CAF50;
+      --primary-light: #E8F5E9;
+      --secondary: #2196F3;
+      --warning: #FF9800;
+      --danger: #F44336;
+      --neutral: #607D8B;
+      --background: #F5F7FA;
+      --card: #FFFFFF;
+      --text: #333333;
+      --text-light: #757575;
+      --border: #E0E0E0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--background);
+      color: var(--text);
+      margin: 0;
+      padding: 0;
+      line-height: 1.5;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    h1, h2, h3 {
+      margin: 0;
+      color: var(--text);
+    }
+
+    .header-subtitle {
+      color: var(--text-light);
+      margin-top: 5px;
+    }
+
+    .recommendations-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+
+    .recommendation-card {
+      background-color: var(--card);
+      border-radius: 10px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+      position: relative;
+    }
+
+    .recommendation-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .card-header {
+      padding: 15px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .card-title {
+      font-weight: 600;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+    }
+
+    .card-icon {
+      margin-right: 10px;
+      color: var(--primary);
+      font-size: 18px;
+    }
+
+    .card-tag {
+      background-color: var(--primary-light);
+      color: var(--primary);
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .card-body {
+      padding: 20px;
+    }
+
+    .recommendation-content {
+      margin-bottom: 20px;
+    }
+
+    .recommendation-metric {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+
+    .metric-label {
+      color: var(--text-light);
+    }
+
+    .metric-value {
+      font-weight: 500;
+    }
+
+    .metric-value.highlight {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .confidence-bar {
+      width: 100%;
+      height: 6px;
+      background-color: #e0e0e0;
+      border-radius: 3px;
+      margin: 15px 0;
+    }
+
+    .confidence-level {
+      height: 100%;
+      border-radius: 3px;
+      background-color: var(--primary);
+    }
+
+    .reasoning-list {
+      margin: 15px 0;
+      padding-left: 20px;
+    }
+
+    .reasoning-item {
+      margin-bottom: 8px;
+      font-size: 14px;
+    }
+
+    .card-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 20px;
+      border-top: 1px solid var(--border);
+      padding-top: 15px;
+    }
+
+    .btn {
+      padding: 8px 16px;
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: none;
+    }
+
+    .btn-primary {
+      background-color: var(--primary);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background-color: #43A047;
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      border: 1px solid var(--neutral);
+      color: var(--neutral);
+    }
+
+    .btn-outline:hover {
+      background-color: #f5f5f5;
+    }
+
+    .impact-badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 600;
+      background-color: var(--primary-light);
+      color: var(--primary);
+      margin-top: 5px;
+    }
+
+    .filter-controls {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .filter-group {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .filter-select {
+      padding: 8px 12px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      font-size: 14px;
+    }
+
+    .new-badge {
+      background-color: var(--danger);
+      color: white;
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 10px;
+      margin-left: 8px;
+      animation: pulse 2s infinite;
+    }
+
+    .tabs {
+      display: flex;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 20px;
+    }
+
+    .tab {
+      padding: 10px 20px;
+      cursor: pointer;
+      font-weight: 500;
+      color: var(--text-light);
+      position: relative;
+    }
+
+    .tab.active {
+      color: var(--primary);
+    }
+
+    .tab.active:after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background-color: var(--primary);
+    }
+
+    @keyframes pulse {
+      0% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.6;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--text-light);
+    }
+
+    .empty-icon {
+      font-size: 48px;
+      color: var(--border);
+      margin-bottom: 20px;
+    }
+
+    .empty-message {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .empty-description {
+      font-size: 14px;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    .connection-status {
+      display: flex;
+      align-items: center;
+      font-size: 12px;
+      margin-left: 15px;
+    }
+
+    .status-indicator {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      margin-right: 5px;
+    }
+
+    .status-indicator.connected {
+      background-color: var(--primary);
+      box-shadow: 0 0 5px var(--primary);
+      animation: pulse 2s infinite;
+    }
+
+    .status-indicator.disconnected {
+      background-color: var(--neutral);
+    }
+
+    .notification-toast {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 12px 20px;
+      background-color: var(--primary);
+      color: white;
+      border-radius: 4px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      z-index: 1000;
+      transform: translateY(-100px);
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+
+    .notification-toast.visible {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .recommendation-card.new-recommendation {
+      animation: highlight 2s ease-out;
+    }
+
+    @keyframes highlight {
+      0% {
+        box-shadow: 0 0 0 2px var(--primary);
+      }
+      100% {
+        box-shadow: 0 0 0 0 var(--primary);
+      }
+    }
+
+    /* Loading animation */
+    .loader {
+      border: 3px solid #f3f3f3;
+      border-top: 3px solid var(--primary);
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      animation: spin 1s linear infinite;
+      margin: 0 auto;
+      display: inline-block;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container" data-expert-id="exp1">
+    <header>
+      <div>
+        <h1>AI Recommendations</h1>
+        <p class="header-subtitle">
+          Personalized insights to optimize your expert services
+          <span class="connection-status">
+            <span class="status-indicator disconnected" id="connectionStatus"></span>
+            <span id="connectionText">Connecting...</span>
+          </span>
+        </p>
+      </div>
+      <div>
+        <button class="btn btn-primary" id="refreshRecommendations">
+          <i class="fas fa-sync-alt"></i> Refresh
+        </button>
+      </div>
+    </header>
+
+    <div class="tabs">
+      <div class="tab active" data-tab="all">All Recommendations</div>
+      <div class="tab" data-tab="pricing">Pricing</div>
+      <div class="tab" data-tab="duration">Duration</div>
+      <div class="tab" data-tab="strategy">Strategy</div>
+    </div>
+
+    <div class="filter-controls">
+      <div class="filter-group">
+        <label for="sortBy">Sort by:</label>
+        <select id="sortBy" class="filter-select">
+          <option value="confidence">Confidence</option>
+          <option value="impact">Potential Impact</option>
+          <option value="newest">Newest</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label for="confidenceFilter">Min. Confidence:</label>
+        <select id="confidenceFilter" class="filter-select">
+          <option value="0.7">70%</option>
+          <option value="0.8">80%</option>
+          <option value="0.9">90%</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="recommendations-grid" id="recommendationsGrid">
+      <!-- Recommendations will be populated here dynamically -->
+      <div class="loader" id="recommendationsLoader"></div>
+    </div>
+
+    <!-- Empty state (hidden by default) -->
+    <div class="empty-state" id="emptyState" style="display: none;">
+      <div class="empty-icon">
+        <i class="fas fa-lightbulb"></i>
+      </div>
+      <div class="empty-message">No recommendations yet</div>
+      <div class="empty-description">
+        Our AI is analyzing your performance data. Check back soon for personalized recommendations to optimize your services.
+      </div>
+    </div>
+
+    <!-- Notification toast (hidden by default) -->
+    <div class="notification-toast" id="notificationToast">
+      New recommendation received!
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Get DOM elements
+      const recommendationsGrid = document.getElementById('recommendationsGrid');
+      const recommendationsLoader = document.getElementById('recommendationsLoader');
+      const emptyState = document.getElementById('emptyState');
+      const connectionStatus = document.getElementById('connectionStatus');
+      const connectionText = document.getElementById('connectionText');
+      const notificationToast = document.getElementById('notificationToast');
+
+      // Current filter state
+      let currentTab = 'all';
+      let sortBy = 'confidence';
+      let confidenceThreshold = 0.7;
+
+      // Initialize tab functionality
+      const tabs = document.querySelectorAll('.tab');
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          // Update active tab
+          tabs.forEach(t => t.classList.remove('active'));
+          tab.classList.add('active');
+
+          // Update current tab
+          currentTab = tab.getAttribute('data-tab');
+
+          // Filter recommendations by tab
+          filterAndSortRecommendations();
+        });
+      });
+
+      // Initialize filter functionality
+      document.getElementById('sortBy').addEventListener('change', (e) => {
+        sortBy = e.target.value;
+        filterAndSortRecommendations();
+      });
+
+      document.getElementById('confidenceFilter').addEventListener('change', (e) => {
+        confidenceThreshold = parseFloat(e.target.value);
+        filterAndSortRecommendations();
+      });
+
+      // Refresh button
+      document.getElementById('refreshRecommendations').addEventListener('click', () => {
+        showToast('Refreshing recommendations...');
+
+        // In a real app, this would fetch new recommendations
+        if (window.realtimeRecommendations) {
+          // Simulate generating a new recommendation
+          window.realtimeRecommendations.generateMockRecommendation();
+        }
+      });
+
+      // Function to create a recommendation card
+      function createRecommendationCard(recommendation) {
+        const card = document.createElement('div');
+        card.className = 'recommendation-card';
+        card.dataset.type = recommendation.type;
+        card.dataset.id = recommendation.id;
+
+        if (recommendation.isNew) {
+          card.classList.add('new-recommendation');
+          // Remove the 'new' flag after animation
+          setTimeout(() => {
+            recommendation.isNew = false;
+          }, 2000);
+        }
+
+        // Different icons based on recommendation type
+        let icon, tag;
+        switch (recommendation.type) {
+          case 'pricing':
+            icon = 'fa-dollar-sign';
+            tag = 'Pricing';
+            break;
+          case 'duration':
+            icon = 'fa-clock';
+            tag = 'Duration';
+            break;
+          case 'strategy':
+            icon = 'fa-users';
+            tag = 'Strategy';
+            break;
+          default:
+            icon = 'fa-lightbulb';
+            tag = 'Recommendation';
+        }
+
+        // Format impact text
+        let impactText = '';
+        if (recommendation.impact) {
+          if (recommendation.impact.revenue) {
+            impactText = `+$${recommendation.impact.revenue}/month`;
+          } else if (recommendation.impact.bookings) {
+            impactText = `+${recommendation.impact.bookings} bookings/month`;
+          } else if (recommendation.impact.retentionIncrease) {
+            impactText = `+${recommendation.impact.retentionIncrease}% client retention`;
+          }
+        }
+
+        // Create card HTML
+        card.innerHTML = `
+          <div class="card-header">
+            <div class="card-title">
+              <i class="fas ${icon} card-icon"></i>
+              ${recommendation.title}
+              ${recommendation.isNew ? '<span class="new-badge">New</span>' : ''}
+            </div>
+            <div class="card-tag">${tag}</div>
+          </div>
+          <div class="card-body">
+            <div class="recommendation-content">
+              ${recommendation.type === 'pricing' ? `
+                <div class="recommendation-metric">
+                  <div class="metric-label">Current Price</div>
+                  <div class="metric-value">$${recommendation.currentPrice}</div>
+                </div>
+                <div class="recommendation-metric">
+                  <div class="metric-label">Recommended Price</div>
+                  <div class="metric-value highlight">$${recommendation.recommendedPrice}</div>
+                </div>
+              ` : ''}
+
+              ${recommendation.type === 'duration' ? `
+                <div class="recommendation-metric">
+                  <div class="metric-label">Recommended Duration</div>
+                  <div class="metric-value highlight">${recommendation.duration} minutes</div>
+                </div>
+                <div class="recommendation-metric">
+                  <div class="metric-label">Suggested Price</div>
+                  <div class="metric-value">$${recommendation.recommendedPrice}</div>
+                </div>
+              ` : ''}
+
+              ${recommendation.type === 'strategy' ? `
+                <div class="recommendation-metric">
+                  <div class="metric-label">Recommended Action</div>
+                  <div class="metric-value highlight">${recommendation.action}</div>
+                </div>
+              ` : ''}
+
+              <div class="confidence-bar">
+                <div class="confidence-level" style="width: ${Math.round(recommendation.confidence * 100)}%;"></div>
+              </div>
+              <div class="recommendation-metric">
+                <div class="metric-label">Confidence</div>
+                <div class="metric-value">${Math.round(recommendation.confidence * 100)}%</div>
+              </div>
+              ${impactText ? `
+                <div class="impact-badge">
+                  <i class="fas fa-chart-line"></i> Potential impact: ${impactText}
+                </div>
+              ` : ''}
+            </div>
+
+            <h3>Why we recommend this</h3>
+            <ul class="reasoning-list">
+              ${recommendation.reasoning.map(reason => `<li class="reasoning-item">${reason}</li>`).join('')}
+            </ul>
+
+            <div class="card-actions">
+              <button class="btn btn-outline" data-action="dismiss" data-id="${recommendation.id}">Dismiss</button>
+              <button class="btn btn-primary" data-action="apply" data-id="${recommendation.id}">
+                ${recommendation.type === 'pricing' ? 'Apply New Price' :
+                 recommendation.type === 'duration' ? 'Add This Duration' : 'Implement Strategy'}
+              </button>
+            </div>
+          </div>
+        `;
+
+        // Add event listeners for action buttons
+        const dismissBtn = card.querySelector('[data-action="dismiss"]');
+        const applyBtn = card.querySelector('[data-action="apply"]');
+
+        dismissBtn.addEventListener('click', () => {
+          dismissRecommendation(recommendation.id);
+        });
+
+        applyBtn.addEventListener('click', () => {
+          applyRecommendation(recommendation.id);
+        });
+
+        return card;
+      }
+
+      // Function to filter and sort recommendations
+      function filterAndSortRecommendations() {
+        if (!window.realtimeRecommendations) return;
+
+        // Get all recommendations
+        let recommendations = window.realtimeRecommendations.getRecommendations();
+
+        // Apply tab filter
+        if (currentTab !== 'all') {
+          recommendations = recommendations.filter(rec => rec.type === currentTab);
+        }
+
+        // Apply confidence threshold
+        recommendations = recommendations.filter(rec => rec.confidence >= confidenceThreshold);
+
+        // Sort recommendations
+        recommendations.sort((a, b) => {
+          if (sortBy === 'confidence') {
+            return b.confidence - a.confidence;
+          } else if (sortBy === 'impact') {
+            // Simplified impact comparison - in real app would need more sophisticated comparison
+            const impactA = a.impact?.revenue || a.impact?.bookings || a.impact?.retentionIncrease || 0;
+            const impactB = b.impact?.revenue || b.impact?.bookings || b.impact?.retentionIncrease || 0;
+            return impactB - impactA;
+          } else if (sortBy === 'newest') {
+            return new Date(b.timestamp) - new Date(a.timestamp);
+          }
+          return 0;
+        });
+
+        // Update UI
+        renderRecommendations(recommendations);
+      }
+
+      // Function to render recommendations
+      function renderRecommendations(recommendations) {
+        // Clear current recommendations
+        recommendationsGrid.innerHTML = '';
+
+        // Show empty state if no recommendations
+        if (recommendations.length === 0) {
+          emptyState.style.display = 'block';
+          return;
+        }
+
+        // Hide empty state
+        emptyState.style.display = 'none';
+
+        // Add recommendation cards
+        recommendations.forEach(recommendation => {
+          const card = createRecommendationCard(recommendation);
+          recommendationsGrid.appendChild(card);
+        });
+      }
+
+      // Function to apply a recommendation
+      function applyRecommendation(id) {
+        if (window.realtimeRecommendations) {
+          const success = window.realtimeRecommendations.applyRecommendation(id);
+          if (success) {
+            showToast('Recommendation applied successfully!');
+            // Remove from UI
+            const card = document.querySelector(`.recommendation-card[data-id="${id}"]`);
+            if (card) {
+              card.style.opacity = '0';
+              card.style.transform = 'scale(0.8)';
+              setTimeout(() => {
+                card.remove();
+                filterAndSortRecommendations();
+              }, 300);
+            }
+          }
+        }
+      }
+
+      // Function to dismiss a recommendation
+      function dismissRecommendation(id) {
+        if (window.realtimeRecommendations) {
+          const success = window.realtimeRecommendations.dismissRecommendation(id, 'User dismissed');
+          if (success) {
+            showToast('Recommendation dismissed');
+            // Update UI
+            filterAndSortRecommendations();
+          }
+        }
+      }
+
+      // Function to show a notification toast
+      function showToast(message) {
+        notificationToast.textContent = message;
+        notificationToast.classList.add('visible');
+
+        setTimeout(() => {
+          notificationToast.classList.remove('visible');
+        }, 3000);
+      }
+
+      // Check if realtime recommendations is available
+      function initializeRecommendations() {
+        if (window.realtimeRecommendations) {
+          // Update connection status
+          updateConnectionStatus(true);
+
+          // Set up event handlers
+          window.realtimeRecommendations.on('new', (recommendation) => {
+            showToast('New recommendation received!');
+            filterAndSortRecommendations();
+          });
+
+          window.realtimeRecommendations.on('connect', () => {
+            updateConnectionStatus(true);
+          });
+
+          window.realtimeRecommendations.on('disconnect', () => {
+            updateConnectionStatus(false);
+          });
+
+          // Hide loader
+          recommendationsLoader.style.display = 'none';
+
+          // Initialize recommendations
+          filterAndSortRecommendations();
+        } else {
+          // Try again in a moment
+          setTimeout(initializeRecommendations, 500);
+        }
+      }
+
+      // Update connection status indicator
+      function updateConnectionStatus(connected) {
+        connectionStatus.className = `status-indicator ${connected ? 'connected' : 'disconnected'}`;
+        connectionText.textContent = connected ? 'Connected' : 'Disconnected';
+      }
+
+      // Initialize when loaded
+      initializeRecommendations();
+    });
+  </script>
+</body>
+</html>

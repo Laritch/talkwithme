@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Detail | Expert Chat System</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="css/product-reviews.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .product-container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    .product-breadcrumb {
+      margin-bottom: 1.5rem;
+      color: #6c757d;
+      font-size: 0.9rem;
+    }
+
+    .product-breadcrumb a {
+      color: #4a6cf7;
+      text-decoration: none;
+    }
+
+    .product-detail {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .product-gallery {
+      position: relative;
+    }
+
+    .product-main-image {
+      width: 100%;
+      height: 400px;
+      object-fit: contain;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      background-color: #f8f9fa;
+    }
+
+    .product-thumbnails {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .product-thumbnail {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: opacity 0.3s ease;
+      border: 2px solid transparent;
+    }
+
+    .product-thumbnail:hover {
+      opacity: 0.8;
+    }
+
+    .product-thumbnail.active {
+      border-color: #4a6cf7;
+    }
+
+    .product-badges {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .product-badge {
+      padding: 0.3rem 0.6rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .featured-badge {
+      background-color: #ffd43b;
+      color: #333;
+    }
+
+    .digital-badge {
+      background-color: #20c997;
+      color: white;
+    }
+
+    .product-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .product-category {
+      background-color: #f0f4ff;
+      color: #4a6cf7;
+      font-size: 0.9rem;
+      padding: 0.3rem 0.6rem;
+      border-radius: 20px;
+      display: inline-block;
+      margin-bottom: 0.5rem;
+      width: max-content;
+    }
+
+    .product-title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #333;
+      margin-top: 0;
+      margin-bottom: 1rem;
+    }
+
+    .product-price-container {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .product-price {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #4a6cf7;
+    }
+
+    .product-original-price {
+      font-size: 1.2rem;
+      text-decoration: line-through;
+      color: #6c757d;
+    }
+
+    .product-description {
+      margin-bottom: 2rem;
+      color: #4f4f4f;
+      line-height: 1.6;
+    }
+
+    .product-controls {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .quantity-control {
+      display: flex;
+      align-items: center;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .quantity-btn {
+      width: 40px;
+      height: 40px;
+      border: none;
+      background: #f8f9fa;
+      cursor: pointer;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .quantity-input {
+      width: 60px;
+      height: 40px;
+      border: none;
+      border-left: 1px solid #ddd;
+      border-right: 1px solid #ddd;
+      text-align: center;
+      font-size: 1rem;
+    }
+
+    .add-to-cart-btn {
+      flex: 1;
+      height: 40px;
+      background-color: #4a6cf7;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .add-to-cart-btn:hover {
+      background-color: #3a57d7;
+    }
+
+    .product-meta {
+      margin-top: auto;
+      margin-bottom: 1rem;
+    }
+
+    .meta-item {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+      color: #6c757d;
+      font-size: 0.9rem;
+    }
+
+    .meta-item i {
+      width: 20px;
+    }
+
+    .expert-info {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem;
+      background-color: #f8f9fa;
+      border-radius: 8px;
+      margin-top: 1rem;
+    }
+
+    .expert-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .expert-details {
+      flex: 1;
+    }
+
+    .expert-name {
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .expert-bio {
+      font-size: 0.9rem;
+      color: #4f4f4f;
+      margin-bottom: 0.5rem;
+    }
+
+    .expert-link {
+      color: #4a6cf7;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .tabs {
+      margin-top: 3rem;
+    }
+
+    .tab-headers {
+      display: flex;
+      border-bottom: 1px solid #ddd;
+      margin-bottom: 1.5rem;
+    }
+
+    .tab-header {
+      padding: 0.8rem 1.5rem;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      font-weight: 600;
+    }
+
+    .tab-header.active {
+      border-bottom-color: #4a6cf7;
+      color: #4a6cf7;
+    }
+
+    .tab-content {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .related-products {
+      margin-top: 3rem;
+    }
+
+    .related-products h2 {
+      margin-bottom: 1.5rem;
+    }
+
+    .related-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .review-list {
+      margin-top: 1rem;
+    }
+
+    .review-item {
+      border-bottom: 1px solid #eee;
+      padding-bottom: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .review-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+    }
+
+    .reviewer-name {
+      font-weight: 600;
+    }
+
+    .review-date {
+      color: #6c757d;
+      font-size: 0.9rem;
+    }
+
+    .review-rating {
+      color: #ffc107;
+      margin-bottom: 0.5rem;
+    }
+
+    .review-text {
+      color: #4f4f4f;
+      line-height: 1.5;
+    }
+
+    .cart-badge {
+      position: relative;
+    }
+
+    .cart-badge span {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background-color: #ff6b6b;
+      color: white;
+      font-size: 0.8rem;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Responsive styles */
+    @media (max-width: 768px) {
+      .product-detail {
+        grid-template-columns: 1fr;
+      }
+
+      .product-main-image {
+        height: 300px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="main-header">
+      <div class="logo">
+        <a href="index.html">Expert Chat System</a>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="expert-matching.html">Find Experts</a></li>
+          <li><a href="store.html">Expert Store</a></li>
+          <li class="cart-badge">
+            <a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
+            <span id="cartCount">0</span>
+          </li>
+          <li id="userProfileNav" style="display:none;">
+            <a href="#" id="userProfileLink">
+              <img id="userProfileImage" src="/uploads/default-avatar.png" alt="Profile" class="avatar-img">
+            </a>
+          </li>
+          <li id="loginNav">
+            <a href="login.html" class="btn-login">Login</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="product-container">
+      <div class="product-breadcrumb">
+        <a href="store.html">Store</a> &gt; <span id="productCategory">Category</span> &gt; <span id="productName">Product Name</span>
+      </div>
+
+      <div id="productDetail" class="product-detail">
+        <!-- Product content will be loaded here -->
+        <div class="product-gallery">
+          <div class="loading-spinner">
+            <i class="fas fa-spinner fa-spin"></i> Loading product...
+          </div>
+        </div>
+        <div class="product-info"></div>
+      </div>
+
+      <div class="tabs">
+        <div class="tab-headers">
+          <div class="tab-header active" data-tab="description">Description</div>
+          <div class="tab-header" data-tab="reviews">Reviews</div>
+          <div class="tab-header" data-tab="shipping">Shipping & Returns</div>
+        </div>
+
+        <div id="descriptionTab" class="tab-content active">
+          <div id="fullDescription"></div>
+        </div>
+
+        <div id="reviewsTab" class="tab-content">
+          <div class="reviews-section">
+            <div class="reviews-header">
+              <h3 class="reviews-title">Customer Reviews</h3>
+              <div class="reviews-stats">
+                <div class="reviews-rating">
+                  <div id="averageRating" class="reviews-rating-value">0.0</div>
+                  <div class="reviews-rating-stars">★★★★★</div>
+                </div>
+                <div class="reviews-count">
+                  <span id="reviewCount">0</span> reviews
+                </div>
+              </div>
+            </div>
+
+            <!-- Review Form -->
+            <div id="reviewForm" class="review-form">
+              <h4 class="review-form-title">Write a Review</h4>
+              <form id="productReviewForm">
+                <div class="form-group">
+                  <label class="form-label">Your Rating*</label>
+                  <div class="star-rating">
+                    <input type="radio" id="star5" name="rating" value="5" />
+                    <label for="star5" title="5 stars">★</label>
+                    <input type="radio" id="star4" name="rating" value="4" />
+                    <label for="star4" title="4 stars">★</label>
+                    <input type="radio" id="star3" name="rating" value="3" />
+                    <label for="star3" title="3 stars">★</label>
+                    <input type="radio" id="star2" name="rating" value="2" />
+                    <label for="star2" title="2 stars">★</label>
+                    <input type="radio" id="star1" name="rating" value="1" />
+                    <label for="star1" title="1 star">★</label>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="reviewText" class="form-label">Your Review</label>
+                  <textarea id="reviewText" name="review" class="review-textarea" placeholder="Share your experience with this product..."></textarea>
+                </div>
+                <button type="submit" class="submit-review-btn">Submit Review</button>
+              </form>
+            </div>
+
+            <!-- Reviews Container -->
+            <div id="reviews" class="reviews-container">
+              <!-- Reviews will be loaded here -->
+            </div>
+          </div>
+        </div>
+
+        <div id="shippingTab" class="tab-content">
+          <h3>Shipping Information</h3>
+          <p>We offer the following shipping options:</p>
+          <ul>
+            <li>Standard Shipping (3-5 business days): $5.99</li>
+            <li>Express Shipping (1-2 business days): $12.99</li>
+          </ul>
+
+          <h3>Return Policy</h3>
+          <p>If you're not satisfied with your purchase, we accept returns within 30 days of delivery.</p>
+          <p>Digital products are not eligible for return once the download link has been provided.</p>
+        </div>
+      </div>
+
+      <div class="related-products">
+        <h2>Related Products</h2>
+        <div id="relatedProducts" class="related-grid">
+          <!-- Related products will be loaded here -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/auth.js"></script>
+  <script src="js/product-reviews.js"></script>
+  <script src="js/product-detail.js"></script>
+</body>
+</html>
