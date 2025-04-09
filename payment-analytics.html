@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment Analytics | Admin Dashboard</title>
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="admin-styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Chart.js for analytics -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- DateRangePicker for filtering -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+</head>
+<body>
+  <div class="admin-container">
+    <!-- Admin Sidebar -->
+    <aside class="admin-sidebar">
+      <div class="admin-logo">
+        <a href="dashboard.html">
+          <i class="fas fa-headset"></i>
+          <span>Admin Panel</span>
+        </a>
+      </div>
+
+      <nav class="admin-nav">
+        <ul>
+          <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+          <li><a href="users.html"><i class="fas fa-users"></i> Users</a></li>
+          <li><a href="experts.html"><i class="fas fa-user-tie"></i> Experts</a></li>
+          <li><a href="orders.html"><i class="fas fa-shopping-cart"></i> Orders</a></li>
+          <li class="active"><a href="payment-analytics.html"><i class="fas fa-chart-line"></i> Payment Analytics</a></li>
+          <li><a href="disputes.html"><i class="fas fa-gavel"></i> Disputes</a></li>
+          <li><a href="loyalty.html"><i class="fas fa-award"></i> Loyalty Program</a></li>
+          <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+        </ul>
+      </nav>
+
+      <div class="admin-user">
+        <img src="../uploads/admin-avatar.png" alt="Admin" class="admin-avatar">
+        <div class="admin-user-info">
+          <h4 id="admin-name">Admin User</h4>
+          <p>Administrator</p>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="admin-main">
+      <header class="admin-header">
+        <div class="admin-header-content">
+          <h1><i class="fas fa-chart-line"></i> Payment Analytics</h1>
+          <div class="admin-header-actions">
+            <div class="date-filter">
+              <input type="text" id="date-range" placeholder="Date Range">
+              <i class="fas fa-calendar"></i>
+            </div>
+            <button id="export-data" class="btn btn-secondary">
+              <i class="fas fa-download"></i> Export Data
+            </button>
+            <div class="admin-notification">
+              <i class="fas fa-bell"></i>
+              <span class="notification-badge">3</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Analytics Overview Cards -->
+      <section class="analytics-cards">
+        <div class="analytics-card">
+          <div class="analytics-card-icon revenue">
+            <i class="fas fa-dollar-sign"></i>
+          </div>
+          <div class="analytics-card-content">
+            <h3>Total Revenue</h3>
+            <p class="analytics-card-value" id="total-revenue">$0.00</p>
+            <p class="analytics-card-change positive"><i class="fas fa-arrow-up"></i> <span id="revenue-change">0%</span> vs previous period</p>
+          </div>
+        </div>
+
+        <div class="analytics-card">
+          <div class="analytics-card-icon transactions">
+            <i class="fas fa-exchange-alt"></i>
+          </div>
+          <div class="analytics-card-content">
+            <h3>Transactions</h3>
+            <p class="analytics-card-value" id="total-transactions">0</p>
+            <p class="analytics-card-change positive"><i class="fas fa-arrow-up"></i> <span id="transactions-change">0%</span> vs previous period</p>
+          </div>
+        </div>
+
+        <div class="analytics-card">
+          <div class="analytics-card-icon avg-order">
+            <i class="fas fa-shopping-bag"></i>
+          </div>
+          <div class="analytics-card-content">
+            <h3>Avg. Order Value</h3>
+            <p class="analytics-card-value" id="avg-order-value">$0.00</p>
+            <p class="analytics-card-change negative"><i class="fas fa-arrow-down"></i> <span id="avg-order-change">0%</span> vs previous period</p>
+          </div>
+        </div>
+
+        <div class="analytics-card">
+          <div class="analytics-card-icon disputes">
+            <i class="fas fa-gavel"></i>
+          </div>
+          <div class="analytics-card-content">
+            <h3>Open Disputes</h3>
+            <p class="analytics-card-value" id="open-disputes">0</p>
+            <p class="analytics-card-change negative"><i class="fas fa-arrow-up"></i> <span id="disputes-change">0%</span> vs previous period</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Charts & Graphs Section -->
+      <section class="analytics-charts">
+        <div class="chart-container">
+          <div class="chart-header">
+            <h2>Revenue Over Time</h2>
+            <div class="chart-timeframe">
+              <button class="timeframe-btn active" data-timeframe="week">Week</button>
+              <button class="timeframe-btn" data-timeframe="month">Month</button>
+              <button class="timeframe-btn" data-timeframe="quarter">Quarter</button>
+              <button class="timeframe-btn" data-timeframe="year">Year</button>
+            </div>
+          </div>
+          <div class="chart-body">
+            <canvas id="revenue-chart"></canvas>
+          </div>
+        </div>
+
+        <div class="chart-container">
+          <div class="chart-header">
+            <h2>Revenue by Payment Method</h2>
+          </div>
+          <div class="chart-body">
+            <canvas id="payment-methods-chart"></canvas>
+          </div>
+        </div>
+      </section>
+
+      <section class="analytics-charts">
+        <div class="chart-container">
+          <div class="chart-header">
+            <h2>Transaction Status</h2>
+          </div>
+          <div class="chart-body">
+            <canvas id="transaction-status-chart"></canvas>
+          </div>
+        </div>
+
+        <div class="chart-container">
+          <div class="chart-header">
+            <h2>Revenue by Type</h2>
+          </div>
+          <div class="chart-body">
+            <canvas id="revenue-type-chart"></canvas>
+          </div>
+        </div>
+      </section>
+
+      <!-- Dispute Management Section -->
+      <section class="dispute-management">
+        <div class="section-header">
+          <h2>Dispute Management</h2>
+          <div class="section-actions">
+            <select id="dispute-filter">
+              <option value="all">All Disputes</option>
+              <option value="pending">Pending</option>
+              <option value="resolved">Resolved</option>
+            </select>
+            <button class="btn btn-primary" id="refresh-disputes">
+              <i class="fas fa-sync-alt"></i> Refresh
+            </button>
+          </div>
+        </div>
+
+        <div class="disputes-table-container">
+          <table class="disputes-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Customer</th>
+                <th>Order ID</th>
+                <th>Amount</th>
+                <th>Reason</th>
+                <th>Created</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="disputes-table-body">
+              <!-- Disputes will be loaded here -->
+            </tbody>
+          </table>
+        </div>
+
+        <div class="pagination">
+          <button class="pagination-btn" id="prev-page" disabled>
+            <i class="fas fa-chevron-left"></i> Previous
+          </button>
+          <span class="pagination-info">Page <span id="current-page">1</span> of <span id="total-pages">1</span></span>
+          <button class="pagination-btn" id="next-page">
+            Next <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Dispute Resolution Modal -->
+  <div class="modal" id="dispute-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Resolve Dispute</h2>
+        <button class="modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="dispute-details">
+          <h3>Dispute Details</h3>
+          <div class="dispute-details-row">
+            <div class="dispute-detail">
+              <span class="dispute-detail-label">Dispute ID:</span>
+              <span class="dispute-detail-value" id="modal-dispute-id"></span>
+            </div>
+            <div class="dispute-detail">
+              <span class="dispute-detail-label">Order ID:</span>
+              <span class="dispute-detail-value" id="modal-order-id"></span>
+            </div>
+          </div>
+          <div class="dispute-details-row">
+            <div class="dispute-detail">
+              <span class="dispute-detail-label">Customer:</span>
+              <span class="dispute-detail-value" id="modal-customer"></span>
+            </div>
+            <div class="dispute-detail">
+              <span class="dispute-detail-label">Amount:</span>
+              <span class="dispute-detail-value" id="modal-amount"></span>
+            </div>
+          </div>
+          <div class="dispute-details-row">
+            <div class="dispute-detail">
+              <span class="dispute-detail-label">Reason:</span>
+              <span class="dispute-detail-value" id="modal-reason"></span>
+            </div>
+            <div class="dispute-detail">
+              <span class="dispute-detail-label">Created:</span>
+              <span class="dispute-detail-value" id="modal-created"></span>
+            </div>
+          </div>
+          <div class="dispute-details-row">
+            <div class="dispute-detail full-width">
+              <span class="dispute-detail-label">Evidence:</span>
+              <p class="dispute-detail-value" id="modal-evidence"></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="resolution-form">
+          <h3>Resolution</h3>
+          <div class="form-group">
+            <label for="resolution-decision">Decision</label>
+            <select id="resolution-decision" required>
+              <option value="">Select decision</option>
+              <option value="customer">In favor of customer (refund)</option>
+              <option value="merchant">In favor of merchant</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="resolution-notes">Notes</label>
+            <textarea id="resolution-notes" placeholder="Enter resolution notes"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary modal-close-btn">Cancel</button>
+        <button class="btn btn-primary" id="resolve-dispute-btn">Resolve Dispute</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/moment/moment.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="js/admin-auth.js"></script>
+  <script src="js/payment-analytics.js"></script>
+</body>
+</html>

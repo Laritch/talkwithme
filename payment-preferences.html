@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment Preferences | Expert Chat System</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="css/transaction-history.css">
+  <link rel="stylesheet" href="css/payment-preferences.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <div class="container">
+    <header class="main-header">
+      <div class="logo">
+        <a href="index.html">Expert Chat System</a>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="expert-matching.html">Find Experts</a></li>
+          <li><a href="store.html">Expert Store</a></li>
+          <li><a href="cart.html"><i class="fas fa-shopping-cart"></i></a></li>
+          <li id="userProfileNav" style="display:none;">
+            <a href="#" id="userProfileLink">
+              <img id="userProfileImage" src="/uploads/default-avatar.png" alt="Profile" class="avatar-img">
+            </a>
+          </li>
+          <li id="loginNav">
+            <a href="login.html" class="btn-login">Login</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Client dashboard navigation -->
+    <div class="dashboard-nav">
+      <ul>
+        <li><a href="client-dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+        <li><a href="orders.html"><i class="fas fa-shopping-bag"></i> Orders</a></li>
+        <li><a href="transaction-history.html"><i class="fas fa-history"></i> Transactions</a></li>
+        <li><a href="subscription-management.html"><i class="fas fa-sync-alt"></i> Subscriptions</a></li>
+        <li><a href="chat-history.html"><i class="fas fa-comments"></i> Chat History</a></li>
+        <li><a href="loyalty-rewards.html"><i class="fas fa-award"></i> Loyalty Rewards</a></li>
+        <li><a href="profile.html"><i class="fas fa-user-circle"></i> Profile</a></li>
+        <li class="active"><a href="payment-preferences.html"><i class="fas fa-credit-card"></i> Payment Preferences</a></li>
+      </ul>
+    </div>
+
+    <main class="preferences-main">
+      <section class="page-header">
+        <h1>Payment Preferences</h1>
+        <p>Manage your payment methods and processor preferences for a smoother checkout experience.</p>
+      </section>
+
+      <div class="preferences-container">
+        <!-- Saved payment methods -->
+        <section class="preferences-section">
+          <div class="section-header">
+            <h2>Saved Payment Methods</h2>
+            <button id="add-payment-method" class="btn btn-outline">
+              <i class="fas fa-plus"></i> Add New
+            </button>
+          </div>
+
+          <div class="payment-methods-list" id="payment-methods-list">
+            <!-- This will be populated by JavaScript -->
+            <div class="empty-state" id="no-payment-methods">
+              <i class="fas fa-credit-card"></i>
+              <h3>No Saved Payment Methods</h3>
+              <p>You don't have any payment methods saved yet. Add one to speed up checkout.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Payment processor preferences -->
+        <section class="preferences-section">
+          <div class="section-header">
+            <h2>Payment Processor Preferences</h2>
+            <div class="region-selector">
+              <label for="region-select">Region:</label>
+              <select id="region-select">
+                <option value="global">Global Default</option>
+                <option value="us">United States</option>
+                <option value="eu">Europe</option>
+                <option value="africa">Africa</option>
+                <option value="asia">Asia</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="processor-preferences">
+            <div class="info-message">
+              <i class="fas fa-info-circle"></i>
+              <p>Set your preferences for each payment processor. These settings will be used when multiple options are available.</p>
+            </div>
+
+            <div class="processor-list">
+              <div class="processor-item" data-processor="stripe">
+                <div class="processor-logo">
+                  <i class="fab fa-stripe-s"></i>
+                </div>
+                <div class="processor-details">
+                  <h3>Stripe</h3>
+                  <p>Credit/debit cards, digital wallets, and more</p>
+                  <div class="processor-availability">
+                    <span class="availability-badge available">Available in your region</span>
+                  </div>
+                </div>
+                <div class="processor-actions">
+                  <label class="preference-toggle">
+                    <input type="checkbox" checked class="processor-preference" data-processor="stripe">
+                    <span class="toggle-slider"></span>
+                    <span class="toggle-label">Preferred</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="processor-item" data-processor="square">
+                <div class="processor-logo">
+                  <i class="fab fa-square"></i>
+                </div>
+                <div class="processor-details">
+                  <h3>Square</h3>
+                  <p>Credit/debit cards, digital wallets</p>
+                  <div class="processor-availability">
+                    <span class="availability-badge available">Available in your region</span>
+                  </div>
+                </div>
+                <div class="processor-actions">
+                  <label class="preference-toggle">
+                    <input type="checkbox" class="processor-preference" data-processor="square">
+                    <span class="toggle-slider"></span>
+                    <span class="toggle-label">Preferred</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="processor-item" data-processor="adyen">
+                <div class="processor-logo">
+                  <i class="fas fa-globe"></i>
+                </div>
+                <div class="processor-details">
+                  <h3>Adyen</h3>
+                  <p>Global payment processor with multiple payment methods</p>
+                  <div class="processor-availability">
+                    <span class="availability-badge available">Available in your region</span>
+                  </div>
+                </div>
+                <div class="processor-actions">
+                  <label class="preference-toggle">
+                    <input type="checkbox" class="processor-preference" data-processor="adyen">
+                    <span class="toggle-slider"></span>
+                    <span class="toggle-label">Preferred</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="processor-item" data-processor="mpesa">
+                <div class="processor-logo">
+                  <i class="fas fa-mobile-alt"></i>
+                </div>
+                <div class="processor-details">
+                  <h3>M-Pesa</h3>
+                  <p>Mobile money transfer service</p>
+                  <div class="processor-availability">
+                    <span class="availability-badge limited">Available in select African countries</span>
+                  </div>
+                </div>
+                <div class="processor-actions">
+                  <label class="preference-toggle">
+                    <input type="checkbox" class="processor-preference" data-processor="mpesa">
+                    <span class="toggle-slider"></span>
+                    <span class="toggle-label">Preferred</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="processor-item" data-processor="razorpay">
+                <div class="processor-logo">
+                  <i class="fas fa-rupee-sign"></i>
+                </div>
+                <div class="processor-details">
+                  <h3>Razorpay</h3>
+                  <p>India's popular payment gateway</p>
+                  <div class="processor-availability">
+                    <span class="availability-badge limited">Available in India</span>
+                  </div>
+                </div>
+                <div class="processor-actions">
+                  <label class="preference-toggle">
+                    <input type="checkbox" class="processor-preference" data-processor="razorpay">
+                    <span class="toggle-slider"></span>
+                    <span class="toggle-label">Preferred</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Default currency & settings -->
+        <section class="preferences-section">
+          <div class="section-header">
+            <h2>Default Settings</h2>
+          </div>
+
+          <div class="settings-grid">
+            <div class="setting-item">
+              <label for="default-currency">Default Currency</label>
+              <select id="default-currency">
+                <option value="USD">USD - US Dollar</option>
+                <option value="EUR">EUR - Euro</option>
+                <option value="GBP">GBP - British Pound</option>
+                <option value="KES">KES - Kenyan Shilling</option>
+                <option value="INR">INR - Indian Rupee</option>
+                <option value="NGN">NGN - Nigerian Naira</option>
+                <option value="ZAR">ZAR - South African Rand</option>
+              </select>
+            </div>
+
+            <div class="setting-item">
+              <label for="save-payment-info">Save Payment Information</label>
+              <label class="preference-toggle wide">
+                <input type="checkbox" checked id="save-payment-info">
+                <span class="toggle-slider"></span>
+                <span class="toggle-label">Save payment information for faster checkout</span>
+              </label>
+            </div>
+
+            <div class="setting-item">
+              <label for="auto-currency">Automatic Currency Selection</label>
+              <label class="preference-toggle wide">
+                <input type="checkbox" checked id="auto-currency">
+                <span class="toggle-slider"></span>
+                <span class="toggle-label">Automatically select currency based on location</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="settings-actions">
+            <button id="save-preferences" class="btn btn-primary">
+              Save Preferences
+            </button>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <!-- Add Payment Method Modal -->
+  <div class="modal" id="payment-method-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Add Payment Method</h2>
+        <button class="modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="payment-method-tabs">
+          <button class="tab-btn active" data-tab="card-tab">Credit Card</button>
+          <button class="tab-btn" data-tab="bank-tab">Bank Account</button>
+          <button class="tab-btn" data-tab="other-tab">Other Methods</button>
+        </div>
+
+        <div class="payment-method-tab-content">
+          <!-- Credit Card Form -->
+          <div id="card-tab" class="tab-pane active">
+            <form id="card-form" class="payment-form">
+              <div class="form-group">
+                <label for="card-name">Cardholder Name</label>
+                <input type="text" id="card-name" placeholder="Name on card" required>
+              </div>
+
+              <div class="form-group">
+                <label for="card-number">Card Number</label>
+                <div class="input-with-icon">
+                  <input type="text" id="card-number" placeholder="1234 5678 9012 3456" required pattern="[0-9\s]{13,19}">
+                  <i class="card-icon fas fa-credit-card"></i>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="card-expiry">Expiration</label>
+                  <input type="text" id="card-expiry" placeholder="MM/YY" required pattern="(0[1-9]|1[0-2])\/[0-9]{2}">
+                </div>
+
+                <div class="form-group">
+                  <label for="card-cvc">CVC</label>
+                  <input type="text" id="card-cvc" placeholder="123" required pattern="[0-9]{3,4}">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="checkbox-label">
+                  <input type="checkbox" id="card-default">
+                  Set as default payment method
+                </label>
+              </div>
+
+              <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Add Card</button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Bank Account Form -->
+          <div id="bank-tab" class="tab-pane">
+            <form id="bank-form" class="payment-form">
+              <div class="form-group">
+                <label for="bank-name">Bank Name</label>
+                <input type="text" id="bank-name" placeholder="Bank name" required>
+              </div>
+
+              <div class="form-group">
+                <label for="account-holder">Account Holder</label>
+                <input type="text" id="account-holder" placeholder="Account holder name" required>
+              </div>
+
+              <div class="form-group">
+                <label for="account-number">Account Number</label>
+                <input type="text" id="account-number" placeholder="Account number" required>
+              </div>
+
+              <div class="form-group">
+                <label for="routing-number">Routing Number</label>
+                <input type="text" id="routing-number" placeholder="Routing number" required>
+              </div>
+
+              <div class="form-group">
+                <label class="checkbox-label">
+                  <input type="checkbox" id="bank-default">
+                  Set as default payment method
+                </label>
+              </div>
+
+              <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Add Bank Account</button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Other Payment Methods -->
+          <div id="other-tab" class="tab-pane">
+            <div class="other-methods-list">
+              <div class="other-method-item">
+                <div class="other-method-info">
+                  <i class="fas fa-mobile-alt"></i>
+                  <div class="method-text">
+                    <h4>M-Pesa</h4>
+                    <p>Mobile money service popular in Kenya and other African countries</p>
+                  </div>
+                </div>
+                <button class="btn btn-outline btn-sm">Add</button>
+              </div>
+
+              <div class="other-method-item">
+                <div class="other-method-info">
+                  <i class="fab fa-paypal"></i>
+                  <div class="method-text">
+                    <h4>PayPal</h4>
+                    <p>Connect your PayPal account</p>
+                  </div>
+                </div>
+                <button class="btn btn-outline btn-sm">Connect</button>
+              </div>
+
+              <div class="other-method-item">
+                <div class="other-method-info">
+                  <i class="fab fa-apple-pay"></i>
+                  <div class="method-text">
+                    <h4>Apple Pay</h4>
+                    <p>Available on Apple devices</p>
+                  </div>
+                </div>
+                <button class="btn btn-outline btn-sm">Set Up</button>
+              </div>
+
+              <div class="other-method-item">
+                <div class="other-method-info">
+                  <i class="fab fa-google-pay"></i>
+                  <div class="method-text">
+                    <h4>Google Pay</h4>
+                    <p>Connect your Google Pay account</p>
+                  </div>
+                </div>
+                <button class="btn btn-outline btn-sm">Connect</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/auth.js"></script>
+  <script src="js/payment-preferences.js"></script>
+</body>
+</html>
