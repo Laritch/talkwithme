@@ -1,0 +1,98 @@
+[
+  {
+    "id": "post1",
+    "topicId": "topic1",
+    "forumId": "forum1",
+    "content": "What are some effective techniques you use to manage stress at work?",
+    "authorId": "client1",
+    "isFirstPost": true,
+    "createdAt": "2025-04-09T02:10:00.000Z",
+    "updatedAt": "2025-04-09T02:10:00.000Z",
+    "status": "active",
+    "reactions": {
+      "like": ["expert1"],
+      "helpful": []
+    },
+    "attachments": []
+  },
+  {
+    "id": "post2",
+    "topicId": "topic1",
+    "forumId": "forum1",
+    "content": "Great question! Here are a few techniques I recommend to my clients:\n\n1. **Take short breaks**: Even 5 minutes away from your desk can help reset your mind\n2. **Practice deep breathing**: 4-7-8 technique works wonders (inhale for 4, hold for 7, exhale for 8)\n3. **Prioritize tasks**: Use the Eisenhower matrix to focus on what's important\n4. **Set boundaries**: Learn to say no when your plate is full\n5. **Stay hydrated and eat well**: Physical health impacts stress levels\n\nHope these help! What works best for you?",
+    "authorId": "expert1",
+    "isFirstPost": false,
+    "createdAt": "2025-04-09T02:15:00.000Z",
+    "updatedAt": "2025-04-09T02:15:00.000Z",
+    "status": "active",
+    "reactions": {
+      "like": ["client1"],
+      "helpful": ["client1"]
+    },
+    "attachments": []
+  },
+  {
+    "id": "post3",
+    "topicId": "topic2",
+    "forumId": "forum1",
+    "content": "I'd like to share some quick stress relief techniques that can be done in just 5 minutes. These are perfect for busy professionals who need a quick reset during the workday.\n\n1. **Deep Breathing**: 4-7-8 technique (inhale for 4, hold for 7, exhale for 8)\n2. **Progressive Muscle Relaxation**: Quick tense and release of major muscle groups\n3. **Mindful Observation**: Focus intensely on one object for 1 minute\n4. **Guided Visualization**: 5-minute mental vacation\n5. **Quick Journaling**: Write down 3 current stressors and possible solutions\n\nWhich ones have you tried? Any other quick techniques to add?",
+    "authorId": "expert1",
+    "isFirstPost": true,
+    "createdAt": "2025-04-09T02:30:00.000Z",
+    "updatedAt": "2025-04-09T02:30:00.000Z",
+    "status": "active",
+    "reactions": {
+      "like": ["client1", "admin1"],
+      "helpful": ["client1"]
+    },
+    "attachments": []
+  },
+  {
+    "id": "post4",
+    "topicId": "topic2",
+    "forumId": "forum1",
+    "content": "I've tried the deep breathing technique and it really works for me. I've also found that a quick walk around the block helps clear my head. Thanks for sharing these!",
+    "authorId": "client1",
+    "isFirstPost": false,
+    "createdAt": "2025-04-09T03:00:00.000Z",
+    "updatedAt": "2025-04-09T03:00:00.000Z",
+    "status": "active",
+    "reactions": {
+      "like": ["expert1"],
+      "helpful": []
+    },
+    "attachments": []
+  },
+  {
+    "id": "post5",
+    "topicId": "topic3",
+    "forumId": "forum3",
+    "content": "I'm just starting with meditation and finding it difficult to maintain focus. Any tips for beginners?",
+    "authorId": "client1",
+    "isFirstPost": true,
+    "createdAt": "2025-04-09T04:00:00.000Z",
+    "updatedAt": "2025-04-09T04:00:00.000Z",
+    "status": "active",
+    "reactions": {
+      "like": [],
+      "helpful": []
+    },
+    "attachments": []
+  },
+  {
+    "id": "post6",
+    "topicId": "topic3",
+    "forumId": "forum3",
+    "content": "Welcome to meditation! It's normal to struggle with focus when starting out. Here are some beginner tips:\n\n1. **Start small**: Even 2-3 minutes is fine at first\n2. **Use guided meditations**: Apps like Headspace or Calm can help\n3. **Focus on your breath**: When your mind wanders, gently return focus to breathing\n4. **Be kind to yourself**: Don't judge when thoughts come up\n5. **Consistency over perfection**: Daily practice, even short, is better than occasional long sessions\n\nLet me know if you need more specific guidance!",
+    "authorId": "expert1",
+    "isFirstPost": false,
+    "createdAt": "2025-04-09T04:20:00.000Z",
+    "updatedAt": "2025-04-09T04:20:00.000Z",
+    "status": "active",
+    "reactions": {
+      "like": ["client1"],
+      "helpful": ["client1"]
+    },
+    "attachments": []
+  }
+]

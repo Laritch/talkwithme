@@ -1,0 +1,150 @@
+{
+  "forums": {
+    "forum1": {
+      "id": "forum1",
+      "title": "Stress Management",
+      "keywords": ["stress", "anxiety", "relaxation", "coping", "burnout", "workplace", "techniques", "relief", "management", "pressure"],
+      "topicVector": [0.8, 0.7, 0.3, 0.2, 0.6, 0.9, 0.4, 0.1],
+      "audienceSegments": ["professionals", "busy-parents", "executives", "remote-workers", "healthcare-workers"],
+      "emotionalTones": ["supportive", "calming", "encouraging", "practical"],
+      "serviceAlignment": {
+        "coaching": 0.9,
+        "counseling": 0.8,
+        "workshops": 0.7,
+        "courses": 0.7
+      },
+      "commonPainPoints": ["work pressure", "time constraints", "sleep issues", "health concerns"],
+      "popularTopics": ["quick relief techniques", "managing workplace stress", "stress and health"],
+      "affiliatedExperts": ["expert1"],
+      "conversionRate": 0.34,
+      "engagementMetrics": {
+        "avgTimeSpent": 240,
+        "returnRate": 0.65,
+        "commentRate": 0.42
+      },
+      "recommendationScore": 4.8
+    },
+    "forum2": {
+      "id": "forum2",
+      "title": "Work-Life Balance",
+      "keywords": ["balance", "boundaries", "time-management", "priorities", "productivity", "family", "leisure", "career", "wellbeing", "organization"],
+      "topicVector": [0.4, 0.3, 0.7, 0.8, 0.2, 0.3, 0.9, 0.5],
+      "audienceSegments": ["working-parents", "middle-management", "entrepreneurs", "career-changers", "shift-workers"],
+      "emotionalTones": ["empathetic", "understanding", "strategic", "inspirational"],
+      "serviceAlignment": {
+        "coaching": 0.8,
+        "counseling": 0.6,
+        "workshops": 0.9,
+        "courses": 0.8
+      },
+      "commonPainPoints": ["guilt about priorities", "overwork", "family neglect", "career stagnation"],
+      "popularTopics": ["setting boundaries", "effective scheduling", "guilt-free leisure"],
+      "affiliatedExperts": ["expert1"],
+      "conversionRate": 0.28,
+      "engagementMetrics": {
+        "avgTimeSpent": 190,
+        "returnRate": 0.58,
+        "commentRate": 0.35
+      },
+      "recommendationScore": 4.5
+    },
+    "forum3": {
+      "id": "forum3",
+      "title": "Mindfulness & Meditation",
+      "keywords": ["mindfulness", "meditation", "presence", "awareness", "breathing", "focus", "concentration", "wellbeing", "spirituality", "practice"],
+      "topicVector": [0.2, 0.1, 0.8, 0.7, 0.9, 0.3, 0.2, 0.8],
+      "audienceSegments": ["beginners", "spiritual-seekers", "stressed-professionals", "self-improvement", "anxiety-sufferers"],
+      "emotionalTones": ["peaceful", "accepting", "nurturing", "instructive"],
+      "serviceAlignment": {
+        "coaching": 0.7,
+        "counseling": 0.9,
+        "workshops": 0.8,
+        "courses": 0.9
+      },
+      "commonPainPoints": ["inability to focus", "racing thoughts", "anxiety", "feeling overwhelmed"],
+      "popularTopics": ["beginner techniques", "mindfulness at work", "meditation science"],
+      "affiliatedExperts": ["expert1"],
+      "conversionRate": 0.32,
+      "engagementMetrics": {
+        "avgTimeSpent": 260,
+        "returnRate": 0.72,
+        "commentRate": 0.38
+      },
+      "recommendationScore": 4.7
+    }
+  },
+  "topics": {
+    "topic1": {
+      "id": "topic1",
+      "title": "Managing Workplace Stress",
+      "keywords": ["workplace", "stress", "management", "techniques", "office", "anxiety", "professional", "coping", "job"],
+      "topicVector": [0.9, 0.8, 0.2, 0.1, 0.7, 0.8, 0.3, 0.2],
+      "audienceAppeal": {
+        "professionals": 0.9,
+        "managers": 0.8,
+        "healthcare-workers": 0.7,
+        "remote-workers": 0.9
+      },
+      "associatedServices": ["stress coaching", "wellness workshops", "organizational consulting"],
+      "purchaseIntent": 0.65,
+      "recommendationScore": 4.7
+    },
+    "topic2": {
+      "id": "topic2",
+      "title": "Expert Tips: 5-Minute Stress Relief Techniques",
+      "keywords": ["quick", "stress relief", "techniques", "expert", "tips", "five-minute", "busy", "practical", "immediate"],
+      "topicVector": [0.9, 0.6, 0.4, 0.2, 0.7, 0.9, 0.3, 0.1],
+      "audienceAppeal": {
+        "busy-professionals": 0.9,
+        "executives": 0.8,
+        "parents": 0.7,
+        "students": 0.6
+      },
+      "associatedServices": ["stress management courses", "executive coaching", "quick-relief workshops"],
+      "purchaseIntent": 0.72,
+      "recommendationScore": 4.9
+    },
+    "topic3": {
+      "id": "topic3",
+      "title": "Beginner's Guide to Meditation",
+      "keywords": ["meditation", "beginners", "guide", "starting", "basics", "practice", "mindfulness", "introduction", "how-to"],
+      "topicVector": [0.3, 0.2, 0.8, 0.9, 0.7, 0.2, 0.1, 0.9],
+      "audienceAppeal": {
+        "beginners": 0.9,
+        "stress-sufferers": 0.8,
+        "self-improvement": 0.9,
+        "anxiety-sufferers": 0.7
+      },
+      "associatedServices": ["meditation courses", "mindfulness coaching", "stress reduction programs"],
+      "purchaseIntent": 0.68,
+      "recommendationScore": 4.6
+    }
+  },
+  "keywordCategories": {
+    "stress-management": [
+      "stress", "pressure", "burnout", "coping", "relief", "techniques", "management", "reduction"
+    ],
+    "mindfulness": [
+      "meditation", "presence", "awareness", "breathing", "focus", "concentration", "mindful", "practice"
+    ],
+    "work-life-balance": [
+      "balance", "boundaries", "time-management", "priorities", "productivity", "schedule", "organization"
+    ],
+    "career": [
+      "workplace", "professional", "job", "career", "office", "work", "employment", "business"
+    ],
+    "wellbeing": [
+      "health", "wellness", "wellbeing", "self-care", "sleep", "exercise", "nutrition", "recovery"
+    ],
+    "relationships": [
+      "family", "colleagues", "communication", "conflict", "team", "connection", "social", "support"
+    ],
+    "anxiety": [
+      "anxiety", "worry", "panic", "nervousness", "overthinking", "tension", "apprehension"
+    ]
+  },
+  "vectorDimensions": [
+    "stress-management", "career-focus", "mindfulness", "self-improvement",
+    "practical-techniques", "immediate-relief", "long-term-strategies", "scientific-basis"
+  ]
+}

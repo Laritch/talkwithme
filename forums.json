@@ -1,0 +1,41 @@
+[
+  {
+    "id": "forum1",
+    "title": "Stress Management",
+    "description": "Discuss techniques and strategies for managing stress in daily life",
+    "imageUrl": "/uploads/forums/stress-management.jpg",
+    "moderatorIds": ["expert1"],
+    "createdAt": "2025-04-09T02:00:00.000Z",
+    "updatedAt": "2025-04-09T02:00:00.000Z",
+    "status": "active",
+    "order": 1,
+    "topicCount": 0,
+    "postCount": 0
+  },
+  {
+    "id": "forum2",
+    "title": "Work-Life Balance",
+    "description": "Share experiences and advice on maintaining a healthy balance between work and personal life",
+    "imageUrl": "/uploads/forums/work-life-balance.jpg",
+    "moderatorIds": ["expert1"],
+    "createdAt": "2025-04-09T02:00:00.000Z",
+    "updatedAt": "2025-04-09T02:00:00.000Z",
+    "status": "active",
+    "order": 2,
+    "topicCount": 0,
+    "postCount": 0
+  },
+  {
+    "id": "forum3",
+    "title": "Mindfulness & Meditation",
+    "description": "Learn about mindfulness practices and meditation techniques for better mental health",
+    "imageUrl": "/uploads/forums/mindfulness.jpg",
+    "moderatorIds": ["expert1"],
+    "createdAt": "2025-04-09T02:00:00.000Z",
+    "updatedAt": "2025-04-09T02:00:00.000Z",
+    "status": "active",
+    "order": 3,
+    "topicCount": 0,
+    "postCount": 0
+  }
+]

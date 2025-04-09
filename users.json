@@ -1,0 +1,42 @@
+{
+  "client1": {
+    "id": "client1",
+    "email": "client@example.com",
+    "passwordHash": "$2a$10$JwPsC5/n.Xt1ZgEL7g0J6eIjmQMdZTu4OCH6jB4v5XOYhbcN5C7UC",
+    "name": "Alex Johnson",
+    "role": "client",
+    "status": "online",
+    "avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&h=150&crop=faces&auto=format&fit=crop",
+    "memberSince": "2023-01-15",
+    "createdAt": "2023-01-15T10:30:00.000Z"
+  },
+  "expert1": {
+    "id": "expert1",
+    "email": "expert@example.com",
+    "passwordHash": "$2a$10$nKOFU7X9wkPHIYqLQj5qeehYnG4pLGmBB9KAoyNbyrdPsrPTO9x7S",
+    "name": "Dr. Sarah Miller",
+    "role": "expert",
+    "status": "online",
+    "avatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&crop=faces&auto=format&fit=crop",
+    "title": "Stress Management Specialist",
+    "specialties": [
+      "Anxiety Management",
+      "Workplace Stress",
+      "Mindfulness"
+    ],
+    "rating": 4.9,
+    "reviewCount": 127,
+    "bio": "I help professionals manage stress and anxiety through evidence-based techniques. With 15+ years of experience, I've developed a holistic approach that combines cognitive behavioral therapy, mindfulness, and practical stress management strategies.",
+    "createdAt": "2023-01-10T08:15:00.000Z"
+  },
+  "admin1": {
+    "id": "admin1",
+    "email": "admin@chat.com",
+    "passwordHash": "$2a$10$ZNapWqrT4mL4Cbcn7XY8ReR3vLHQZ2fJZSki5F1RBYgM87h6Hx41a",
+    "name": "Admin User",
+    "role": "admin",
+    "status": "online",
+    "avatar": "/uploads/avatars/admin1.png",
+    "createdAt": "2025-04-09T01:10:12.944Z"
+  }
+}

@@ -1,0 +1,38 @@
+[
+  {
+    "id": "msg1",
+    "senderId": "client1",
+    "receiverId": "expert1",
+    "content": "Hello Dr. Miller, I'm looking forward to our session tomorrow.",
+    "timestamp": "2025-04-08T14:30:00.000Z",
+    "read": true,
+    "type": "text"
+  },
+  {
+    "id": "msg2",
+    "senderId": "expert1",
+    "receiverId": "client1",
+    "content": "Hi Alex! I'm looking forward to it as well. I've prepared some new stress management techniques we can try.",
+    "timestamp": "2025-04-08T14:35:00.000Z",
+    "read": true,
+    "type": "text"
+  },
+  {
+    "id": "msg3",
+    "senderId": "client1",
+    "receiverId": "expert1",
+    "content": "That sounds great. I've been practicing the breathing exercises you taught me last time.",
+    "timestamp": "2025-04-08T14:40:00.000Z",
+    "read": true,
+    "type": "text"
+  },
+  {
+    "id": "msg4",
+    "senderId": "expert1",
+    "receiverId": "client1",
+    "content": "Excellent! We'll build on those and introduce some new mindfulness techniques as well.",
+    "timestamp": "2025-04-08T14:45:00.000Z",
+    "read": false,
+    "type": "text"
+  }
+]

@@ -1,0 +1,56 @@
+{
+  "client1": {
+    "userId": "client1",
+    "explicitInterests": ["stress management", "work-life balance"],
+    "implicitInterests": ["meditation", "workplace anxiety", "time management"],
+    "viewHistory": [
+      { "forumId": "forum1", "topicId": "topic1", "timestamp": "2025-04-09T02:20:00.000Z", "duration": 180 },
+      { "forumId": "forum1", "topicId": "topic2", "timestamp": "2025-04-09T03:10:00.000Z", "duration": 240 }
+    ],
+    "searchHistory": [
+      { "query": "stress techniques", "timestamp": "2025-04-09T01:50:00.000Z" },
+      { "query": "meditation for beginners", "timestamp": "2025-04-09T04:05:00.000Z" }
+    ],
+    "topicCreationHistory": ["topic1", "topic3"],
+    "postingActivity": {
+      "forum1": 2,
+      "forum3": 1
+    },
+    "clickThroughRates": {
+      "forum1": 0.82,
+      "forum2": 0.45,
+      "forum3": 0.67
+    },
+    "recommendationFeedback": [
+      { "recommendationId": "rec1", "forumId": "forum1", "rating": 4, "timestamp": "2025-04-09T03:30:00.000Z" }
+    ],
+    "lastUpdated": "2025-04-09T04:30:00.000Z"
+  },
+  "expert1": {
+    "userId": "expert1",
+    "explicitInterests": ["mindfulness", "stress management techniques", "professional coaching"],
+    "implicitInterests": ["CBT", "career development", "leadership"],
+    "viewHistory": [
+      { "forumId": "forum1", "topicId": "topic1", "timestamp": "2025-04-09T02:15:00.000Z", "duration": 120 },
+      { "forumId": "forum3", "topicId": "topic3", "timestamp": "2025-04-09T04:05:00.000Z", "duration": 180 }
+    ],
+    "searchHistory": [
+      { "query": "advanced meditation techniques", "timestamp": "2025-04-09T01:30:00.000Z" },
+      { "query": "stress management research", "timestamp": "2025-04-09T02:25:00.000Z" }
+    ],
+    "topicCreationHistory": ["topic2"],
+    "postingActivity": {
+      "forum1": 2,
+      "forum3": 1
+    },
+    "clickThroughRates": {
+      "forum1": 0.75,
+      "forum2": 0.60,
+      "forum3": 0.90
+    },
+    "recommendationFeedback": [
+      { "recommendationId": "rec2", "forumId": "forum3", "rating": 5, "timestamp": "2025-04-09T04:15:00.000Z" }
+    ],
+    "lastUpdated": "2025-04-09T04:30:00.000Z"
+  }
+}

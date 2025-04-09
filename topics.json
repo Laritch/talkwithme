@@ -1,0 +1,50 @@
+[
+  {
+    "id": "topic1",
+    "forumId": "forum1",
+    "title": "Managing Workplace Stress",
+    "content": "What are some effective techniques you use to manage stress at work?",
+    "authorId": "client1",
+    "isPinned": true,
+    "isLocked": false,
+    "views": 124,
+    "lastPostAt": "2025-04-09T02:15:00.000Z",
+    "createdAt": "2025-04-09T02:10:00.000Z",
+    "updatedAt": "2025-04-09T02:15:00.000Z",
+    "status": "active",
+    "postCount": 2,
+    "tags": ["workplace", "stress-relief", "techniques"]
+  },
+  {
+    "id": "topic2",
+    "forumId": "forum1",
+    "title": "Expert Tips: 5-Minute Stress Relief Techniques",
+    "content": "I'd like to share some quick stress relief techniques that can be done in just 5 minutes. These are perfect for busy professionals who need a quick reset during the workday.\n\n1. **Deep Breathing**: 4-7-8 technique (inhale for 4, hold for 7, exhale for 8)\n2. **Progressive Muscle Relaxation**: Quick tense and release of major muscle groups\n3. **Mindful Observation**: Focus intensely on one object for 1 minute\n4. **Guided Visualization**: 5-minute mental vacation\n5. **Quick Journaling**: Write down 3 current stressors and possible solutions\n\nWhich ones have you tried? Any other quick techniques to add?",
+    "authorId": "expert1",
+    "isPinned": true,
+    "isLocked": false,
+    "views": 287,
+    "lastPostAt": "2025-04-09T03:45:00.000Z",
+    "createdAt": "2025-04-09T02:30:00.000Z",
+    "updatedAt": "2025-04-09T03:45:00.000Z",
+    "status": "active",
+    "postCount": 5,
+    "tags": ["quick-relief", "expert-advice", "techniques"]
+  },
+  {
+    "id": "topic3",
+    "forumId": "forum3",
+    "title": "Beginner's Guide to Meditation",
+    "content": "I'm just starting with meditation and finding it difficult to maintain focus. Any tips for beginners?",
+    "authorId": "client1",
+    "isPinned": false,
+    "isLocked": false,
+    "views": 56,
+    "lastPostAt": "2025-04-09T04:20:00.000Z",
+    "createdAt": "2025-04-09T04:00:00.000Z",
+    "updatedAt": "2025-04-09T04:20:00.000Z",
+    "status": "active",
+    "postCount": 1,
+    "tags": ["meditation", "beginners", "focus"]
+  }
+]

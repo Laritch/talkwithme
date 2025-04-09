@@ -1,0 +1,34 @@
+[
+  {
+    "id": "gt1",
+    "giftId": "gift2",
+    "senderId": "client1",
+    "recipientId": "expert1",
+    "amount": 1,
+    "totalCost": 100,
+    "platformFee": 50,
+    "expertEarnings": 50,
+    "forumId": "forum1",
+    "topicId": "topic1",
+    "postId": "post2",
+    "message": "Thank you for the great advice about workplace stress!",
+    "anonymous": false,
+    "createdAt": "2025-04-09T05:30:00.000Z"
+  },
+  {
+    "id": "gt2",
+    "giftId": "gift3",
+    "senderId": "client1",
+    "recipientId": "expert1",
+    "amount": 1,
+    "totalCost": 250,
+    "platformFee": 125,
+    "expertEarnings": 125,
+    "forumId": "forum3",
+    "topicId": "topic3",
+    "postId": "post6",
+    "message": "Your meditation tips have been life-changing for me!",
+    "anonymous": false,
+    "createdAt": "2025-04-09T05:45:00.000Z"
+  }
+]

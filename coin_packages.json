@@ -1,0 +1,52 @@
+[
+  {
+    "id": "cp1",
+    "name": "Starter Pack",
+    "description": "Perfect for getting started with gifting",
+    "coins": 500,
+    "priceUSD": 4.99,
+    "discount": 0,
+    "popular": false,
+    "createdAt": "2025-04-09T05:00:00.000Z"
+  },
+  {
+    "id": "cp2",
+    "name": "Standard Pack",
+    "description": "Most popular choice for regular users",
+    "coins": 1000,
+    "priceUSD": 9.99,
+    "discount": 0,
+    "popular": true,
+    "createdAt": "2025-04-09T05:00:00.000Z"
+  },
+  {
+    "id": "cp3",
+    "name": "Premium Pack",
+    "description": "Great value for active users",
+    "coins": 2000,
+    "priceUSD": 19.99,
+    "discount": 0,
+    "popular": false,
+    "createdAt": "2025-04-09T05:00:00.000Z"
+  },
+  {
+    "id": "cp4",
+    "name": "Power User Pack",
+    "description": "Best value for regular gifting",
+    "coins": 5000,
+    "priceUSD": 49.99,
+    "discount": 0,
+    "popular": false,
+    "createdAt": "2025-04-09T05:00:00.000Z"
+  },
+  {
+    "id": "cp5",
+    "name": "Ultimate Pack",
+    "description": "Maximum support for your favorite experts",
+    "coins": 10000,
+    "priceUSD": 99.99,
+    "discount": 0,
+    "popular": false,
+    "createdAt": "2025-04-09T05:00:00.000Z"
+  }
+]

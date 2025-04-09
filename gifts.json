@@ -1,0 +1,62 @@
+[
+  {
+    "id": "gift1",
+    "name": "Thank You Note",
+    "description": "A simple gesture to show your appreciation",
+    "icon": "/uploads/gifts/thank-you.png",
+    "cost": 50,
+    "currency": "coins",
+    "animation": "sparkle",
+    "category": "appreciation",
+    "popularity": 1,
+    "createdAt": "2025-04-09T05:00:00.000Z"
+  },
+  {
+    "id": "gift2",
+    "name": "Helpful Award",
+    "description": "For experts who provided exceptional advice",
+    "icon": "/uploads/gifts/helpful.png",
+    "cost": 100,
+    "currency": "coins",
+    "animation": "stars",
+    "category": "appreciation",
+    "popularity": 2,
+    "createdAt": "2025-04-09T05:00:00.000Z"
+  },
+  {
+    "id": "gift3",
+    "name": "Wisdom Trophy",
+    "description": "Recognize profound insights and expertise",
+    "icon": "/uploads/gifts/wisdom.png",
+    "cost": 250,
+    "currency": "coins",
+    "animation": "glow",
+    "category": "recognition",
+    "popularity": 3,
+    "createdAt": "2025-04-09T05:00:00.000Z"
+  },
+  {
+    "id": "gift4",
+    "name": "Life Changer",
+    "description": "For advice that made a significant impact",
+    "icon": "/uploads/gifts/life-changer.png",
+    "cost": 500,
+    "currency": "coins",
+    "animation": "confetti",
+    "category": "recognition",
+    "popularity": 4,
+    "createdAt": "2025-04-09T05:00:00.000Z"
+  },
+  {
+    "id": "gift5",
+    "name": "Guru Status",
+    "description": "The highest honor for exceptional expertise",
+    "icon": "/uploads/gifts/guru.png",
+    "cost": 1000,
+    "currency": "coins",
+    "animation": "fireworks",
+    "category": "premium",
+    "popularity": 5,
+    "createdAt": "2025-04-09T05:00:00.000Z"
+  }
+]

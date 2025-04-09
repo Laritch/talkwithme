@@ -1,0 +1,37 @@
+version: 2
+snapshot:
+  widths:
+    - 375  # Mobile
+    - 768  # Tablet
+    - 1024 # Laptop
+    - 1440 # Desktop
+
+  minHeight: 800
+  percyCSS: |
+    /* Remove animations and transitions for consistent snapshots */
+    * {
+      animation-duration: 0s !important;
+      animation-delay: 0s !important;
+      transition-duration: 0s !important;
+      transition-delay: 0s !important;
+    }
+
+  enableJavaScript: true
+
+  # Skip certain stories or components
+  skip:
+    - name: .*Loading.*
+    - name: .*Skeleton.*
+
+discovery:
+  # Allow-list of what URLs Percy should visit
+  allowUrls:
+    - /iframe.html
+  # Don't snapshot pages that match these patterns
+  disallowUrls:
+    - .*loading.*
+    - .*error.*
+
+storybook:
+  # Storybook configuration
+  targetDirectory: './storybook-static'

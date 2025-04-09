@@ -1,0 +1,79 @@
+{
+  "client1": {
+    "userId": "client1",
+    "coins": 550,
+    "totalPurchased": 1000,
+    "totalSpent": 450,
+    "purchaseHistory": [
+      {
+        "id": "p1",
+        "amount": 1000,
+        "costUSD": 9.99,
+        "paymentMethod": "credit_card",
+        "transactionId": "ch_123456789",
+        "status": "completed",
+        "createdAt": "2025-04-09T05:15:00.000Z"
+      }
+    ],
+    "giftHistory": [
+      {
+        "id": "gt1",
+        "giftId": "gift2",
+        "recipientId": "expert1",
+        "cost": 100,
+        "createdAt": "2025-04-09T05:30:00.000Z"
+      },
+      {
+        "id": "gt2",
+        "giftId": "gift3",
+        "recipientId": "expert1",
+        "cost": 250,
+        "createdAt": "2025-04-09T05:45:00.000Z"
+      }
+    ],
+    "lastUpdated": "2025-04-09T05:45:00.000Z"
+  },
+  "expert1": {
+    "userId": "expert1",
+    "coins": 175,
+    "totalEarned": 175,
+    "totalPurchased": 0,
+    "totalSpent": 0,
+    "earnedCoins": [
+      {
+        "id": "e1",
+        "amount": 50,
+        "source": "gift",
+        "transactionId": "gt1",
+        "createdAt": "2025-04-09T05:30:00.000Z"
+      },
+      {
+        "id": "e2",
+        "amount": 125,
+        "source": "gift",
+        "transactionId": "gt2",
+        "createdAt": "2025-04-09T05:45:00.000Z"
+      }
+    ],
+    "withdrawalHistory": [],
+    "lastUpdated": "2025-04-09T05:45:00.000Z"
+  },
+  "admin1": {
+    "userId": "admin1",
+    "coins": 1000,
+    "totalPurchased": 1000,
+    "totalSpent": 0,
+    "purchaseHistory": [
+      {
+        "id": "p2",
+        "amount": 1000,
+        "costUSD": 0,
+        "paymentMethod": "admin_grant",
+        "status": "completed",
+        "createdAt": "2025-04-09T05:00:00.000Z"
+      }
+    ],
+    "giftHistory": [],
+    "lastUpdated": "2025-04-09T05:00:00.000Z"
+  }
+}
